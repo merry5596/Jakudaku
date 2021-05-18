@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
+    <title>TimeSale</title>
+</head>
+<body>
+<div th:replace="thyme/Header :: header"></div>
+
+<div class="pt-5 salecover" align="center">
+	
+	
+	<div  class="container evnet-page">
+		<p class="event-title"> Time Sale </p>
+		<div class="timeSale-image-banner">
+			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+			  <div class="carousel-inner">
+			    <div class="carousel-item active">
+			      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="/image/tmp2.jpg" class="d-block w-100" alt="...">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+			    </div>
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+		</div>
+
+		<p class="timeSale-item-name"> name1 </p>
+		<p class="text-muted"> category </p>
+		<p > price -> saleprice(30%) </p>
+		<p class="event-des"> time sale item description</p>
+		<p class="event-des"> time sale description</p>
+	</div>
+</div>

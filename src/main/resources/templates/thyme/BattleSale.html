@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
+    <title>BattleSale</title>
+</head>
+<body>
+<div th:replace="thyme/Header :: header"></div>
+
+<div class="pt-5 salecover" align="center">
+	<div th:unless="${item1}" class="container evnet-page">
+		<p class="event-des"> no sale </p>
+	</div>
+	</div>
+	<div th:if="${item1}" class="container evnet-page">
+		<p class="event-title"> Battle Sale </p>
+		<p class="event-des"> battle sale description</p>
+		<div class="row">
+			<div class="col battle-image-banner">
+				<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="/image/tmp2.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+				    </div>
+				  </div>
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				</div>
+			</div>
+			<div class="col-md-auto">
+				<p>VS</p>
+			</div>
+			<div class="col battle-image-banner">
+				<div id="carouselExampleFade2" class="carousel slide carousel-fade" data-bs-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="/image/tmp2.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+				    </div>
+				  </div>
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div clss="col">
+				<p th:text="${item1.name}"> name1 </p>
+				<p th:text="${item1.category}"> category </p>
+				<p th:text="${item1.description}"> description </p>
+				<p th:text="${item1.price}"> price </p>
+				<button type="button" class="like btn btn-sm btn-outline-danger"> like </button>
+			</div>
+			<div clss="col">
+				<p th:text="${item2.name}"> name2 </p>
+				<p th:text="${item2.category}"> category </p>
+				<p th:text="${item2.description}"> description </p>
+				<p th:text="${item2.price}"> price </p>
+				<button type="button" class="like btn btn-sm btn-outline-danger"> like </button>
+			</div>
+		</div>
+	</div>
+</div>
