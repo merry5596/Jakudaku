@@ -9,7 +9,6 @@ public class BattleSale extends Sale {
 	private int itemId2;
 	private int vote1;
 	private int vote2;
-
 	
 
   /* JavaBeans Properties */
