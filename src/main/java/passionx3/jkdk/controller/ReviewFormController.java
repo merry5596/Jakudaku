@@ -44,7 +44,7 @@ public class ReviewFormController {
 	public ReviewForm formBacking(HttpServletRequest request, ReviewForm reviewForm) throws Exception {
 		
 		if (reviewForm.isNewReview() == false) { // edit an existing review
-			return new ReviewForm(jkdkStore.getReview(reviewId));
+			return new ReviewForm(reviewForm.getReview());
 		}
 		else { // create a new review
 			return new ReviewForm();
@@ -73,9 +73,10 @@ public class ReviewFormController {
 			}
 		}
 		catch (DataIntegrityViolationException ex) {
-			result.rejectValue(); 
+			result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS","User ID already exists: choose a different ID."); 
 			return formViewName; 
 		}
 		
 		return successViewName; 
+	}
 }
