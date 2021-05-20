@@ -26,6 +26,6 @@ public class ViewFundingsController {
 			fundingList = jkdkStore.getFundingItemList(themeId);
 		}
 		
-		return new ModelAndView("viewFundings", "fundingList", fundingList);
+		return new ModelAndView("thyme/ViewFundings", "fundingList", fundingList);
 	}
 }

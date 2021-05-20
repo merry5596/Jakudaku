@@ -24,7 +24,7 @@ public class SearchItemsController {
 		List<Funding> fundingList = jkdkStore.getFundingItemsByKeyword(keyword);
 	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("viewCategory");
+		mav.setViewName("thyme/ViewCategory");
 		mav.addObject("onlineList", onlineList);
 		mav.addObject("fundingList", fundingList);
 		return mav;

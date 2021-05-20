@@ -21,7 +21,7 @@ public class DeleteAccountController {
 	@Autowired
 	private jkdkFacade jkdkStore;
 	
-	@Value("deleteAccountForm")
+	@Value("thyme/DeleteAccountForm")
 	private String formViewName;
 	
 	@RequestMapping(method = RequestMethod.GET)

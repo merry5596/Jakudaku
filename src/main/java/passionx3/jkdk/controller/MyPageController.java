@@ -15,10 +15,10 @@ public class MyPageController {
 	@RequestMapping("/user/myPage.do")
 	public ModelAndView viewMyPagesMain(@SessionAttribute("userSession") Account userSession) {
 		if (userSession == null) {
-			return new ModelAndView("home", "message", "로그인 후 이용 가능합니다.");
+			return new ModelAndView("thyme/Home", "message", "로그인 후 이용 가능합니다.");
 		}
 		
-		return new ModelAndView("myPage");
+		return new ModelAndView("thyme/MyPage");
 	}
 	
 //	@RequestMapping("/user/myPage/buy.do")

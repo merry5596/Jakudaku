@@ -30,7 +30,7 @@ public class SignonController {
 		Account account = jkdkStore.getAccount(userId, password);
 		
 		if (account == null) {	// 로그인 정보 일치하지 않음
-			return new ModelAndView("signonForm", "message", "아이디 또는 비밀번호가 일치하지 않습니다.");	
+			return new ModelAndView("thyme/SignonForm", "message", "아이디 또는 비밀번호가 일치하지 않습니다.");	
 		}
 		
 		model.addAttribute("userSession", account);
@@ -40,6 +40,6 @@ public class SignonController {
 		if (forwardAction != null)
 			return new ModelAndView("redirect:" + forwardAction);
 		else 
-			return new ModelAndView("/home");
+			return new ModelAndView("thyme/Home");
 	}
 }

@@ -108,5 +108,77 @@ public class jkdkImpl implements jkdkFacade {
 		return null;
 	}
 
+	@Override
+	public List<Online> getOnlineItemsByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemsByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId, int themeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory2(String categoryId, int device) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId, int themeId, int device) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item getCategoryByCategoryId(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemList(int themeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getBestOnlineItemList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getNewOnlineItemList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getNewFundingItemList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
