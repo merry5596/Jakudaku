@@ -15,7 +15,7 @@ public class SignoffController {
 	public String handleRequest(HttpServletRequest request, HttpSession session) {
 		session.removeAttribute("userSession");
 		session.invalidate();
-		return "home";
+		return "thyme/Home";
 	}
 }
 

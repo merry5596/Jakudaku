@@ -38,7 +38,7 @@ public class ViewCategoryController {
 		String categoryName = jkdkStore.getCategoryByCategoryId(categoryId).getName();
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("viewItemsByCategory");
+		mav.setViewName("thyme/ViewItemsByCategory");
 		mav.addObject("categoryName", categoryName);
 		mav.addObject("themeId", themeId);
 		mav.addObject("device", device);
