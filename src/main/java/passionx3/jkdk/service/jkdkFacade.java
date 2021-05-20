@@ -36,4 +36,28 @@ public interface jkdkFacade {
 	
 	Funding getFundingItemById(int itemId); 
 
+	List<Online> getOnlineItemsByKeyword(String keyword);
+
+	List<Funding> getFundingItemsByKeyword(String keyword);
+
+	List<Online> getOnlineItemListByCategory(String categoryId);
+
+	List<Online> getOnlineItemListByCategory(String categoryId, int themeId);
+
+	List<Online> getOnlineItemListByCategory2(String categoryId, int device);
+
+	List<Online> getOnlineItemListByCategory(String categoryId, int themeId, int device);
+
+	Item getCategoryByCategoryId(String categoryId);
+
+	List<Funding> getFundingItemList();
+
+	List<Funding> getFundingItemList(int themeId);
+
+	List<Online> getBestOnlineItemList();
+
+	List<Online> getNewOnlineItemList();
+
+	List<Funding> getNewFundingItemList(); 
+	
 }
