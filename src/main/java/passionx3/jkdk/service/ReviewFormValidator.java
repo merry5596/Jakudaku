@@ -1,11 +1,13 @@
 package passionx3.jkdk.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import passionx3.jkdk.controller.ReviewRegistRequest;
 
+@Service
 public class ReviewFormValidator implements Validator {
 
 	@Override

@@ -11,12 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import passionx3.jkdk.dao.mybatis.MybatisTimeSaleDao;
+import passionx3.jkdk.domain.TimeSale;
+
 @Controller
 public class ViewTimeSaleController { 
-	@RequestMapping(value = "/timeSale", method = RequestMethod.GET)
-	public String home(
+	
+	@RequestMapping("/timesale/viewtimeSale.do")
+	public String handleRequest(
+			@RequestParam("timeSaleId") String timeSaleId,
+			ModelMap model
 			) throws Exception {
 		
+		MybatisTimeSaleDao timeSaleDao = new MybatisTimeSaleDao();
+		
+		TimeSale timeSale = timeSaleDao.getTimeSale();
+		//Item item = itemDao.getItem(timeSale.getItemId());
+		model.put("timeSale", timeSale);
+		//model.put("item", item);
 		return "thyme/TimeSale";
 	}
 }
