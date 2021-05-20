@@ -32,8 +32,10 @@ public interface jkdkFacade {
 	
 	List<Review> getReviewsByItemId(int reviewId);
 	
-	Online getOnlineItemById(int itemId);
+	Online getOnlineItemById(String itemId);
 	
-	Funding getFundingItemById(int itemId); 
+	Funding getFundingItemById(String itemId); 
+	
+	Review getRevieById(int reviewId);
 
 }
