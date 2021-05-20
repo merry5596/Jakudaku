@@ -14,5 +14,5 @@ public interface AccountDao {
 	
 	Account getAccount(String userId, String password);	
 	
-	Boolean existingUser(String userId);
+	int existingUser(String userId);
 }

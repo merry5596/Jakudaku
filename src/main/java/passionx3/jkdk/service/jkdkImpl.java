@@ -17,13 +17,13 @@ public class jkdkImpl implements jkdkFacade {
 	private AccountDao accountDao;
 	
 	@Override
-	public Account getAccount(String username) {
-		return accountDao.getAccount(username);
+	public Account getAccount(String userId) {
+		return accountDao.getAccount(userId);
 		}
 	
 	@Override
-	public Account getAccount(String username, String password) {
-		return accountDao.getAccount(username, password);
+	public Account getAccount(String userId, String password) {
+		return accountDao.getAccount(userId, password);
 	}
 	
 	@Override
@@ -43,9 +43,9 @@ public class jkdkImpl implements jkdkFacade {
 	}
 	
 	@Override
-	public Boolean existingUser(String userId) {
+	public int existingUser(String userId) {
 		// TODO Auto-generated method stub
-		return null;
+		return accountDao.existingUser(userId);
 	}
 
 	@Override

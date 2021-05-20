@@ -6,17 +6,17 @@ import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
 
-	Account getAccount(String username);
+	Account getAccount(String userId);
 
-	Account getAccount(String username, String password);
+	Account getAccount(String userId, String password);
 	
 	void insertAccount(Account account);
 	
 	void updateAccount(Account account);
 	
-	void removeAccount(String username);
+	void removeAccount(String userId);
 	
-	Boolean existingUser(String userId);	
+	int existingUser(String userId);	
 	
 	void updateLike(int itemId, String userId);
 	

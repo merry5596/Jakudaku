@@ -11,14 +11,14 @@ public interface AccountMapper {
 	
 	@Select("SELECT USERID, ALIAS, NAME, EMAIL,"
 			+ " PHONE, ADDRESS1, ADDRESS2, ZIP, MILEAGE"
-			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{username}")
-	Account getAccountByUsername(String username);
+			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")
+	Account getAccountByUsername(String userId);
 
 	@Select("SELECT USERID, ALIAS, NAME, EMAIL,"
 			+ " PHONE, ADDRESS1, ADDRESS2, ZIP, MILEAGE"
-			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{username}"
+			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}"
 			+ " AND PASSWORD = #{password}")
-	Account getAccountByUsernameAndPassword(String username, String password);
+	Account getAccountByUsernameAndPassword(String userId, String password);
 	
 	@Insert("INSERT INTO ACCOUNT (USERID, PASSWORD, ALIAS, NAME, EMAIL, PHONE, ADDRESS1, ADDRESS2, ZIP)"
 			+ " VALUES (#{account.userId}, #{account.password}, #{account.alias}, #{account.name}, #{account.email}, "
@@ -33,5 +33,9 @@ public interface AccountMapper {
 
 	@Delete("DELETE FROM ACCOUNT WHERE USERID = #{account.userId}")
 	void removeAccount(String userId);
+
+	@Select("SELECT USERID FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")
+	int exisingUser(String userId);	
+	
 	
 }
