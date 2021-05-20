@@ -6,42 +6,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.domain.*;
 
 @Service
 @Transactional
 public class jkdkImpl implements jkdkFacade {
 
+	@Autowired
+	private AccountDao accountDao;
+	
+	@Override
+	public Account getAccount(String username) {
+		return accountDao.getAccount(username);
+		}
+	
+	@Override
+	public Account getAccount(String username, String password) {
+		return accountDao.getAccount(username, password);
+	}
+	
 	@Override
 	public void insertAccount(Account account) {
-		// TODO Auto-generated method stub
-		
+		accountDao.insertAccount(account);
 	}
-
+	
 	@Override
 	public void updateAccount(Account account) {
-		// TODO Auto-generated method stub
-		
+		accountDao.updateAccount(account);
 	}
 
 	@Override
 	public void removeAccount(String userId) {
 		// TODO Auto-generated method stub
-		
+		accountDao.removeAccount(userId);
 	}
-
-	@Override
-	public Account getAccount(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Account getAccount(String userId, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Boolean existingUser(String userId) {
 		// TODO Auto-generated method stub
@@ -179,6 +179,8 @@ public class jkdkImpl implements jkdkFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 
 }
