@@ -1,6 +1,9 @@
 package passionx3.jkdk.domain;
 
-public class Category {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Category implements Serializable {
 	int categoryId;
 	String name;
 	

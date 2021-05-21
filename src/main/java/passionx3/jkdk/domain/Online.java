@@ -1,8 +1,10 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Online extends Item {
+@SuppressWarnings("serial")
+public class Online extends Item implements Serializable {
 	private int saleState;
 	private double totalRate;
 	private String pcFile;

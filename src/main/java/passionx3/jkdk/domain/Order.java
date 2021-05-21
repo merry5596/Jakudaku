@@ -1,12 +1,14 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class Order {
+@SuppressWarnings("serial")
+public class Order implements Serializable {
 	int orderId; 
 	String orderDate; 
 	int totalPrice; 

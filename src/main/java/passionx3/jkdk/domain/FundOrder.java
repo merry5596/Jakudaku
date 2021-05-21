@@ -1,7 +1,10 @@
 
 package passionx3.jkdk.domain;
 
-public class FundOrder extends Order {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class FundOrder extends Order implements Serializable {
 	String address1;
 	String address2;
 	int zip;
