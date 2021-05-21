@@ -1,8 +1,10 @@
 
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 
-public class LineItem {
+@SuppressWarnings("serial")
+public class LineItem implements Serializable {
 	int lineItemId;
 	int orderId;
 	int lineNumber;

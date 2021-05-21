@@ -37,8 +37,6 @@ public class AccountFormController {
 		Account userSession = 
 			(Account) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
-			// Session 방식 변경했지만 여전히 문제... 
-			// return new AccountForm(userSession); 하면 안되는 이유는?
 			return new AccountForm(jkdkStore.getAccount(userSession.getUserId()));
 		}
 		else {	// create a new account
@@ -76,7 +74,7 @@ public class AccountFormController {
 		Account userSession = jkdkStore.getAccount(accountForm.getAccount().getUserId());
 		session.setAttribute("userSession", userSession);
 		
-		return "redirect:/user/hello.do";
+		return "redirect:/";
 	}
 	
 	

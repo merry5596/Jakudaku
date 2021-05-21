@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
+import passionx3.jkdk.dao.OnlineDao;
 import passionx3.jkdk.dao.TimeSaleDao;
-
+import passionx3.jkdk.dao.FundingDao;
 import passionx3.jkdk.domain.*;
 
 @Service
@@ -20,6 +21,18 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Autowired
 	private AccountDao accountDao;
+	
+	@Autowired
+	private OnlineDao onlineDao;
+	
+	@Autowired
+	private FundingDao fundingDao;
+	
+	@Autowired
+	private TimeSaleDao timeSaleDao;
+	
+	@Autowired
+	private BattleSaleDao battleSaleDao;
 	
 	@Override
 	public Account getAccount(String userId) {
@@ -31,11 +44,7 @@ public class jkdkImpl implements jkdkFacade {
 		return accountDao.getAccount(userId, password);
 	}
   
-	@Autowired
-	private TimeSaleDao timeSaleDao;
 	
-	@Autowired
-	private BattleSaleDao battleSaleDao;
 	
 	@Override
 	public int insertAccount(Account account) {
@@ -68,16 +77,13 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public int approveItem(int itemId) {
-		return itemId;
-		// TODO Auto-generated method stub
+		return onlineDao.approveItem(itemId);
 		
 	}
 
 	@Override
 	public int refuseItem(int itemId) {
-		return itemId;
-		// TODO Auto-generated method stub
-		
+		return onlineDao.refuseItem(itemId);
 	}
 
 	@Override
@@ -261,18 +267,15 @@ public class jkdkImpl implements jkdkFacade {
 	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
 		battleSaleDao.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
-
-	
-
-	public Item getNotApprovedOnlineItems() {
-		// TODO Auto-generated method stub
-		return null;
+  
+	@Override
+	public List<Online> getNotApprovedOnlineItems() {
+		return onlineDao.getNotApprovedOnlineItems();
 	}
 
 	@Override
-	public Item getNotApprovedFundingItems() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Funding> getNotApprovedFundingItems() {
+		return fundingDao.getNotApprovedFundingItems();
 	}
 
 	@Override

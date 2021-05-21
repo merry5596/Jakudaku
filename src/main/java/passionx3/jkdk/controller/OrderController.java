@@ -76,8 +76,10 @@ public class OrderController {
 			BindingResult result, SessionStatus status) {
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
+
 			if (result.hasErrors())
 				return new ModelAndView("thyme/order/NewOrderForm");
+
 			
 			jkdkStore.insertOrder(orderForm.getOrder());
 			ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");

@@ -1,7 +1,9 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class TimeSale extends Sale {
+public class TimeSale extends Sale implements Serializable {
 
   /* Private Fields */
 	private int TimeSaleId;

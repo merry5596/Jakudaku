@@ -92,9 +92,9 @@ public interface jkdkFacade {
 
 	void updateFundingItem(Funding funding);
 
-	Item getNotApprovedOnlineItems();
+	List<Online> getNotApprovedOnlineItems();
 
-	Item getNotApprovedFundingItems();
+	List<Funding> getNotApprovedFundingItems();
 
 	Map<String, List<LineItem>> getLineItemsByUserId(String userId);
 

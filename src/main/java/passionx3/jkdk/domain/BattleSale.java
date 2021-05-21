@@ -1,7 +1,9 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class BattleSale extends Sale {
+public class BattleSale extends Sale implements Serializable {
 
   /* Private Fields */
 	private int battleSaleId;
@@ -10,7 +12,6 @@ public class BattleSale extends Sale {
 	private int vote1;
 	private int vote2;
 	
-
   /* JavaBeans Properties */
 	public int getBattleSaleId() {
 		return battleSaleId;
