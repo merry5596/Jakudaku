@@ -1,3 +1,5 @@
+package passionx3.jkdk.dao.mybatis.mapper;
+
 /*
  *    Copyright 2010-2013 the original author or authors.
  *
@@ -14,28 +16,24 @@
  *    limitations under the License.
  */
 
-package passionx3.jkdk.dao.mybatis.mapper;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Item;
 
 @Mapper
 public interface FundingMapper {
-	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, "
-			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS'), f.purchaseQuantity, f.targetQuantity "
+	@Select("SELECT i.itemId AS itemId, i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
+			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
 			+ "FROM item i, fundingitem f "
 			+ "WHERE i.itemId = f.itemId "
 			+ "AND i.name LIKE '%#{keyword}%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
-	List<Item> getFundingItemsByKeyword(@Param("keyword") String keyword);
+	List<Funding> getFundingItemsByKeyword(@Param("keyword") String keyword);
 
 	
 	@Select("SELECT i.itemId AS itemId, name, userID AS producerId, approval, description, uploaddate, price, targetquantity " + 
