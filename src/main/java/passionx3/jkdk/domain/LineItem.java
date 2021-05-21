@@ -7,25 +7,23 @@ public class LineItem {
 	int lineNumber;
 	int quantity;
 	int isDownloaded;
-	int itemId;
-	String itemName;
-	String thumbnail; 
 	int unitPrice;
-	
+	Item item;
+	int saleState;
 	
 	public LineItem() {
 	}
 		
-	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, int itemId, String itemName,
-			String thumbnail, int unitPrice) {
+	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, 
+			int unitPrice, Item item, int saleState) {
 		this.lineItemId = lineItemId;
 		this.orderId = orderId;
 		this.lineNumber = lineNumber;
 		this.quantity = quantity;
 		this.isDownloaded = isDownloaded;
-		this.itemName = itemName;
-		this.thumbnail = thumbnail;
 		this.unitPrice = unitPrice;
+		this.item = item;
+		this.saleState = saleState;
 	}
 	
 	public int getLineItemId() {
@@ -58,31 +56,34 @@ public class LineItem {
 	public void setIsDownloaded(int isDownloaded) {
 		this.isDownloaded = isDownloaded;
 	}
-	public int getItemId() {
-		return itemId;
-	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public String getThumbnail() {
-		return thumbnail;
-	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
 	public int getUnitPrice() {
 		return unitPrice;
 	}
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
+	public Item getItem() {
+		return item;
+	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	public int getSaleState() {
+		return saleState;
+	}
+	public void setSaleState(int saleState) {
+		this.saleState = saleState;
+	}
 	
-	
+	//method 추가
+	public int getDiscount() {
+		if (saleState == 0)
+			return 0;
+		else
+			return (int) (unitPrice * 0.1);
+	}
+	public int getSalePrice() {
+		return unitPrice - getDiscount();
+	}
 }
 
