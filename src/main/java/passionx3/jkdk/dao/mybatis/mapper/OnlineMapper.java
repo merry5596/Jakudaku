@@ -29,12 +29,13 @@ import passionx3.jkdk.domain.Online;
 
 @Mapper
 public interface OnlineMapper {
-	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, i.isForSale, o.totalRate, o.pcFile, otabletFile, o.phoneFile "
+	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, i.isForSale, o.totalRate, o.pcFile, o.tabletFile, o.phoneFile "
 			+ "FROM item i, onlineitem o "
 			+ "WHERE i.itemId = o.itemId "
 			+ "AND i.name LIKE '%#{keyword}%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
+
 	List<Item> getOnlineItemsByKeyword(@Param("keyword") String keyword);
 	
 	@Select("SELECT i.itemId, name, userID AS producerId, themeId, approval, description, categoryid, uploaddate, price " + 
@@ -46,5 +47,12 @@ public interface OnlineMapper {
 
 	@Insert("UPDATE ITEM SET APPROVAL = 1 WHERE ITEMID = #{itemId}")
 	int approveItem(@Param("itemId") int itemId);
+
+	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
+	
+	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
+			+ "ISFORSALE, DESCRIPTION, APPROVAL, CATEGORYID, THEMEID, PCFILE, TABLEFILE, PHONEFILE"
+			+ " FROM ITEM, ONLINEITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = ONLINEITEM.ITEMID ORDER BY UPLOADDATE")
+	List<Online> getOnlineItemListByProducerId(String userId);
 
 }

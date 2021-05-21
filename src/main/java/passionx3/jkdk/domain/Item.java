@@ -1,8 +1,10 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Item {
+@SuppressWarnings("serial")
+public abstract class Item implements Serializable {
 	private int itemId;
 	private String producerId;
 	private String producerName;

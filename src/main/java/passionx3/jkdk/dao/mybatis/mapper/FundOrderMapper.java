@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import passionx3.jkdk.domain.FundOrder;
+
 @Mapper
 public interface FundOrderMapper {
 

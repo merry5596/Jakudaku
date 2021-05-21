@@ -1,10 +1,13 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Funding extends Item {
+@SuppressWarnings("serial")
+public class Funding extends Item implements Serializable {
 		private String finishDate;
 		private int purchaseQuantity;
 		private int targetQuantity;

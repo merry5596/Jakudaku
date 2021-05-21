@@ -326,4 +326,10 @@ public class jkdkImpl implements jkdkFacade {
 		
 	}
 
+	@Override
+	public Order getOrder(int orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
