@@ -5,6 +5,7 @@ public class FundOrder extends Order {
 	String address1;
 	String address2;
 	int zip;
+	String phone;
 	String receiverName;
 	String deliveryNumber;
 	int deliveryStatus;
@@ -13,12 +14,13 @@ public class FundOrder extends Order {
 	public FundOrder() { }
 	
 	public FundOrder(int orderId, String orderDate, int totalPrice, String creditCard, String expireDate, String cardType,
-			int discountCost, int usedMileage, String userId, String address1, String address2, int zip,
-			String receiverName, String deliveryNumber, int deliveryStatus, LineItem lineItem) {
+			int discountCost, int usedMileage, String userId, String address1, String address2, int zip, 
+			String phone, String receiverName, String deliveryNumber, int deliveryStatus, LineItem lineItem) {
 		super(orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId);
 		this.address1 = address1;
 		this.address2 = address2;
 		this.zip = zip;
+		this.phone = phone;
 		this.receiverName = receiverName;
 		this.deliveryNumber = deliveryNumber;
 		this.deliveryStatus = deliveryStatus;
@@ -42,6 +44,12 @@ public class FundOrder extends Order {
 	}
 	public void setZip(int zip) {
 		this.zip = zip;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getReceiverName() {
 		return receiverName;
