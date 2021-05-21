@@ -12,14 +12,47 @@ public abstract class Item {
 	private String name;
 	private Date uploadDate;
 	private int price;
-	private int like;
+	private int likeNum;
 	private String thumbnail1;
 	private String thumbnail2;
 	private String thumbnail3;
 	private int isForSale;
 	private String description;
 	private int approval;
+	
+	public Item() {
+	}
+	
+	public Item(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale) {
+		this.itemId = itemId;
+		this.name = name;
+		this.price = price;
+		this.likeNum = likeNum;
+		this.thumbnail1 = thumbnail1;
+		this.isForSale = isForSale;
+	}
 
+	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, int categoryId,
+			String name, Date uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
+			int isForSale, String description, int approval) {
+		this.itemId = itemId;
+		this.producerId = producerId;
+		this.producerName = producerName;
+		this.themeId = themeId;
+		this.themeName = themeName;
+		this.categoryId = categoryId;
+		this.name = name;
+		this.uploadDate = uploadDate;
+		this.price = price;
+		this.likeNum = likeNum;
+		this.thumbnail1 = thumbnail1;
+		this.thumbnail2 = thumbnail2;
+		this.thumbnail3 = thumbnail3;
+		this.isForSale = isForSale;
+		this.description = description;
+		this.approval = approval;
+	}
+	
 	public int getItemId() {
 		return itemId;
 	}
@@ -75,10 +108,10 @@ public abstract class Item {
 		this.price = price;
 	}
 	public int getLike() {
-		return like;
+		return likeNum;
 	}
 	public void setLike(int like) {
-		this.like = like;
+		this.likeNum = like;
 	}
 	public String getThumbnail1() {
 		return thumbnail1;
