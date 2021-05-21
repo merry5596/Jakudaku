@@ -1,8 +1,10 @@
 package passionx3.jkdk.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Online extends Item {
+@SuppressWarnings("serial")
+public class Online extends Item implements Serializable {
 	private int saleState;
 	private double totalRate;
 	private String pcFile;
@@ -31,17 +33,7 @@ public class Online extends Item {
 		this.phoneFile = phoneFile;
 	}
 
-	public Online(int itemId, String producerId, String producerName, int themeId, String themeName, int categoryId,
-			String name, Date uploadDate, int price, int like, String thumbnail1, String thumbnail2, String thumbnail3,
-			int isForSale, String description, int approval, int saleState, double totalRate, String pcFile, String tabletFile, String phoneFile) {
-		super(itemId, producerId, producerName, themeId, themeName, categoryId, name, uploadDate, price, like, thumbnail1,
-				thumbnail2, thumbnail3, isForSale, description, approval);
-		this.saleState = saleState;
-		this.totalRate = totalRate;
-		this.pcFile = pcFile;
-		this.tabletFile = tabletFile;
-		this.phoneFile = phoneFile;
-	}
+
 
 	public int getSaleState() {
 		return saleState;

@@ -28,8 +28,7 @@ public class Funding extends Item {
 		public Funding(int itemId, String producerId, String producerName, int themeId, String themeName,
 				int categoryId, String name, Date uploadDate, int price, int likeNum, String thumbnail1,
 				String thumbnail2, String thumbnail3, int isForSale, String description, int approval) {
-			super(itemId, producerId, producerName, themeId, themeName, categoryId, name, uploadDate, price, likeNum, thumbnail1,
-					thumbnail2, thumbnail3, isForSale, description, approval);
+			super();
 			// TODO Auto-generated constructor stub
 		}
 

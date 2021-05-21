@@ -10,7 +10,7 @@ public abstract class Item {
 	private String themeName;
 	private int categoryId;
 	private String name;
-	private Date uploadDate;
+	private String uploadDate;
 	private int price;
 	private int likeNum;
 	private String thumbnail1;
@@ -33,7 +33,7 @@ public abstract class Item {
 	}
 
 	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, int categoryId,
-			String name, Date uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
+			String name, String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
 			int isForSale, String description, int approval) {
 		this.itemId = itemId;
 		this.producerId = producerId;
@@ -95,10 +95,10 @@ public abstract class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getUploadDate() {
+	public String getUploadDate() {
 		return uploadDate;
 	}
-	public void setUploadDate(Date uploadDate) {
+	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 	public int getPrice() {

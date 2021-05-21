@@ -23,10 +23,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Item;
 
 @Mapper
-@Repository
 public interface FundingMapper {
 	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, "
 			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS'), f.purchaseQuantity, f.targetQuantity "
@@ -36,4 +36,9 @@ public interface FundingMapper {
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 	List<Item> getFundingItemsByKeyword(@Param("keyword") String keyword);
+
+	
+	@Select("SELECT i.itemId AS itemId, name, userID AS producerId, approval, description, uploaddate, price, targetquantity " + 
+			"FROM item i, fundingitem f WHERE approval = 0 AND i.itemid = f.itemid")
+	List<Funding> getNotApprovedFundingItems();
 }
