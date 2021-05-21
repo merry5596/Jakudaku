@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.dao;
 
 import java.util.List;
@@ -20,3 +21,4 @@ public interface FundingDao {
 
 	// +조건 검색 내 키워드 검색	
 }
+

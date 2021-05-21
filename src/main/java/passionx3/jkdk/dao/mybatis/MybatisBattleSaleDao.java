@@ -26,8 +26,8 @@ public class MybatisBattleSaleDao implements BattleSaleDao {
 	}
 	
 	@Override
-	public void insetBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
-		battleSaleMapper.insetBattleSale(itemId1, itemId2, openTime, closeTime);
+	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
+		battleSaleMapper.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
 
 	@Override

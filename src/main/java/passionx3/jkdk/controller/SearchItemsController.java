@@ -1,32 +1,28 @@
-package passionx3.jkdk.controller;
 
-import java.util.List;
+package passionx3.jkdk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@RequestMapping("/item/searchItems.do")
 public class SearchItemsController {
-	
+	private jkdkFacade jkdk;
 	@Autowired
-	private jkdkFacade jkdkStore;
-	
-	public ModelAndView handleRequest(@RequestParam("keyword") String keyword) throws Exception {
-		List<Online> onlineList = jkdkStore.getOnlineItemsByKeyword(keyword);
-		List<Funding> fundingList = jkdkStore.getFundingItemsByKeyword(keyword);
-	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("thyme/ViewCategory");
-		mav.addObject("onlineList", onlineList);
-		mav.addObject("fundingList", fundingList);
-		return mav;
+	public void setJkdk(jkdkFacade jkdk) {
+		this.jkdk = jkdk;
 	}
+
+	@RequestMapping("/item/viewCategory.do")
+	public String handleRequest(ModelMap model, @RequestParam("keyword") String keyword) throws Exception {
+		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
+		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));
+		
+		return "thyme/item/searchItems";
+	} 
 }
+

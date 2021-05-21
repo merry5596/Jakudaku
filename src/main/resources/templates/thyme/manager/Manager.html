@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
+    <title>Home</title>
+</head>
+<body>
+<div th:replace="thyme/Header :: header"></div>
+
+<!-- side bar-->
+    <div class="row row-margin">
+        <div class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky" style="width: 250px;">
+            <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Sidebar</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li>
+                    <a th:href="@{/diary}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2"></use>
+                        </svg>
+                        Diary
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/font}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#table"></use>
+                        </svg>
+                        Font
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/wallpaper}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#grid"></use>
+                        </svg>
+                        Wallpaper
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/icon}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg>
+                        Icon
+                    </a>
+                </li>
+                <hr>
+                <li>
+            		<a th:href="@{/item/viewFundingItem.do}" class="nav-link link-dark">
+            		<svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg>
+            		funding
+            		</a>
+            	</li>
+            </ul>
+            <ul>
+            	
+            </ul>
+        </div>
+        
+        <div class="col-7 base">
+            <!-- 관리자 영역 -->
+        <div>
+		<p>ì¹ì¸ ìì²­ ëª©ë¡</p>
+		<div class="wrap">
+		   <div class="search">
+		      <input type="text" class="searchTerm" placeholder="What are you looking for?">
+		      <button type="submit" class="searchButton">
+		        <i class="fa fa-search"></i>
+		     </button>
+		   </div>
+		</div>
+		
+		<!--  ì¹ì¸ ëê¸° ìí ëª©ë¡ -->
+		<div align="center">
+		  <table class="n23">
+		    <tr bgcolor="#CCCCCC">
+		      <td>&nbsp;</td>
+		      <td><b>Product ID</b></td>
+		      <td><b>Name</b></td>
+		    </tr>
+		    <c:forEach var="product" items="${productList.pageList}">
+		      <tr bgcolor="#FFFF88">
+		        <td><a
+		          href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
+		            <c:out value="${product.description}" escapeXml="false" />
+		        </a></td>
+		        <td><b><a
+		            href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
+		              <font color="BLACK"><c:out value="${product.productId}" /></font>
+		          </a></b></td>
+		        <td><c:out value="${product.name}" /></td>
+		      </tr>
+		    </c:forEach>
+		    <tr>
+		      <td><c:if test="${!productList.firstPage}">
+		          <a href="?page=previous"><font color="white"><B>&lt;&lt;
+		                Prev</B></font></a>
+		        </c:if> <c:if test="${!productList.lastPage}">
+		          <a href="?page=next"><font color="white"><B>Next
+		                &gt;&gt;</B></font></a>
+		        </c:if></td>
+		    </tr>
+		  </table>
+		</div>
+	</div>
+            
+        </div>
+    </div>

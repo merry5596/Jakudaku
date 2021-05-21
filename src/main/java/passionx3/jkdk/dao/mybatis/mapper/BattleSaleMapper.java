@@ -27,14 +27,14 @@ import passionx3.jkdk.domain.BattleSale;
 
 @Mapper
 public interface BattleSaleMapper {
-	@Select("SELECT * FROM battleSale WHERE rownum = 1 ORDER BY opentime DESC")
+	@Select("SELECT * FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
 	BattleSale getBattleSale(); //가장 최근의 battle sale Get
 	
 	@Insert("INSERT INTO BattleSale (battlesaleId, itemId1, itemId2, votes1, votes2, discountRate, openTime, closeTime) " + 
 			"SELECT #{battleSaleId}, #{itemId1}, #{itemId2}, 0, 0, 20, #{openTime}, #{closeTime} from dual " + 
 			"WHERE NOT EXISTS ( SELECT openTime FROM battlesale WHERE opentime = '#{openTime}')")
 	@SelectKey(statement="select battleSaleId_seq.nextval FROM DUAL", keyProperty="battleSaleId", before=true, resultType=int.class)
-	void insetBattleSale(@Param("itemId1") String itemId1, @Param("itemId2") String itemId2, @Param("openTime") String openTime, @Param("closeTime") String closeTime);
+	void insertBattleSale(@Param("itemId1") String itemId1, @Param("itemId2") String itemId2, @Param("openTime") String openTime, @Param("closeTime") String closeTime);
 	
 	@Insert("INSERT into vote (userId, battleSaleId, voteId) " + 
 			"SELECT #{userId}, #{battleSaleId}, #{voteId} FROM DUAL " + 
@@ -46,7 +46,7 @@ public interface BattleSaleMapper {
 	void resetVote();
 	
 	@Select("SELECT case WHEN votes1 > votes2 THEN itemId1 WHEN votes1 < votes2 THEN itemId2 END AS winner " + 
-			"FROM battleSale WHERE rownum = 1 ORDER BY opentime DESC")
+			"FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
 	int getWinnerItemId();
 	
 	@Insert("UPDATE battlesale SET votes1 = votes1 + 1 where battlesaleid = 1")
