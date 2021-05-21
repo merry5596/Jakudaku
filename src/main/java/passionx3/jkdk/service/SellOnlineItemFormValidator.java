@@ -12,7 +12,7 @@ import passionx3.jkdk.domain.Online;
  * @modified by Changsup Park
  */
 @Component
-public class SellOnlineFormValidator implements Validator {
+public class SellOnlineItemFormValidator implements Validator {
 
 	public boolean supports(Class<?> clazz) {
 		return Online.class.isAssignableFrom(clazz);

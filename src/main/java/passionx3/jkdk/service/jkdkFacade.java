@@ -1,6 +1,7 @@
 package passionx3.jkdk.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -8,11 +9,11 @@ import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
 
-	void insertAccount(Account account);  	
+	int insertAccount(Account account);  	
 	
-	void updateAccount(Account account);	
+	int updateAccount(Account account);	
 	
-	void removeAccount(String userId);     
+	int removeAccount(String userId);     
 	
 	Account getAccount(String userId);     	
 	
@@ -20,11 +21,11 @@ public interface jkdkFacade {
 	
 	Boolean existingUser(String userId);	
 	
-	void updateLike(int itemId, String userId);
+	int updateLike(int itemId, String userId);
 	
-	void approveItem(int itemId);
+	int approveItem(int itemId);
 	
-	void refuseItem(int itemId);
+	int refuseItem(int itemId);
 	
 	int insertReview (Review review);
 
@@ -34,9 +35,9 @@ public interface jkdkFacade {
 	
 	List<Review> getReviewsByItemId(int reviewId);
 	
-	Online getOnlineItemById(String itemId);
+	Online getOnlineItemById(int itemId);
 	
-	Funding getFundingItemById(String itemId); 
+	Funding getFundingItemById(int itemId); 
 	
 	Review getRevieById(int reviewId);
 
@@ -82,4 +83,28 @@ public interface jkdkFacade {
 	
 	void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime);
 	
+	List<Funding> getNewFundingItemList();
+
+	List<Theme> getAllThemes();
+
+	List<Category> getAllCategories();
+
+	void registerFundingItem(Funding funding);
+
+	void updateFundingItem(Funding funding);
+
+	Item getNotApprovedOnlineItems();
+
+	Item getNotApprovedFundingItems();
+
+	Map<String, List<LineItem>> getLineItemsByUserId(String userId);
+
+	List<Online> getOnlineItemListByProducerId(String userId);
+
+	List<Funding> getFundingItemListByProducerId(String userId);
+
+	int registerOnlineItem(Online online);
+
+	int updateOnlineItem(Online online);
+
 }

@@ -12,7 +12,7 @@ import passionx3.jkdk.domain.Funding;
  * @modified by Changsup Park
  */
 @Component
-public class SellFundingFormValidator implements Validator {
+public class SellFundingItemFormValidator implements Validator {
 
 	public boolean supports(Class<?> clazz) {
 		return Funding.class.isAssignableFrom(clazz);

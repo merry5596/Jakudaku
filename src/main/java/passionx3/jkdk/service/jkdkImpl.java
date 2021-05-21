@@ -1,6 +1,7 @@
 package passionx3.jkdk.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,22 @@ public class jkdkImpl implements jkdkFacade {
 	private BattleSaleDao battleSaleDao;
 	
 	@Override
-	public void insertAccount(Account account) {
+	public int insertAccount(Account account) {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateAccount(Account account) {
+	public int updateAccount(Account account) {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removeAccount(String userId) {
+	public int removeAccount(String userId) {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
@@ -56,19 +60,22 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public void updateLike(int itemId, String userId) {
+	public int updateLike(int itemId, String userId) {
+		return itemId;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void approveItem(int itemId) {
+	public int approveItem(int itemId) {
+		return itemId;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void refuseItem(int itemId) {
+	public int refuseItem(int itemId) {
+		return itemId;
 		// TODO Auto-generated method stub
 		
 	}
@@ -93,18 +100,6 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Review> getReviewsByItemId(int reviewId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Online getOnlineItemById(String itemId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Funding getFundingItemById(String itemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -215,6 +210,40 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public void updateBattleSaleVote2(String battleId) {
 		battleSaleDao.updateBattleSaleVote2(battleId);
+  }
+  
+	public Online getOnlineItemById(int itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Funding getFundingItemById(int itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Theme> getAllThemes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void registerFundingItem(Funding funding) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateFundingItem(Funding funding) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -234,5 +263,49 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	
+
+	public Item getNotApprovedOnlineItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item getNotApprovedFundingItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, List<LineItem>> getLineItemsByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByProducerId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemListByProducerId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int registerOnlineItem(Online online) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int updateOnlineItem(Online online) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
