@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="passionx3.jkdk.dao.mybatis.mapper.OrderMapper">
+
+<cache/>
+
+<select id="getOrder">SELECT orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage
+	FROM Orders WHERE orderId = #{orderId}</select>
+
+<insert id="insertOrder">INSERT INTO Orders (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage)
+			VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{userId}, #{discountCost}, #{usedMileage})</insert>
+
+</mapper>
