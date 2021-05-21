@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">  
+	<title>상품 통합 검색</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.css" integrity="sha512-zF2HEUhQSw0Cb7RtcIc9qx8SKuAvNl8wzA542h55r+COkQ/xBkkcMvqdzQ9NApKQxiluCRmmjFAs5oDlTPsOOw==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
+</head>
+<body>
+	
+	<div class="ui segment">
+	  		<div class="ui sticky" style="width: 670px !important; height: 42.6px !important; left: 417.8px;">
+	    		<div class="ui fluid two item tabular menu">
+	      		<a class="active item" href="#online_tab">온라인 상품</a>
+	      		<a class="item" href="#funding_tab">펀딩 상품</a>
+	    		</div>
+			</div>
+			<div class="ui active tab">
+			    <p><a id="online_tab">온라인 상품</a></p>
+			   	(상품 출력 view 템플릿 복붙)
+			</div>
+			<div class="ui active tab">
+			 	<p><a id="funding_tab">펀딩 상품</a></p>
+			    (상품 출력 view 템플릿 복붙)
+			</div>
+		</div>
+	
+	<div th:include="footer::linkToMain"></div>
+	
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js" integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA==" crossorigin="anonymous"></script>
+	<script>
+	$('.ui.sticky')
+	  .sticky()
+	;
+	</script>
+</body>
+</html>
