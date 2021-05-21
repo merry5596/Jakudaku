@@ -24,6 +24,7 @@ import passionx3.jkdk.service.jkdkFacade;
 
 
 @Controller
+@SessionAttributes("userSession")
 public class ViewHomeController { 
 	
 	@Autowired

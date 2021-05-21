@@ -44,10 +44,10 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Category</th>
+						<th>Date</th>
 						<th>Description</th>
 						<th>Price</th>
-						<th>Date</th>
+						<th>Goal</th>
 						<th>Producer</th>
 						<th>Approve</th>
 						<th>Reject</th>
@@ -56,13 +56,13 @@
 				<tbody>
 					<tr th:each="item:${items}">
 						<td th:text="${item.name}">name</td>
-						<td th:text="${item.categoryId}">category</td>
+						<td th:text="${item.uploadDate}">date</td>
 						<td th:text="${item.description}">description</td>
 						<td th:text="${item.price}">price</td>
-						<td th:text="${item.uploadDate}">date</td>
+						<td th:text="${item.targetQuantity}">goal</td>
 						<td th:text="${item.producerName}">producer</td>
 						<td> 
-							<form action="#" th:action="@{/manager/online/approveItem.do}">
+							<form action="#" th:action="@{/manager/funding/approveItem.do}">
 							<input type="hidden" id="itemId" name="itemId" th:value="${item.itemId}"/>
 		          			<button type="submit" class="btn btn-success">
 				            	approve
@@ -70,7 +70,7 @@
 				          	</form>
 				        </td>
 				        <td> 
-							<form action="#" th:action="@{/manager/online/refuseItem.do}">
+							<form action="#" th:action="@{/manager/funding/refuseItem.do}">
 							<input type="hidden" id="itemId" name="itemId" th:value="${item.itemId}"/>
 		          			<button type="submit" class="btn btn-danger">
 				            	reject
