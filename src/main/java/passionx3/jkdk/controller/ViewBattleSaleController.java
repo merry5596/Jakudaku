@@ -11,12 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import passionx3.jkdk.domain.BattleSale;
+import passionx3.jkdk.service.jkdkFacade;
+
 @Controller
 public class ViewBattleSaleController { 
-	@RequestMapping(value = "/battleSale", method = RequestMethod.GET)
-	public String home(
-			) throws Exception {
+	@Autowired
+	private jkdkFacade jkdkStore;
+	
+	@RequestMapping("/battlesale/viewBattleSale.do")
+	public String handleRequest(ModelMap model) throws Exception {
 		
-		return "thyme/BattleSale";
+		BattleSale battleSale = jkdkStore.getBattleSale();
+
+		//Item item = itemDao.getItem(timeSale.getItemId());
+		
+		model.put("battleSale", battleSale);
+		//model.put("item1", item1);
+		//model.put("item2", item2);
+		return "thyme/sale/BattleSale";
 	}
 }

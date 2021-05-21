@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import passionx3.jkdk.service.jkdkFacade;
 
+import passionx3.jkdk.service.jkdkFacade;
+
 @Controller
 public class ManagerItemController {
 	private jkdkFacade jkdk;

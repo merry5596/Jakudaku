@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import passionx3.jkdk.dao.mybatis.MybatisTimeSaleDao;
 import passionx3.jkdk.domain.TimeSale;
+import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
 public class ViewTimeSaleController { 
 	
 	@Autowired
-	private MybatisTimeSaleDao timeSaleDao = new MybatisTimeSaleDao();
+	private jkdkFacade jkdkStore;
 	
 	@RequestMapping("/timesale/viewtimeSale.do")
 	public String handleRequest(ModelMap model) throws Exception {
-		TimeSale timeSale = timeSaleDao.getTimeSale();
+		
+		TimeSale timeSale = jkdkStore.getTimeSale();
 
 		//Item item = itemDao.getItem(timeSale.getItemId());
 		

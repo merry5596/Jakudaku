@@ -3,6 +3,8 @@ package passionx3.jkdk.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
@@ -61,6 +63,26 @@ public interface jkdkFacade {
 
 	List<Online> getNewOnlineItemList();
 
+	List<Funding> getNewFundingItemList(); 
+	
+	TimeSale getTimeSale();
+	
+	void insertTimeSale(String itemId, String openTime,String closeTime);
+	
+	BattleSale getBattleSale() ;
+	
+	int insertVote(String battleId, String userId);
+	
+	void updateBattleSaleVote1(String battleId);
+	
+	void updateBattleSaleVote2(String battleId);
+	
+	void resetVote();
+	
+	int getWinnerItemId();
+	
+	void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime);
+	
 	List<Funding> getNewFundingItemList();
 
 	List<Theme> getAllThemes();

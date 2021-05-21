@@ -22,18 +22,12 @@ import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 
-import passionx3.jkdk.dao.mybatis.MybatisBattleSaleDao;
-import passionx3.jkdk.dao.mybatis.MybatisTimeSaleDao;
 
 @Controller
 public class ViewHomeController { 
 	
 	@Autowired
-	private MybatisTimeSaleDao timeSaleDao = new MybatisTimeSaleDao();
-	
-	
-	@Autowired
-	private MybatisBattleSaleDao battleSaleDao = new MybatisBattleSaleDao();
+	private jkdkFacade jkdkStore;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap model) throws Exception {
@@ -53,15 +47,15 @@ public class ViewHomeController {
 			
 			//같은 카테고리 내에서 랜덤으로 itemId 2개 뽑기
 			
-			battleSaleDao.insetBattleSale("5", "6", today, tomorrow);
+			jkdkStore.insertBattleSale("5", "6", today, tomorrow);
 			
 		}
 		else if(day_of_week == 8) { //일요일이면 battleSale 진행
-			int itemId = battleSaleDao.getWinnerItemId();//viewBattleSalecontroller에서 정의하고 보여주기
+			int itemId = jkdkStore.getWinnerItemId();//viewBattleSalecontroller에서 정의하고 보여주기
 			
 		}
 		else { //다른 요일에는 timeSale 진행
-			timeSaleDao.insetTimeSale("5", today, tomorrow);
+			jkdkStore.insertTimeSale("5", today, tomorrow);
 		}
 		
 		return "thyme/Home";
@@ -69,8 +63,6 @@ public class ViewHomeController {
 	
 	
 	// 여기부터는 혜연이가 추가한 파트임 일단 복붙만 해두겠음!
-	@Autowired
-	private jkdkFacade jkdkStore;
 
 	@RequestMapping("/home.do")
 	public ModelAndView handleRequest() throws Exception {
