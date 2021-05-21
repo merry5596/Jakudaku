@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper">
+
+<cache/>
+
+<select id="getFundOrder">SELECT o.orderDate, o.totalPrice, o.creditCard, o.expireDate, o.cardType, o.userId, o.discountCost, o.usedMileage,
+	f.address1, f.address2, f.zip, f.receiverName, f.deliveryNumber, f.deliveryStatus
+	FROM FundOrders f, orders o WHERE f.orderId = #{orderId} AND f.orderId = o.orderId</select>
+
+<insert id="insertFundOrder">INSERT INTO FundOrders (orderId, address1, address2, zip, receiverName, deliveryNumber, deliveryStatus)
+			VALUES(#{orderId}, #{address1}, #{address2}, #{zip}, #{receiverName}, #{deliveryNumber}, #{deliveryStatus})</insert>
+
+</mapper>

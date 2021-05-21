@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.domain;
 
 public class FundOrder extends Order {
@@ -69,3 +70,4 @@ public class FundOrder extends Order {
 	
 	
 }
+

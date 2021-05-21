@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.controller;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import passionx3.jkdk.domain.Order;
 import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.domain.Account;
 
 @Controller
 public class MyPageController {
@@ -23,6 +25,15 @@ public class MyPageController {
 	@Autowired
 	public void setJkdk(jkdkFacade jkdk) {
 		this.jkdk = jkdk;
+	}
+  
+  @RequestMapping("/user/myPage.do")
+	public ModelAndView viewMyPagesMain(@SessionAttribute("userSession") Account userSession) {
+		if (userSession == null) {
+			return new ModelAndView("thyme/Home", "message", "로그인 후 이용 가능합니다.");
+		}
+		
+		return new ModelAndView("thyme/MyPage");
 	}
 	
 	@RequestMapping("/user/myPage/buy.do")
@@ -33,7 +44,7 @@ public class MyPageController {
 
 		model.put("lineItemMap", lineItemMap);
 		
-		return "/myPage/buy";
+		return "thyme/myPage/buy";
 	}
 	
 	@RequestMapping("/user/myPage/sell.do")
@@ -46,6 +57,6 @@ public class MyPageController {
 		model.put("onlineList", onlineList);
 		model.put("fundingList", fundingList);
 		
-		return "/myPage/sell";
+		return "thyme/myPage/sell";
 	}
 }

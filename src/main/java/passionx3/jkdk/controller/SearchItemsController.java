@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +7,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
@@ -22,6 +22,7 @@ public class SearchItemsController {
 		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
 		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));
 		
-		return "/item/searchItems";
-	}
+		return "thyme/item/searchItems";
+	} 
 }
+

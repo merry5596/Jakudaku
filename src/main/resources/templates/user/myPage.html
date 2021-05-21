@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:replace="thyme/Header :: head(~{::title})">
+<meta charset="UTF-8">
+<TITLE>마이페이지</TITLE>
+<style>
+  table {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #444444;
+    padding: 30px;
+  }
+</style>
+</HEAD>
+<BODY>
+반갑습니다  <p th:text="#{Account.alias}">사용자<p>님<br>
+적립금 : <p th:text="#{Account.mileage}">0<p>원<br><br>
+<table style="table-layout: fixed; width: 139px">
+<colgroup>
+<col style="width: 200px">
+<col style="width: 200px">
+<col style="width: 200px">
+<col style="width: 200px">
+</colgroup>
+<thead>
+  <tr>
+    <th onclick="location.href='/user/myPage/buy.do'"; style="cursor:pointer;">구매내역조회</th>
+    <th onclick="location.href='/user/myPage/sell.do'"; style="cursor:pointer;">판매내역조회</th>
+    <th onclick="location.href='/user/editAccount.do'"; style="cursor:pointer;">회원정보수정</th>
+    <th onclick="location.href='/user/viewCart.do'"; style="cursor:pointer;">장바구니</th>
+  </tr>
+</thead>
+</table>
+</BODY>
+</HTML>

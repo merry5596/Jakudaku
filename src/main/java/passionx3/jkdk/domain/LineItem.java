@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.domain;
 
 public class LineItem {
@@ -84,3 +85,4 @@ public class LineItem {
 	
 	
 }
+
