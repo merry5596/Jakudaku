@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import passionx3.jkdk.domain.Item;
+import passionx3.jkdk.domain.Online;
 
 @Mapper
 @Repository
@@ -34,5 +35,11 @@ public interface OnlineMapper {
 			+ "AND i.name LIKE '%#{keyword}%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
-	List<Item> getOnlineItemsByKeyword(@Param("keyword") String keyword);
+	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
+	
+	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
+			+ "ISFORSALE, DESCRIPTION, APPROVAL, CATEGORYID, THEMEID, PCFILE, TABLEFILE, PHONEFILE"
+			+ " FROM ITEM, ONLINEITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = ONLINEITEM.ITEMID ORDER BY UPLOADDATE")
+	List<Online> getOnlineItemListByProducerId(String userId);
+
 }
