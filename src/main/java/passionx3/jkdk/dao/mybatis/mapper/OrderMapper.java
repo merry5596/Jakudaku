@@ -3,11 +3,12 @@ package passionx3.jkdk.dao.mybatis.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.domain.Order;
-
+@Mapper
 public interface OrderMapper {
 
 	@Select("SELECT orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage"

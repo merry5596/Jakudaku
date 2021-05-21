@@ -2,8 +2,10 @@ package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
 
-import passionx3.jkdk.domain.LineItem;
+import org.apache.ibatis.annotations.Mapper;
 
+import passionx3.jkdk.domain.LineItem;
+@Mapper
 public interface LineItemMapper {
 	
 	LineItem getLineItemByOrderId(int orderId);

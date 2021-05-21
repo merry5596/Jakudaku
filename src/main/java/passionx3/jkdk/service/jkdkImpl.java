@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.TimeSaleDao;
-
 import passionx3.jkdk.domain.*;
 
 @Service
@@ -264,8 +263,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	
 
-	public Item getNotApprovedOnlineItems() {
-		// TODO Auto-generated method stub
+	public List<Item> getNotApprovedOnlineItems() {
 		return null;
 	}
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title})">
-    <title>Home</title>
+    <title>Manager</title>
 </head>
 <body>
 <div th:replace="thyme/Header :: header"></div>
@@ -22,7 +22,7 @@
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
                         </svg>
-                        Diary
+                       Online Items
                     </a>
                 </li>
                 <li>
@@ -30,44 +30,17 @@
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table"></use>
                         </svg>
-                        Font
+                        Funding Items
                     </a>
                 </li>
-                <li>
-                    <a th:href="@{/wallpaper}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg>
-                        Wallpaper
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/icon}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg>
-                        Icon
-                    </a>
-                </li>
-                <hr>
-                <li>
-            		<a th:href="@{/item/viewFundingItem.do}" class="nav-link link-dark">
-            		<svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg>
-            		funding
-            		</a>
-            	</li>
             </ul>
-            <ul>
-            	
-            </ul>
+
         </div>
         
         <div class="col-7 base">
             <!-- 관리자 영역 -->
         <div>
-		<p>ì¹ì¸ ìì²­ ëª©ë¡</p>
+		<p>승인 페이지</p>
 		<div class="wrap">
 		   <div class="search">
 		      <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -84,29 +57,14 @@
 		      <td>&nbsp;</td>
 		      <td><b>Product ID</b></td>
 		      <td><b>Name</b></td>
+		      <td><b>승인 여부</b></td>
 		    </tr>
-		    <c:forEach var="product" items="${productList.pageList}">
-		      <tr bgcolor="#FFFF88">
-		        <td><a
-		          href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
-		            <c:out value="${product.description}" escapeXml="false" />
-		        </a></td>
-		        <td><b><a
-		            href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
-		              <font color="BLACK"><c:out value="${product.productId}" /></font>
-		          </a></b></td>
-		        <td><c:out value="${product.name}" /></td>
-		      </tr>
-		    </c:forEach>
-		    <tr>
-		      <td><c:if test="${!productList.firstPage}">
-		          <a href="?page=previous"><font color="white"><B>&lt;&lt;
-		                Prev</B></font></a>
-		        </c:if> <c:if test="${!productList.lastPage}">
-		          <a href="?page=next"><font color="white"><B>Next
-		                &gt;&gt;</B></font></a>
-		        </c:if></td>
-		    </tr>
+		    <tr th:each="items : ${items}">
+		      <td bgcolor="#FFFF88">
+		      	
+		      </td>
+	      </tr>
+		  
 		  </table>
 		</div>
 	</div>
