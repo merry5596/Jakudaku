@@ -67,6 +67,9 @@ ${Account.name} 님의 구매내역<br><br>
 				</c:if>	
 				</td>
 			</c:if>
+			<td>
+				<button type="button"  onClick="location.href='/review/writeReview.do'">리뷰쓰기</button>
+			</td>
 			</tr>
 		</c:forEach>
 	</c:forEach>

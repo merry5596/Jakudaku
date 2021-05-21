@@ -7,14 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.TimeSaleDao;
+
 import passionx3.jkdk.domain.*;
 
 @Service
 @Transactional
 public class jkdkImpl implements jkdkFacade {
+
+	@Autowired
+	private AccountDao accountDao;
 	
+	@Override
+	public Account getAccount(String userId) {
+		return accountDao.getAccount(userId);
+		}
+	
+	@Override
+	public Account getAccount(String userId, String password) {
+		return accountDao.getAccount(userId, password);
+	}
+  
 	@Autowired
 	private TimeSaleDao timeSaleDao;
 	
@@ -23,41 +39,24 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Override
 	public int insertAccount(Account account) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+		return accountDao.insertAccount(account);
 	}
 
 	@Override
 	public int updateAccount(Account account) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+		return accountDao.updateAccount(account);
 	}
 
 	@Override
 	public int removeAccount(String userId) {
-		return 0;
 		// TODO Auto-generated method stub
-		
+		return accountDao.removeAccount(userId);
 	}
-
+	
 	@Override
-	public Account getAccount(String userId) {
+	public int existingUser(String userId) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Account getAccount(String userId, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Boolean existingUser(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountDao.existingUser(userId);
 	}
 
 	@Override
