@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">  
+	<title>펀딩 상품 등록</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css" integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css" integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A==" crossorigin="anonymous" />
+</head>
+<body>
+	<form action="#" th:action="@{/item/sellOnlineItem.do}" th:object="${sellOnlineForm}" method="post" class="ui form">
+		<span>미리보기 이미지 </span>
+		<span>(0/3)</span>
+		<br>
+		<input type="file" /> <input type="file" /> <input type="file" />
+		<p>
+			<span th:text="#{precautions.image}"></span><br>
+			<span th:text="#{precautions.image.1}"></span><br>
+			<span th:text="#{precautions.image.2}"></span><br>
+			<span th:text="#{precautions.image.3}"></span><br>
+		</p>
+		
+		<p>
+	    <label for="name">상품명 </label>
+	    <input type="text" id="name" th:field="*{name}" />
+	    <div id="name_cnt">(0 / 100)</div>
+	    <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
+	    <p>
+	    
+	    <p>
+		    <label for="price">판매가격 </label>
+		    <input type="text" id="price" th:field="*{price}" /> 
+		    <span>원 </span>
+		    <span th:each="err : ${#fields.errors('price')}" th:text="${err}"></span>
+	    </p>
+	    
+	    <p>
+		    <span>테마</span>
+		    
+		    <select class="ui search dropdown" id="select"
+		    		th:field="*{themeId}" th:each="theme : ${themeList}" > <!-- Controller에서 Theme Dto List 가져오는 service 필요 -->
+<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
+				<option value="">테마를 선택하세요.</option>
+				
+				<option th:value="${theme.themeId}" 
+						th:text="'#' + ${theme.name}"
+						value="#">theme name</option>
+				
+				<!-- <option value="cute">#귀여운</option>
+				<option value="moody">#무드있는</option>
+				<option value="simple">#심플한</option>
+				<option value="emotional">#감성적인</option>
+				<option value="fancy">#화려한</option> -->
+			</select>
+	    </p>
+	    
+	    <p>
+		    <span>카테고리</span>
+		    
+		    <select class="ui search dropdown" id="select"
+		    		th:field="*{categoryId}" th:each="category : ${categoryList}" > <!-- Controller에서 Theme Dto List 가져오는 service 필요 -->
+<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
+				<option value="">카테고리를 선택하세요.</option>
+				
+				<option th:value="${category.categoryId}" 
+						th:text="'#' + ${category.name}"
+						value="#">cetegory name</option>
+				
+				<!-- <option value="cute">#귀여운</option>
+				<option value="moody">#무드있는</option>
+				<option value="simple">#심플한</option>
+				<option value="emotional">#감성적인</option>
+				<option value="fancy">#화려한</option> -->
+			</select>
+	    </p>
+	    
+	    <p>
+	    	<span>설명</span>
+<!-- 	    	<textarea id="description" name="description" cols="30" rows="10"  -->
+<!-- 	    			th:value="*{description}"  -->
+<!-- 	    			th:placeholder="#{item.description.message}"  -->
+<!-- 	    			></textarea> -->
+	    			
+	    	<textarea id="description" name="description" cols="30" rows="10" 
+	    			th:value="*{description}" 
+	    			placeholder="상품 설명을 입력하세요." ></textarea>
+			<div id="textarea_cnt">(0 / 500)</div>
+	    </p>
+	    
+	    <p>
+	    	<span>펀딩종료 날짜/시간</span>
+	    	
+	    </p>
+	    
+	    <p>
+	    	<span>목표 수량</span>
+	    	<input type="text" id="targetQuantity" th:field="*{targetQuantity}" />개 
+	    </p>
+	   
+	    <br>
+	    <input type="submit" value="등록하기">
+    </form>
+	
+	<div th:include="footer::linkToMain"></div>
+	
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js" integrity="sha512-8F/2JIwyPohlMVdqCmXt6A6YQ9X7MK1jHlwBJv2YeZndPs021083S2Z/mu7WZ5g0iTlGDYqelA9gQXGh1F0tUw==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js" integrity="sha512-cYY5gAyJxIK4sLwDYueWWJH9rEdgBNvRaEIGJ6+dQ5vzfoTqHAtUDYrG2rdZTGqACvPS9QRrnzqqRGfrgxO7ug==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js" integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg==" crossorigin="anonymous"></script>
+	<script>
+	$('#multi-select')
+	  .dropdown({
+	    maxSelections: 2
+	  })
+	;
+	
+	$(document).ready(function() {
+        $('#name').on('keyup', function() {
+            $('#name_cnt').html("("+$(this).val().length+" / 100)");
+ 
+            if($(this).val().length > 100) {
+                $(this).val($(this).val().substring(0, 100));
+                $('#name_cnt').html("(100 / 100)");
+            }
+        });
+    });
+	
+	$(document).ready(function() {
+        $('#description').on('keyup', function() {
+            $('#textarea_cnt').html("("+$(this).val().length+" / 500)");
+ 
+            if($(this).val().length > 500) {
+                $(this).val($(this).val().substring(0, 500));
+                $('#textarea_cnt').html("(500 / 500)");
+            }
+        });
+    });
+	
+	$('.ui.checkbox')
+	  .checkbox()
+	;
+	</script>
+</body>
+</html>

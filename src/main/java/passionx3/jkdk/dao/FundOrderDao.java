@@ -9,3 +9,4 @@ public interface FundOrderDao {
 	FundOrder getFundOrder(int orderId);   // orderId로 FundOrder 반환
 	int insertFundOrder(FundOrder fundOrder); 	// Fundorder 레코드 추가
 }
+
