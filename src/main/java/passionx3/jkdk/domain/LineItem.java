@@ -1,6 +1,7 @@
 
 package passionx3.jkdk.domain;
 
+
 public class LineItem {
 	int lineItemId;
 	int orderId;
@@ -8,23 +9,34 @@ public class LineItem {
 	int quantity;
 	int isDownloaded;
 	int unitPrice;
+
 	Item item;
 	int saleState;
-	
+
 	public LineItem() {
 	}
 		
 	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, 
 			int unitPrice, Item item, int saleState) {
-		this.lineItemId = lineItemId;
-		this.orderId = orderId;
-		this.lineNumber = lineNumber;
-		this.quantity = quantity;
-		this.isDownloaded = isDownloaded;
-		this.unitPrice = unitPrice;
-		this.item = item;
-		this.saleState = saleState;
+  		this.lineItemId = lineItemId;
+		  this.orderId = orderId;
+		  this.lineNumber = lineNumber;
+		  this.quantity = quantity;
+	  	this.isDownloaded = isDownloaded;
+	  	this.unitPrice = unitPrice;
+	  	this.item = item;
+	  	this.saleState = saleState;
 	}
+  
+	public LineItem(int lineNumber, CartItem cartItem) {
+	    this.lineNumber = lineNumber;
+	    this.quantity = cartItem.getQuantity();
+	    this.itemId = cartItem.getOnlineItem().getItemId();
+	    //this.unitPrice = cartItem.getOnlineItem().getListPrice();
+	    this.item = cartItem.getOnlineItem();
+	  }
+	
+
 	
 	public int getLineItemId() {
 		return lineItemId;
@@ -84,6 +96,4 @@ public class LineItem {
 	}
 	public int getSalePrice() {
 		return unitPrice - getDiscount();
-	}
-}
-
+  }

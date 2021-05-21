@@ -1,4 +1,4 @@
-package com.example.jpetstore.controller;
+package passionx3.jkdk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,25 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.domain.Item;
-import com.example.jpetstore.service.PetStoreFacade;
+import passionx3.jkdk.domain.Cart;
+import passionx3.jkdk.domain.Item;
+import passionx3.jkdk.domain.Online;
+import passionx3.jkdk.service.jkdkFacade;
 
-/**
- * @author Juergen Hoeller
- * @since 30.11.2003
- * @modified-by Changsup Park
- */
 @Controller
 @SessionAttributes("sessionCart")
 public class AddItemToCartController { 
-
-	private PetStoreFacade petStore;
-
 	@Autowired
-	public void setPetStore(PetStoreFacade petStore) {
-		this.petStore = petStore;
-	}
+	private jkdkFacade jkdkStore;
 
 	@ModelAttribute("sessionCart")
 	public Cart createCart() {
@@ -44,9 +35,9 @@ public class AddItemToCartController {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
-			boolean isInStock = this.petStore.isItemInStock(workingItemId);
-			Item item = this.petStore.getItem(workingItemId);
-			cart.addItem(item, isInStock);
+			boolean isInStock = this.jkdkStore.isItemInStock(workingItemId);
+			//Online item = this.jkdkStore.getOnlineItem(workingItemId); 아직 facade에 미 구현 돼서 주석 처리 했어
+			//cart.addItem(item, isInStock);
 		}
 		return new ModelAndView("Cart", "cart", cart);
 	}
