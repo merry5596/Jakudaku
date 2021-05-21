@@ -276,8 +276,6 @@ public class jkdkImpl implements jkdkFacade {
 		battleSaleDao.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
 
-	
-
 	public Item getNotApprovedOnlineItems() {
 		// TODO Auto-generated method stub
 		return null;

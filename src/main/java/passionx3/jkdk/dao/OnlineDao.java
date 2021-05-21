@@ -15,7 +15,7 @@ public interface OnlineDao {
 	List<Online> getOnlineItemListByCategory(String categoryId, String themeId) throws DataAccessException; 	
 	List<Online> getOnlineItemListByCategory(String categoryId, int device) throws DataAccessException;
 	List<Online> getOnlineItemListByCategory(String categoryId, String themeId, int device) throws DataAccessException; 	// 카테고리별 온라인 상품 list 출력 (+ 조건 설정 시 테마, 기기에 따라)
-	List<Online> getOnlineItemByKeyword(String keyword) throws DataAccessException; 	// 전체검색에서 키워드로 온라인 상품 list 가져와서 온라인 검색 결과에 출력하기 위함
+	List<Online> getOnlineItemsByKeyword(String keyword) throws DataAccessException; 	// 전체검색에서 키워드로 온라인 상품 list 가져와서 온라인 검색 결과에 출력하기 위함
 	List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException; // 사용자의 판매 창작물 list 가져오기
 	Online getOnlineItemById(int itemId) throws DataAccessException;   	// itemId로 Online 반환
 	int registerOnlineItem (Online OnlineItem) throws DataAccessException; // 온라인 상품 등록, 메소드에서 할일: online Item insert & approval = 0
