@@ -117,4 +117,7 @@ public interface jkdkFacade {
 
 	void insertOrder(Order order);
 
+
+	Order getOrder(int orderId);
+
 }
