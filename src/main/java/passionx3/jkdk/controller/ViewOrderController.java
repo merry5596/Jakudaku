@@ -25,7 +25,7 @@ public class ViewOrderController {
 			@RequestParam("orderId") int orderId
 			) throws Exception {
 		
-		Order order = jkdkStore.getOrder(orderId);
+		Order order = jkdkStore.getOrderByOrderId(orderId);
 		if (user.getUserId().equals(order.getUserId())) {
 			return new ModelAndView("ViewOrder", "order", order);
 		}

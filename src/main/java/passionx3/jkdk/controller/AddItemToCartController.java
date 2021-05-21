@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import passionx3.jkdk.domain.Cart;
-import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 
@@ -28,16 +27,17 @@ public class AddItemToCartController {
 			@RequestParam("workingItemId") String workingItemId,
 			@ModelAttribute("sessionCart") Cart cart 
 			) throws Exception {
-		if (cart.containsItemId(workingItemId)) {
-			cart.incrementQuantityByItemId(workingItemId);
+		int itemId = Integer.parseInt(workingItemId);
+		if (cart.containsItemId(itemId)) {
+			// 처리
+			// UI에 "이미 담겼음" 출력
 		}
 		else {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
-			boolean isInStock = this.jkdkStore.isItemInStock(workingItemId);
-			//Online item = this.jkdkStore.getOnlineItem(workingItemId); 아직 facade에 미 구현 돼서 주석 처리 했어
-			//cart.addItem(item, isInStock);
+			Online item = this.jkdkStore.getOnlineItemById(itemId);
+			cart.addItem(item);
 		}
 		return new ModelAndView("Cart", "cart", cart);
 	}

@@ -34,7 +34,7 @@ public class Order implements Serializable {
 		this.usedMileage = usedMileage;
 		this.userId = userId;
 	}
-	
+		
 	 public void initOrder(Account account, Cart cart) {
 		    userId = account.getUserId();
 		    
@@ -43,13 +43,13 @@ public class Order implements Serializable {
 			cal.setTime(new Date());
 			String today = sDate.format(cal.getTime());
 		    orderDate = today;
-
+	
 		    totalPrice = (int) cart.getSubTotal();
 		    
 		    creditCard = "999 9999 9999 9999";
 		    expireDate = "12/03";
 		    cardType = "Visa";
-
+	
 		    Iterator<CartItem> i = cart.getAllCartItems();
 		    while (i.hasNext()) {
 		      CartItem cartItem = (CartItem) i.next();

@@ -310,10 +310,6 @@ public class jkdkImpl implements jkdkFacade {
 		
 	}
 
-	public boolean isItemInStock(String itemId) {
-		return false;
-	}
-
 	@Override
 	public Item getItem(String itemId) {
 		// TODO Auto-generated method stub
@@ -327,7 +323,7 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public Order getOrder(int orderId) {
+	public Order getOrderByOrderId(int orderId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
