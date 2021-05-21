@@ -29,7 +29,7 @@ import passionx3.jkdk.domain.Online;
 @Mapper
 @Repository
 public interface OnlineMapper {
-	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, i.isForSale, o.totalRate, o.pcFile, otabletFile, o.phoneFile "
+	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, i.isForSale, o.totalRate, o.pcFile, o.tabletFile, o.phoneFile "
 			+ "FROM item i, onlineitem o "
 			+ "WHERE i.itemId = o.itemId "
 			+ "AND i.name LIKE '%#{keyword}%' "

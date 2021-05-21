@@ -1,6 +1,9 @@
 package passionx3.jkdk.domain;
 
-public class Theme {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Theme implements Serializable {
 	int themeId;
 	String name;
 	
