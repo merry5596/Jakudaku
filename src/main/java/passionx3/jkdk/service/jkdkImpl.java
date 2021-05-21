@@ -6,12 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import passionx3.jkdk.dao.BattleSaleDao;
+import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.domain.*;
 
 @Service
 @Transactional
 public class jkdkImpl implements jkdkFacade {
-
+	@Autowired
+	private TimeSaleDao timeSaleDao;
+	
+	@Autowired
+	private BattleSaleDao battleSaleDao;
+	
 	@Override
 	public void insertAccount(Account account) {
 		// TODO Auto-generated method stub
@@ -180,5 +187,52 @@ public class jkdkImpl implements jkdkFacade {
 		return null;
 	}
 
+	@Override
+	public TimeSale getTimeSale() {
+		return timeSaleDao.getTimeSale();
+	}
+
+	@Override
+	public void insertTimeSale(String itemId, String openTime, String closeTime) {
+		timeSaleDao.insertTimeSale(itemId, openTime, closeTime);
+	}
+
+	@Override
+	public BattleSale getBattleSale() {
+		return battleSaleDao.getBattleSale();
+	}
+
+	@Override
+	public int insertVote(String battleId, String userId) {
+		return battleSaleDao.insertVote(battleId, userId);
+	}
+
+	@Override
+	public void updateBattleSaleVote1(String battleId) {
+		battleSaleDao.updateBattleSaleVote1(battleId);
+	}
+
+	@Override
+	public void updateBattleSaleVote2(String battleId) {
+		battleSaleDao.updateBattleSaleVote2(battleId);
+		
+	}
+
+	@Override
+	public void resetVote() {
+		battleSaleDao.resetVote();
+	}
+
+	@Override
+	public int getWinnerItemId() {
+		return battleSaleDao.getWinnerItemId();
+	}
+
+	@Override
+	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
+		battleSaleDao.insertBattleSale(itemId1, itemId2, openTime, closeTime);
+	}
+
+	
 
 }

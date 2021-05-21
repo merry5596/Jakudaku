@@ -34,7 +34,7 @@ public interface BattleSaleMapper {
 			"SELECT #{battleSaleId}, #{itemId1}, #{itemId2}, 0, 0, 20, #{openTime}, #{closeTime} from dual " + 
 			"WHERE NOT EXISTS ( SELECT openTime FROM battlesale WHERE opentime = '#{openTime}')")
 	@SelectKey(statement="select battleSaleId_seq.nextval FROM DUAL", keyProperty="battleSaleId", before=true, resultType=int.class)
-	void insetBattleSale(@Param("itemId1") String itemId1, @Param("itemId2") String itemId2, @Param("openTime") String openTime, @Param("closeTime") String closeTime);
+	void insertBattleSale(@Param("itemId1") String itemId1, @Param("itemId2") String itemId2, @Param("openTime") String openTime, @Param("closeTime") String closeTime);
 	
 	@Insert("INSERT into vote (userId, battleSaleId, voteId) " + 
 			"SELECT #{userId}, #{battleSaleId}, #{voteId} FROM DUAL " + 
