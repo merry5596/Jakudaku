@@ -8,6 +8,7 @@ import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.mybatis.mapper.AccountMapper;
 import passionx3.jkdk.domain.Account;
 
+@Repository
 public class MybatisAccountDao implements AccountDao{
 	@Autowired
 	private AccountMapper accountMapper;

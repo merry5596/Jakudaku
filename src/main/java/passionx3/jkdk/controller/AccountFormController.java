@@ -76,7 +76,7 @@ public class AccountFormController {
 		Account userSession = jkdkStore.getAccount(accountForm.getAccount().getUserId());
 		session.setAttribute("userSession", userSession);
 		
-		return "redirect:/user/hello.do";
+		return "redirect:/";
 	}
 	
 	

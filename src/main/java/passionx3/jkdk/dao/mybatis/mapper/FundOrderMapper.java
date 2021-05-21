@@ -2,10 +2,12 @@ package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import passionx3.jkdk.domain.FundOrder;
 
+@Mapper
 public interface FundOrderMapper {
 
 	@Select("SELECT o.orderDate, o.totalPrice, o.creditCard, o.expireDate, o.cardType, o.userId, o.discountCost, o.usedMileage,"
