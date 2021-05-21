@@ -8,18 +8,26 @@ public class LineItem {
 	int lineNumber;
 	int quantity;
 	int isDownloaded;
-	int itemId;
-	String itemName;
-	String thumbnail; 
 	int unitPrice;
-	private Online item;
-	
-	
-	
+
+	Item item;
+	int saleState;
 
 	public LineItem() {
 	}
 		
+	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, 
+			int unitPrice, Item item, int saleState) {
+  		this.lineItemId = lineItemId;
+		  this.orderId = orderId;
+		  this.lineNumber = lineNumber;
+		  this.quantity = quantity;
+	  	this.isDownloaded = isDownloaded;
+	  	this.unitPrice = unitPrice;
+	  	this.item = item;
+	  	this.saleState = saleState;
+	}
+  
 	public LineItem(int lineNumber, CartItem cartItem) {
 	    this.lineNumber = lineNumber;
 	    this.quantity = cartItem.getQuantity();
@@ -28,17 +36,7 @@ public class LineItem {
 	    this.item = cartItem.getOnlineItem();
 	  }
 	
-	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, int itemId, String itemName,
-			String thumbnail, int unitPrice) {
-		this.lineItemId = lineItemId;
-		this.orderId = orderId;
-		this.lineNumber = lineNumber;
-		this.quantity = quantity;
-		this.isDownloaded = isDownloaded;
-		this.itemName = itemName;
-		this.thumbnail = thumbnail;
-		this.unitPrice = unitPrice;
-	}
+
 	
 	public int getLineItemId() {
 		return lineItemId;
@@ -70,37 +68,32 @@ public class LineItem {
 	public void setIsDownloaded(int isDownloaded) {
 		this.isDownloaded = isDownloaded;
 	}
-	public int getItemId() {
-		return itemId;
-	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public String getThumbnail() {
-		return thumbnail;
-	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
 	public int getUnitPrice() {
 		return unitPrice;
 	}
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	
-	public Online getItem() {
+	public Item getItem() {
 		return item;
 	}
-
-	public void setItem(Online item) {
+	public void setItem(Item item) {
 		this.item = item;
 	}
-}
-
+	public int getSaleState() {
+		return saleState;
+	}
+	public void setSaleState(int saleState) {
+		this.saleState = saleState;
+	}
+	
+	//method 추가
+	public int getDiscount() {
+		if (saleState == 0)
+			return 0;
+		else
+			return (int) (unitPrice * 0.1);
+	}
+	public int getSalePrice() {
+		return unitPrice - getDiscount();
+  }

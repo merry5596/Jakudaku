@@ -31,4 +31,14 @@ public class Online extends Item {
 		this.phoneFile = phoneFile;
 	}
 	
+	//method 추가
+	public int getDiscount() {
+		if (saleState == 0)
+			return 0;
+		else
+			return (int) (getPrice() * 0.1);
+	}
+	public int getSalePrice() {
+		return getPrice() - getDiscount();
+	}
 }
