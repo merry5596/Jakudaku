@@ -87,4 +87,78 @@ public class MybatisOnlineDao implements OnlineDao{
 		return onlineMapper.getOnlineItemListByProducerId(userId);
 	}
 	
+	public List<Online> getNotApprovedOnlineItems() throws DataAccessException {
+		return onlineMapper.getNotApprovedOnlineItems();
+	}
+
+	@Override
+	public List<Online> getBestOnlineItemList() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getNewOnlineItemList() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId, String themeId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId, int device) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(String categoryId, String themeId, int device)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Online getOnlineItemById(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int registerOnlineItem(Online OnlineItem) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWatermark(String fileAddr) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int refuseItem(int itemId) throws DataAccessException {
+		return onlineMapper.refuseItem(itemId);
+	}
+
+	@Override
+	public int approveItem(int itemId) {
+		return onlineMapper.approveItem(itemId);
+	}
 }

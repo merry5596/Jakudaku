@@ -37,9 +37,15 @@ public interface FundingMapper {
 			+ "AND i.approval = 1")
 	List<Item> getFundingItemsByKeyword(@Param("keyword") String keyword);
 
+	
+	@Select("SELECT i.itemId AS itemId, name, userID AS producerId, approval, description, uploaddate, price, targetquantity " + 
+			"FROM item i, fundingitem f WHERE approval = 0 AND i.itemid = f.itemid")
+	List<Funding> getNotApprovedFundingItems();
+  
 	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
 			+ "ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED"
 			+ " FROM ITEM, FUNDINGITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = FUNDINGITEM.ITEMID ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemListByProducerId(String userId);
+
 
 }

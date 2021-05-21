@@ -1,18 +1,3 @@
-/*
- *    Copyright 2010-2013 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
 
 package passionx3.jkdk.dao.mybatis.mapper;
 
@@ -32,13 +17,13 @@ public interface BattleSaleMapper {
 	
 	@Insert("INSERT INTO BattleSale (battlesaleId, itemId1, itemId2, votes1, votes2, discountRate, openTime, closeTime) " + 
 			"SELECT #{battleSaleId}, #{itemId1}, #{itemId2}, 0, 0, 20, #{openTime}, #{closeTime} from dual " + 
-			"WHERE NOT EXISTS ( SELECT openTime FROM battlesale WHERE opentime = '#{openTime}')")
+			"WHERE NOT EXISTS ( SELECT openTime FROM battlesale WHERE opentime = #{openTime})")
 	@SelectKey(statement="select battleSaleId_seq.nextval FROM DUAL", keyProperty="battleSaleId", before=true, resultType=int.class)
 	void insertBattleSale(@Param("itemId1") String itemId1, @Param("itemId2") String itemId2, @Param("openTime") String openTime, @Param("closeTime") String closeTime);
 	
 	@Insert("INSERT into vote (userId, battleSaleId, voteId) " + 
 			"SELECT #{userId}, #{battleSaleId}, #{voteId} FROM DUAL " + 
-			"WHERE NOT EXISTS (SELECT userId FROM VOTE WHERE userId='#{userId}') ")
+			"WHERE NOT EXISTS (SELECT userId FROM VOTE WHERE userId= #{userId}) ")
 	@SelectKey(statement="select votdId_seq.nextval FROM DUAL", keyProperty="voteId", before=true, resultType=int.class)
 	int insertVote(@Param("battleId") String battleId, @Param("userId") String userId);
 	

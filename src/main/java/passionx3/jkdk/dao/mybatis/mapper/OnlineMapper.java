@@ -18,6 +18,7 @@ package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -34,6 +35,19 @@ public interface OnlineMapper {
 			+ "AND i.name LIKE '%#{keyword}%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
+
+	List<Item> getOnlineItemsByKeyword(@Param("keyword") String keyword);
+	
+	@Select("SELECT i.itemId, name, userID AS producerId, themeId, approval, description, categoryid, uploaddate, price " + 
+			"FROM item i, onlineitem o WHERE approval = 0 AND i.itemId = o.itemId")
+	List<Online> getNotApprovedOnlineItems();
+
+	@Insert("UPDATE ITEM SET APPROVAL = -1 WHERE ITEMID = #{itemId}")
+	int refuseItem(@Param("itemId") int itemId);
+
+	@Insert("UPDATE ITEM SET APPROVAL = 1 WHERE ITEMID = #{itemId}")
+	int approveItem(@Param("itemId") int itemId);
+
 	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
 	
 	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "

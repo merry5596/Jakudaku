@@ -13,13 +13,62 @@ import passionx3.jkdk.domain.Item;
 
 @Repository
 public class MybatisFundingDao implements FundingDao {
-	
+
 	@Autowired
 	private FundingMapper fundingMapper;
 
 	public List<Item> getFundingItemsByKeyword(String keyword) throws DataAccessException {
 		return fundingMapper.getFundingItemsByKeyword(keyword);
 	}
+
+	@Override
+	public List<Funding> getNewFundingItemList() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemList() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemList(String themeId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getFundingItemByKeyword(String keyword) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Funding getFundingItemById(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int registerFundingItem(Funding funding) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Funding> getFundingItemListByProducerId(String userId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funding> getNotApprovedFundingItems() throws DataAccessException {
+		return fundingMapper.getNotApprovedFundingItems();
+	}
+	
+
 	
 	@Override
 	public List<Funding> getFundingItemListByProducerId(String userId) throws DataAccessException {
