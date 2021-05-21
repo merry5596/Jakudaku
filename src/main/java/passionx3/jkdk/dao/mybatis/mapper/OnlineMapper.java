@@ -36,7 +36,6 @@ public interface OnlineMapper {
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 
-	List<Item> getOnlineItemsByKeyword(@Param("keyword") String keyword);
 	
 	@Select("SELECT i.itemId, name, userID AS producerId, themeId, approval, description, categoryid, uploaddate, price " + 
 			"FROM item i, onlineitem o WHERE approval = 0 AND i.itemId = o.itemId")
