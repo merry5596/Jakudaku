@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
+    <title>New Fund Order</title>
+</head>
+<script>
+	window.onclick = function() {
+		var m = document.getElementById('usedMileage');
+		var printM = document.getElementById('usedMileageValue');
+		if (m.value == "") {
+			printM.innerText = "0";
+		}
+		else {
+			printM.innerText = m.value;
+		}
+	}
+</script>
+<body>
+
+<div th:replace="thyme/Header :: header"></div>
+
+<div align="center">
+  <h2>상품 결제</h2>
+  <table style="width:1000px; align:center;">
+    <tr>
+      	<td colspan="5"><b>상품 정보</b></td>
+    </tr>
+    <tr bgcolor="#CCCCCC">
+      	<td style="text-align:center"><b>이미지</b></td>
+ 	  	<td style="text-align:center"><b>상품</b></td>
+	  	<td style="text-align:center"><b>판매가</b></td>
+	  	<td style="text-align:center"><b>수량</b></td>
+	  	<td style="text-align:center"><b>결제 금액</b></td>
+    </tr>
+    <tr th:each="lineItem : ${orderForm.fundOrder.lineItem}" bgcolor="#EEEEEE">
+		<td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
+			<img th:src="@{${lineItem.item.thumbnail1}}"/></a></td>
+        <td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
+            <p th:text="${lineItem.item.name}">상품명</p></a>
+        <td style="text-align:center" th:text="${lineItem.item.price}">0</td>
+        <td style="text-align:center" th:text="${lineItem.item.quantity}">1</td>
+        <td style="text-align:center" th:text="${lineItem.item.price} * ${lineItem.item.quantity}">0</td>
+    </tr>
+    <tr bgcolor="#CCCCCC">
+      <td style="text-align:right" colspan="5" th:text="'총 ' + ${fundOrder.totalPrice} + '원'"><b>총 0원</b></td>
+    </tr>
+  </table>
+  
+  <br><br>
+  
+  <form action="#" th:action="@{confirmFundOrder.do}" th:object="${orderForm}" method="POST">
+	  <table style="width:1000px; align:center;">
+  	  	<tr>
+  	  		<td width="20%"><b>배송 정보</b></td>
+  	  		<td><input type="radio" name="group" checked="">회원 정보와 동일
+				<input type="radio" name="group">새로운 수령인</td>
+  	  	</tr>
+  	  	<tr>
+  	  		<td bgcolor="#CCCCCC">수령인</td>
+  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.receiverName}" /></td>
+  	  	</tr>
+  	  	<tr>
+  	  		<td bgcolor="#CCCCCC"><br>수령 주소</td>
+  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.zip}" /> <button type="button">주소 찾기</button>
+	  	  		<br><input type="text" th:field="*{fundOrder.address1}" />
+	  	  		<br><input type="text" th:field="*{fundOrder.address2}" /></td>
+  	  	</tr>
+  	  	<tr>
+  	  		<td bgcolor="#CCCCCC">휴대폰 번호</td>
+  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.phone}" /></td>
+  	  	</tr>
+  	  </table>
+  	  <br>
+	  <table style="width:1000px; align:center;">
+	  	<tr>
+	      <td colspan="2"><b>결제 상세 <span style="font-size:10pt">※펀딩 상품 구매시에는 적립금 사용이 불가합니다.</span></b></td>
+	    </tr>
+	    <tr style="vertical-align:top">
+	      <td width="65%" height="100px">
+	      	<table width="100%" height="100%" bgcolor="#EEEEEE">
+	      		<tr>
+	      			<td bgcolor="#CCCCCC">결제 수단</td>
+	      			<td>카드사
+	      				<select th:field="*{fundOrder.cardType}">
+	      					<option value="">선택</option>
+	      					<option value="shinhan">신한</option>
+			      			<option value="kookmin">국민</option>
+			      			<option value="hana">하나</option></select>
+	      				<br>카드 번호 <input type="text" th:field="*{fundOrder.creditCard}" />
+	      				<br>만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{fundOrder.expireDate}" /></td>
+	      		</tr>
+	      	</table>
+	      </td>
+	      <td height="100px">
+	      	<table width="100%" height="100%" bgcolor="#EEEEEE">
+			    <tr>
+			      	<td>최종 결제 금액</td>
+			      	<td>&nbsp;</td>
+			      	<td style="text-align:center"><span th:text="${fundOrder.totalPrice}">0</span>원</td>
+			    </tr>
+			    <tr>
+			    	<td colspan=3 style="text-align:right"><span style="font-size:10pt">※펀딩 상품은 적립금이 적립되지 않습니다.</span></td>
+	      		</tr>
+	      	</table>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td style="text-align:center" colspan="2" ><input type="submit" value="결제하기" /></td>
+	    </tr>
+	  </table>
+  </form>
+</div>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <tr style="vertical-align:top">
     <td style="text-align:center">
       <h2>Shopping Cart</h2>
-      <form action='<c:url value="/shop/newOrder.do"/>' method="post">
+      <form action='<c:url value="/order/newOrder.do?"/>' method="post">
         <table style="width:100%;" id="cart">
           <tr bgcolor="#cccccc">
             <td style="text-align:center"><b>이미지</b></td>
@@ -32,26 +32,10 @@
                 <a href='<c:url value="/item/viewOnlineItem.do">
                   <c:param name="itemId" value="${cartItem.item.itemId}"/></c:url>'>
                   <c:out value="${cartItem.item.name}" /> </a>
-                 <br><br>ìµì:
-                <c:choose>
-					<c:when test="${cartItem.deviceOption == 0}">PC</c:when>
-					<c:when test="${cartItem.deviceOption == 1}">TABLET</c:when>
-					<c:when test="${cartItem.deviceOption == 2}">PHONE</c:when>
-				</c:choose>
-		    	<!-- <select id="deviceSelect" onchange="changeOption()">
-		    		<option value="0">PC</option>
-		    		<option value="1">TABLET</option>
-		    		<option value="2">PHONE</option>
-		    	</select>
- 				<script>
-	 			 	function changeOption() {
-	 			 		alert('hello');
-	 			 		var deviceSelect = document.getElementById('deviceSelect');
-	 			 		var deviceValue = deviceSelect.options[deviceSelect.selectedIndex].value;
-	 			 		var test = document.getElementById('test');
-	 			 		test.innerHTML"Changed option: " + deviceValue;
-	 			 	}
-	 		   </script> -->
+                <br><br>옵션:
+                <c:if test="${cartitem.item.pcFile != ''}">PC </c:if>
+                <c:if test="${cartItem.item.tabletFile != ''}">TABLET </c:if>
+                <c:if test="${cartItem.item.phoneFile != ''}">PHONE </c:if>
                </b></td>
               <td style="text-align:center"><c:out value="${cartItem.item.price}" /></td>
               <td style="text-align:center">
@@ -64,16 +48,16 @@
 	              	<c:when test="cartItem.item.saleState == 2">	<!-- Battle Sale -->
 	              		<c:set var="discountPrice" value="${cartItem.item.price} * 0.1" />
 						Battle Sale</c:when></c:choose>
-				<br>-<c:out value="${discountPrice}"/></td>
-              <td style="text-align:center"><c:out value="${cartItem.item.price} - ${discountPrice}" /></td>
+				<br>-<c:out value="${cartItem.item.discount}"/></td>
+              <td style="text-align:center"><c:out value="${cartItem.item.salePrice}" /></td>
               <td style="text-align:center">
-                <button type="button">구매</button>
-                <br><button type="button">삭제</button></td>
+                <button type="button" onclick="location.href='/order/newOrder.do?itemId=' + ${cartItem.item.itemId}">구매</button>
+                <br><button type="button" onclick="location.href='/user/removeItemFromCart.do?workingItemId=' + ${cartItem.item.itemId}">삭제</button></td>
             </tr>
           </c:forEach>
           <tr bgcolor="#cccccc">
           	<td colspan="3" align="left">
-          		<button type="button">전체 삭제</button>
+          		<button type="button" onclick="location.href='/user/removeItemFromCart.do?">전체 삭제</button>
           	</td>
             <td colspan="3" align="right">
             	<b>총 <c:out value="${cart.subTotal}" />원</b><br><br>

@@ -27,7 +27,7 @@ public class OrderValidator implements Validator {
 		errors.setNestedPath("");
 	}
 
-	private void validateAddress(Order ojb, Errors errors) {
+	public void validateAddress(Order order, Errors errors) {
 		errors.setNestedPath("order");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receiverName", "RECEIVER_NAME_REQUIRED", "Billing Info: receiver name is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "ADDRESS1_REQUIRED", "Billing Info: address1 is required.");

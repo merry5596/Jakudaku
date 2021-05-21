@@ -3,16 +3,9 @@ package passionx3.jkdk.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
-
 import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
-
-
-	boolean isItemInStock(String itemId);
-	
 
 	Account getAccount(String userId);
 
@@ -116,5 +109,7 @@ public interface jkdkFacade {
 	Item getItem(String itemId);
 
 	void insertOrder(Order order);
+
+	Order getOrderByOrderId(int orderId);
 
 }

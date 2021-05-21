@@ -5,14 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
-import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.domain.Order;
 
 public interface OrderMapper {
 
 	@Select("SELECT orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage"
 			+ "	FROM Orders WHERE orderId = #{orderId}")
-	Order getOrder(int orderId);
+	Order getOrderByOrderId(int orderId);
 
 	@Select("INSERT INTO Orders (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage)"
 			+ "	VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{userId}, #{discountCost}, #{usedMileage})")

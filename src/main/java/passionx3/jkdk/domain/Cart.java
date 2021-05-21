@@ -13,7 +13,7 @@ public class Cart implements Serializable {
 
   /* Private Fields */
 
-  private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
+  private final Map<Integer, CartItem> itemMap = Collections.synchronizedMap(new HashMap<Integer, CartItem>());
 	
   private final PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
 
@@ -29,25 +29,23 @@ public class Cart implements Serializable {
 
   /* Public Methods */
 
-  public boolean containsItemId(String itemId) {
+  public boolean containsItemId(int itemId) {
     return itemMap.containsKey(itemId);
   }
 
-  public void addItem(Online item, boolean isInStock) {
+  public void addItem(Online item) {
     CartItem cartItem = itemMap.get(item.getItemId());
+    // 아직 담기지 않았을 때
     if (cartItem == null) {
       cartItem = new CartItem();
       cartItem.setOnlineItem(item);
-      cartItem.setQuantity(0);
-      cartItem.setInStock(isInStock);
-      itemMap.put(String.valueOf(item.getItemId()), cartItem);
+      itemMap.put(item.getItemId(), cartItem);
       itemList.getSource().add(cartItem);
     }
-    cartItem.incrementQuantity();
+    // 이미 담겼을 때, 처리 필요?
   }
 
-
-  public Online removeItemById(String itemId) {
+  public Online removeItemById(int itemId) {
     CartItem cartItem = itemMap.remove(itemId);
     if (cartItem == null) {
       return null;
@@ -58,16 +56,7 @@ public class Cart implements Serializable {
     }
   }
 
-  public void incrementQuantityByItemId(String itemId) {
-    CartItem cartItem = itemMap.get(itemId);
-    cartItem.incrementQuantity();
-  }
-
-  public void setQuantityByItemId(String itemId, int quantity) {
-    CartItem cartItem = itemMap.get(itemId);
-    cartItem.setQuantity(quantity);
-  }
-
+  // 할인까지 된 총 금액을 반환합니다!!! (DB 저장 아니므로 출력용 정보인 할인된 금액이 더 중요하기 때문)
   public double getSubTotal() {
     double subTotal = 0;
     Iterator<CartItem> items = getAllCartItems();
@@ -75,11 +64,15 @@ public class Cart implements Serializable {
       CartItem cartItem = (CartItem) items.next();
       Online onlineItem = cartItem.getOnlineItem();
       
-      // double listPrice = item.getListPrice(); => 이 부분 수정 좀
-      int quantity = cartItem.getQuantity();
-      //subTotal += listPrice * quantity;
+      subTotal += onlineItem.getSalePrice();
     }
     return subTotal;
   }
-
+  
+  //메소드 추가
+  public void removeAllItems() {
+	  itemMap.clear();
+	  itemList.getSource().clear();
+	  
+  }
 }

@@ -1,5 +1,7 @@
 package passionx3.jkdk.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,20 @@ import passionx3.jkdk.domain.Cart;
 @SessionAttributes("sessionCart")
 public class RemoveItemFromCartController { 
 
-	@RequestMapping("/shop/removeItemFromCart.do")
+	@RequestMapping("/order/removeItemFromCart.do")
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") String workingItemId,
-			@ModelAttribute("sessionCart") Cart cart
+			@ModelAttribute("sessionCart") Cart cart,
+			HttpSession session
 		) throws Exception {
-		cart.removeItemById(workingItemId);
+		// 전체 삭제
+		if (workingItemId == null) {
+			cart.removeAllItems();
+		}
+		// 단일 상품 삭제
+		else {
+			cart.removeItemById(Integer.parseInt(workingItemId));
+		}
 		return new ModelAndView("Cart", "cart", cart);
 	}
 }

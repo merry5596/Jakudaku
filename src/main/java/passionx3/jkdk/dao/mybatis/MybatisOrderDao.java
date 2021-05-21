@@ -36,13 +36,13 @@ public class MybatisOrderDao implements OrderDao {
 	
 	@Override
 	@Transactional
-	public Order getOrder(int orderId) throws DataAccessException {
-		Order order = orderMapper.getOrder(orderId);
+	public Order getOrderByOrderId(int orderId) {
+		Order order = orderMapper.getOrderByOrderId(orderId);
 		if (order != null) {
 			order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 		}
 	    return order;
-	}
+	}	
 	
 	@Override
 	@Transactional
@@ -84,7 +84,7 @@ public class MybatisOrderDao implements OrderDao {
 			int fundOrderId = fundingList.get(i).getOrderId();
 			
 			if(onlineList.get(i).getOrderDate().equals(fundingList.get(j).getOrderDate())) {
-				Order order = orderMapper.getOrder(orderId);
+				Order order = orderMapper.getOrderByOrderId(orderId);
 				order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
@@ -95,7 +95,7 @@ public class MybatisOrderDao implements OrderDao {
 				i++; j++;
 			}
 			else if(Integer.parseInt(onlineList.get(i).getOrderDate()) > Integer.parseInt(fundingList.get(j).getOrderDate())) {
-				Order order = orderMapper.getOrder(orderId);
+				Order order = orderMapper.getOrderByOrderId(orderId);
 				order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(order);
 				
@@ -119,7 +119,7 @@ public class MybatisOrderDao implements OrderDao {
 			for(int k = i; k < onlineList.size(); k++) {
 				int orderId = onlineList.get(i).getOrderId();
 
-				Order order = orderMapper.getOrder(orderId);
+				Order order = orderMapper.getOrderByOrderId(orderId);
 				order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(order);
 				
@@ -143,5 +143,6 @@ public class MybatisOrderDao implements OrderDao {
 		
 		
 		return lineItemMap;
-	}	
+	}
+
 }
