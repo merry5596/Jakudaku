@@ -1,4 +1,4 @@
-package com.example.jpetstore.controller;
+package passionx3.jkdk.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,21 +15,16 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.example.jpetstore.domain.Account;
-import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.service.OrderValidator;
-import com.example.jpetstore.service.PetStoreFacade;
+import passionx3.jkdk.domain.Account;
+import passionx3.jkdk.domain.Cart;
+import passionx3.jkdk.service.OrderValidator;
+import passionx3.jkdk.service.jkdkFacade;
 
-/**
- * @author Juergen Hoeller
- * @since 01.12.2003
- * @modified by Changsup Park
- */
 @Controller
 @SessionAttributes({"sessionCart", "orderForm"})
 public class OrderController {
 	@Autowired
-	private PetStoreFacade petStore;
+	private jkdkFacade jkdkStore;
 	@Autowired
 	private OrderValidator orderValidator;
 	
@@ -52,10 +47,10 @@ public class OrderController {
 			@ModelAttribute("sessionCart") Cart cart,
 			@ModelAttribute("orderForm") OrderForm orderForm
 			) throws ModelAndViewDefiningException {
-		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
+		Account user = (Account) request.getSession().getAttribute("user");
 		if (cart != null) {
 			// Re-read account from DB at team's request.
-			Account account = petStore.getAccount(userSession.getAccount().getUsername());
+			Account account = jkdkStore.getAccount(user.getName());
 			orderForm.getOrder().initOrder(account, cart);
 			return "NewOrderForm";	
 		}
@@ -84,9 +79,7 @@ public class OrderController {
 				return "ConfirmOrder";
 			}
 		}
-		else {		// from ShippingForm
-			orderValidator.validateShippingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "ShippingForm";
+		else {
 			return "ConfirmOrder";
 		}
 	}
@@ -95,7 +88,7 @@ public class OrderController {
 	protected ModelAndView confirmOrder(
 			@ModelAttribute("orderForm") OrderForm orderForm, 
 			SessionStatus status) {
-		petStore.insertOrder(orderForm.getOrder());
+		jkdkStore.insertOrder(orderForm.getOrder());
 		ModelAndView mav = new ModelAndView("ViewOrder");
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("message", "Thank you, your order has been submitted.");

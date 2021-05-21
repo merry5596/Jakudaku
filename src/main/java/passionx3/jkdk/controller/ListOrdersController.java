@@ -1,4 +1,4 @@
-package com.example.jpetstore.controller;
+package passionx3.jkdk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,31 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.jpetstore.service.PetStoreFacade;
+import passionx3.jkdk.domain.Account;
+import passionx3.jkdk.service.jkdkFacade;
 
-/**
- * @author Juergen Hoeller
- * @since 01.12.2003
- * @modified by Changsup Park
- */
 @Controller
 @SessionAttributes("userSession")
 public class ListOrdersController {
 
-	private PetStoreFacade petStore;
-
 	@Autowired
-	public void setPetStore(PetStoreFacade petStore) {
-		this.petStore = petStore;
-	}
+	private jkdkFacade jkdkStore;
 
 	@RequestMapping("/shop/listOrders.do")
 	public ModelAndView handleRequest(
-		@ModelAttribute("userSession") UserSession userSession
+		@ModelAttribute("Account") Account account
 		) throws Exception {
-		String username = userSession.getAccount().getUsername();
-		return new ModelAndView("ListOrders", "orderList", 
-				petStore.getOrdersByUsername(username));
+		String username = account.getName();
+		return new ModelAndView("ListOrders");
+				//(orderList, jkdkStore.getOrdersByUsername(username));
 	}
 
 }

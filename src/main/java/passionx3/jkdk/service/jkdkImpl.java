@@ -30,7 +30,7 @@ public class jkdkImpl implements jkdkFacade {
 	public Account getAccount(String userId, String password) {
 		return accountDao.getAccount(userId, password);
 	}
-
+  
 	@Autowired
 	private TimeSaleDao timeSaleDao;
 	
@@ -307,5 +307,20 @@ public class jkdkImpl implements jkdkFacade {
 		
 	}
 
+	public boolean isItemInStock(String itemId) {
+		return false;
+	}
+
+	@Override
+	public Item getItem(String itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
