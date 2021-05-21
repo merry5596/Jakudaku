@@ -25,8 +25,8 @@ public class ViewOrderController {
 			@RequestParam("orderId") int orderId
 			) throws Exception {
 		
-		Order order = this.petStore.getOrder(orderId);
-		if (userSession.getAccount().getUsername().equals(order.getUsername())) {
+		Order order = jkdkStore.getOrder(orderId);
+		if (user.getUserId().equals(order.getUserId())) {
 			return new ModelAndView("ViewOrder", "order", order);
 		}
 		else {

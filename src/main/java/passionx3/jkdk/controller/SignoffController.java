@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("userSession")
-@RequestMapping("/user/signoff.do")
 public class SignoffController {
 	
-	public String handleRequest(HttpServletRequest request, HttpSession session) {
+	@RequestMapping("/user/signoff.do")
+	public String handleRequest(HttpSession session) {
 		session.removeAttribute("userSession");
 		session.invalidate();
+
 		return "thyme/Home";
 	}
 }
