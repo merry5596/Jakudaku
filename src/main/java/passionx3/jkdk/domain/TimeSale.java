@@ -6,9 +6,9 @@ public class TimeSale extends Sale {
   /* Private Fields */
 	private int TimeSaleId;
 	private int itemId;
-	
+	private int quantity;
 
-  /* JavaBeans Properties */
+	/* JavaBeans Properties */
 	public int getTimeSaleId() {
 		return TimeSaleId;
 	}
@@ -21,5 +21,10 @@ public class TimeSale extends Sale {
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
-	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }
