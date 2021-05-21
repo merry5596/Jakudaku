@@ -21,7 +21,7 @@ public class DeleteAccountController {
 	@Autowired
 	private jkdkFacade jkdkStore;
 	
-	@Value("thyme/DeleteAccountForm")
+	@Value("DeleteAccountForm")
 	private String formViewName;
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -44,6 +44,6 @@ public class DeleteAccountController {
 			return new ModelAndView(formViewName); 
 		}
 		
-		return new ModelAndView("redirect:/user/goodbye.do");
+		return new ModelAndView("redirect:thyme/user/goodbye.do");
 	}
 }
