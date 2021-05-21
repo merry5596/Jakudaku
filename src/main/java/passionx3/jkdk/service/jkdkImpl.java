@@ -260,9 +260,8 @@ public class jkdkImpl implements jkdkFacade {
 	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
 		battleSaleDao.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
-
-	
-
+  
+	@Override
 	public List<Item> getNotApprovedOnlineItems() {
 		return null;
 	}

@@ -1,18 +1,43 @@
 package passionx3.jkdk.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Funding extends Item {
-		private Date finishDate;
+		private String finishDate;
 		private int purchaseQuantity;
 		private int targetQuantity;
-		private boolean isSaleEnded;
 
-		public Date getFinishDate() {
+		public Funding() {
+		}
+
+		public Funding(String finishDate, int purchaseQuantity, int targetQuantity) {
+			this.finishDate = finishDate;
+			this.purchaseQuantity = purchaseQuantity;
+			this.targetQuantity = targetQuantity;
+		}
+		
+		public Funding(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale, String finishDate, int purchaseQuantity, int targetQuantity) {
+			super(itemId, name, price, likeNum, thumbnail1, isForSale);
+			this.finishDate = finishDate;
+			this.purchaseQuantity = purchaseQuantity;
+			this.targetQuantity = targetQuantity;
+		}
+
+		public Funding(int itemId, String producerId, String producerName, int themeId, String themeName,
+				int categoryId, String name, Date uploadDate, int price, int likeNum, String thumbnail1,
+				String thumbnail2, String thumbnail3, int isForSale, String description, int approval) {
+			super(itemId, producerId, producerName, themeId, themeName, categoryId, name, uploadDate, price, likeNum, thumbnail1,
+					thumbnail2, thumbnail3, isForSale, description, approval);
+			// TODO Auto-generated constructor stub
+		}
+
+		public String getFinishDate() {
 			return finishDate;
 		}
 
-		public void setFinishDate(Date finishDate) {
+		public void setFinishDate(String finishDate) {
 			this.finishDate = finishDate;
 		}
 
@@ -32,25 +57,23 @@ public class Funding extends Item {
 			this.targetQuantity = targetQuantity;
 		}
 
-		public boolean isSaleEnded() {
-			return isSaleEnded;
-		}
-
-		public void setSaleEnded(boolean isSaleEnded) {
-			this.isSaleEnded = isSaleEnded;
-		}
-
 //		이 부분은 실시간으로 바뀌어야 돼서 javascript로 가져가서 구현하기
-//		public String getRemainingTime() {
-//			Date today = new Date();
-//		
-//			long remainingDays = (finishDate.getTime() - today.getTime()) / (24*60*60*1000);
-//			long remainingHours = (finishDate.getTime() - today.getTime()) % (24*60*60*1000) / (60*60*1000);
-//			long remainingMinutes = (finishDate.getTime() - today.getTime()) % (60*60*1000) / (60 * 1000);
-//			long remainingSeconds = (finishDate.getTime() - today.getTime()) % (60 * 1000) / (1000);
-//			
-//			return remainingDays + "일 " + remainingHours + "시간" + remainingMinutes + "분" + remainingSeconds + "초";
-//		}
+		public String getRemainingTime() {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date finish = null;
+			try {
+				finish = transFormat.parse(finishDate);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Date today = new Date();
+		
+			long remainingDays = (finish.getTime() - today.getTime()) / (24*60*60*1000);
+			
+			return remainingDays + "일 남음";
+		}
 		
 //		소수점 자르는 과정에서 double -> String, String -> double 을 거치는데
 //		출력용이면 그냥 반환값을 String으로 바꿔서 'return sPercentage;' 해도 되지 않을까
