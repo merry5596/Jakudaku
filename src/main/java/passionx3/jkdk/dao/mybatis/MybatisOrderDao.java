@@ -55,7 +55,7 @@ public class MybatisOrderDao implements OrderDao {
 
 	@Override
 	public List<Order> getOrdersByUserId(String userId) {
-		return null;
+		return orderMapper.getOrdersByUserId(userId);
 	}
 	
 }

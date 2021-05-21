@@ -30,7 +30,7 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	
 	@Override
 	public List<FundOrder> getFundOrdersByUserId(String userId) {
-		return null;
+		return fundOrderMapper.getFundOrdersByUserId(userId);
 	}
 
 	@Override
