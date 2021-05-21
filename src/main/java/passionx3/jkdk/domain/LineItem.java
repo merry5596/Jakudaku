@@ -31,7 +31,7 @@ public class LineItem {
 	public LineItem(int lineNumber, CartItem cartItem) {
 	    this.lineNumber = lineNumber;
 	    this.quantity = cartItem.getQuantity();
-	    this.itemId = cartItem.getOnlineItem().getItemId();
+	    this.item.setItemId(cartItem.getOnlineItem().getItemId());
 	    //this.unitPrice = cartItem.getOnlineItem().getListPrice();
 	    this.item = cartItem.getOnlineItem();
 	  }
@@ -96,4 +96,5 @@ public class LineItem {
 	}
 	public int getSalePrice() {
 		return unitPrice - getDiscount();
-  }
+	}
+}
