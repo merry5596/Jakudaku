@@ -68,7 +68,7 @@ public class OrderController {
 		if (orderForm.didShippingAddressProvided() == false) {	
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
-			orderValidator.validateBillingAddress(orderForm.getOrder(), result);
+			//orderValidator.validateBillingAddress(orderForm.getOrder(), result); 오류나서 우선 주석처리
 			if (result.hasErrors()) return "NewOrderForm";
 			
 			if (orderForm.isShippingAddressRequired() == true) {

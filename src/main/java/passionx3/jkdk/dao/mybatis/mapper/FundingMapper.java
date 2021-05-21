@@ -27,7 +27,6 @@ import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Item;
 
 @Mapper
-@Repository
 public interface FundingMapper {
 	@Select("SELECT i.itemId, i.name, i.price, i.likeNum, i.thumbnail1, "
 			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS'), f.purchaseQuantity, f.targetQuantity "
