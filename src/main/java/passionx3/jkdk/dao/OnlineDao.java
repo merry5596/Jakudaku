@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
 
 public interface OnlineDao {

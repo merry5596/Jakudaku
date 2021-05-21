@@ -18,7 +18,6 @@ public interface FundingDao {
 	List<Funding> getFundingItemListByProducerId(String userId) throws DataAccessException; // 사용자의 판매 펀딩 list 가져오기 (추가)
 
 	List<Funding> getNotApprovedFundingItems() throws DataAccessException; // 조건문에서 approval 무조건 0 (수정)
-
 	// +조건 검색 내 키워드 검색	
 }
 
