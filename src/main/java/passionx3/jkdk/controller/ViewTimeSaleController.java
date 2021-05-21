@@ -17,18 +17,18 @@ import passionx3.jkdk.domain.TimeSale;
 @Controller
 public class ViewTimeSaleController { 
 	
+	@Autowired
+	private MybatisTimeSaleDao timeSaleDao = new MybatisTimeSaleDao();
+	
 	@RequestMapping("/timesale/viewtimeSale.do")
-	public String handleRequest(
-			@RequestParam("timeSaleId") String timeSaleId,
-			ModelMap model
-			) throws Exception {
-		
-		MybatisTimeSaleDao timeSaleDao = new MybatisTimeSaleDao();
-		
+	public String handleRequest(ModelMap model) throws Exception {
 		TimeSale timeSale = timeSaleDao.getTimeSale();
+
 		//Item item = itemDao.getItem(timeSale.getItemId());
+		
 		model.put("timeSale", timeSale);
 		//model.put("item", item);
-		return "thyme/TimeSale";
+		model.put("timeSale", timeSale);
+		return "thyme/sale/TimeSale";
 	}
 }

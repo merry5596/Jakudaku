@@ -7,8 +7,6 @@
 <div th:replace="thyme/Header :: header"></div>
 
 <div class="pt-5 salecover" align="center">
-	
-	
 	<div  class="container evnet-page">
 		<p class="event-title"> Time Sale </p>
 		<div class="timeSale-image-banner">
@@ -34,11 +32,23 @@
 			  </button>
 			</div>
 		</div>
-
-		<p class="timeSale-item-name"> name1 </p>
-		<p class="text-muted"> category </p>
-		<p > price -> saleprice(30%) </p>
-		<p class="event-des"> time sale item description</p>
-		<p class="event-des"> time sale description</p>
+		
+		<div align="center">
+			<table>
+				<tr>
+					<td> <h2>Item Name</h2> </td>
+					<td class="text-muted" > ItemCategory </td>
+				</tr>
+				<tr>
+					<td> 아이템 설명 주저리 주저리</td>
+				</tr>
+				<tr>
+					<td align="right" th:text="${timeSale.discountRate}"> discountRate </td><td>% 할인</td>
+				</tr>
+				<tr>
+					<td align="right" th:text="${timeSale.quantity}"> quantity </td><td>개 선착순!</td> 
+				</tr>
+			</table>
+		</div>
 	</div>
 </div>

@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.domain;
 
 public class LineItem {
@@ -6,22 +7,25 @@ public class LineItem {
 	int lineNumber;
 	int quantity;
 	int isDownloaded;
+	int itemId;
+	String itemName;
+	String thumbnail; 
 	int unitPrice;
-	Item item;
 	
 	
 	public LineItem() {
 	}
 		
-	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, 
-			int unitPrice, Item item) {
+	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, int itemId, String itemName,
+			String thumbnail, int unitPrice) {
 		this.lineItemId = lineItemId;
 		this.orderId = orderId;
 		this.lineNumber = lineNumber;
 		this.quantity = quantity;
 		this.isDownloaded = isDownloaded;
+		this.itemName = itemName;
+		this.thumbnail = thumbnail;
 		this.unitPrice = unitPrice;
-		this.item = item;
 	}
 	
 	public int getLineItemId() {
@@ -54,17 +58,31 @@ public class LineItem {
 	public void setIsDownloaded(int isDownloaded) {
 		this.isDownloaded = isDownloaded;
 	}
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 	public int getUnitPrice() {
 		return unitPrice;
 	}
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public Item getItem() {
-		return item;
-	}
-	public void setItem(Item item) {
-		this.item = item;
-	}
+	
 	
 }
+

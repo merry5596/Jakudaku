@@ -16,6 +16,8 @@ public class MybatisTimeSaleDao implements TimeSaleDao {
 
 	@Override
 	public TimeSale getTimeSale() throws DataAccessException {
+		System.out.println(timeSaleMapper.getTimeSale());
+		
 		return timeSaleMapper.getTimeSale();
 	}
 

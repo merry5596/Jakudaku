@@ -27,7 +27,7 @@ import passionx3.jkdk.domain.BattleSale;
 
 @Mapper
 public interface BattleSaleMapper {
-	@Select("SELECT * FROM battleSale WHERE rownum = 1 ORDER BY opentime DESC")
+	@Select("SELECT * FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
 	BattleSale getBattleSale(); //가장 최근의 battle sale Get
 	
 	@Insert("INSERT INTO BattleSale (battlesaleId, itemId1, itemId2, votes1, votes2, discountRate, openTime, closeTime) " + 
@@ -46,7 +46,7 @@ public interface BattleSaleMapper {
 	void resetVote();
 	
 	@Select("SELECT case WHEN votes1 > votes2 THEN itemId1 WHEN votes1 < votes2 THEN itemId2 END AS winner " + 
-			"FROM battleSale WHERE rownum = 1 ORDER BY opentime DESC")
+			"FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
 	int getWinnerItemId();
 	
 	@Insert("UPDATE battlesale SET votes1 = votes1 + 1 where battlesaleid = 1")

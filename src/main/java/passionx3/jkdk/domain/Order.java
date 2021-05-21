@@ -9,9 +9,9 @@ public class Order {
 	String creditCard; 
 	String expireDate;
 	String cardType;
-	String userId;
 	int discountCost;
 	int usedMileage;
+	String userId;
 	List<LineItem> lineItems;
 		
 	public Order() { }
