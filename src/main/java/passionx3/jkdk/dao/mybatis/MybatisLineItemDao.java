@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
 import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
@@ -13,6 +15,7 @@ import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.domain.Order;
 
+@Repository
 public class MybatisLineItemDao implements LineItemDao {
 
 	private LineItemMapper lineItemMapper;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import passionx3.jkdk.dao.FundOrderDao;
@@ -14,6 +15,7 @@ import passionx3.jkdk.dao.mybatis.mapper.OrderMapper;
 import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.LineItem;
 
+@Repository
 public class MybatisFundOrderDao implements FundOrderDao {
 
 	@Autowired

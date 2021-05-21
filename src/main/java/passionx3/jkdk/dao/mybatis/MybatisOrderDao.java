@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import passionx3.jkdk.dao.OrderDao;
@@ -18,6 +19,7 @@ import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.domain.Order;
 
+@Repository
 public class MybatisOrderDao implements OrderDao {
 
 	@Autowired

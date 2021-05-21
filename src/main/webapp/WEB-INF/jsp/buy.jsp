@@ -45,25 +45,26 @@ ${Account.name} 님의 구매내역<br><br>
 <br><br>
 
 <table>
-	<c:forEach var="order" items="${lineItemMap}">
+	<c:forEach var="d" items="${orderMap}">
+		<c:forEach var="o" items="${orderMap[d.key]}">
 		<tr>
-			<td>${order.key}</td>
+			<td>${d.key}</td>
 			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">상세보기</button></td>
 		</tr>
-		<c:forEach var="item" items="${lineItemMap[order.key]}">
+		<c:forEach var="l" items="${o.value.lineItems}">
 			<tr>
-			<td>${item.value.thumnail1}</td>
-			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${item.value.name}</td>
-			<c:if test="${item.value.item.getClass().getSimpleName() eq Online}">
+			<td>${l.item.thumnail1}</td>
+			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${l.item.name}</td>
+			<c:if test="${l.item.getClass().getSimpleName() eq Online}">
 				<td>
-				<c:if test="${not empty orderList.lineItems.itemId.pcFile}">
-					<a href="${orderList.lineItems.itemId.pcFile}" download><button>pc용 다운로드</button></a>
+				<c:if test="${not empty l.item.pcFile}">
+					<a href="${l.item.pcFile}" download><button>pc용 다운로드</button></a>
 				</c:if>
-				<c:if test="${not empty orderList.lineItems.itemId.tableFile}">
-					<a href="${orderList.lineItems.itemId.tableFile}" download><button>테블릿용 다운로드</button></a>
+				<c:if test="${not empty l.item.tableFile}">
+					<a href="${l.item.tableFile}" download><button>테블릿용 다운로드</button></a>
 				</c:if>	
-				<c:if test="${not empty orderList.lineItems.itemId.phoneFile}">
-					<a href="${orderList.lineItems.itemId.phoneFile}" download><button>모바일용 다운로드</button></a>
+				<c:if test="${not empty l.item.phoneFile}">
+					<a href="${l.item.phoneFile}" download><button>모바일용 다운로드</button></a>
 				</c:if>	
 				</td>
 			</c:if>
@@ -71,6 +72,7 @@ ${Account.name} 님의 구매내역<br><br>
 				<button type="button"  onClick="location.href='/review/writeReview.do'">리뷰쓰기</button>
 			</td>
 			</tr>
+		</c:forEach>
 		</c:forEach>
 	</c:forEach>
 </table>
