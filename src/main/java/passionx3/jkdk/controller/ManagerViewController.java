@@ -1,5 +1,7 @@
 package passionx3.jkdk.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,11 +20,11 @@ public class ManagerViewController {
 
 	@RequestMapping("/manager/myPage/onlineItem.do") 	//관리자 마이페이지의 default
 	public String viewOnlineItem(ModelMap model) throws Exception {
-		Item item = jkdk.getNotApprovedOnlineItems();
+		List<Item> items = jkdk.getNotApprovedOnlineItems();
 		
-		model.put("item", item);
+		model.put("items", items);
 		
-		return "/manager/myPage/online";
+		return "thyme/manager/Manager";
 	}
 	
 	@RequestMapping("/manager/myPage/fundingItem.do")
