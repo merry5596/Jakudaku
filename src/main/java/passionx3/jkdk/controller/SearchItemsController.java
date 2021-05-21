@@ -17,7 +17,7 @@ public class SearchItemsController {
 		this.jkdk = jkdk;
 	}
 
-	@RequestMapping("/item/viewCategory.do")
+	@RequestMapping("/item/searchItems.do")
 	public String handleRequest(ModelMap model, @RequestParam("keyword") String keyword) throws Exception {
 		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
 		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));

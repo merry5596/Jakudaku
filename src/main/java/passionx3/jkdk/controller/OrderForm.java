@@ -1,13 +1,10 @@
-package com.example.jpetstore.controller;
+package passionx3.jkdk.controller;
 
 import java.io.Serializable;
 
-import com.example.jpetstore.domain.Order;
+import passionx3.jkdk.domain.Order;
 
-/**
- * @author Juergen Hoeller
- * @since 01.12.2003
- */
+
 @SuppressWarnings("serial")
 public class OrderForm implements Serializable {
 

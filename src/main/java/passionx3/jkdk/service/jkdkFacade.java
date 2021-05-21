@@ -5,10 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+
 import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
 
+	boolean isItemInStock(String itemId);
+	
 	int insertAccount(Account account);  	
 	
 	int updateAccount(Account account);	
@@ -83,7 +86,7 @@ public interface jkdkFacade {
 	
 	void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime);
 	
-	List<Funding> getNewFundingItemList();
+	//List<Funding> getNewFundingItemList();
 
 	List<Theme> getAllThemes();
 
@@ -106,5 +109,9 @@ public interface jkdkFacade {
 	int registerOnlineItem(Online online);
 
 	int updateOnlineItem(Online online);
+	
+	Item getItem(String itemId);
+
+	void insertOrder(Order order);
 
 }

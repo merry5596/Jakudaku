@@ -14,6 +14,7 @@ import passionx3.jkdk.domain.*;
 @Service
 @Transactional
 public class jkdkImpl implements jkdkFacade {
+	
 	@Autowired
 	private TimeSaleDao timeSaleDao;
 	
@@ -307,5 +308,20 @@ public class jkdkImpl implements jkdkFacade {
 		
 	}
 
+	public boolean isItemInStock(String itemId) {
+		return false;
+	}
+
+	@Override
+	public Item getItem(String itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

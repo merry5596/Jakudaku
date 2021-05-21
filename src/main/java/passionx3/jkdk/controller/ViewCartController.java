@@ -1,21 +1,26 @@
-package com.example.jpetstore.controller;
+package passionx3.jkdk.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.example.jpetstore.domain.Cart;
+import passionx3.jkdk.domain.Account;
+import passionx3.jkdk.domain.Cart;
+
+import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
 @SessionAttributes("sessionCart")
 public class ViewCartController { 
+	@Autowired
+	private jkdkFacade jkdkStore;
 	
 	@ModelAttribute("sessionCart")
 	public Cart createCart(HttpSession session) {
@@ -27,42 +32,21 @@ public class ViewCartController {
 	@RequestMapping("/shop/viewCart.do")
 	public ModelAndView viewCart(
 			HttpServletRequest request,
-			@RequestParam(value="page", required=false) String page,
 			@ModelAttribute("sessionCart") Cart cart) 
 			throws Exception {
-		UserSession userSession = 
-			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
-		handleRequest(page, cart, userSession);
+		
+		Account account = (Account) WebUtils.getSessionAttribute(request, "user");
+		
 		return new ModelAndView("Cart", "cart", cart);
 	}
 
 	@RequestMapping("/shop/checkout.do")
 	public ModelAndView checkout(
 			HttpServletRequest request,
-			@RequestParam(value="page", required=false) String page,
 			@ModelAttribute("sessionCart") Cart cart) 
 			throws Exception {
-		UserSession userSession = 
-			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
-		handleRequest(page, cart, userSession);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "user");
 		return new ModelAndView("Checkout", "cart", cart);
 	}
 	
-	private void handleRequest(String page, Cart cart, UserSession userSession)
-			throws Exception {
-		if (userSession != null) {
-			if ("next".equals(page)) {
-				userSession.getMyList().nextPage();
-			}
-			else if ("previous".equals(page)) {
-				userSession.getMyList().previousPage();
-			}
-		}
-		if ("nextCart".equals(page)) {
-			cart.getCartItemList().nextPage();
-		}
-		else if ("previousCart".equals(page)) {
-			cart.getCartItemList().previousPage();
-		}
-	}
 }
