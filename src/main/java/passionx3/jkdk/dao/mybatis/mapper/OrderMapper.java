@@ -8,7 +8,10 @@ import org.apache.ibatis.annotations.Select;
 
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.domain.Order;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'develop' of https://github.com/KangHyojin1401/Jakudaku.git
 @Mapper
 public interface OrderMapper {
 

@@ -6,7 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import passionx3.jkdk.domain.FundOrder;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'develop' of https://github.com/KangHyojin1401/Jakudaku.git
 @Mapper
 public interface FundOrderMapper {
 

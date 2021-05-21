@@ -99,7 +99,7 @@ public interface jkdkFacade {
 
 	void updateFundingItem(Funding funding);
 
-	Item getNotApprovedOnlineItems();
+	List<Item> getNotApprovedOnlineItems();
 
 	Item getNotApprovedFundingItems();
 
