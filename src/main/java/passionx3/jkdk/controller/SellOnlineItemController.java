@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import passionx3.jkdk.service.SellOnlineItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
-import passionx3.jkdk.cotroller.SellOnlineForm;
+import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
@@ -52,7 +53,7 @@ public class SellOnlineItemController {
 	}
 	
 	@ModelAttribute("categoryList")
-	public List<Theme> getCategoryList() { // accessor method
+	public List<Category> getCategoryList() { // accessor method
 		return jkdk.getAllCategories(); // view에 전달됨
 	}
 	

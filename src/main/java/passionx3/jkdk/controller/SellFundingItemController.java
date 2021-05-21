@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import passionx3.jkdk.service.SellFundingItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
-import passionx3.jkdk.cotroller.SellFundingForm;
 import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Theme;
 
