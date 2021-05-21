@@ -23,16 +23,16 @@ public interface AccountMapper {
 	@Insert("INSERT INTO ACCOUNT (USERID, PASSWORD, ALIAS, NAME, EMAIL, PHONE, ADDRESS1, ADDRESS2, ZIP)"
 			+ " VALUES (#{account.userId}, #{account.password}, #{account.alias}, #{account.name}, #{account.email}, "
 			+ "#{account.phone}, #{account.address1}, #{account.address2}, #{account.zip})")
-	void insertAccount(Account account);
+	int insertAccount(Account account);
 	
 	@Update("UPDATE ACCOUNT SET USERID = #{account.userId}, PASSWORD = #{account.password}, "
 			+ "ALIAS = #{account.alias}, NAME = #{account.name}, EMAIL = #{account.email}, "
 			+ "PHONE = #{account.phone}, ADDRESS1 = #{account.address1}, ADDRESS2 = #{account.address2}, "
 			+ "ZIP = #{account.zip} WHERE USERID = #{account.userId}")
-	void updateAccount(Account account);
+	int updateAccount(Account account);
 
 	@Delete("DELETE FROM ACCOUNT WHERE USERID = #{account.userId}")
-	void removeAccount(String userId);
+	int removeAccount(String userId);
 
 	@Select("SELECT USERID FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")
 	int exisingUser(String userId);	

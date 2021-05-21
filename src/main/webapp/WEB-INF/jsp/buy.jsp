@@ -5,7 +5,7 @@
 <HTML>
 <HEAD>
 <meta charset="UTF-8">
-<TITLE>±¸¸Å³»¿ª</TITLE>
+<TITLE>êµ¬ë§¤ë‚´ì—­</TITLE>
 <style>
   table {
     width: 100%;
@@ -14,8 +14,8 @@
 </style>
 </HEAD>
 <BODY>
-${Account.name} ´ÔÀÇ ±¸¸Å³»¿ª<br><br>
-<!-- ÃßÈÄ±¸Çö»çÇ×
+${Account.name} ë‹˜ì˜ êµ¬ë§¤ë‚´ì—­<br><br>
+<!-- ì¶”í›„êµ¬í˜„ì‚¬í•­
 <table style="undefined;table-layout: fixed; width: 164px">
 <colgroup>
 <col style="width: 100px">
@@ -27,46 +27,49 @@ ${Account.name} ´ÔÀÇ ±¸¸Å³»¿ª<br><br>
 </colgroup>
 <thead>
   <tr>
-    <th rowspan="2">Á¶È¸±â°£</th>
-    <th>¿À´Ã</th>
-    <th>1ÁÖÀÏ</th>
-    <th>1°³¿ù</th>
-    <th>6°³¿ù</th>
-    <th>1³â</th>
+    <th rowspan="2">ì¡°íšŒê¸°ê°„</th>
+    <th>ì˜¤ëŠ˜</th>
+    <th>1ì£¼ì¼</th>
+    <th>1ê°œì›”</th>
+    <th>6ê°œì›”</th>
+    <th>1ë…„</th>
   </tr>
   <tr>
-    <td colspan="5" align=center>³¯Â¥ ³ª¿À´Â °÷</td>
+    <td colspan="5" align=center>ë‚ ì§œ ë‚˜ì˜¤ëŠ” ê³³</td>
   </tr>
 </thead>
 </table> -->
 <br><br><br>
 
-<h3>±¸¸Å ¸ñ·Ï</h3>
+<h3>êµ¬ë§¤ ëª©ë¡</h3>
 <br><br>
 
 <table>
-	<c:forEach var="o" items="${lineItemMap}">
+	<c:forEach var="order" items="${lineItemMap}">
 		<tr>
-			<td>${o.key}</td>
-			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">»ó¼¼º¸±â</button></td>
+			<td>${order.key}</td>
+			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">ìƒì„¸ë³´ê¸°</button></td>
 		</tr>
-		<c:forEach var="i" items="${lineItemMap[order.key]}">
+		<c:forEach var="item" items="${lineItemMap[order.key]}">
 			<tr>
-			<td>${i.value.item.thumnail1}</td>
-			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${i.value.itme.name}</td>
-			<c:if test="${i.value.item.getClass().getSimpleName() eq Online}">
+			<td>${item.value.thumnail1}</td>
+			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${item.value.name}</td>
+			<c:if test="${item.value.item.getClass().getSimpleName() eq Online}">
 				<td>
-				<c:if test="${not empty i.value.item.pcFile}">
-					<a href="${orderList.lineItems.itemId.pcFile}" download><button>pc¿ë ´Ù¿î·Îµå</button></a>
+				<c:if test="${not empty orderList.lineItems.itemId.pcFile}">
+					<a href="${orderList.lineItems.itemId.pcFile}" download><button>pcìš© ë‹¤ìš´ë¡œë“œ</button></a>
 				</c:if>
-				<c:if test="${not empty i.value.item.tableFile}">
-					<a href="${orderList.lineItems.itemId.tableFile}" download><button>Å×ºí¸´¿ë ´Ù¿î·Îµå</button></a>
+				<c:if test="${not empty orderList.lineItems.itemId.tableFile}">
+					<a href="${orderList.lineItems.itemId.tableFile}" download><button>í…Œë¸”ë¦¿ìš© ë‹¤ìš´ë¡œë“œ</button></a>
 				</c:if>	
-				<c:if test="${not empty i.value.item.phoneFile}">
-					<a href="${orderList.lineItems.itemId.phoneFile}" download><button>¸ğ¹ÙÀÏ¿ë ´Ù¿î·Îµå</button></a>
+				<c:if test="${not empty orderList.lineItems.itemId.phoneFile}">
+					<a href="${orderList.lineItems.itemId.phoneFile}" download><button>ëª¨ë°”ì¼ìš© ë‹¤ìš´ë¡œë“œ</button></a>
 				</c:if>	
 				</td>
 			</c:if>
+			<td>
+				<button type="button"  onClick="location.href='/review/writeReview.do'">ë¦¬ë·°ì“°ê¸°</button>
+			</td>
 			</tr>
 		</c:forEach>
 	</c:forEach>
@@ -78,7 +81,7 @@ ${Account.name} ´ÔÀÇ ±¸¸Å³»¿ª<br><br>
 	<c:forEach var="o" items="${orderList}">
 		<tr>
 			<td>${o.orderDate}</td>
-			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">»ó¼¼º¸±â</button></td>
+			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">ìƒì„¸ë³´ê¸°</button></td>
 		</tr>
 		<c:forEach var="l" items="${orderList.lineItems}">
 			<tr>
@@ -86,13 +89,13 @@ ${Account.name} ´ÔÀÇ ±¸¸Å³»¿ª<br><br>
 			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${l.itemId.name}</td>
 			<td>
 			<c:if test="${not empty orderList.lineItems.itemId.pcFile}">
-				<a href="${orderList.lineItems.itemId.pcFile}" download><button>pc¿ë ´Ù¿î·Îµå</button></a>
+				<a href="${orderList.lineItems.itemId.pcFile}" download><button>pcìš© ë‹¤ìš´ë¡œë“œ</button></a>
 			</c:if>
 			<c:if test="${not empty orderList.lineItems.itemId.tableFile}">
-				<a href="${orderList.lineItems.itemId.tableFile}" download><button>Å×ºí¸´¿ë ´Ù¿î·Îµå</button></a>
+				<a href="${orderList.lineItems.itemId.tableFile}" download><button>í…Œë¸”ë¦¿ìš© ë‹¤ìš´ë¡œë“œ</button></a>
 			</c:if>	
 			<c:if test="${not empty orderList.lineItems.itemId.phoneFile}">
-				<a href="${orderList.lineItems.itemId.phoneFile}" download><button>¸ğ¹ÙÀÏ¿ë ´Ù¿î·Îµå</button></a>
+				<a href="${orderList.lineItems.itemId.phoneFile}" download><button>ëª¨ë°”ì¼ìš© ë‹¤ìš´ë¡œë“œ</button></a>
 			</c:if>	
 			</td>
 			</tr>
@@ -102,15 +105,15 @@ ${Account.name} ´ÔÀÇ ±¸¸Å³»¿ª<br><br>
 
 
 <a name = "funding" />
-<h3>Funding »óÇ° ±¸¸Å ¸ñ·Ï</h3>
-<a href="#online">Online »óÇ° ±¸¸Å ¸ñ·Ï º¸±â</a>
+<h3>Funding ìƒí’ˆ êµ¬ë§¤ ëª©ë¡</h3>
+<a href="#online">Online ìƒí’ˆ êµ¬ë§¤ ëª©ë¡ ë³´ê¸°</a>
 <br><br>
 
 <table>
 	<c:forEach var="f" items="${fundorderList}">
 		<tr>
 		<td>${f.orderDate}</td>
-		<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">»ó¼¼º¸±â</button></td>
+		<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">ìƒì„¸ë³´ê¸°</button></td>
 		</tr>
 		<tr>
 		<td>${f.lineItem.itemId.thumnail1}</td>

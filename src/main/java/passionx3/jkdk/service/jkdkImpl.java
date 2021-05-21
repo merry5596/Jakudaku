@@ -29,6 +29,7 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public Account getAccount(String userId, String password) {
 		return accountDao.getAccount(userId, password);
+	}
 
 	@Autowired
 	private TimeSaleDao timeSaleDao;
@@ -38,33 +39,18 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Override
 	public int insertAccount(Account account) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+		return accountDao.insertAccount(account);
 	}
 
 	@Override
 	public int updateAccount(Account account) {
-		return 0;
-		// TODO Auto-generated method stub
-
+		return accountDao.updateAccount(account);
 	}
-	
+
 	@Override
 	public int removeAccount(String userId) {
-		return 0;
 		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	public void updateAccount(Account account) {
-		accountDao.updateAccount(account);
-	}
-
-	@Override
-	public void removeAccount(String userId) {
-		// TODO Auto-generated method stub
-		accountDao.removeAccount(userId);
+		return accountDao.removeAccount(userId);
 	}
 	
 	@Override
