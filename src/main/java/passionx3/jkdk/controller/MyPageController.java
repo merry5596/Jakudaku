@@ -42,11 +42,11 @@ public class MyPageController {
 	public String viewBuyItem(ModelMap model, HttpSession session) throws Exception {
 		String userId = (String) session.getAttribute("userId"); 
 		
-		Map<String, List<LineItem>> lineItemMap= jkdk.getLineItemsByUserId(userId); //dao 인터페이스에 추가해야 할 메소드
+		Map<String, List<LineItem>> orderMap = jkdk.getLineItemsByUserId(userId); //dao 인터페이스에 추가해야 할 메소드
 
-		model.put("lineItemMap", lineItemMap);
+		model.put("lineItemMap", orderMap);
 		
-		return "thyme/myPage/buy";
+		return "/buy";
 	}
 	
 	@RequestMapping("/user/myPage/sell.do")
@@ -59,6 +59,6 @@ public class MyPageController {
 		model.put("onlineList", onlineList);
 		model.put("fundingList", fundingList);
 		
-		return "thyme/myPage/sell";
+		return "/sell";
 	}
 }
