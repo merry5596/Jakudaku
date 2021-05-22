@@ -50,7 +50,7 @@ public class ViewHomeController {
 			String item2 = jkdkStore.getOnlineItemIdByCategoryforSale(0);
 			jkdkStore.insertBattleSale(item1, item2, today, tomorrow);
 		}
-		else if(day_of_week != 8){ //다른 요일에는 timeSale 진행
+		else if(day_of_week != 1){ //다른 요일에는 timeSale 진행
 			int category = cal.get(Calendar.DAY_OF_MONTH) % 4;
 			String item = jkdkStore.getOnlineItemIdByCategoryforSale(category);
 			jkdkStore.insertTimeSale(item, today, tomorrow);

@@ -35,10 +35,10 @@ public class ViewTimeSaleController {
 		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
-		
-		if(day_of_week != 8 && day_of_week != 7){ //주말이 아니면 타임 세일 진행
+
+		if(day_of_week != 1 && day_of_week != 7){ //주말이 아니면 타임 세일 진행
 			TimeSale timeSale = jkdkStore.getTimeSale(today);
-			System.out.println("Time slae ID = " + timeSale.getItemId());
+			
 			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
 			
 			model.put("timeSale", timeSale);

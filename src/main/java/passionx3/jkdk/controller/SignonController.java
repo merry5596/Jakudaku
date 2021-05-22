@@ -21,7 +21,7 @@ public class SignonController {
 	private jkdkFacade jkdkStore;
 	
 	@RequestMapping("/user/signon.do")
-	public ModelAndView handleRequest(HttpServletRequest request,
+	public String handleRequest(HttpServletRequest request,
 			@RequestParam("userId") String userId,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
@@ -30,7 +30,7 @@ public class SignonController {
 		Account account = jkdkStore.getAccount(userId, password);
 		
 		if (account == null) {	// 로그인 정보 일치하지 않음
-			return new ModelAndView("thyme/SignonForm", "message", "아이디 또는 비밀번호가 일치하지 않습니다.");	
+			return "redirect:/";
 		}
 		
 		model.addAttribute("userSession", account);
@@ -38,8 +38,8 @@ public class SignonController {
 		// 로그인 하기 직전 페이지로 이동
 		// forwardAction(이전 페이지) 값은 GET 요청 시 interceptor에서 form으로 보낸 뒤 POST 요청 시에 parameter로 받아오는 것
 		if (forwardAction != null)
-			return new ModelAndView("redirect:" + forwardAction);
+			return "redirect:/";
 		else 
-			return new ModelAndView("thyme/Home");
+			return "redirect:/";
 	}
 }

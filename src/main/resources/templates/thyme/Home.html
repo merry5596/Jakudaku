@@ -8,7 +8,7 @@
 
 <!-- side bar-->
     <div class="row row-margin">
-        <div class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky" style="width: 250px;">
+        <div class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky" style="width: 250px; height: 500px;">
             <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
@@ -130,10 +130,18 @@
                                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                                     </svg>
 
-                                    <div class="card-body">
-                                        <p th:text="${item.name}" class="card-text">
+                                    <div class="card-body ">
+                                        <span class="itemName" th:text="${item.name}" >
                                             name
-                                        </p>
+                                        </span>
+                                        <small class="text-muted" th:text="${item.categoryId}">
+                                            categoryId
+                                        </small>
+                                        <div class = "mt-1 mb-3">
+	                                        <small class="text-muted" th:text="${item.description}">
+	                                        	description
+	                                        </small>
+                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="like btn btn-sm btn-outline-danger"> like
@@ -141,7 +149,7 @@
                                                 <button type="button" class="basket btn btn-sm btn-outline-primary">
                                                     basket </button>
                                             </div>
-                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
+                                            <small align="right" th:text="${item.price}" >price</small><small>won</small>
                                         </div>
                                     </div>
                                 </div>
@@ -166,10 +174,18 @@
                                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                                     </svg>
 
-                                    <div class="card-body">
-                                        <p th:text="${item.name}" class="card-text">
+                                    <div class="card-body ">
+                                        <span class="itemName" th:text="${item.name}" >
                                             name
-                                        </p>
+                                        </span>
+                                        <small class="text-muted" th:text="${item.categoryId}">
+                                            categoryId
+                                        </small>
+                                        <div class = "mt-1 mb-3">
+	                                        <small class="text-muted" th:text="${item.description}">
+	                                        	description
+	                                        </small>
+                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="like btn btn-sm btn-outline-danger"> like
@@ -177,7 +193,7 @@
                                                 <button type="button" class="basket btn btn-sm btn-outline-primary">
                                                     basket </button>
                                             </div>
-                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
+                                            <small align="right" th:text="${item.price}" >price</small><small>won</small>
                                         </div>
                                     </div>
                                 </div>
@@ -203,10 +219,18 @@
                                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                                     </svg>
 
-                                    <div class="card-body">
-                                        <p th:text="${item.name}" class="card-text">
+                                    <div class="card-body ">
+                                        <span class="itemName" th:text="${item.name}" >
                                             name
-                                        </p>
+                                        </span>
+                                        <small class="text-muted" th:text="${item.categoryId}">
+                                            categoryId
+                                        </small>
+                                        <div class = "mt-1 mb-3">
+	                                        <small class="text-muted" th:text="${item.description}">
+	                                        	description
+	                                        </small>
+                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="like btn btn-sm btn-outline-danger"> like
@@ -214,7 +238,7 @@
                                                 <button type="button" class="basket btn btn-sm btn-outline-primary">
                                                     basket </button>
                                             </div>
-                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
+                                            <small align="right" th:text="${item.price}" >price</small><small>won</small>
                                         </div>
                                     </div>
                                 </div>

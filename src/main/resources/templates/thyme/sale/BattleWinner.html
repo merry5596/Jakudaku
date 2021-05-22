@@ -6,52 +6,33 @@
 <body>
 <div th:replace="thyme/Header :: header"></div>
 
-<div class="pt-5 salecover" align="center">
+<div class="pt-2 ">
 <div th:unless="${item}" class="container evnet-page">
 		<p class="event-des"> no Battle Winner </p>
 	</div>
 	
 	<div th:if="${item}"  class="container evnet-page">
-		<p class="event-title"> Battle Winner </p>
-		<div class="timeSale-image-banner">
-			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="/image/tmp2.jpg" class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="/image/tmp.jpg" class="d-block w-100" alt="...">
-			    </div>
-			  </div>
-			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Previous</span>
-			  </button>
-			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Next</span>
-			  </button>
-			</div>
-		</div>
-
-		<div align="center">
-			<table>
-				<tr>
-					<td> <h2 th:text="${item.name}"> name1 </h2> </td>
-					<td class="text-muted" th:text="${item1.categoryId}"> ItemCategory </td>
-				</tr>
-				<tr>
-					<td th:text="${item.description}"> description </td>
-				</tr>
-				<tr>
-					<td th:text="${item.price}"> price </td>
-					<td align="right" th:text="${battleSale.discountRate}"> discountRate </td><td>% 할인</td>
-				</tr>
-
-			</table>
-		</div>
+	<p class="event-title mt-3" align = "center"><b> Battle Winner </b> </p>
+	<p class="lead text-center" > 배틀 세일 우승을 축하합니다. 승자는 20% 세일을 진행합니다. </p>
+	<section class="pb-5 px-5 mx-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..."></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1" th:text="${item.categoryId}" >ItemCategory</div>
+                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
+                            <span th:text="${item.price}">price</span>
+                        </div>
+                        <p class="lead" th:text="${item.description}">description</p>
+                         <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                	구매
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 	</div>
 </div>
