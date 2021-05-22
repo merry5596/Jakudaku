@@ -12,8 +12,8 @@ import passionx3.jkdk.domain.BattleSale;
 
 @Mapper
 public interface BattleSaleMapper {
-	@Select("SELECT * FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
-	BattleSale getBattleSale(); //가장 최근의 battle sale Get
+	@Select("SELECT * FROM BATTLESALE WHERE openTime = #{openTime}")
+	BattleSale getBattleSale(@Param("openTime") String openTime); //가장 최근의 battle sale Get
 	
 	@Insert("INSERT INTO BattleSale (battlesaleId, itemId1, itemId2, votes1, votes2, discountRate, openTime, closeTime) " + 
 			"SELECT #{battleSaleId}, #{itemId1}, #{itemId2}, 0, 0, 20, #{openTime}, #{closeTime} from dual " + 
@@ -24,8 +24,8 @@ public interface BattleSaleMapper {
 	@Insert("INSERT into vote (userId, battleSaleId, voteId) " + 
 			"SELECT #{userId}, #{battleSaleId}, #{voteId} FROM DUAL " + 
 			"WHERE NOT EXISTS (SELECT userId FROM VOTE WHERE userId= #{userId}) ")
-	@SelectKey(statement="select votdId_seq.nextval FROM DUAL", keyProperty="voteId", before=true, resultType=int.class)
-	int insertVote(@Param("battleId") String battleId, @Param("userId") String userId);
+	@SelectKey(statement="select voteId_seq.nextval FROM DUAL", keyProperty="voteId", before=true, resultType=int.class)
+	int insertVote(@Param("battleSaleId") String battleSaleId, @Param("userId") String userId);
 	
 	@Delete("TRUNCATE TABLE vote ")
 	void resetVote();
@@ -34,9 +34,9 @@ public interface BattleSaleMapper {
 			"FROM battleSale WHERE rownum = 1 ORDER BY battleSaleId DESC")
 	int getWinnerItemId();
 	
-	@Insert("UPDATE battlesale SET votes1 = votes1 + 1 where battlesaleid = 1")
-	void updateBattleSaleVote1(@Param("battleId") String battleId);
+	@Insert("UPDATE battlesale SET votes1 = votes1 + 1 where battlesaleid = #{battleSaleId}")
+	void updateBattleSaleVote1(@Param("battleSaleId") String battleSaleId);
 	
-	@Insert("UPDATE battlesale SET votes2 = votes2 + 1 where battlesaleid = 1")
-	void updateBattleSaleVote2(@Param("battleId") String battleId);
+	@Insert("UPDATE battlesale SET votes2 = votes2 + 1 where battlesaleid = #{battleSaleId}")
+	void updateBattleSaleVote2(@Param("battleSaleId") String battleSaleId);
 }

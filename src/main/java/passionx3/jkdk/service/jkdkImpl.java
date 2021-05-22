@@ -171,9 +171,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Online> getBestOnlineItemList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getBestOnlineItemListforHome() {
+		return onlineDao.getBestOnlineItemListforHome();
 	}
 
 	@Override
@@ -189,8 +188,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public TimeSale getTimeSale() {
-		return timeSaleDao.getTimeSale();
+	public TimeSale getTimeSale(String openTime) {
+		return timeSaleDao.getTimeSale(openTime);
 	}
 
 	@Override
@@ -199,8 +198,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public BattleSale getBattleSale() {
-		return battleSaleDao.getBattleSale();
+	public BattleSale getBattleSale(String openTime) {
+		return battleSaleDao.getBattleSale(openTime);
 	}
 
 	@Override
@@ -209,18 +208,17 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public void updateBattleSaleVote1(String battleId) {
-		battleSaleDao.updateBattleSaleVote1(battleId);
+	public void updateBattleSaleVote1(String battleSaleId) {
+		battleSaleDao.updateBattleSaleVote1(battleSaleId);
 	}
 
 	@Override
-	public void updateBattleSaleVote2(String battleId) {
-		battleSaleDao.updateBattleSaleVote2(battleId);
+	public void updateBattleSaleVote2(String battleSaleId) {
+		battleSaleDao.updateBattleSaleVote2(battleSaleId);
   }
   
 	public Online getOnlineItemById(int itemId) {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineDao.getOnlineItemById(itemId);
 	}
 
 	@Override
@@ -328,4 +326,18 @@ public class jkdkImpl implements jkdkFacade {
 		return null;
 	}
 
+	@Override
+	public String getOnlineItemIdByCategoryforSale(int category) {
+		return onlineDao.getOnlineItemIdByCategoryforSale(category);
+	}
+
+	@Override
+	public List<Online> getNewOnlineItemListforHome() {
+		return onlineDao.getNewOnlineItemListforHome();
+	}
+
+	@Override
+	public List<Funding> getNewFundingItemListforHome(){
+		return fundingDao.getNewFundingItemListforHome();
+	}
 }

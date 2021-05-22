@@ -17,9 +17,8 @@ public class MybatisOnlineDao implements OnlineDao{
 	private OnlineMapper onlineMapper;
 
 	@Override
-	public List<Online> getBestOnlineItemList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getBestOnlineItemListforHome() throws DataAccessException {
+		return onlineMapper.getBestOnlineItemListforHome();
 	}
 
 	@Override
@@ -66,8 +65,7 @@ public class MybatisOnlineDao implements OnlineDao{
 
 	@Override
 	public Online getOnlineItemById(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineMapper.getOnlineItemById(itemId);
 	}
 
 	@Override
@@ -84,20 +82,33 @@ public class MybatisOnlineDao implements OnlineDao{
 
 	@Override
 	public List<Online> getNotApprovedOnlineItems() throws DataAccessException {
+		return onlineMapper.getNotApprovedOnlineItems();
+	}
+
+	@Override
+	public int refuseItem(int itemId) throws DataAccessException {
+		return onlineMapper.refuseItem(itemId) ;
+	}
+
+	@Override
+	public int approveItem(int itemId) {
+		return onlineMapper.approveItem(itemId) ;
+	}
+
+	@Override
+	public String getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException {
+		return onlineMapper.getOnlineItemIdByCategoryforSale(categoryId);
+	}
+
+	@Override
+	public List<Online> getBestOnlineItemList() throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int refuseItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int approveItem(int itemId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Online> getNewOnlineItemListforHome() throws DataAccessException {
+		return onlineMapper.getNewOnlineItemListforHome();
 	}
 
 

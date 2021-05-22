@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title})">
-    <title>TimeSale</title>
+    <title>battleWinner</title>
 </head>
 <body>
 <div th:replace="thyme/Header :: header"></div>
 
 <div class="pt-5 salecover" align="center">
 <div th:unless="${item}" class="container evnet-page">
-		<p class="event-des"> no sale </p>
+		<p class="event-des"> no Battle Winner </p>
 	</div>
 	
 	<div th:if="${item}"  class="container evnet-page">
-		<p class="event-title"> Time Sale </p>
+		<p class="event-title"> Battle Winner </p>
 		<div class="timeSale-image-banner">
 			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 			  <div class="carousel-inner">
@@ -36,22 +36,21 @@
 			  </button>
 			</div>
 		</div>
-		
+
 		<div align="center">
 			<table>
 				<tr>
-					<td> <h2>Item Name</h2> </td>
-					<td class="text-muted" > ItemCategory </td>
+					<td> <h2 th:text="${item.name}"> name1 </h2> </td>
+					<td class="text-muted" th:text="${item1.categoryId}"> ItemCategory </td>
 				</tr>
 				<tr>
-					<td> 아이템 설명 주저리 주저리</td>
+					<td th:text="${item.description}"> description </td>
 				</tr>
 				<tr>
-					<td align="right" th:text="${timeSale.discountRate}"> discountRate </td><td>% 할인</td>
+					<td th:text="${item.price}"> price </td>
+					<td align="right" th:text="${battleSale.discountRate}"> discountRate </td><td>% 할인</td>
 				</tr>
-				<tr>
-					<td align="right" th:text="${timeSale.quantity}"> quantity </td><td>개 선착순!</td> 
-				</tr>
+
 			</table>
 		</div>
 	</div>

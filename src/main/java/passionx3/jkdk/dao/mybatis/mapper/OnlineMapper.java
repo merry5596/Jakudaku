@@ -54,4 +54,18 @@ public interface OnlineMapper {
 			+ " FROM ITEM, ONLINEITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = ONLINEITEM.ITEMID ORDER BY UPLOADDATE")
 	List<Online> getOnlineItemListByProducerId(String userId);
 
+	@Select("SELECT i.itemID FROM ITEM i, ONLINEITEM o WHERE categoryID = #{categoryId}  AND i.itemId = o.itemId AND ROWNUM = 1 order by dbms_random.value")
+	String getOnlineItemIdByCategoryforSale(@Param("categoryId") int categoryId);
+	
+	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, thumbnail2, thumbnail3, isforsale, categoryid, description, themeid, userid, approval, pcfile, tablefile, phonefile\r\n" + 
+			"FROM item i, onlineitem o WHERE i.itemid = o.itemid AND i.itemId = #{itemId}")
+	Online getOnlineItemById(@Param("itemId") int itemId);
+
+	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.likenum DESC) WHERE ROWNUM < 9")
+	List<Online> getBestOnlineItemListforHome();
+	
+	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC) WHERE ROWNUM < 9")
+	List<Online> getNewOnlineItemListforHome();
 }
