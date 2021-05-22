@@ -15,7 +15,7 @@ public interface TimeSaleMapper {
 	TimeSale getTimeSale( @Param("openTime") String openTime);
 	
 	@Insert("INSERT INTO TimeSale (timeSaleId, itemId, discountRate, openTime, closeTime, quantity) " + 
-			"SELECT timesaleId, #{itemId}, 50, #{openTime}, #{closeTime}, 10 from dual " + 
+			"SELECT #{timeSaleId}, #{itemId}, 50, #{openTime}, #{closeTime}, 10 from dual " + 
 			"WHERE NOT EXISTS ( SELECT openTime FROM timesale WHERE opentime = #{openTime})")
 	@SelectKey(statement="select timeSaleId_seq.nextval FROM DUAL", keyProperty="timeSaleId", before=true, resultType=int.class)
 	void insertTimeSale(@Param("itemId") String itemId, @Param("openTime") String openTime, @Param("closeTime") String closeTime);

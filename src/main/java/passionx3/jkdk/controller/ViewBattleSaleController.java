@@ -49,7 +49,7 @@ public class ViewBattleSaleController {
 			
 			return "thyme/sale/BattleSale";
 		}
-		else if (day_of_week == 8) {
+		else if (day_of_week == 1) {
 			jkdkStore.resetVote();
 			
 			cal.add(Calendar.DATE, -1);

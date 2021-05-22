@@ -62,10 +62,10 @@ public interface OnlineMapper {
 	Online getOnlineItemById(@Param("itemId") int itemId);
 
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 
-			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.likenum DESC) WHERE ROWNUM < 9")
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
 	List<Online> getBestOnlineItemListforHome();
 	
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 
-			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC) WHERE ROWNUM < 9")
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC) WHERE ROWNUM < 5")
 	List<Online> getNewOnlineItemListforHome();
 }

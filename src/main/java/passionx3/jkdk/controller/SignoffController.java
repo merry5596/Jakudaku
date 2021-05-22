@@ -15,7 +15,7 @@ public class SignoffController {
 		session.removeAttribute("userSession");
 		session.invalidate();
 
-		return "thyme/Home";
+		return "redirect:/";
 	}
 }
 
