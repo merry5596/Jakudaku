@@ -1,6 +1,10 @@
 package passionx3.jkdk.controller;
 
-import org.springframework.beans.support.PagedListHolder;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.TimeSale;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
+@SessionAttributes("userSession")
 public class ViewTimeSaleController { 
 	
 	@Autowired
@@ -23,13 +29,23 @@ public class ViewTimeSaleController {
 	@RequestMapping("/timesale/viewtimeSale.do")
 	public String handleRequest(ModelMap model) throws Exception {
 		
-		TimeSale timeSale = jkdkStore.getTimeSale();
+		Calendar cal= Calendar.getInstance ( );	
+		int day_of_week = cal.get ( Calendar.DAY_OF_WEEK );
 
-		//Item item = itemDao.getItem(timeSale.getItemId());
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
 		
-		model.put("timeSale", timeSale);
-		//model.put("item", item);
-		model.put("timeSale", timeSale);
-		return "thyme/sale/TimeSale";
+		if(day_of_week != 8 && day_of_week != 7){ //주말이 아니면 타임 세일 진행
+			TimeSale timeSale = jkdkStore.getTimeSale(today);
+			System.out.println("Time slae ID = " + timeSale.getItemId());
+			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
+			
+			model.put("timeSale", timeSale);
+			model.put("item", item);
+			return "thyme/sale/TimeSale";
+		}
+		else
+			return "thyme/sale/TimeSale";
 	}
 }

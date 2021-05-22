@@ -15,8 +15,8 @@ public class MybatisBattleSaleDao implements BattleSaleDao {
 	private BattleSaleMapper battleSaleMapper;
 
 	@Override
-	public BattleSale getBattleSale() throws DataAccessException {
-		return battleSaleMapper.getBattleSale();
+	public BattleSale getBattleSale(String openTime) throws DataAccessException {
+		return battleSaleMapper.getBattleSale(openTime);
 		
 	}
 

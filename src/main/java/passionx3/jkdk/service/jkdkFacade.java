@@ -58,23 +58,23 @@ public interface jkdkFacade {
 
 	List<Funding> getFundingItemList(int themeId);
 
-	List<Online> getBestOnlineItemList();
+	List<Online> getBestOnlineItemListforHome();
 
 	List<Online> getNewOnlineItemList();
 
 	List<Funding> getNewFundingItemList(); 
 	
-	TimeSale getTimeSale();
+	TimeSale getTimeSale(String openTime);
 	
 	void insertTimeSale(String itemId, String openTime,String closeTime);
 	
-	BattleSale getBattleSale() ;
+	BattleSale getBattleSale(String openTime) ;
 	
 	int insertVote(String battleId, String userId);
 	
-	void updateBattleSaleVote1(String battleId);
+	void updateBattleSaleVote1(String battleSaleId);
 	
-	void updateBattleSaleVote2(String battleId);
+	void updateBattleSaleVote2(String battleSaleId);
 	
 	void resetVote();
 	
@@ -112,4 +112,9 @@ public interface jkdkFacade {
 
 	Order getOrderByOrderId(int orderId);
 
+	String getOnlineItemIdByCategoryforSale(int category);
+
+	List<Online> getNewOnlineItemListforHome();
+
+	List<Funding> getNewFundingItemListforHome();
 }

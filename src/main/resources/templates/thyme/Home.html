@@ -114,13 +114,12 @@
                 </button>
             </div>
 
-            <!-- Best ���-->
+            <!-- Best 목록-->
             <h3 class="pt-5 container">Best</h2>
                 <div class="album bg-light">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                        
-                            <div th:each="item: ${items}" class="col">
+                            <div th:each="item: ${bestOnlineList}" class="col">
                                 <div class="card shadow-sm">
                                     <svg class="bd-placeholder-img card-img-top" width="100%" height="30%"
                                         xmlns="http://www.w3.org/2000/svg" role="img"
@@ -142,7 +141,7 @@
                                                 <button type="button" class="basket btn btn-sm btn-outline-primary">
                                                     basket </button>
                                             </div>
-                                            <small th:text="${item.category}" class="text-muted"> category </small>
+                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
                                         </div>
                                     </div>
                                 </div>
@@ -150,5 +149,81 @@
                         </div>
                     </div>
                 </div>
+                
+            <!-- 신상품 목록-->
+            <h3 class="pt-5 container">New</h2>
+                <div class="album bg-light">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                            <div th:each="item: ${newOnlineList}" class="col">
+                                <div class="card shadow-sm">
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="30%"
+                                        xmlns="http://www.w3.org/2000/svg" role="img"
+                                        aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                        focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                    </svg>
+
+                                    <div class="card-body">
+                                        <p th:text="${item.name}" class="card-text">
+                                            name
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="like btn btn-sm btn-outline-danger"> like
+                                                </button>
+                                                <button type="button" class="basket btn btn-sm btn-outline-primary">
+                                                    basket </button>
+                                            </div>
+                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- 펀딩목록-->
+            <h3 class="pt-5 container"> Funding</h2>
+                <div class="album bg-light">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                            <div th:each="item: ${newFundingList}" class="col">
+                                <div class="card shadow-sm">
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="30%"
+                                        xmlns="http://www.w3.org/2000/svg" role="img"
+                                        aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                        focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                    </svg>
+
+                                    <div class="card-body">
+                                        <p th:text="${item.name}" class="card-text">
+                                            name
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="like btn btn-sm btn-outline-danger"> like
+                                                </button>
+                                                <button type="button" class="basket btn btn-sm btn-outline-primary">
+                                                    basket </button>
+                                            </div>
+                                            <small th:text="${item.categoryId}" class="text-muted"> category </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
         </div>
     </div>

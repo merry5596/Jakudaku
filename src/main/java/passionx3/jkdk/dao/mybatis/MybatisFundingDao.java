@@ -61,8 +61,12 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public List<Funding> getNotApprovedFundingItems() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingMapper.getNotApprovedFundingItems();
+	}
+
+	@Override
+	public List<Funding> getNewFundingItemListforHome() throws DataAccessException {
+		return fundingMapper.getNewFundingItemListforHome();
 	}
 
 	

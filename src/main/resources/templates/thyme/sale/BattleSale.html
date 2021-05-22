@@ -10,7 +10,7 @@
 	<div th:unless="${item1}" class="container evnet-page">
 		<p class="event-des"> no sale </p>
 	</div>
-	</div>
+	
 	<div th:if="${item1}" class="container evnet-page">
 		<p class="event-title"> Battle Sale </p>
 		<p class="event-des"> battle sale description</p>
@@ -66,21 +66,45 @@
 			</div>
 		</div>
 		
-		<div class="row">
-			<div clss="col">
-				<p th:text="${item1.name}"> name1 </p>
-				<p th:text="${item1.category}"> category </p>
-				<p th:text="${item1.description}"> description </p>
-				<p th:text="${item1.price}"> price </p>
-				<button type="button" class="like btn btn-sm btn-outline-danger"> like </button>
+		<div class="container">
+		  <div class="row">
+		    <div class="col align-self-start">
+		      <h2 th:text="${item1.name}"> name1 </h2>
+		      <p th:text="${item1.categoryId}"> category </p>
+		      <p th:text="${item1.description}"> description </p>
+		      <p th:text="${item1.price}"> price </p>
+		      <div> 좋아요 <span th:text="${battleSale.votes1}"> vote1 </span></div>
+		      <form action="#" th:action="@{/battlesale/vote1.do}">
+					<input type="hidden" id="battleSaleId" name="battleSaleId" th:value="${battleSale.battleSaleId}"/>
+					<input th:if = ${userSession} type="hidden" id="userId" name="userId" th:value="${userSession.userId}"/>
+		      		<button th:if = ${userSession} type="submit" class="like btn  btn-outline-danger"> like </button>
+	          </form>
+		    </div>
+		    <div class="col align-self-end">
+		      <h2 th:text="${item2.name}"> name2 </h2>
+		      <p th:text="${item2.categoryId}"> category </p>
+		      <p th:text="${item2.description}"> description </p>
+		      <p th:text="${item2.price}"> price </p>
+  		      <div> 좋아요 <span th:text="${battleSale.votes2}"> votes2 </span></div>
+		      <form action="#" th:action="@{/battlesale/vote2.do}">
+					<input type="hidden" id="battleSaleId" name="battleSaleId" th:value="${battleSale.battleSaleId}"/>
+					<input th:if = ${userSession} type="hidden" id="userId" name="userId" th:value="${userSession.userId}"/>
+		      		<button th:if = ${userSession} type="submit" class="like btn  btn-outline-danger"> like </button>
+	          </form>
+		    </div>
+		  </div>
+		  
+		  <!-- 이미 투표했을 경우 경고창 띄움 -->
+			<div th:if = ${alreadyVote} class="alert alert-warning alert-dismissible fade show" role="alert">
+			  <strong> 이미 투표하였습니다.</strong>
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
-			<div clss="col">
-				<p th:text="${item2.name}"> name2 </p>
-				<p th:text="${item2.category}"> category </p>
-				<p th:text="${item2.description}"> description </p>
-				<p th:text="${item2.price}"> price </p>
-				<button type="button" class="like btn btn-sm btn-outline-danger"> like </button>
-			</div>
+			
+			
 		</div>
 	</div>
+	
+
+
+
 </div>

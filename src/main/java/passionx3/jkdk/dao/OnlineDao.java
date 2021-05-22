@@ -9,7 +9,7 @@ import passionx3.jkdk.domain.Online;
 
 public interface OnlineDao {
 	// getItem
-	List<Online> getBestOnlineItemList() throws DataAccessException;  	// best 온라인 상품 list 가져오기
+	List<Online> getBestOnlineItemList() throws DataAccessException;  	// best 온라인 상품 list 가져오기(for home)
 	List<Online> getNewOnlineItemList() throws DataAccessException; 	// 신상품 온라인 list 가져오기
 	List<Online> getOnlineItemListByCategory(int categoryId) throws DataAccessException; 	
 	List<Online> getOnlineItemListByTheme(int categoryId, int themeId) throws DataAccessException;    
@@ -26,6 +26,8 @@ public interface OnlineDao {
 	List<Online> getNotApprovedOnlineItems() throws DataAccessException; // 조건문에서 approval 무조건 0 (수정)
 	int refuseItem(int itemId) throws DataAccessException;
 	int approveItem(int itemId);
-
+	String getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException; //세일 선정을 위해 카테고리 동일의 랜덤으로 뽑기 위한 함수
+	List<Online> getBestOnlineItemListforHome()throws DataAccessException;
+	List<Online> getNewOnlineItemListforHome()throws DataAccessException;
 	//	+조건 검색 내 키워드 검색
 }
