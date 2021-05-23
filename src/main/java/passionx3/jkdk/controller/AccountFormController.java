@@ -21,7 +21,6 @@ import passionx3.jkdk.service.jkdkFacade;
 
 // 등록, 수정 둘 다 이곳에서
 @Controller
-@SessionAttributes("userSession")
 @RequestMapping({"/user/newAccount.do","/user/editAccount.do"})
 public class AccountFormController {
 
@@ -74,7 +73,9 @@ public class AccountFormController {
 			return formViewName; 
 		}
 		
+		
 		Account userSession = jkdkStore.getAccount(accountForm.getAccount().getUserId());
+
 		session.setAttribute("userSession", userSession);
 		
 		return "redirect:/";

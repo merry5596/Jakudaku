@@ -27,7 +27,7 @@ public interface AccountMapper {
 			+ "#{phone}, #{address1}, #{address2}, #{zip})")
 	int insertAccount(Account account);
 	
-	@Update("UPDATE ACCOUNT SET USERID = #{account.userId}, PASSWORD = #{account.password}, "
+	@Insert("UPDATE ACCOUNT SET USERID = #{userId}, PASSWORD = #{password}, "
 			+ "ALIAS = #{alias}, NAME = #{name}, EMAIL = #{email}, "
 			+ "PHONE = #{phone}, ADDRESS1 = #{address1}, ADDRESS2 = #{address2}, "
 			+ "ZIP = #{zip} WHERE USERID = #{userId}")

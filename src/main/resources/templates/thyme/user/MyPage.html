@@ -76,8 +76,9 @@
             </ul>
         </div>
         <div class="col-7 base">
-반갑습니다  <p th:text="#{Account.alias}">사용자<p>님<br>
-적립금 : <p th:text="#{Account.mileage}">0<p>원<br><br>
+        
+반갑습니다  <span th:text= ${userSession.alias}>사용자</span>님<br>
+적립금 : <span th:text= ${userSession.mileage}>0</span>원<br><br>
 <table style="table-layout: fixed; width: 139px">
 <colgroup>
 <col style="width: 200px">
@@ -95,5 +96,7 @@
 </thead>
 </table>
 <p align="left"><a href="/user/deleteAccount.do">탈퇴하기</a></p>
+</div>
+</div>
 </BODY>
 </HTML>
