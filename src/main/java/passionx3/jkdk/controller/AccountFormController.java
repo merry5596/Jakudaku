@@ -11,14 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
 
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.AccountFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
 
+
 // 등록, 수정 둘 다 이곳에서
 @Controller
+@SessionAttributes("userSession")
 @RequestMapping({"/user/newAccount.do","/user/editAccount.do"})
 public class AccountFormController {
 

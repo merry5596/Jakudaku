@@ -13,7 +13,7 @@ import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes("userSession")
 public class ViewOrderController {
 
 	@Autowired

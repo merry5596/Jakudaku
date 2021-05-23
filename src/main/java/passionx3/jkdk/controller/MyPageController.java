@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Online;
@@ -22,6 +23,7 @@ import passionx3.jkdk.service.jkdkFacade;
 import passionx3.jkdk.domain.Account;
 
 @Controller
+@SessionAttributes("userSession")
 public class MyPageController {
 	private jkdkFacade jkdk;
 	@Autowired
@@ -35,7 +37,7 @@ public class MyPageController {
 			return new ModelAndView("thyme/Home", "message", "로그인 후 이용 가능합니다.");
 		}
 		
-		return new ModelAndView("thyme/MyPage");
+		return new ModelAndView("thyme/user/MyPage");
 	}
 	
 	@RequestMapping("/user/myPage/buy.do")

@@ -23,17 +23,17 @@ public interface AccountMapper {
 	Account getAccountByUsernameAndPassword(String userId, String password);
 	
 	@Insert("INSERT INTO ACCOUNT (USERID, PASSWORD, ALIAS, NAME, EMAIL, PHONE, ADDRESS1, ADDRESS2, ZIP)"
-			+ " VALUES (#{account.userId}, #{account.password}, #{account.alias}, #{account.name}, #{account.email}, "
-			+ "#{account.phone}, #{account.address1}, #{account.address2}, #{account.zip})")
+			+ " VALUES (#{userId}, #{password}, #{alias}, #{name}, #{email}, "
+			+ "#{phone}, #{address1}, #{address2}, #{zip})")
 	int insertAccount(Account account);
 	
 	@Update("UPDATE ACCOUNT SET USERID = #{account.userId}, PASSWORD = #{account.password}, "
-			+ "ALIAS = #{account.alias}, NAME = #{account.name}, EMAIL = #{account.email}, "
-			+ "PHONE = #{account.phone}, ADDRESS1 = #{account.address1}, ADDRESS2 = #{account.address2}, "
-			+ "ZIP = #{account.zip} WHERE USERID = #{account.userId}")
+			+ "ALIAS = #{alias}, NAME = #{name}, EMAIL = #{email}, "
+			+ "PHONE = #{phone}, ADDRESS1 = #{address1}, ADDRESS2 = #{address2}, "
+			+ "ZIP = #{zip} WHERE USERID = #{userId}")
 	int updateAccount(Account account);
 
-	@Delete("DELETE FROM ACCOUNT WHERE USERID = #{account.userId}")
+	@Delete("DELETE FROM ACCOUNT WHERE USERID = #{userId}")
 	int removeAccount(String userId);
 
 	@Select("SELECT USERID FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")

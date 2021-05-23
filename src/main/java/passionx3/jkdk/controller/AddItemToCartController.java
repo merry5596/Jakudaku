@@ -12,7 +12,7 @@ import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@SessionAttributes("sessionCart")
+@SessionAttributes({"sessionCart", "userSession"})
 public class AddItemToCartController { 
 	@Autowired
 	private jkdkFacade jkdkStore;
