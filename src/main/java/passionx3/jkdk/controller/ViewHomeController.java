@@ -60,6 +60,18 @@ public class ViewHomeController {
 		List<Online> newOnlineList = jkdkStore.getNewOnlineItemListforHome();
 		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome();
 
+		for (Online bestOnline : bestOnlineList) {
+			bestOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(bestOnline.getCategoryId()));
+		 }
+		
+		for (Online newOnline : newOnlineList) {
+			newOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newOnline.getCategoryId()));
+		 }
+		
+		for (Funding newFunding : newFundingList) {
+			newFunding.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newFunding.getCategoryId()));
+		 }
+		
 		model.put("bestOnlineList", bestOnlineList);
 		model.put("newOnlineList", newOnlineList);
 		model.put("newFundingList", newFundingList);

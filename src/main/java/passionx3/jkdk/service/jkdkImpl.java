@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
+import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.OnlineDao;
 import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.dao.FundingDao;
@@ -33,6 +34,9 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Autowired
 	private BattleSaleDao battleSaleDao;
+	
+	@Autowired
+	private CategoryDao categoryDao;
 	
 	@Override
 	public Account getAccount(String userId) {
@@ -339,5 +343,10 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public List<Funding> getNewFundingItemListforHome(){
 		return fundingDao.getNewFundingItemListforHome();
+	}
+
+	@Override
+	public String getCategoryNameByCategoryId(int CategoryId) {
+		return categoryDao.getCategoryNameByCategoryId(CategoryId);
 	}
 }

@@ -11,6 +11,7 @@ public abstract class Item implements Serializable {
 	private int themeId;
 	private String themeName;
 	private int categoryId;
+	private String categoryName;
 	private String name;
 	private String uploadDate;
 	private int price;
@@ -150,5 +151,20 @@ public abstract class Item implements Serializable {
 	}
 	public void setApproval(int approval) {
 		this.approval = approval;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public int getLikeNum() {
+		return likeNum;
+	}
+
+	public void setLikeNum(int likeNum) {
+		this.likeNum = likeNum;
 	}
 }

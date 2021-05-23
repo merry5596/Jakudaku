@@ -4,6 +4,8 @@ import java.util.List;
 
 import passionx3.jkdk.domain.Theme;
 
-public interface CetegoryDao {
+public interface CategoryDao {
 	List<Theme> getAllCategories();
+	
+	String getCategoryNameByCategoryId(int CategoryId);
 }
