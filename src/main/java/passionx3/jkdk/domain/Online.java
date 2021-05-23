@@ -8,7 +8,7 @@ public class Online extends Item implements Serializable {
 	private int saleState;
 	private double totalRate;
 	private String pcFile;
-	private String tabletFile;
+	private String tableFile;
 	private String phoneFile;
 	
 	public Online() {
@@ -20,7 +20,7 @@ public class Online extends Item implements Serializable {
 		super(itemId, name, price, likeNum, thumbnail1, isForSale);
 		this.totalRate = totalRate;
 		this.pcFile = pcFile;
-		this.tabletFile = tabletFile;
+		this.tableFile = tabletFile;
 		this.phoneFile = phoneFile;
 	}
 
@@ -29,7 +29,7 @@ public class Online extends Item implements Serializable {
 		this.saleState = saleState;
 		this.totalRate = totalRate;
 		this.pcFile = pcFile;
-		this.tabletFile = tabletFile;
+		this.tableFile = tabletFile;
 		this.phoneFile = phoneFile;
 	}
 
@@ -47,11 +47,11 @@ public class Online extends Item implements Serializable {
 	public void setPcFile(String pcFile) {
 		this.pcFile = pcFile;
 	}
-	public String getTabletFile() {
-		return tabletFile;
+	public String getTableFile() {
+		return tableFile;
 	}
-	public void setTabletFile(String tabletFile) {
-		this.tabletFile = tabletFile;
+	public void setTableFile(String tabletFile) {
+		this.tableFile = tabletFile;
 	}
 	public String getPhoneFile() {
 		return phoneFile;

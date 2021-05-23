@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
+<title th:text="${categoryName}">categoryName</title>
+<style>
+.container {
+	display: grid;
+	grid-gap: 20px;
+	grid-auto-rows: minmax(300px, auto);
+	grid-template-columns: repeat(4, 1fr);
+}
+
+</style>
+</head>
+<body>
+	<div th:replace="thyme/Header :: header"></div>
+
+	<!-- side bar-->
+	<div class="row row-margin">
+		<div
+			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
+			style="width: 250px; height: 500px;">
+			<a th:href="@{/}"
+				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+				<svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg> <span class="fs-4">Sidebar</span>
+			</a>
+			<hr>
+			<ul class="nav nav-pills flex-column mb-auto">
+				<li><a
+					th:href="@{/item/viewCategory.do(categoryId = '0', themeId = '-1', device = '-1')}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#speedometer2"></use>
+                        </svg> Diary
+				</a></li>
+				<li><a th:href="@{/item/viewCategory.do(categoryId = '1', themeId = '-1', device = '-1')}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#table"></use>
+                        </svg> Font
+				</a></li>
+				<li><a th:href="@{/item/viewCategory.do(categoryId = '2', themeId = '-1', device = '-1')}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#grid"></use>
+                        </svg> Wallpaper
+				</a></li>
+				<li><a th:href="@{/item/viewCategory.do(categoryId = '3', themeId = '-1', device = '-1')}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg> Icon
+				</a></li>
+				<hr>
+				<li><a th:href="@{/item/viewCategory.do(categoryId = '4')}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg> funding
+				</a></li>
+			</ul>
+		</div>
+		
+		<div class="col-7 base">
+			<!-- 여기서부터 content -->
+			<h2 th:text="${categoryName}" class="text-uppercase d-flex flex-wrap justify-content-center py-3 mb-4"> category</h2>
+			
+			<!-- 검색 창 -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<nav class="d-flex flex-wrap" aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+								<li class="breadcrumb-item active " aria-current="page" th:text="${categoryName}">category</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-6 col-md-4">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								aria-label="Text input with segmented dropdown button">
+							<button type="button" class="btn btn-outline-secondary">Search</button>
+							<button type="button"
+								class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="visually-hidden">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-end">
+								<li><a class="dropdown-item" href="#">최신 순</a></li>
+								<li><a class="dropdown-item" href="#">높은 가격 순</a></li>
+								<li><a class="dropdown-item" href="#">낮은 가격 순</a></li>
+							</ul>
+						</div>
+					</div>
+					<div style="text-align:left">
+				        <a href="#" th:each="theme : ${themes}">
+				     		<span th:text="${theme.name}">#테마</span></a>
+				    </div>
+				</div>
+				<div style="text-align:left">
+			        <a href="#" th:each="theme : ${themes}">
+			     		<span th:text="${theme.name}">#테마</span></a>
+			    </div>
+			    <div style="text-align:left">
+					<a href="#">PC</a> | <a href="#">TABLET</a> | <a href="#">PHONE</a>
+				</div>
+
+				<!-- 상품 목록-->
+				<div class="mt-4 album bg-light">
+					<div class="container">
+						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+							<div th:each="item: ${onlineList}" class="col">
+<!-- 								<a href="" th:href="@{/item/viewOnlineItem.do(itemId=${categoryItem.itemId})}"> 아직 컨트롤러 없음 -->
+									<div class="card shadow-sm">
+										<img th:src="@{${item.thumbnail1}}"/>
+	
+										<div class="card-body ">
+	                                        <span class="itemName" th:text="${item.name}" >
+	                                            name
+	                                        </span>
+	                                        <small class="text-muted" th:text="${item.categoryName}">
+	                                            categoryName
+	                                        </small>
+	                                        <div class = "mt-1 mb-3">
+		                                        <small class="text-muted" th:text="${item.description}">
+		                                        	description
+		                                        </small>
+	                                        </div>
+	
+	                                       <span th:text="${item.price}" >price</span>원
+									</div>
+									<div class= "mx-1" style="text-align:right" >
+										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
+										<small class ="text-warning" th:if="${item.tableFile}"> TABLET </small>
+										<small class ="text-danger" th:if="${item.phoneFile}"> PHONE </small>
+									</div>
+								</div>
+<!-- 							</a> -->
+						</div>
+					</div>
+				</div>
+				</div>
+
+				<!-- 상품 등록-->
+				<div class="mt-4 d-grid gap-2 d-md-flex justify-content-md-end">
+					<a href="productR.html"><button class="btn btn-secondary"
+							type="button">상품 등록</button></a>
+				</div>
+
+				<!-- 페이징네이션-->
+				<div class=" text-center mt-4 position-relative">
+					<nav aria-label="Page navigation example">
+						<ul class="justify-content-center pagination">
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>	
+			</div>
+		</div>
