@@ -57,8 +57,8 @@ public class Cart implements Serializable {
   }
 
   // 할인까지 된 총 금액을 반환합니다!!! (DB 저장 아니므로 출력용 정보인 할인된 금액이 더 중요하기 때문)
-  public double getSubTotal() {
-    double subTotal = 0;
+  public int getSubTotal() {
+    int subTotal = 0;
     Iterator<CartItem> items = getAllCartItems();
     while (items.hasNext()) {
       CartItem cartItem = (CartItem) items.next();
