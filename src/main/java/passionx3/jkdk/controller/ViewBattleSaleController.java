@@ -57,7 +57,7 @@ public class ViewBattleSaleController {
 			
 			BattleSale battleSale = jkdkStore.getBattleSale(yesterday);
 			Online item = jkdkStore.getOnlineItemById(jkdkStore.getWinnerItemId());
-			
+			item.setCategoryName(jkdkStore.getCategoryNameByCategoryId(item.getCategoryId()));
 			model.put("battleSale", battleSale);
 			model.put("item", item);
 			

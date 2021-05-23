@@ -117,4 +117,6 @@ public interface jkdkFacade {
 	List<Online> getNewOnlineItemListforHome();
 
 	List<Funding> getNewFundingItemListforHome();
+	
+	String getCategoryNameByCategoryId(int CategoryId);
 }
