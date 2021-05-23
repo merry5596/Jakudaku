@@ -34,7 +34,7 @@
 	         	<a th:href="@{/manager/myPage/onlineItem.do}"><span th:text=${userSession.name}></span>님</a>
 	         </div>
 	         <div class="col-5" th:unless = ${userSession.userId.equals('admin')} >
-	         	<a th:href="@{/user/myPage.do}"><span th:text=${userSession.name}></span>님</a>
+	         	<a th:href="@{/user/myPage.do}"><span th:text=${userSession.alias}></span> 님</a>
 	         </div>
 	         <!-- 장바구니 -->
 	         <div class= "col-2">
