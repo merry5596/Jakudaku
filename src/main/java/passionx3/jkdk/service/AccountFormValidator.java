@@ -37,7 +37,6 @@ public class AccountFormValidator implements Validator {
 		"ZIP is required.");
 		
 		if (accountForm.isNewAccount()) {
-			account.setStatus("OK");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.name", 
 			"USER_ID_REQUIRED", "User ID is required.");
 			if (account.getPassword() == null || account.getPassword().length() < 1 ||

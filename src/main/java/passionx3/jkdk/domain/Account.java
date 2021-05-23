@@ -3,7 +3,7 @@ package passionx3.jkdk.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Account  implements Serializable{
+public class Account implements Serializable{
 
 	private String userId;
 	private String password;
@@ -15,9 +15,7 @@ public class Account  implements Serializable{
 	private String address2;
 	private String zip;
 	private int mileage;
-	private String status;
 
-	
 	public String getUserId() {
 		return userId;
 	}
@@ -78,9 +76,6 @@ public class Account  implements Serializable{
 	public void setMileage(int mileage) {
 		this.mileage = mileage;
 	}
-	
-	public String getStatus() { return status; }
-	public void setStatus(String status) { this.status = status; }
 	
 	
 }

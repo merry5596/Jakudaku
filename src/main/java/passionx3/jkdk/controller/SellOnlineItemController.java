@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.SellOnlineItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
@@ -20,6 +21,7 @@ import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
+@SessionAttributes("userSession")
 public class SellOnlineItemController {
 	@Value("sellOnlineItemForm")
 	private String formViewName;

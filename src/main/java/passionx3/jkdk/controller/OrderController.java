@@ -21,7 +21,7 @@ import passionx3.jkdk.service.OrderValidator;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@SessionAttributes({"sessionCart", "orderForm"})
+@SessionAttributes({"sessionCart", "orderForm", "userSession"})
 public class OrderController {
 	@Autowired
 	private jkdkFacade jkdkStore;

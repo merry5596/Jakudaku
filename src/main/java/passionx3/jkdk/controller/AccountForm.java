@@ -2,6 +2,8 @@ package passionx3.jkdk.controller;
 
 import java.io.Serializable;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import passionx3.jkdk.domain.Account;
 
 @SuppressWarnings("serial")

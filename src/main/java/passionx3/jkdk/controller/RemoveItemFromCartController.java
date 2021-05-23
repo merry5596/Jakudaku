@@ -13,7 +13,7 @@ import passionx3.jkdk.domain.Cart;
 
 
 @Controller
-@SessionAttributes("sessionCart")
+@SessionAttributes("sessionCart, userSession")
 public class RemoveItemFromCartController { 
 
 	@RequestMapping("/order/removeItemFromCart.do")
