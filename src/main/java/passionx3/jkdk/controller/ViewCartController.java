@@ -15,27 +15,27 @@ import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Cart;
 
 @Controller
-@SessionAttributes("sessionCart, userSession")
+@SessionAttributes("sessionCart")
 public class ViewCartController { 
 	
 	@ModelAttribute("sessionCart")
 	public Cart createCart(HttpSession session) {
 		Cart cart = (Cart)session.getAttribute("sessionCart");
-		if (cart == null) cart = new Cart();
+		if (cart == null)
+			cart = new Cart();
 		return cart;
 	}
 	
-	@RequestMapping("/shop/viewCart.do")
+	@RequestMapping("/order/viewCart.do")
 	public ModelAndView viewCart(
 		 HttpServletRequest request,
 		 @RequestParam(value="page", required=false) String page,
 		 @ModelAttribute("sessionCart") Cart cart) throws Exception {
-		Account userSession = (Account) WebUtils.getSessionAttribute(request, "userSession");
-		handleRequest(page, cart, userSession);
+		handleRequest(page, cart);
 		return new ModelAndView("Cart", "cart", cart);
 	}
 
-	private void handleRequest(String page, Cart cart, Account userSession)
+	private void handleRequest(String page, Cart cart)
 		 throws Exception {
 		if ("nextCart".equals(page)) {
 			cart.getCartItemList().nextPage();
