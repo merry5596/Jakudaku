@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 
@@ -21,13 +22,13 @@ public class ViewCategoryController {
 	
 	@RequestMapping("/item/viewCategory.do")
 	public ModelAndView handleRequest(			
-			@RequestParam("categoryId") String categoryId, 
+			@RequestParam("categoryId") int categoryId, 
 			@RequestParam("themeId") int themeId,
 			@RequestParam("device") int device) throws Exception {
 		
 		List<Online> onlineList = null;
 		
-		if (themeId != -1 && device != -1) {	// theme 선택 안됨, device 선택 안됨
+		if (themeId == -1 && device == -1) {	// theme 선택 안됨, device 선택 안됨
 			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId);
 		} else if (themeId != -1 && device == -1) {	// theme 선택됨, device 선택 안됨
 			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId);
@@ -37,10 +38,14 @@ public class ViewCategoryController {
 			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId, device);
 		}
 		
-		String categoryName = jkdkStore.getCategoryByCategoryId(categoryId).getName();
+		String categoryName = jkdkStore.getCategoryNameByCategoryId(categoryId);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("thyme/ViewItemsByCategory");
+		for (Online Online : onlineList) {
+			Online.setCategoryName(jkdkStore.getCategoryNameByCategoryId(Online.getCategoryId()));
+		 }
+		
+		mav.setViewName("thyme/item/ViewItemsByCategory");
 		mav.addObject("categoryName", categoryName);
 		mav.addObject("themeId", themeId);
 		mav.addObject("device", device);

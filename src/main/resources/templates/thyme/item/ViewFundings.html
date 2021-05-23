@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head th:replace="thyme/Header :: head(~{::title})">
+<title>View Category Items</title>
+<style>
+	.container {
+		display: grid; 
+		grid-gap: 20px;
+		grid-auto-rows: minmax(300px, auto);
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.item {
+		background-color: #EEEEEE;
+	}
+</style>
+</head>
+<body>
+	<div style="width:1000px; text-align:center;">
+		<div><a href="">Funding</a></div>
+		<div style="text-align:left">
+	        <a href="#" th:each="theme : ${themes}">
+	     		<span th:text="${theme.name}">#테마</span></a>
+	    </div>
+		<hr>
+		<div style="text-align:right">
+			<input id="keyword" type="text" /> <button type="button">검색</button>
+		</div>
+		<br>
+		<div style="text-align:right">
+			<a href="">최신 순</a>
+			<a href="">높은 가격 순</a>
+			<a href="">낮은 가격 순</a>
+		</div>
+		
+		<!-- 상품 리스트 출력 -->
+		<div class="container">
+			<div class="item" th:each="categoryItem : ${categoryOnlineList}">
+				<div style="text-align:right">
+					<span th:if="${categoryItem.pcFile}"> PC </span>
+					<span th:if="${categoryItem.tabletFile}"> TABLET </span>
+					<span th:if="${categoryItem.phoneFile}"> PHONE </span></div>
+				<div style="height:75%"><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${categoryItem.itemId})}">
+					<img th:src="@{${categoryItem.thumbnail1}}"/></a></div>
+				<div><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${categoryItem.itemId})}">
+            		<span th:text="${categoryItem.name}">상품명</span></a></div>
+            	<div><span th:text="${categoryItem.price}">0</span>원</div>
+			</div>
+			<!-- test용 -->
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+		</div>
+	</div>
+</body>
+</html>

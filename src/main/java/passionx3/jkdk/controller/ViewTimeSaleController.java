@@ -40,7 +40,11 @@ public class ViewTimeSaleController {
 			TimeSale timeSale = jkdkStore.getTimeSale(today);
 			
 			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
+			item.setCategoryName(jkdkStore.getCategoryNameByCategoryId(item.getCategoryId()));
+			int salePrice = item.getPrice() * timeSale.getDiscountRate();
 			
+			model.put("salePrice", salePrice);
+			model.put("timeSale", timeSale);
 			model.put("timeSale", timeSale);
 			model.put("item", item);
 			return "thyme/sale/TimeSale";
