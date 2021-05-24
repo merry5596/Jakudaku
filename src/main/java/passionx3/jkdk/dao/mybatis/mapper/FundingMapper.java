@@ -50,5 +50,10 @@ public interface FundingMapper {
 			"WHERE f.itemid = i.itemid  AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC ) WHERE ROWNUM < 5")
 	List<Funding> getNewFundingItemListforHome();
 
+	
+	@Select("SELECT i.ITEMID AS itemID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMBNAIL1, THUMBNAIL2, THUMBNAIL3, ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED " + 
+			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 ORDER BY UPLOADDATE")
+	List<Funding> getFundingItemList();
+
 
 }
