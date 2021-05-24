@@ -5,8 +5,57 @@
 <TITLE>탈퇴 완료</TITLE>
 </HEAD>
 <BODY>
+<div th:replace="thyme/Header :: header"></div>
+
+	<!-- side bar-->
+	<div class="row row-margin">
+		<div
+			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
+			style="width: 250px; height: 500px;">
+			<a th:href="@{/}"
+				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+				<svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg> <span class="fs-4">Sidebar</span>
+			</a>
+			<hr>
+			<ul class="nav nav-pills flex-column mb-auto">
+				<li><a th:href="@{/diary}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2"></use>
+                        </svg> Diary
+				</a></li>
+				<li><a th:href="@{/font}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
+                            <use xlink:href="#table"></use>
+                        </svg> Font
+				</a></li>
+				<li><a th:href="@{/wallpaper}" class="nav-link link-dark">
+						<svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#grid"></use>
+                        </svg> Wallpaper
+				</a></li>
+				<li><a th:href="@{/icon}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg> Icon
+				</a></li>
+				<hr>
+				<li><a th:href="@{/item/viewFundingItem.do}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg> funding
+				</a></li>
+			</ul>
+			<ul>
+
+			</ul>
+		</div>
+		<div class="col-7 base">
 탈퇴가 완료되었습니다.
 <br><br>
 <a href="/">홈으로 돌아가기</a>
+</div>
 </BODY>
 </HTML>

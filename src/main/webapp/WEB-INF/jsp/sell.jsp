@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE>
-<HTML>
-<HEAD>
-<meta charset="UTF-8">
-<TITLE>판매내역</TITLE>
-<style> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="navbar.jsp" %>
+<%@ include file="sidebar.jsp" %>
+<div class="col-7 base">
+<!-- <style> 
   table {
     width: 100%;
     border-top: 1px solid #444444;
@@ -18,8 +17,8 @@
   }
 </style>
 </HEAD>
-<BODY>
-${Account.name} 님의 판매내역<br><br>
+<BODY> -->
+<h2>${userSession.alias} 님의 판매내역</h2><br><br>
 <!-- 추후구현사항
 <table style="undefined;table-layout: fixed; width: 164px">
 <colgroup>
@@ -45,19 +44,26 @@ ${Account.name} 님의 판매내역<br><br>
 </thead>
 </table> -->
 <a name = "online" />
-<h3>online 상품 판매 목록</h3>
+<h3>Online 상품 판매 목록</h3>
 <a href="#online">Funding 상품 판매 목록 보기</a>
 <br><br>
-<table>
-	<tr>
-		<td>번호</td>
+<table style=" width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;">
+	<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
+		<td >번호</td>
 		<td>썸네일</td>
 		<td>상품명</td>
 		<td>등록날짜</td>
 		<td>수정</td>
 	</tr>
-	<c:forEach var="o" items="${onlineList}" varState="status" >
-		<tr>
+	<c:if test="${fn:length(onlineList) == 0}">
+			<td style="text-align:center" colspan="6"><b>판매한 내역이 없습니다.</b></td>
+	</c:if>
+	<c:forEach var="o" items="${onlineList}" varStatus="status" >
+		<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
 		<td>${status.index}</td>
 		<td>${o.thumnail1}</td>
 		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
@@ -71,16 +77,23 @@ ${Account.name} 님의 판매내역<br><br>
 <h3>Funding 상품 판매 목록</h3>
 <a href="#online">Online 상품 판매 목록 보기</a>
 <br><br>
-<table>
-	<tr>
+<table style=" width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;">
+	<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
 		<td>번호</td>
 		<td>썸네일</td>
 		<td>상품명</td>
 		<td>등록날짜</td>
 		<td>수정</td>
 	</tr>
-	<c:forEach var="f" items="${fundingList}" varState="status" >
-		<tr>
+	<c:if test="${fn:length(fundingList) == 0}">
+			<td style="text-align:center" colspan="6"><b>판매한 내역이 없습니다.</b></td>
+	</c:if>
+	<c:forEach var="f" items="${fundingList}" varStatus="status" >
+		<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
 		<td>${status.index}</td>
 		<td>${f.thumnail1}</td>
 		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${f.name}</td>
@@ -89,5 +102,6 @@ ${Account.name} 님의 판매내역<br><br>
 		</tr>
 	</c:forEach>
 </table>
+</div>
 </BODY>
 </HTML>
