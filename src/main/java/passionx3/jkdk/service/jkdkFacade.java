@@ -44,15 +44,15 @@ public interface jkdkFacade {
 
 	List<Funding> getFundingItemsByKeyword(String keyword);
 
-	List<Online> getOnlineItemListByCategory(String categoryId);
+	List<Online> getOnlineItemListByCategory(int categoryId);
 
-	List<Online> getOnlineItemListByCategory(String categoryId, int themeId);
+	List<Online> getOnlineItemListByCategory(int categoryId, int themeId);
 
-	List<Online> getOnlineItemListByCategory2(String categoryId, int device);
+	List<Online> getOnlineItemListByCategory2(int categoryId, int device);
 
-	List<Online> getOnlineItemListByCategory(String categoryId, int themeId, int device);
+	List<Online> getOnlineItemListByCategory(int categoryId, int themeId, int device);
 
-	Item getCategoryByCategoryId(String categoryId);
+	Item getCategoryByCategoryId(int categoryId);
 
 	List<Funding> getFundingItemList();
 

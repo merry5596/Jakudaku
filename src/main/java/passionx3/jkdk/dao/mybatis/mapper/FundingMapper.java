@@ -45,10 +45,24 @@ public interface FundingMapper {
 			+ " FROM ITEM, FUNDINGITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = FUNDINGITEM.ITEMID ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemListByProducerId(String userId);
 
-	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid," + 
+
+	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale," + 
 			"description, themeid, userid, finishdate, targetquantity FROM fundingitem f, item i " + 
 			"WHERE f.itemid = i.itemid  AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC ) WHERE ROWNUM < 5")
 	List<Funding> getNewFundingItemListforHome();
+
+	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, T.THEMENAME, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE,"
+			+ " I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3,"
+			+ " I.ISFORSALE AS ISFORSALE, I.DESCRIPTION AS DESCRIPTION, I.APPROVAL AS APPROVAL, "
+			+ " F.FINISHDATE AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY"
+			+ " FROM ITEM I, FUNDINGITEM F, LINEITEM L THEME T, ACCOUNT A"
+			+ " WHERE #{lineItemId} = L.LINEITEMID AND L.ITEMID = I.ITEMID AND I.ITEMID = F.ITEMID AND T.THEMEID = I.THEMEID AND A.USERID = I.USERID")
+	Funding getFundingItemByLineItemId(int lineItemId);
+
+	
+	@Select("SELECT i.ITEMID AS itemID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMBNAIL1, THUMBNAIL2, THUMBNAIL3, ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED " + 
+			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 ORDER BY UPLOADDATE")
+	List<Funding> getFundingItemList();
 
 
 }

@@ -46,11 +46,11 @@ public class ViewHomeController {
 		if(day_of_week == 7) { // 토요일이면 battleSale set
 			//같은 카테고리 내에서 랜덤으로 itemId 2개 뽑기
 			int category = cal.get(Calendar.DAY_OF_MONTH) % 4;
-			String item1 = jkdkStore.getOnlineItemIdByCategoryforSale(0); //나중에 변수 부분에 category 넣어주기
-			String item2 = jkdkStore.getOnlineItemIdByCategoryforSale(0);
+			String item1 = jkdkStore.getOnlineItemIdByCategoryforSale(category);
+			String item2 = jkdkStore.getOnlineItemIdByCategoryforSale(category);
 			jkdkStore.insertBattleSale(item1, item2, today, tomorrow);
 		}
-		else if(day_of_week != 1){ //다른 요일에는 timeSale 진행
+		else if(day_of_week != 1){ //평일에는 timeSale 진행
 			int category = cal.get(Calendar.DAY_OF_MONTH) % 4;
 			String item = jkdkStore.getOnlineItemIdByCategoryforSale(category);
 			jkdkStore.insertTimeSale(item, today, tomorrow);
@@ -60,6 +60,7 @@ public class ViewHomeController {
 		List<Online> newOnlineList = jkdkStore.getNewOnlineItemListforHome();
 		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome();
 
+		
 		for (Online bestOnline : bestOnlineList) {
 			bestOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(bestOnline.getCategoryId()));
 		 }
@@ -68,10 +69,11 @@ public class ViewHomeController {
 			newOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newOnline.getCategoryId()));
 		 }
 		
-		for (Funding newFunding : newFundingList) {
-			newFunding.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newFunding.getCategoryId()));
-		 }
-		
+//		funding은 category 없음
+//		for (Funding newFunding : newFundingList) {
+//			newFunding.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newFunding.getCategoryId()));
+//		 }
+//		
 		model.put("bestOnlineList", bestOnlineList);
 		model.put("newOnlineList", newOnlineList);
 		model.put("newFundingList", newFundingList);

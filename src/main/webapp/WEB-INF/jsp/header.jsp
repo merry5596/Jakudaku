@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<%@ page contentType="text/html" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-
+    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,9 +19,17 @@
       crossorigin="anonymous"
     ></script>
 
+	<link rel="stylesheet" href="/style/master.css" type="text/css" />
+    <link rel="stylesheet" href="/style/modal.css" type="text/css" />
+   <!--  <link rel="stylesheet" href="/static/css/master.css" /> -->
     <!-- my css -->
-    <link rel="stylesheet" href="/static/css/master.css" />
 
-    <title>title</title>
+	<style>
+	  .buyTable {
+	    width: 100%;
+	    border: 1px solid #444444;
+	  }
+	</style>
+	
+    <title>자꾸 다꾸 Jaku Daku</title>
   </head>
-</html>

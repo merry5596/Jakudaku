@@ -5,6 +5,8 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Online extends Item implements Serializable {
+	private int categoryId;
+	private String categoryName;
 	private int saleState;
 	private double totalRate;
 	private String pcFile;
@@ -75,5 +77,21 @@ public class Online extends Item implements Serializable {
 	}
 	public int getSalePrice() {
 		return getPrice() - getDiscount();
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 }

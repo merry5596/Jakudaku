@@ -46,6 +46,12 @@
                         Icon
                     </a>
                 </li>
+                <hr>
+				<li><a href="/item/viewFundings.do(themeId = '-1')}" class="nav-link link-dark">
+						<svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle"></use>
+                        </svg> funding
+				</a></li>
             </ul>
         </div>
         <div class="col-7 base">

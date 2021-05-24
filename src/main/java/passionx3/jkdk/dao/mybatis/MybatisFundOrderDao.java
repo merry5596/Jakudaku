@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import passionx3.jkdk.dao.FundOrderDao;
+import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.SequenceDao;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
 import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
@@ -29,6 +30,8 @@ public class MybatisFundOrderDao implements FundOrderDao {
 
 	@Autowired
 	private SequenceDao sequenceDao;
+
+	private LineItemDao lineItemDao;
 	
 	@Override
 	public List<FundOrder> getFundOrdersByUserId(String userId) {
@@ -40,7 +43,7 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	public FundOrder getFundOrder(int orderId) throws DataAccessException {
 		FundOrder fundOrder = fundOrderMapper.getFundOrder(orderId);
 		if (fundOrder != null) {
-			fundOrder.setLineItem(lineItemMapper.getLineItemByOrderId(orderId));
+			fundOrder.setLineItem(lineItemDao.getLineItemByOrderId(orderId));
 		}
 	    return fundOrder;
 	}
