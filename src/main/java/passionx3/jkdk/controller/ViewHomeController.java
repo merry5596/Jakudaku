@@ -60,8 +60,12 @@ public class ViewHomeController {
 		List<Online> newOnlineList = jkdkStore.getNewOnlineItemListforHome();
 		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome();
 
+		System.out.println("Category Name is = " + bestOnlineList.get(0).getCategoryId());
+
+		
 		for (Online bestOnline : bestOnlineList) {
 			bestOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(bestOnline.getCategoryId()));
+			System.out.println("Category Name is = " + bestOnline.getCategoryId());
 		 }
 		
 		for (Online newOnline : newOnlineList) {

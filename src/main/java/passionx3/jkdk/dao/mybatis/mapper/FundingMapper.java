@@ -45,7 +45,7 @@ public interface FundingMapper {
 			+ " FROM ITEM, FUNDINGITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = FUNDINGITEM.ITEMID ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemListByProducerId(String userId);
 
-	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid," + 
+	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale," + 
 			"description, themeid, userid, finishdate, targetquantity FROM fundingitem f, item i " + 
 			"WHERE f.itemid = i.itemid  AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC ) WHERE ROWNUM < 5")
 	List<Funding> getNewFundingItemListforHome();
