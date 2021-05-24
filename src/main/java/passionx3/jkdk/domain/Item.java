@@ -1,7 +1,6 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @SuppressWarnings("serial")
 public abstract class Item implements Serializable {
@@ -10,8 +9,6 @@ public abstract class Item implements Serializable {
 	private String producerName;
 	private int themeId;
 	private String themeName;
-	private int categoryId;
-	private String categoryName;
 	private String name;
 	private String uploadDate;
 	private int price;
@@ -35,7 +32,7 @@ public abstract class Item implements Serializable {
 		this.isForSale = isForSale;
 	}
 
-	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, int categoryId,
+	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, 
 			String name, String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
 			int isForSale, String description, int approval) {
 		this.itemId = itemId;
@@ -43,7 +40,6 @@ public abstract class Item implements Serializable {
 		this.producerName = producerName;
 		this.themeId = themeId;
 		this.themeName = themeName;
-		this.categoryId = categoryId;
 		this.name = name;
 		this.uploadDate = uploadDate;
 		this.price = price;
@@ -85,12 +81,6 @@ public abstract class Item implements Serializable {
 	}
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
-	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
 	}
 	public String getName() {
 		return name;
@@ -152,14 +142,6 @@ public abstract class Item implements Serializable {
 	public void setApproval(int approval) {
 		this.approval = approval;
 	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
 	public int getLikeNum() {
 		return likeNum;
 	}

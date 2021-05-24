@@ -3,6 +3,7 @@ package passionx3.jkdk.dao.mybatis.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,12 +12,12 @@ import passionx3.jkdk.domain.Order;
 @Mapper
 public interface OrderMapper {
 
-	@Select("SELECT orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage"
-			+ "	FROM Orders WHERE orderId = #{orderId}")
+	@Select("SELECT orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId"
+			+ "	FROM ORDERS WHERE orderId = #{orderId}")
 	Order getOrderByOrderId(int orderId);
 
-	@Select("INSERT INTO Orders (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, userId, discountCost, usedMileage)"
-			+ "	VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{userId}, #{discountCost}, #{usedMileage})")
+	@Insert("INSERT INTO ORDERS (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId)"
+			+ "	VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{discountCost}, #{usedMileage}, #{userId})")
 	int insertOrder(Order order);
 	
 	@Select("SELECT ORDERID, ORDERDATE, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"

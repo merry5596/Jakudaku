@@ -11,7 +11,6 @@ public class LineItem implements Serializable {
 	int quantity;
 	int isDownloaded;
 	int unitPrice;
-
 	Item item;
 	int saleState;
 

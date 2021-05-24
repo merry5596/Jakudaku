@@ -68,10 +68,11 @@ public class ViewHomeController {
 			newOnline.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newOnline.getCategoryId()));
 		 }
 		
-		for (Funding newFunding : newFundingList) {
-			newFunding.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newFunding.getCategoryId()));
-		 }
-		
+//		funding은 category 없음
+//		for (Funding newFunding : newFundingList) {
+//			newFunding.setCategoryName(jkdkStore.getCategoryNameByCategoryId(newFunding.getCategoryId()));
+//		 }
+//		
 		model.put("bestOnlineList", bestOnlineList);
 		model.put("newOnlineList", newOnlineList);
 		model.put("newFundingList", newFundingList);
