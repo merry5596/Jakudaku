@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.OrderDao;
 import passionx3.jkdk.dao.SequenceDao;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
@@ -32,14 +33,17 @@ public class MybatisOrderDao implements OrderDao {
 	private LineItemMapper lineItemMapper;
 
 	@Autowired
+	private LineItemDao lineItemDao;
+	
+	@Autowired
 	private SequenceDao sequenceDao;
 	
 	@Override
 	@Transactional
-	public Order getOrderByOrderId(int orderId) {
+	public Order getOrderByOrderId(int orderId) throws DataAccessException {
 		Order order = orderMapper.getOrderByOrderId(orderId);
 		if (order != null) {
-			order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
+			order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
 		}
 	    return order;
 	}	
@@ -55,11 +59,11 @@ public class MybatisOrderDao implements OrderDao {
     		return 0;
 
     	// lineitem 테이블에 insert
-    	for (int i = 0; i < order.getLineItems().size(); i++) {
-    		LineItem lineItem = (LineItem) order.getLineItems().get(i);
+    	for (LineItem lineItem : order.getLineItems()) {
     		lineItem.setOrderId(order.getOrderId());
     		lineItemMapper.insertLineItem(lineItem);
     	}
+    	
     	return 1;
 	}
 
