@@ -15,7 +15,7 @@ import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Cart;
 
 @Controller
-@SessionAttributes("sessionCart")
+@SessionAttributes({"sessionCart", "userSession"})
 public class ViewCartController { 
 	
 	@ModelAttribute("sessionCart")

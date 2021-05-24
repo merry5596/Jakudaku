@@ -19,8 +19,10 @@
       crossorigin="anonymous"
     ></script>
 
+	<link rel="stylesheet" href="/style/master.css" type="text/css" />
+    <link rel="stylesheet" href="/style/modal.css" type="text/css" />
+   <!--  <link rel="stylesheet" href="/static/css/master.css" /> -->
     <!-- my css -->
-    <link rel="stylesheet" href="/static/css/master.css" />
 
 	<style>
 	  .buyTable {
