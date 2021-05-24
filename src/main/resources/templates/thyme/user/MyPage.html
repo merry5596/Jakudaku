@@ -4,96 +4,95 @@
 <meta charset="UTF-8">
 <TITLE>마이페이지</TITLE>
 <style>
-  table {
-    width: 100%;
-    border: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #444444;
-    padding: 30px;
-  }
+table {
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+	padding: 30px;
+}
 </style>
 </HEAD>
 <BODY>
-<div th:replace="thyme/Header :: header"></div>
+	<div th:replace="thyme/Header :: header"></div>
 
-<!-- side bar-->
-    <div class="row row-margin">
-        <div class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky" style="width: 250px; height: 500px;">
-            <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
+	<!-- side bar-->
+	<div class="row row-margin">
+		<div
+			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
+			style="width: 250px; height: 500px;">
+			<a th:href="@{/}"
+				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+				<svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">Sidebar</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li>
-                    <a th:href="@{/diary}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
+                </svg> <span class="fs-4">Sidebar</span>
+			</a>
+			<hr>
+			<ul class="nav nav-pills flex-column mb-auto">
+				<li><a th:href="@{/diary}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
-                        </svg>
-                        Diary
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/font}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
+                        </svg> Diary
+				</a></li>
+				<li><a th:href="@{/font}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
                             <use xlink:href="#table"></use>
-                        </svg>
-                        Font
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/wallpaper}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
+                        </svg> Font
+				</a></li>
+				<li><a th:href="@{/wallpaper}" class="nav-link link-dark">
+						<svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#grid"></use>
-                        </svg>
-                        Wallpaper
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/icon}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
+                        </svg> Wallpaper
+				</a></li>
+				<li><a th:href="@{/icon}" class="nav-link link-dark"> <svg
+							class="bi me-2" width="16" height="16">
                             <use xlink:href="#people-circle"></use>
-                        </svg>
-                        Icon
-                    </a>
-                </li>
-                <hr>
-                <li>
-            		<a th:href="@{/item/viewFundingItem.do}" class="nav-link link-dark">
-            		<svg class="bi me-2" width="16" height="16">
+                        </svg> Icon
+				</a></li>
+				<hr>
+				<li><a th:href="@{/item/viewFundingItem.do}"
+					class="nav-link link-dark"> <svg class="bi me-2" width="16"
+							height="16">
                             <use xlink:href="#people-circle"></use>
-                        </svg>
-            		funding
-            		</a>
-            	</li>
-            </ul>
-            <ul>
-            	
-            </ul>
-        </div>
-        <div class="col-7 base">
-반갑습니다  <p th:text="#{Account.alias}">사용자<p>님<br>
-적립금 : <p th:text="#{Account.mileage}">0<p>원<br><br>
-<table style="table-layout: fixed; width: 139px">
-<colgroup>
-<col style="width: 200px">
-<col style="width: 200px">
-<col style="width: 200px">
-<col style="width: 200px">
-</colgroup>
-<thead>
-  <tr>
-    <th onclick="location.href='/user/myPage/buy.do'"; style="cursor:pointer;">구매내역조회</th>
-    <th onclick="location.href='/user/myPage/sell.do'"; style="cursor:pointer;">판매내역조회</th>
-    <th onclick="location.href='/user/editAccount.do'"; style="cursor:pointer;">회원정보수정</th>
-    <th onclick="location.href='/user/viewCart.do'"; style="cursor:pointer;">장바구니</th>
-  </tr>
-</thead>
-</table>
-<p align="left"><a href="/user/deleteAccount.do">탈퇴하기</a></p>
+                        </svg> funding
+				</a></li>
+			</ul>
+			<ul>
+
+			</ul>
+		</div>
+		<div class="col-7 base">
+			<div>
+				반갑습니다 <span th:text=${userSession.alias}>사용자</span>님<br> 적립금 : <span
+					th:text=${userSession.mileage}>0</span>원<br>
+				<br>
+				<table style="table-layout: fixed; width: 139px">
+					<colgroup>
+						<col style="width: 200px">
+						<col style="width: 200px">
+						<col style="width: 200px">
+						<col style="width: 200px">
+					</colgroup>
+					<thead>
+						<tr>
+							<th onclick="location.href='/user/myPage/buy.do'"
+								; style="cursor: pointer;">구매내역조회</th>
+							<th onclick="location.href='/user/myPage/sell.do'"
+								; style="cursor: pointer;">판매내역조회</th>
+							<th onclick="location.href='/user/editAccount.do'"
+								; style="cursor: pointer;">회원정보수정</th>
+							<th onclick="location.href='/user/viewCart.do'"
+								; style="cursor: pointer;">장바구니</th>
+						</tr>
+					</thead>
+				</table>
+				<p align="left">
+					<a href="/user/deleteAccount.do">탈퇴하기</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </BODY>
 </HTML>

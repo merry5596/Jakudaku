@@ -1,7 +1,6 @@
-<jsp:include page="header.jsp" />
-<!DOCTYPE html>
-<html>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
 <body>
   <!--navbar-->
   <nav class="mainnav navbar navbar-expand-lg navbar-light sticky-top bg-light">
@@ -59,6 +58,3 @@
       </div>
     </div>
   </nav>
-
-</body>
-</html>

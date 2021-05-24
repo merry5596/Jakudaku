@@ -64,7 +64,7 @@ body{
 	border-radius: 60px;
 }
 .timeSale-image-banner{
-	width: 500px;
+	width: 300px;
 }
 .timeSale-image-banner{
 	margin: 0 auto;
@@ -97,4 +97,9 @@ body{
 	top: 0;
     
   padding: 0 15px;
+}
+
+
+.link-unstyled {
+  text-decoration: none;
 }

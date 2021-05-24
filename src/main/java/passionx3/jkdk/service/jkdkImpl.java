@@ -133,39 +133,37 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(String categoryId) {
+	public List<Online> getOnlineItemListByCategory(int categoryId) {
+		return onlineDao.getOnlineItemListByCategory(categoryId);
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(String categoryId, int themeId) {
+	public List<Online> getOnlineItemListByCategory2(int categoryId, int device) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory2(String categoryId, int device) {
+	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId, int device) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(String categoryId, int themeId, int device) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getCategoryByCategoryId(String categoryId) {
+	public Item getCategoryByCategoryId(int categoryId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Funding> getFundingItemList() {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingDao.getFundingItemList();
 	}
 
 	@Override
