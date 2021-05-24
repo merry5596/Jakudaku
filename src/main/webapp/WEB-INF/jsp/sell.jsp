@@ -6,7 +6,7 @@
 <HEAD>
 <meta charset="UTF-8">
 <TITLE>판매내역</TITLE>
-<style>
+<style> 
   table {
     width: 100%;
     border-top: 1px solid #444444;
