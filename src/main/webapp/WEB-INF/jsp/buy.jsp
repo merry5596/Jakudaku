@@ -1,17 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <HTML>
 <HEAD>
 <meta charset="UTF-8">
 <TITLE>구매내역</TITLE>
-<style>
-  table {
-    width: 100%;
-    border: 1px solid #444444;
-  }
-</style>
 </HEAD>
 <BODY>
 ${Account.name} 님의 구매내역<br><br>
@@ -44,7 +38,7 @@ ${Account.name} 님의 구매내역<br><br>
 <h3>구매 목록</h3>
 <br><br>
 
-<table>
+<table style="width:100%; border:1px solid #444444;">
 	<c:forEach var="d" items="${orderMap}">
 		<c:forEach var="o" items="${orderMap[d.key]}">
 		<tr>
