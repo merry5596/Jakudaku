@@ -20,6 +20,7 @@
           </tr>
           
          </table>
+         </td></tr></table>
          
          <br />
          <button  type="submit" id="submit">회원탈퇴</button>
