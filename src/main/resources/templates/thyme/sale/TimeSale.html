@@ -49,10 +49,9 @@
                             <span class="text-decoration-line-through" th:text="${item.price}">price</span>
                             <span th:text="${salePrice}"> salePrice </span>
                         </div>
-                        <p class="lead" th:text="${item.description}">description</p>
-                        <small>남은 수량</small> <span th:text="${timeSale.quantity}">quantity</span><span>개!</span>
-                         <button type="button" class="btn btn-success"> 구매하러가기</button>
-                        
+                        <p class="lead" th:text="${item.description}">description</p> 
+                        <button type="button" class="btn btn-success"><small>남은 수량</small> 
+                        	<span th:text="${timeSale.quantity}">quantity</span>개!</button>
 				</div>
 			</div>
 		</div>

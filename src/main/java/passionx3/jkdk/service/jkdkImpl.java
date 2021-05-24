@@ -163,8 +163,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Funding> getFundingItemList() {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingDao.getFundingItemList();
 	}
 
 	@Override
