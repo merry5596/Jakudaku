@@ -39,15 +39,15 @@ public class ViewFundingsController {
 		}
 		
 		// finish Date 형식 바꿔주
-		for (Funding item : fundingList) {
-			String findate = item.getFinishDate();
-			Date finish = toFormat.parse(findate);
-			
-			long gap = finish.getTime() - today.getTime();
-			long diffDays = gap / (24 * 60 * 60 * 1000);
-			
-			item.setFinishDate(Long.toString(diffDays));
-		}
+//		for (Funding item : fundingList) {
+//			String findate = item.getFinishDate();
+//			Date finish = toFormat.parse(findate);
+//			
+//			long gap = finish.getTime() - today.getTime();
+//			long diffDays = gap / (24 * 60 * 60 * 1000);
+//			
+//			item.setFinishDate(Long.toString(diffDays));
+//		}
 		
 		return new ModelAndView("thyme/item/ViewFundings", "fundingList", fundingList);
 	}

@@ -138,9 +138,13 @@
 											<small class="text-info" th:text="${item.targetQuantity}"> 목표 퍼센티지 </small><small class="text-info">% </small>
 										</span>
 										<span class= "mx-2" style="text-align:right" >
-											<small style="text-align:left" class="text-muted text-sm" th:text="${item.finishDate}"> finishdate</small>
+											<small style="text-align:left" class="text-muted text-sm" th:text="${item.remainingDays}"> remainingDays</small>
 											<small class="text-muted text-sm">일 남음</small>
 										</span>
+									</div>
+									<div style="text-align:right">
+										<small class="text-muted text-sm" th:text="${item.finishDate}"> finishDate</small>
+										<small class="text-muted text-sm">에 마감&nbsp;</small>
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>
