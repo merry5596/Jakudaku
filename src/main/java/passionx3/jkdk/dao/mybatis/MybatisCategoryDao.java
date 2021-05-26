@@ -11,6 +11,7 @@ import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.mybatis.mapper.AccountMapper;
 import passionx3.jkdk.dao.mybatis.mapper.CategoryMapper;
 import passionx3.jkdk.domain.Account;
+import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Theme;
 
 @Repository
@@ -29,5 +30,9 @@ public class MybatisCategoryDao implements CategoryDao{
 		return categoryMapper.getCategoryNameByCategoryId(CategoryId);
 	}
  
+	@Override
+	public Category getCategoryByCategoryId(int CategoryId) {
+		return categoryMapper.getCategoryByCategoryId(CategoryId);
+	}
 	
 }

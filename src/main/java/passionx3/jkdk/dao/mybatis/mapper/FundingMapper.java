@@ -64,5 +64,8 @@ public interface FundingMapper {
 			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemList();
 
+	@Select("SELECT i.ITEMID AS itemID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMBNAIL1, THUMBNAIL2, THUMBNAIL3, ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED " + 
+			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 AND i.themeId = #{themeId} ORDER BY UPLOADDATE")
+	List<Funding> getFundingItemListByTheme(int themeId);
 
 }
