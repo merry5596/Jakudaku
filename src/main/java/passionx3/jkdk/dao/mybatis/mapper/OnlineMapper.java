@@ -80,4 +80,8 @@ public interface OnlineMapper {
 			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND o.categoryid = #{categoryId} ORDER BY i.uploaddate DESC")
 	List<Online> getOnlineItemListByCategory(int categoryId);
 
+	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile " + 
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} ORDER BY i.uploaddate DESC")
+	List<Online> getOnlineItemListByTheme(int categoryId, int themeId);
+
 }

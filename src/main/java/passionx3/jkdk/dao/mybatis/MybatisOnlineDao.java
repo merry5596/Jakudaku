@@ -1,5 +1,7 @@
 package passionx3.jkdk.dao.mybatis;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import passionx3.jkdk.dao.mybatis.mapper.OnlineMapper;
 import passionx3.jkdk.domain.Online;
 
 @Repository
-public class MybatisOnlineDao implements OnlineDao{
+public class MybatisOnlineDao implements OnlineDao {
 	
 	@Autowired
 	private OnlineMapper onlineMapper;
@@ -34,21 +36,70 @@ public class MybatisOnlineDao implements OnlineDao{
 
 	@Override
 	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineMapper.getOnlineItemListByTheme(categoryId, themeId);
 	}
 
 	@Override
 	public List<Online> getOnlineItemListByDevice(int categoryId, int device) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	
+		List<Online> onlineItemList = onlineMapper.getOnlineItemListByCategory(categoryId);
+
+		List<Online> listFilteredByDevice = new ArrayList<>();
+		
+		switch(device) {
+			case 1:
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getPcFile() != null) {
+						listFilteredByDevice.add(onlineitem);
+					}
+				}
+				break;
+			case 2:
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getTabletFile() != null)
+						listFilteredByDevice.add(onlineitem);
+				}
+				break;
+			case 3: 
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getPhoneFile() != null)
+						listFilteredByDevice.add(onlineitem);
+				}
+				break;
+		}
+		
+		return listFilteredByDevice;
 	}
 
 	@Override
 	public List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Online> onlineItemList = onlineMapper.getOnlineItemListByTheme(categoryId, themeId);
+
+		List<Online> listFilteredByDevice = new ArrayList<>();
+		
+		switch(device) {
+			case 1:
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getPcFile() != null)
+						listFilteredByDevice.add(onlineitem);
+				}
+				break;
+			case 2:
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getTabletFile() != null)
+						listFilteredByDevice.add(onlineitem);
+				}
+				break;
+			case 3: 
+				for (Online onlineitem : onlineItemList) {
+					if (onlineitem.getPhoneFile() != null)
+						listFilteredByDevice.add(onlineitem);
+				}
+				break;
+		}
+		
+		return listFilteredByDevice;
 	}
 
 	@Override

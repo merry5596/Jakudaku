@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title})">
-<title th:text="${categoryName}">categoryName</title>
+<title th:text="${category.name}">categoryName</title>
 <style>
 .container {
 	display: grid;
@@ -65,7 +65,7 @@
 		
 		<div class="col-7 base">
 			<!-- 여기서부터 content -->
-			<h2 th:text="${categoryName}" class="text-uppercase d-flex flex-wrap justify-content-center py-3 mb-4"> category</h2>
+			<h2 th:text="${category.name}" class="text-uppercase d-flex flex-wrap justify-content-center py-3 mb-4"> category</h2>
 			
 			<!-- 검색 창 -->
 			<div class="container">
@@ -74,7 +74,9 @@
 						<nav class="d-flex flex-wrap" aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a class= "text-secondary link-unstyled" th:href="@{/}">Home</a></li>
-								<li class="breadcrumb-item active " aria-current="page" th:text="${categoryName}">category</li>
+								<li class="breadcrumb-item active " aria-current="page">
+									<a th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = '-1', device = '-1')}"><span th:text="${category.name}">category</span></a>
+								</li>
 							</ol>
 						</nav>
 					</div>
@@ -95,17 +97,25 @@
 							</ul>
 						</div>
 					</div>
-					<div style="text-align:left">
-				        <a href="#" th:each="theme : ${themes}">
-				     		<span th:text="${theme.name}">#테마</span></a>
-				    </div>
 				</div>
 				<div style="text-align:left">
-			        <a href="#" th:each="theme : ${themes}">
-			     		<span th:text="${theme.name}">#테마</span></a>
+					<table>
+						<tr>
+							<td style="width:100px">
+							<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = -1, device = ${device})}">
+			     				<span>#전체테마</span></a></td>
+							<td style="width:100px" th:each="theme : ${allThemes}">
+								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${theme.themeId}, device = ${device})}">
+			     				<span th:text="'#' + ${theme.name}">#테마</span></a>
+							</td>
+						</tr>
+					</table>
 			    </div>
 			    <div >
-					<a class= "text-secondary link-unstyled" href="#">PC</a> | <a class= "text-secondary link-unstyled" href="#">TABLET</a> | <a class= "text-secondary link-unstyled"href="#">PHONE</a>
+					<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '-1')}">전체</a>
+					| <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '1')}">PC</a>
+					| <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '2')}">TABLET</a>
+					| <a class= "text-secondary link-unstyled"href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '3')}">PHONE</a>
 				</div>
 
 				<!-- 상품 목록-->

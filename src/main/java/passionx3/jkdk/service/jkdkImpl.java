@@ -12,6 +12,7 @@ import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.OnlineDao;
+import passionx3.jkdk.dao.ThemeDao;
 import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.dao.FundingDao;
 import passionx3.jkdk.domain.*;
@@ -38,6 +39,9 @@ public class jkdkImpl implements jkdkFacade {
 	@Autowired
 	private CategoryDao categoryDao;
 	
+	@Autowired
+	private ThemeDao themeDao;
+	
 	@Override
 	public Account getAccount(String userId) {
 		return accountDao.getAccount(userId);
@@ -48,8 +52,6 @@ public class jkdkImpl implements jkdkFacade {
 		return accountDao.getAccount(userId, password);
 	}
   
-	
-	
 	@Override
 	public int insertAccount(Account account) {
 		return accountDao.insertAccount(account);
@@ -138,27 +140,18 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId) {
+		return onlineDao.getOnlineItemListByTheme(categoryId, themeId);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory2(int categoryId, int device) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByDevice(int categoryId, int device) {
+		return onlineDao.getOnlineItemListByDevice(categoryId, device);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId, int device) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getCategoryByCategoryId(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device) {
+		return onlineDao.getOnlineItemListByThemeAndDevice(categoryId, themeId, device);
 	}
 
 	@Override
@@ -167,9 +160,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Funding> getFundingItemList(int themeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Funding> getFundingItemListByTheme(int themeId) {
+		return fundingDao.getFundingItemListByTheme(themeId);
 	}
 
 	@Override
@@ -231,8 +223,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Theme> getAllThemes() {
-		// TODO Auto-generated method stub
-		return null;
+		return themeDao.getAllThemes();
 	}
 
 	@Override
@@ -347,4 +338,11 @@ public class jkdkImpl implements jkdkFacade {
 	public String getCategoryNameByCategoryId(int CategoryId) {
 		return categoryDao.getCategoryNameByCategoryId(CategoryId);
 	}
+	
+	@Override
+	public Category getCategoryByCategoryId(int categoryId) {
+		return categoryDao.getCategoryByCategoryId(categoryId);
+	}
+
+
 }
