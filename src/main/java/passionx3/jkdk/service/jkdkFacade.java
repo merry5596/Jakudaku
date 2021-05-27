@@ -38,7 +38,7 @@ public interface jkdkFacade {
 	
 	Funding getFundingItemById(int itemId); 
 	
-	Review getRevieById(int reviewId);
+	Review getReviewById(int reviewId);
 
 	List<Online> getOnlineItemsByKeyword(String keyword);
 
@@ -86,9 +86,9 @@ public interface jkdkFacade {
 
 	List<Category> getAllCategories();
 
-	void registerFundingItem(Funding funding);
+	int registerFundingItem(Funding funding);
 
-	void updateFundingItem(Funding funding);
+	int updateFundingItem(Funding funding);
 
 	List<Online> getNotApprovedOnlineItems();
 
@@ -116,7 +116,9 @@ public interface jkdkFacade {
 
 	List<Funding> getNewFundingItemListforHome();
 	
-	String getCategoryNameByCategoryId(int CategoryId);
+	String getCategoryNameByCategoryId(int categoryId);
+	
+	int updateOnlineItemSaleState(int itemId);
 	
 	Category getCategoryByCategoryId(int categoryId);
 }

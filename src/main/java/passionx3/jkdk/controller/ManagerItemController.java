@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.jkdkFacade;
 
-import passionx3.jkdk.service.jkdkFacade;
-
 @Controller
 @SessionAttributes("userSession")
 

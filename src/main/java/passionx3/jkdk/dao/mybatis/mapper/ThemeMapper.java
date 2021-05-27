@@ -1,3 +1,4 @@
+
 package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import passionx3.jkdk.domain.Theme;
 
 @Mapper
 public interface ThemeMapper {
-
-	@Select("SELECT * FROM THEME")
+	
+	@Select("SELECT themeId AS themeId, name AS name FROM theme")
 	List<Theme> getAllThemes();
 }

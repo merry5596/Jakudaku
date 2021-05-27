@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.service.jkdkFacade;
 

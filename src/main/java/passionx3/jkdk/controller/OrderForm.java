@@ -2,7 +2,6 @@ package passionx3.jkdk.controller;
 
 import java.io.Serializable;
 
-import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.Order;
 

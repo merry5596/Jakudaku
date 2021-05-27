@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Category;
-import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Theme;
 import passionx3.jkdk.service.jkdkFacade;
