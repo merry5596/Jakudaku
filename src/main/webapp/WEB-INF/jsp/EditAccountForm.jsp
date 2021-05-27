@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="navbar.jsp" %>
+<%@ include file="sidebar.jsp" %>
+<div class="col-7 base">
 <div align="center">
 <form:form modelAttribute="accountForm" method="post" >
   <form:errors cssClass="error" /> <br><br>
@@ -20,7 +22,7 @@
               <B><form:errors path="account.userId" cssClass="error" /></B>
             </c:if> 
             <c:if test="${!accountForm.newAccount}">
-              <c:out value="${accountForm.account.name}" />
+              <c:out value="${accountForm.account.userId}" />
             </c:if>
             </td>
           </tr>
@@ -86,4 +88,6 @@
          <input type="image" src="../images/button_submit.gif" name="submit"
       value="Save Account Information" />
     </form:form>
+    </div>
+    </div>
         

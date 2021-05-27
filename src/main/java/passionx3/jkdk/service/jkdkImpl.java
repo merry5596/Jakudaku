@@ -56,8 +56,6 @@ public class jkdkImpl implements jkdkFacade {
 		return accountDao.getAccount(userId, password);
 	}
   
-	
-	
 	@Override
 	public int insertAccount(Account account) {
 		return accountDao.insertAccount(account);
@@ -145,27 +143,18 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId) {
+		return onlineDao.getOnlineItemListByTheme(categoryId, themeId);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory2(int categoryId, int device) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByDevice(int categoryId, int device) {
+		return onlineDao.getOnlineItemListByDevice(categoryId, device);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId, int themeId, int device) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getCategoryByCategoryId(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device) {
+		return onlineDao.getOnlineItemListByThemeAndDevice(categoryId, themeId, device);
 	}
 
 	@Override
@@ -174,9 +163,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Funding> getFundingItemList(int themeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Funding> getFundingItemListByTheme(int themeId) {
+		return fundingDao.getFundingItemListByTheme(themeId);
 	}
 
 	@Override
@@ -364,6 +352,11 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public int updateOnlineItemSaleState(int itemId) {
 		return onlineDao.updateOnlineItemSaleState(itemId);
+	}
+	
+	@Override
+	public Category getCategoryByCategoryId(int categoryId) {
+		return categoryDao.getCategoryByCategoryId(categoryId);
 	}
 
 }

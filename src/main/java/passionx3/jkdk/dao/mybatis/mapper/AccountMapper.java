@@ -10,12 +10,12 @@ import passionx3.jkdk.domain.Account;
 @Mapper
 public interface AccountMapper {
 	
-	@Select("SELECT USERID, ALIAS, NAME, EMAIL,"
+	@Select("SELECT USERID, PASSWORD, ALIAS, NAME, EMAIL,"
 			+ " PHONE, ADDRESS1, ADDRESS2, ZIP, MILEAGE"
 			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")
 	Account getAccountByUsername(String userId);
 
-	@Select("SELECT USERID, ALIAS, NAME, EMAIL,"
+	@Select("SELECT USERID, PASSWORD, ALIAS, NAME, EMAIL,"
 			+ " PHONE, ADDRESS1, ADDRESS2, ZIP, MILEAGE"
 			+ " FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}"
 			+ " AND PASSWORD = #{password}")

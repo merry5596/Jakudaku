@@ -74,4 +74,9 @@ public interface FundingMapper {
 			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
 			+ "WHERE ITEMID = #{onlineItem.itemId}")
 	int updateFundingItem(@Param("funding") Funding funding);
+
+	@Select("SELECT i.ITEMID AS itemID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMBNAIL1, THUMBNAIL2, THUMBNAIL3, ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED " + 
+			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 AND i.themeId = #{themeId} ORDER BY UPLOADDATE")
+	List<Funding> getFundingItemListByTheme(int themeId);
+
 }

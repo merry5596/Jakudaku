@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.mybatis.mapper.CategoryMapper;
+
 import passionx3.jkdk.domain.Category;
 
 @Repository
@@ -25,5 +26,9 @@ public class MybatisCategoryDao implements CategoryDao {
 		return categoryMapper.getCategoryNameByCategoryId(categoryId);
 	}
  
+	@Override
+	public Category getCategoryByCategoryId(int CategoryId) {
+		return categoryMapper.getCategoryByCategoryId(CategoryId);
+	}
 	
 }

@@ -101,4 +101,8 @@ public interface OnlineMapper {
 	@Update("UPDATE onlineitem SET salestate = 0 WHERE itemid = #{itemId}")
 	int updateOnlineItemSaleState(@Param("itemId") int itemId) throws DataAccessException;
 
+	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile " + 
+			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} ORDER BY i.uploaddate DESC")
+	List<Online> getOnlineItemListByTheme(int categoryId, int themeId);
+
 }

@@ -7,4 +7,5 @@ import passionx3.jkdk.domain.Category;
 public interface CategoryDao {
 	List<Category> getAllCategories();
 	String getCategoryNameByCategoryId(int categoryId);
+	Category getCategoryByCategoryId(int catetgoryId);
 }

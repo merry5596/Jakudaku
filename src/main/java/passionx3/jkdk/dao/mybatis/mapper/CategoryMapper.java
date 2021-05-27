@@ -12,7 +12,10 @@ import passionx3.jkdk.domain.Category;
 public interface CategoryMapper {
 	@Select("SELECT categoryId AS categoryId, name AS name FROM category")
 	List<Category> getAllCategories();
-	
+
 	@Select("SELECT Name FROM category WHERE categoryId = #{categoryId}")
 	String getCategoryNameByCategoryId(@Param("categoryId") int categoryId);	
+
+	@Select("SELECT CATEGORYID, NAME FROM CATEGORY WHERE CATEGORYID=#{CATEGORYID}")
+	Category getCategoryByCategoryId(int categoryId);
 }

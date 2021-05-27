@@ -74,7 +74,8 @@
 						<nav class="d-flex flex-wrap" aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a class= "text-secondary link-unstyled" th:href="@{/}">Home</a></li>
-								<li class="breadcrumb-item active " aria-current="page" > Funding</li>
+								<li class="breadcrumb-item active " aria-current="page" >
+									<a th:href="@{/item/viewFundings.do(themeId = '-1')}">Funding</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -95,16 +96,20 @@
 							</ul>
 						</div>
 					</div>
-					<div style="text-align:left">
-				        <a href="#" th:each="theme : ${themes}">
-				     		<span th:text="${theme.name}">#테마</span></a>
-				    </div>
 				</div>
 				<div style="text-align:left">
-			        <a href="#" th:each="theme : ${themes}">
-			     		<span th:text="${theme.name}">#테마</span></a>
+					<table>
+						<tr>
+							<td style="width:100px">
+								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = -1)}">
+				     				<span>#전체테마</span></a></td>
+							<td style="width:100px" th:each="theme : ${allThemes}">
+								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = ${theme.themeId})}">
+			     				<span th:text="'#' + ${theme.name}">#테마</span></a>
+							</td>
+						</tr>
+					</table>
 			    </div>
-
 				<!-- 상품 목록-->
 				<div class="mt-4 album bg-light">
 					<div class="container">
@@ -138,9 +143,13 @@
 											<small class="text-info" th:text="${item.targetQuantity}"> 목표 퍼센티지 </small><small class="text-info">% </small>
 										</span>
 										<span class= "mx-2" style="text-align:right" >
-											<small style="text-align:left" class="text-muted text-sm" th:text="${item.finishDate}"> finishdate</small>
+											<small style="text-align:left" class="text-muted text-sm" th:text="${item.remainingDays}"> remainingDays</small>
 											<small class="text-muted text-sm">일 남음</small>
 										</span>
+									</div>
+									<div style="text-align:right">
+										<small class="text-muted text-sm" th:text="${item.finishDate}"> finishDate</small>
+										<small class="text-muted text-sm">에 마감&nbsp;</small>
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>

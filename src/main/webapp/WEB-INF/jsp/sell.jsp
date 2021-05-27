@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE>
-<HTML>
-<HEAD>
-<meta charset="UTF-8">
-<TITLE>ÆÇ¸Å³»¿ª</TITLE>
-<style>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="navbar.jsp" %>
+<%@ include file="sidebar.jsp" %>
+<div class="col-7 base">
+<!-- <style> 
   table {
     width: 100%;
     border-top: 1px solid #444444;
@@ -18,9 +17,9 @@
   }
 </style>
 </HEAD>
-<BODY>
-${Account.name} ´ÔÀÇ ÆÇ¸Å³»¿ª<br><br>
-<!-- ÃßÈÄ±¸Çö»çÇ×
+<BODY> -->
+<h2>${userSession.alias} ë‹˜ì˜ íŒë§¤ë‚´ì—­</h2><br><br>
+<!-- ì¶”í›„êµ¬í˜„ì‚¬í•­
 <table style="undefined;table-layout: fixed; width: 164px">
 <colgroup>
 <col style="width: 100px">
@@ -32,62 +31,77 @@ ${Account.name} ´ÔÀÇ ÆÇ¸Å³»¿ª<br><br>
 </colgroup>
 <thead>
   <tr>
-    <th rowspan="2">Á¶È¸±â°£</th>
-    <th>¿À´Ã</th>
-    <th>1ÁÖÀÏ</th>
-    <th>1°³¿ù</th>
-    <th>6°³¿ù</th>
-    <th>1³â</th>
+    <th rowspan="2">ì¡°íšŒê¸°ê°„</th>
+    <th>ì˜¤ëŠ˜</th>
+    <th>1ì£¼ì¼</th>
+    <th>1ê°œì›”</th>
+    <th>6ê°œì›”</th>
+    <th>1ë…„</th>
   </tr>
   <tr>
-    <td colspan="5" align=center>³¯Â¥ ³ª¿À´Â °÷</td>
+    <td colspan="5" align=center>ë‚ ì§œ ë‚˜ì˜¤ëŠ” ê³³</td>
   </tr>
 </thead>
 </table> -->
 <a name = "online" />
-<h3>online »óÇ° ÆÇ¸Å ¸ñ·Ï</h3>
-<a href="#online">Funding »óÇ° ÆÇ¸Å ¸ñ·Ï º¸±â</a>
+<h3>Online ìƒí’ˆ íŒë§¤ ëª©ë¡</h3>
+<a href="#online">Funding ìƒí’ˆ íŒë§¤ ëª©ë¡ ë³´ê¸°</a>
 <br><br>
-<table>
-	<tr>
-		<td>¹øÈ£</td>
-		<td>½æ³×ÀÏ</td>
-		<td>»óÇ°¸í</td>
-		<td>µî·Ï³¯Â¥</td>
-		<td>¼öÁ¤</td>
+<table style=" width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;">
+	<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
+		<td >ë²ˆí˜¸</td>
+		<td>ì¸ë„¤ì¼</td>
+		<td>ìƒí’ˆëª…</td>
+		<td>ë“±ë¡ë‚ ì§œ</td>
+		<td>ìˆ˜ì •</td>
 	</tr>
-	<c:forEach var="o" items="${onlineList}" varState="status" >
-		<tr>
+	<c:if test="${fn:length(onlineList) == 0}">
+			<td style="text-align:center" colspan="6"><b>íŒë§¤í•œ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.</b></td>
+	</c:if>
+	<c:forEach var="o" items="${onlineList}" varStatus="status" >
+		<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
 		<td>${status.index}</td>
 		<td>${o.thumnail1}</td>
 		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
 		<td>${o.uploadDate}</td>
-		<td><button type="button"  onClick="location.href='/item/sellOnlineItem.do'">¼öÁ¤</button></td>
+		<td><button type="button"  onClick="location.href='/item/sellOnlineItem.do'">ìˆ˜ì •</button></td>
 		</tr>
 	</c:forEach>
 </table>
 <br><br>
 <a name = "funding" />
-<h3>Funding »óÇ° ÆÇ¸Å ¸ñ·Ï</h3>
-<a href="#online">Online »óÇ° ÆÇ¸Å ¸ñ·Ï º¸±â</a>
+<h3>Funding ìƒí’ˆ íŒë§¤ ëª©ë¡</h3>
+<a href="#online">Online ìƒí’ˆ íŒë§¤ ëª©ë¡ ë³´ê¸°</a>
 <br><br>
-<table>
-	<tr>
-		<td>¹øÈ£</td>
-		<td>½æ³×ÀÏ</td>
-		<td>»óÇ°¸í</td>
-		<td>µî·Ï³¯Â¥</td>
-		<td>¼öÁ¤</td>
+<table style=" width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;">
+	<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
+		<td>ë²ˆí˜¸</td>
+		<td>ì¸ë„¤ì¼</td>
+		<td>ìƒí’ˆëª…</td>
+		<td>ë“±ë¡ë‚ ì§œ</td>
+		<td>ìˆ˜ì •</td>
 	</tr>
-	<c:forEach var="f" items="${fundingList}" varState="status" >
-		<tr>
+	<c:if test="${fn:length(fundingList) == 0}">
+			<td style="text-align:center" colspan="6"><b>íŒë§¤í•œ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.</b></td>
+	</c:if>
+	<c:forEach var="f" items="${fundingList}" varStatus="status" >
+		<tr style="border-bottom: 1px solid #444444;
+    padding: 10px;">
 		<td>${status.index}</td>
 		<td>${f.thumnail1}</td>
 		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${f.name}</td>
 		<td>${f.uploadDate}</td>
-		<td><button type="button"  onClick="location.href='/item/sellOnlineItem.do'">¼öÁ¤</button></td>
+		<td><button type="button"  onClick="location.href='/item/sellOnlineItem.do'">ìˆ˜ì •</button></td>
 		</tr>
 	</c:forEach>
 </table>
+</div>
 </BODY>
 </HTML>

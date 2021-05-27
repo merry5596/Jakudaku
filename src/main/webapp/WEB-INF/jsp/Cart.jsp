@@ -1,51 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="navbar.jsp" %>
-    <!-- side bar-->
-    <div class="row row-margin">
-        <div class="col-3 sidebar d-flex flex-column p-3 bg-light" style="width: 250px;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">Sidebar</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg>
-                        Diary
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
-                        </svg>
-                        Font
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg>
-                        Wallpaper
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg>
-                        Icon
-                    </a>
-                </li>
-            </ul>
-        </div>
+<%@ include file="sidebar.jsp" %>
         <div class="col-7 base">
 			<table style="width:1000px; align:center;">
 			  <tr style="vertical-align:top">
@@ -132,7 +88,4 @@
 			  </tr>
 			</table>
 		</div>
-	</div>
-</body>
-
-</html>
+<%@ include file="bottom.jsp" %>

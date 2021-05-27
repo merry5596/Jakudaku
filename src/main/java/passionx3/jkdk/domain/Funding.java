@@ -61,7 +61,7 @@ public class Funding extends Item implements Serializable {
 		}
 
 //		이 부분은 실시간으로 바뀌어야 돼서 javascript로 가져가서 구현하기
-		public String getRemainingTime() {
+		public int getRemainingDays() {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date finish = null;
 			try {
@@ -73,9 +73,9 @@ public class Funding extends Item implements Serializable {
 
 			Date today = new Date();
 		
-			long remainingDays = (finish.getTime() - today.getTime()) / (24*60*60*1000);
+			int remainingDays = (int) (finish.getTime() - today.getTime()) / (24*60*60*1000);
 			
-			return remainingDays + "일 남음";
+			return remainingDays;
 		}
 		
 //		소수점 자르는 과정에서 double -> String, String -> double 을 거치는데

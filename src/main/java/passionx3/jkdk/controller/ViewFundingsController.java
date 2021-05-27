@@ -25,6 +25,7 @@ public class ViewFundingsController {
 	public ModelAndView handleRequest(@RequestParam("themeId") int themeId) throws Exception {
 		SimpleDateFormat toFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date today = new Date();
+	
 		
 		List<Funding> fundingList = null;
 		
@@ -33,20 +34,29 @@ public class ViewFundingsController {
 			
 			
 		} else {	// theme 선택됨, device 선택됨
-			fundingList = jkdkStore.getFundingItemList(themeId);
+			fundingList = jkdkStore.getFundingItemListByTheme(themeId);
 		}
 		
 		// finish Date 형식 바꿔주
-		for (Funding item : fundingList) {
-			String findate = item.getFinishDate();
-			Date finish = toFormat.parse(findate);
-			
-			long gap = finish.getTime() - today.getTime();
-			long diffDays = gap / (24 * 60 * 60 * 1000);
-			
-			item.setFinishDate(Long.toString(diffDays));
-		}
+//		for (Funding item : fundingList) {
+//			String findate = item.getFinishDate();
+//			Date finish = toFormat.parse(findate);
+//			
+//			long gap = finish.getTime() - today.getTime();
+//			long diffDays = gap / (24 * 60 * 60 * 1000);
+//			
+//			item.setFinishDate(Long.toString(diffDays));
+//		}
 		
-		return new ModelAndView("thyme/item/ViewFundings", "fundingList", fundingList);
+
+		List<Theme> allThemes = jkdkStore.getAllThemes();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("thyme/item/ViewFundings");
+		mav.addObject("allThemes", allThemes);
+		mav.addObject("themeId", themeId);
+		mav.addObject("fundingList", fundingList);
+		
+		return mav;
 	}
 }

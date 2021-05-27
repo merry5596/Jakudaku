@@ -46,17 +46,15 @@ public interface jkdkFacade {
 
 	List<Online> getOnlineItemListByCategory(int categoryId);
 
-	List<Online> getOnlineItemListByCategory(int categoryId, int themeId);
+	List<Online> getOnlineItemListByTheme(int categoryId, int themeId);
 
-	List<Online> getOnlineItemListByCategory2(int categoryId, int device);
+	List<Online> getOnlineItemListByDevice(int categoryId, int device);
 
-	List<Online> getOnlineItemListByCategory(int categoryId, int themeId, int device);
-
-	Item getCategoryByCategoryId(int categoryId);
+	List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device);
 
 	List<Funding> getFundingItemList();
 
-	List<Funding> getFundingItemList(int themeId);
+	List<Funding> getFundingItemListByTheme(int themeId);
 
 	List<Online> getBestOnlineItemListforHome();
 
@@ -122,4 +120,5 @@ public interface jkdkFacade {
 	
 	int updateOnlineItemSaleState(int itemId);
 	
+	Category getCategoryByCategoryId(int categoryId);
 }

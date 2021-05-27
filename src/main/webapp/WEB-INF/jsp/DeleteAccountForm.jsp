@@ -3,8 +3,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="navbar.jsp" %>
+<%@ include file="sidebar.jsp" %>
+<div class="col-7 base">
 <div align="center">
-<form:form modelAttribute="accountForm" method="post" >
+<form:form modelAttribute="DeleteAccountForm" method="post" >
   <form:errors cssClass="error" /> <br><br>
   
   <table id="account">
@@ -20,9 +22,11 @@
           </tr>
           
          </table>
+         </td></tr></table>
          
          <br />
-         <button  type="submit" id="submit">회원탈퇴</button>
-		 <button  type="button">취소</button>
+         <button  type="submit" >탈퇴하기</button>
+		 <button  type="button" onclick="window.history.back();">취소</button>
     </form:form>
+    </div>
         
