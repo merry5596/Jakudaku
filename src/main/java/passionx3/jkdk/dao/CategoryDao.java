@@ -2,10 +2,9 @@ package passionx3.jkdk.dao;
 
 import java.util.List;
 
-import passionx3.jkdk.domain.Theme;
+import passionx3.jkdk.domain.Category;
 
 public interface CategoryDao {
-	List<Theme> getAllCategories();
-	
-	String getCategoryNameByCategoryId(int CategoryId);
+	List<Category> getAllCategories();
+	String getCategoryNameByCategoryId(int categoryId);
 }

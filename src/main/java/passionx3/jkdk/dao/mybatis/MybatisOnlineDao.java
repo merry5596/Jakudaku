@@ -68,9 +68,8 @@ public class MybatisOnlineDao implements OnlineDao{
 	}
 
 	@Override
-	public int registerOnlineItem(Online OnlineItem) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int registerOnlineItem(Online onlineItem) throws DataAccessException {
+		return onlineMapper.registerOnlineItem(onlineItem);
 	}
 
 	@Override
@@ -108,6 +107,16 @@ public class MybatisOnlineDao implements OnlineDao{
 	@Override
 	public List<Online> getNewOnlineItemListforHome() throws DataAccessException {
 		return onlineMapper.getNewOnlineItemListforHome();
+	}
+
+	@Override
+	public int updateOnlineItemSaleState(int itemId) throws DataAccessException {
+		return onlineMapper.updateOnlineItemSaleState(itemId);
+	}
+
+	@Override
+	public int updateOnlineItem(Online onlineItem) throws DataAccessException {
+		return onlineMapper.updateOnlineItem(onlineItem);
 	}
 
 

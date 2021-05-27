@@ -18,9 +18,11 @@ package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import passionx3.jkdk.domain.Funding;
 
@@ -43,7 +45,7 @@ public interface FundingMapper {
 	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
 			+ "ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED"
 			+ " FROM ITEM, FUNDINGITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = FUNDINGITEM.ITEMID ORDER BY UPLOADDATE")
-	List<Funding> getFundingItemListByProducerId(String userId);
+	List<Funding> getFundingItemListByProducerId(@Param("userId") String userId);
 
 
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale," + 
@@ -57,12 +59,19 @@ public interface FundingMapper {
 			+ " F.FINISHDATE AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, LINEITEM L THEME T, ACCOUNT A"
 			+ " WHERE #{lineItemId} = L.LINEITEMID AND L.ITEMID = I.ITEMID AND I.ITEMID = F.ITEMID AND T.THEMEID = I.THEMEID AND A.USERID = I.USERID")
-	Funding getFundingItemByLineItemId(int lineItemId);
+	Funding getFundingItemByLineItemId(@Param("lineItemId") int lineItemId);
 
 	
 	@Select("SELECT i.ITEMID AS itemID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMBNAIL1, THUMBNAIL2, THUMBNAIL3, ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED " + 
 			"FROM ITEM i, FUNDINGITEM f WHERE i.ITEMID = f.ITEMID  AND i.isforsale = 1 AND i.approval = 1 ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemList();
 
-
+	@Insert("INSERT INTO fundingitem (itemId, finishDate, purchaseQuantity, targetQuantity) "
+			+ "values (#{funding.itemId}, TO_DATE(#{funding.finishDate}, 'YYYY/MM/DD HH24:MI'), #{funding.purchaseQuantity}, #{funding.targetQuantity})")
+	int registerFundingItem(@Param("funding") Funding funding);
+	
+	@Update("UPDATE onlineitem "
+			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
+			+ "WHERE ITEMID = #{onlineItem.itemId}")
+	int updateFundingItem(@Param("funding") Funding funding);
 }

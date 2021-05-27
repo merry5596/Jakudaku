@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import passionx3.jkdk.domain.Review;
 
-@SuppressWarnings("Serial")
+@SuppressWarnings("serial")
 public class ReviewForm implements Serializable{
 
 	private Review review;

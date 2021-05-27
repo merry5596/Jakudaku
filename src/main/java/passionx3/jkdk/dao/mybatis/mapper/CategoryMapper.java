@@ -1,18 +1,18 @@
 package passionx3.jkdk.dao.mybatis.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
-import passionx3.jkdk.domain.Account;
+import passionx3.jkdk.domain.Category;
 
 @Mapper
 public interface CategoryMapper {
+	@Select("SELECT categoryId AS categoryId, name AS name FROM category")
+	List<Category> getAllCategories();
 	
-	@Select("SELECT Name FROM category WHERE categoryId = #{CategoryId}")
-	String getCategoryNameByCategoryId(@Param("CategoryId") int CategoryId);
-		
+	@Select("SELECT Name FROM category WHERE categoryId = #{categoryId}")
+	String getCategoryNameByCategoryId(@Param("categoryId") int categoryId);	
 }

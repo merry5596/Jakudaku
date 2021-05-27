@@ -12,8 +12,10 @@ import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.OnlineDao;
+import passionx3.jkdk.dao.ThemeDao;
 import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.dao.FundingDao;
+import passionx3.jkdk.dao.ItemDao;
 import passionx3.jkdk.domain.*;
 
 @Service
@@ -37,6 +39,12 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private ThemeDao themeDao;
+	
+	@Autowired
+	private ItemDao itemDao;
 	
 	@Override
 	public Account getAccount(String userId) {
@@ -115,15 +123,14 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public Review getRevieById(int reviewId) {
+	public Review getReviewById(int reviewId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Online> getOnlineItemsByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineDao.getOnlineItemsByKeyword(keyword);
 	}
 
 	@Override
@@ -231,26 +238,29 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Theme> getAllThemes() {
-		// TODO Auto-generated method stub
-		return null;
+		return themeDao.getAllThemes();
 	}
 
 	@Override
 	public List<Category> getAllCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryDao.getAllCategories();
 	}
 
 	@Override
-	public void registerFundingItem(Funding funding) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public int registerFundingItem(Funding funding) {
+		Item item = funding;
+		int r1 = itemDao.registerItem(item);
+		int r2 = fundingDao.registerFundingItem(funding);
 		
+		if (r1 * r2 == 0)
+			return 0;
+		return 1;
 	}
 
 	@Override
-	public void updateFundingItem(Funding funding) {
-		// TODO Auto-generated method stub
-		
+	public int updateFundingItem(Funding funding) {
+		return fundingDao.updateFundingItem(funding);
 	}
 
 	@Override
@@ -297,17 +307,20 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
+	@Transactional
 	public int registerOnlineItem(Online online) {
-		return 0;
-		// TODO Auto-generated method stub
+		Item item = online;
+		int r1 = itemDao.registerItem(item);
+		int r2 = onlineDao.registerOnlineItem(online);
 		
+		if (r1 * r2 == 0)
+			return 0;
+		return 1;
 	}
 
 	@Override
 	public int updateOnlineItem(Online online) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+		return onlineDao.updateOnlineItem(online);
 	}
 
 	@Override
@@ -344,7 +357,13 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public String getCategoryNameByCategoryId(int CategoryId) {
-		return categoryDao.getCategoryNameByCategoryId(CategoryId);
+	public String getCategoryNameByCategoryId(int categoryId) {
+		return categoryDao.getCategoryNameByCategoryId(categoryId);
 	}
+
+	@Override
+	public int updateOnlineItemSaleState(int itemId) {
+		return onlineDao.updateOnlineItemSaleState(itemId);
+	}
+
 }

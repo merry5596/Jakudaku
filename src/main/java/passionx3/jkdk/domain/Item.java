@@ -7,7 +7,7 @@ public abstract class Item implements Serializable {
 	private int itemId;
 	private String producerId;
 	private String producerName;
-	private int themeId;
+	private Integer themeId;
 	private String themeName;
 	private String name;
 	private String uploadDate;
@@ -30,6 +30,25 @@ public abstract class Item implements Serializable {
 		this.likeNum = likeNum;
 		this.thumbnail1 = thumbnail1;
 		this.isForSale = isForSale;
+	}
+
+	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, String name,
+			String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
+			int isForSale, String description) {
+		this.itemId = itemId;
+		this.producerId = producerId;
+		this.producerName = producerName;
+		this.themeId = themeId;
+		this.themeName = themeName;
+		this.name = name;
+		this.uploadDate = uploadDate;
+		this.price = price;
+		this.likeNum = likeNum;
+		this.thumbnail1 = thumbnail1;
+		this.thumbnail2 = thumbnail2;
+		this.thumbnail3 = thumbnail3;
+		this.isForSale = isForSale;
+		this.description = description;
 	}
 
 	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, 
@@ -70,10 +89,13 @@ public abstract class Item implements Serializable {
 	public void setProducerName(String producerName) {
 		this.producerName = producerName;
 	}
-	public int getThemeId() {
+	public Integer getThemeId() {
 		return themeId;
 	}
-	public void setThemeId(int themeId) {
+//	public void setThemeId(int themeId) {
+//		this.themeId = themeId;
+//	}
+	public void setThemeId(Integer themeId) {
 		this.themeId = themeId;
 	}
 	public String getThemeName() {
