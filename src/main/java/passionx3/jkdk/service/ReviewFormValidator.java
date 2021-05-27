@@ -5,9 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import passionx3.jkdk.controller.AccountForm;
 import passionx3.jkdk.controller.ReviewForm;
-import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Review;
 
 @Service
