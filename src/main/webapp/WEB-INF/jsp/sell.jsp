@@ -66,9 +66,9 @@
     padding: 10px;">
 		<td>${status.index}</td>
 		<td>${o.thumnail1}</td>
-		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
+		<td onclick="location.href='thyme/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
 		<td>${o.uploadDate}</td>
-		<td><button type="button"  onClick="location.href='/item/sellOnlineItem.do'">수정</button></td>
+		<td><button type="button"  onClick="location.href='thyme/item/sellOnlineItemForm.do'">수정</button></td>
 		</tr>
 	</c:forEach>
 </table>

@@ -286,8 +286,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Online> getOnlineItemListByProducerId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineDao.getOnlineItemListByProducerId(userId);
 	}
 
 	@Override
