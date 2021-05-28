@@ -42,7 +42,9 @@ public class SellOnlineItemController {
 	}
 	
 	@ModelAttribute("sellOnlineForm")
-	public SellOnlineForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception { // accessor method		
+	public SellOnlineForm formBackingObject(HttpServletRequest request) throws Exception { // accessor method		
+		String itemId = request.getParameter("itemId");
+		
 		if (itemId != null) {
 			return new SellOnlineForm(jkdk.getOnlineItemById(Integer.parseInt(itemId)));
 		} else { 

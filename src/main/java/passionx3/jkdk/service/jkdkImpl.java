@@ -414,14 +414,14 @@ public class jkdkImpl implements jkdkFacade {
 		battleSaleDao.updateBattleSaleVote2(battleSaleId);
   }
   
+	@Override
 	public Online getOnlineItemById(int itemId) {
 		return onlineDao.getOnlineItemById(itemId);
 	}
 
 	@Override
 	public Funding getFundingItemById(int itemId) {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingDao.getFundingItemById(itemId);
 	}
 
 	@Override
