@@ -21,8 +21,9 @@ public class ViewFundingItemController {
 		this.jkdkStore = jkdkStore;
 	}
 	
-	@RequestMapping("item/viewFundingItem.do")
+	@RequestMapping("/item/viewFundingItem.do")
 	public String handleRequest(@RequestParam("itemId") int itemId, ModelMap model) throws Exception {
+		System.out.println("funding ok");
 		Funding funding = this.jkdkStore.getFundingItemById(itemId);
 		model.put("funding", funding);
 		return "thyme/ViewFundingItem";

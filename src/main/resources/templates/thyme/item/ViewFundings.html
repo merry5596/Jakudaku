@@ -15,54 +15,8 @@
 <body>
 	<div th:replace="thyme/Header :: header"></div>
 
-	<!-- side bar-->
 	<div class="row row-margin">
-		<div
-			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
-			style="width: 250px; height: 500px;">
-			<a th:href="@{/}"
-				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-				<svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg> <span class="fs-4">Sidebar</span>
-			</a>
-			<hr>
-			<ul class="nav nav-pills flex-column mb-auto">
-				<li><a
-					th:href="@{/item/viewCategory.do(categoryId = '0', themeId = '-1', device = '-1', sortBy = '1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg> Diary
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '1', themeId = '-1', device = '-1', sortBy = '1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#table"></use>
-                        </svg> Font
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '2', themeId = '-1', device = '-1', sortBy = '1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg> Wallpaper
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '3', themeId = '-1', device = '-1', sortBy = '1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> Icon
-				</a></li>
-				<hr>
-				<li><a th:href="@{/item/viewFundings.do(themeId = '-1', sortBy = '1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> funding
-				</a></li>
-			</ul>
-		</div>
-		
+		<div th:replace="thyme/Sidebar :: sidebar"></div>
 		<div class="col-7 base">
 			<!-- 여기서부터 content -->
 			<h2  class="text-uppercase d-flex flex-wrap justify-content-center py-3 mb-4"> Funding </h2>
@@ -137,10 +91,11 @@
 				<div class="mt-4 album bg-light">
 					<div class="container">
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-							<div th:each="item: ${fundingList}" class="col">
-								<div style="cursor:pointer;" onclick="location.href='item/viewFundingItem.do(itemId=${item.itemId})'" class="card shadow-sm">
-									<img th:src="@{${item.thumbnail1}}"/>
-
+							<div th:each="item : ${fundingList}" class="col">
+								<div class="card shadow-sm">
+									<a href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
+										<img th:src="@{${item.thumbnail1}}"/>
+									</a>
 									<div class="card-body ">
                                         <span class="itemName" th:text="${item.name}" >
                                             name

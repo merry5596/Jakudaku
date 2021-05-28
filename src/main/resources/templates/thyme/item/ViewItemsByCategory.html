@@ -15,54 +15,8 @@
 <body>
 	<div th:replace="thyme/Header :: header"></div>
 
-	<!-- side bar-->
 	<div class="row row-margin">
-		<div
-			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
-			style="width: 250px; height: 500px;">
-			<a th:href="@{/}"
-				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-				<svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg> <span class="fs-4">Sidebar</span>
-			</a>
-			<hr>
-			<ul class="nav nav-pills flex-column mb-auto">
-				<li><a
-					th:href="@{/item/viewCategory.do(categoryId = '0', themeId = '-1', device = '-1', sortBy='1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg> Diary
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '1', themeId = '-1', device = '-1', sortBy='1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#table"></use>
-                        </svg> Font
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '2', themeId = '-1', device = '-1', sortBy='1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg> Wallpaper
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '3', themeId = '-1', device = '-1', sortBy='1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> Icon
-				</a></li>
-				<hr>
-				<li><a th:href="@{/item/viewFundings.do(themeId = '-1', sortBy='1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> funding
-				</a></li>
-			</ul>
-		</div>
-		
+		<div th:replace="thyme/Sidebar :: sidebar"></div>
 		<div class="col-7 base">
 			<!-- 여기서부터 content -->
 			<h2 th:text="${category.name}" class="text-uppercase d-flex flex-wrap justify-content-center py-3 mb-4"> category</h2>
@@ -148,10 +102,11 @@
 				<div class="mt-4 album bg-light">
 					<div class="container">
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-							<div id="onlineListDiv" th:each="item: ${onlineList}" class="col">
-								<div style="cursor:pointer;" onclick="location.href='/item/viewOnlineItem.do(itemId=${item.itemId})'" class="card shadow-sm">
-									<img th:src="@{${item.thumbnail1}}"/>
-
+							<div id="onlineListDiv" th:each="item : ${onlineList}" class="col">
+								<div class="card shadow-sm">
+									<a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+										<img th:src="@{${item.thumbnail1}}"/>
+									</a>
 									<div class="card-body ">
                                         <span class="itemName" th:text="${item.name}" >
                                             name
@@ -166,22 +121,22 @@
                                         </div>
 
                                        <span th:text="${item.price}" >price</span>원
-								</div>
-								<div class= "mx-1" style="text-align:right" >
-									<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
-									<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
-									<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
-								</div>
-								<div class="mx-2 text-danger" style="text-align:right">
-									<small th:text="${item.likeNum}">12</small>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-									  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-									</svg>
+									</div>
+									<div class= "mx-1" style="text-align:right" >
+										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
+										<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
+										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
+									</div>
+									<div class="mx-2 text-danger" style="text-align:right">
+										<small th:text="${item.likeNum}">12</small>
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+										  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+										</svg>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</div>
 
 				<!-- 상품 등록-->
