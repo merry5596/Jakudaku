@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import passionx3.jkdk.domain.Funding;
+import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Online;
+import passionx3.jkdk.domain.Theme;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
@@ -26,27 +27,32 @@ public class ViewCategoryController {
 			@RequestParam("themeId") int themeId,
 			@RequestParam("device") int device) throws Exception {
 		
+
 		List<Online> onlineList = null;
 		
 		if (themeId == -1 && device == -1) {	// theme 선택 안됨, device 선택 안됨
 			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId);
 		} else if (themeId != -1 && device == -1) {	// theme 선택됨, device 선택 안됨
-			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId);
+			onlineList = jkdkStore.getOnlineItemListByTheme(categoryId, themeId);
 		} else if (themeId == -1 && device != -1) {	// theme 선택 안됨, device 선택됨
-			onlineList = jkdkStore.getOnlineItemListByCategory2(categoryId, device);	// themeId랑 device 타입이 같아서 오버로딩이 안돼..
+			onlineList = jkdkStore.getOnlineItemListByDevice(categoryId, device);	// themeId랑 device 타입이 같아서 오버로딩이 안돼..
 		} else {	// theme 선택됨, device 선택됨
-			onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId, device);
+			onlineList = jkdkStore.getOnlineItemListByThemeAndDevice(categoryId, themeId, device);
 		}
 		
-		String categoryName = jkdkStore.getCategoryNameByCategoryId(categoryId);
+//		String categoryName = jkdkStore.getCategoryNameByCategoryId(categoryId);
+		Category category = jkdkStore.getCategoryByCategoryId(categoryId);
+		
+//		for (Online Online : onlineList) {
+//			Online.setCategoryName(jkdkStore.getCategoryNameByCategoryId(Online.getCategoryId()));
+//		 }
+
+		List<Theme> allThemes = jkdkStore.getAllThemes();
+
 		ModelAndView mav = new ModelAndView();
-		
-		for (Online Online : onlineList) {
-			Online.setCategoryName(jkdkStore.getCategoryNameByCategoryId(Online.getCategoryId()));
-		 }
-		
 		mav.setViewName("thyme/item/ViewItemsByCategory");
-		mav.addObject("categoryName", categoryName);
+		mav.addObject("allThemes", allThemes);
+		mav.addObject("category", category);
 		mav.addObject("themeId", themeId);
 		mav.addObject("device", device);
 		mav.addObject("onlineList", onlineList);

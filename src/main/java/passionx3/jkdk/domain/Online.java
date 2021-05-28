@@ -1,29 +1,28 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Online extends Item implements Serializable {
-	private int categoryId;
+	private Integer categoryId;
 	private String categoryName;
-	private int saleState;
 	private double totalRate;
 	private String pcFile;
 	private String tabletFile;
 	private String phoneFile;
+	private int saleState;
 	
 	public Online() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Online(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale, double totalRate, String pcFile, String tabletFile, String phoneFile) {
+	public Online(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale, double totalRate, String pcFile, String tabletFile, String phoneFile, int saleState) {
 		super(itemId, name, price, likeNum, thumbnail1, isForSale);
 		this.totalRate = totalRate;
 		this.pcFile = pcFile;
 		this.tabletFile = tabletFile;
 		this.phoneFile = phoneFile;
+		this.saleState = saleState;
 	}
 
 	public Online(int saleState, double totalRate, String pcFile, String tabletFile, String phoneFile) {
@@ -35,7 +34,32 @@ public class Online extends Item implements Serializable {
 		this.phoneFile = phoneFile;
 	}
 
+	public Online(int categoryId, String categoryName, double totalRate, String pcFile, String tabletFile,
+			String phoneFile, int saleState) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.totalRate = totalRate;
+		this.pcFile = pcFile;
+		this.tabletFile = tabletFile;
+		this.phoneFile = phoneFile;
+		this.saleState = saleState;
+	}
 
+	public Online(int itemId, String producerId, String producerName, int themeId, String themeName, String name,
+			String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
+			int isForSale, String description, int categoryId, String categoryName, double totalRate, String pcFile, String tabletFile,
+			String phoneFile, int saleState) {
+		super(itemId, producerId, producerName, themeId, themeName, name, uploadDate, price, likeNum, thumbnail1, thumbnail2,
+				thumbnail3, isForSale, description);
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.totalRate = totalRate;
+		this.pcFile = pcFile;
+		this.tabletFile = tabletFile;
+		this.phoneFile = phoneFile;
+		this.saleState = saleState;
+	}
 
 	public int getSaleState() {
 		return saleState;
@@ -75,15 +99,16 @@ public class Online extends Item implements Serializable {
 		else
 			return (int) (getPrice() * 0.1);
 	}
+	
 	public int getSalePrice() {
 		return getPrice() - getDiscount();
 	}
 
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -94,4 +119,5 @@ public class Online extends Item implements Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
 }

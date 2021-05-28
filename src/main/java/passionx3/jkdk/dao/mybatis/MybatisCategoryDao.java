@@ -6,28 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.CategoryDao;
-import passionx3.jkdk.dao.mybatis.mapper.AccountMapper;
 import passionx3.jkdk.dao.mybatis.mapper.CategoryMapper;
-import passionx3.jkdk.domain.Account;
-import passionx3.jkdk.domain.Theme;
+
+import passionx3.jkdk.domain.Category;
 
 @Repository
-public class MybatisCategoryDao implements CategoryDao{
+public class MybatisCategoryDao implements CategoryDao {
 	@Autowired
 	private CategoryMapper categoryMapper;
 
 	@Override
-	public List<Theme> getAllCategories() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Category> getAllCategories() throws DataAccessException {
+		return categoryMapper.getAllCategories();
 	}
 
 	@Override
-	public String getCategoryNameByCategoryId(int CategoryId) {
-		return categoryMapper.getCategoryNameByCategoryId(CategoryId);
+	public String getCategoryNameByCategoryId(int categoryId) throws DataAccessException {
+		return categoryMapper.getCategoryNameByCategoryId(categoryId);
 	}
  
+	@Override
+	public Category getCategoryByCategoryId(int CategoryId) {
+		return categoryMapper.getCategoryByCategoryId(CategoryId);
+	}
 	
 }

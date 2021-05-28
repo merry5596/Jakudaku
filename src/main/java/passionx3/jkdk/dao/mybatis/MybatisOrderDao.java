@@ -78,7 +78,7 @@ public class MybatisOrderDao implements OrderDao {
 		List<Order> onlineList = orderMapper.getOrdersByUserId(userId);
 		List<FundOrder> fundingList = fundOrderMapper.getFundOrdersByUserId(userId);
 		
-		Map<String, List<Order>> lineItemMap = new LinkedHashMap();
+		Map<String, List<Order>> lineItemMap = new LinkedHashMap<>();
 		
 		int i = 0, j = 0;
 		

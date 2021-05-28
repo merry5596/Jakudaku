@@ -19,7 +19,9 @@ public interface OnlineDao {
 	List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException; // 사용자의 판매 창작물 list 가져오기
 	Online getOnlineItemById(int itemId) throws DataAccessException;   	// itemId로 Online 반환
 	int registerOnlineItem (Online OnlineItem) throws DataAccessException; // 온라인 상품 등록, 메소드에서 할일: online Item insert & approval = 0
-
+	int updateOnlineItemSaleState(int itemId) throws DataAccessException; //세일 상품 변경 시 이전 상품의 saleState를 0으로 변경
+	int updateOnlineItem(Online OnlineItem) throws DataAccessException; //상품 수정 & approval을 0으로 변경
+	
 	//워터마크 // 비즈니스 로직
 	void setWatermark(String fileAddr) throws DataAccessException;  // 이미지 주소를 받아와야 될지 아니면 item을 받아와서 item.thumnail로 써야될지 모르겠다..
 
