@@ -108,8 +108,7 @@ public class MybatisOnlineDao implements OnlineDao {
 
 	@Override
 	public List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineMapper.getOnlineItemListByProducerId(userId);
 	}
 
 	@Override

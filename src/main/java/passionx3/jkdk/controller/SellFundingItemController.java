@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.SellFundingItemFormValidator;
@@ -40,8 +41,7 @@ public class SellFundingItemController {
 	}
 	
 	@ModelAttribute("sellFundingForm")
-	public SellFundingForm formBackingObject(HttpServletRequest request) throws Exception {
-		String itemId = request.getParameter("itemId");
+	public SellFundingForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception {
 		
 		if (itemId != null) {
 			return new SellFundingForm(jkdk.getFundingItemById(Integer.parseInt(itemId)));

@@ -52,8 +52,7 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public List<Funding> getFundingItemListByProducerId(String userId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingMapper.getFundingItemListByProducerId(userId);
 	}
 
 	@Override
