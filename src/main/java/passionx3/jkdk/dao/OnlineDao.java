@@ -11,10 +11,10 @@ public interface OnlineDao {
 	// getItem
 	List<Online> getBestOnlineItemList() throws DataAccessException;  	// best 온라인 상품 list 가져오기(for home)
 	List<Online> getNewOnlineItemList() throws DataAccessException; 	// 신상품 온라인 list 가져오기
-	List<Online> getOnlineItemListByCategory(int categoryId) throws DataAccessException; 	
-	List<Online> getOnlineItemListByTheme(int categoryId, int themeId) throws DataAccessException;    
-	List<Online> getOnlineItemListByDevice(int categoryId, int device) throws DataAccessException;
-	List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device) throws DataAccessException; 	// 카테고리별 온라인 상품 list 출력 (+ 조건 설정 시 테마, 기기에 따라)
+	
+	List<Online> getOnlineItemListByCategory(int categoryId, String keyword, int sortBy) throws DataAccessException; 	
+	List<Online> getOnlineItemListByTheme(int categoryId, int themeId, String keyword, int sortBy) throws DataAccessException; 
+
 	List<Online> getOnlineItemsByKeyword(String keyword) throws DataAccessException; 	// 전체검색에서 키워드로 온라인 상품 list 가져와서 온라인 검색 결과에 출력하기 위함
 	List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException; // 사용자의 판매 창작물 list 가져오기
 	Online getOnlineItemById(int itemId) throws DataAccessException;   	// itemId로 Online 반환
