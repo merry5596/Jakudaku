@@ -41,7 +41,8 @@ public class SellFundingItemController {
 	}
 	
 	@ModelAttribute("sellFundingForm")
-	public SellFundingForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception {
+	public SellFundingForm formBackingObject(HttpServletRequest request) throws Exception {
+		String itemId = request.getParameter("itemId");
 		
 		if (itemId != null) {
 			return new SellFundingForm(jkdk.getFundingItemById(Integer.parseInt(itemId)));

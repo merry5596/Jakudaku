@@ -25,6 +25,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import passionx3.jkdk.domain.Funding;
+import passionx3.jkdk.domain.Online;
 
 @Mapper
 public interface FundingMapper {
@@ -36,7 +37,6 @@ public interface FundingMapper {
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 	List<Funding> getFundingItemsByKeyword(@Param("keyword") String keyword);
-
 	
 	@Select("SELECT i.itemId AS itemId, name, userID AS producerId, approval, description, uploaddate, price, targetquantity " + 
 			"FROM item i, fundingitem f WHERE approval = 0 AND i.itemid = f.itemid")
@@ -53,6 +53,14 @@ public interface FundingMapper {
 			"WHERE f.itemid = i.itemid  AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.uploaddate DESC ) WHERE ROWNUM < 5")
 	List<Funding> getNewFundingItemListforHome();
 
+	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE, "
+			+ "I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3, "
+			+ "I.ISFORSALE AS ISFORSALE, I.DESCRIPTION AS DESCRIPTION, I.APPROVAL AS APPROVAL, "
+			+ "F.FINISHDATE AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY "
+			+ "FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A "
+			+ "WHERE i.itemId = #{itemId} AND I.ITEMID = F.ITEMID AND T.THEMEID = I.THEMEID AND A.USERID = I.USERID")
+	Funding getOnlineItemById(@Param("itemId") int itemId);
+	
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, T.THEMENAME, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE,"
 			+ " I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3,"
 			+ " I.ISFORSALE AS ISFORSALE, I.DESCRIPTION AS DESCRIPTION, I.APPROVAL AS APPROVAL, "
