@@ -25,13 +25,23 @@ public class MybatisFundingDao implements FundingDao {
 	}
 
 	@Override
-	public List<Funding> getFundingItemList() throws DataAccessException {
-		return fundingMapper.getFundingItemList();
+	public List<Funding> getFundingItemList(String keyword, int sortBy) throws DataAccessException {
+		if (sortBy == 1)
+			return fundingMapper.getFundingItemListOrderByUploadDate(keyword);
+		else if (sortBy == 2)
+			return fundingMapper.getFundingItemListOrderByLikeNum(keyword);
+		else // (sortBy == 6)
+			return fundingMapper.getFundingItemListOrderByFinishDate(keyword);
 	}
 
 	@Override
-	public List<Funding> getFundingItemListByTheme(int themeId) throws DataAccessException {
-		return fundingMapper.getFundingItemListByTheme(themeId);
+	public List<Funding> getFundingItemListByTheme(int themeId, String keyword, int sortBy) throws DataAccessException {
+		if (sortBy == 1)
+			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword);
+		else if (sortBy == 2)
+			return fundingMapper.getFundingItemListByThemeOrderByLikeNum(themeId, keyword);
+		else // (sortBy == 6)
+			return fundingMapper.getFundingItemListByThemeOrderByFinishDate(themeId, keyword);
 	}
 
 	@Override

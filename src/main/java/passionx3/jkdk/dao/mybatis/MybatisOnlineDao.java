@@ -27,78 +27,35 @@ public class MybatisOnlineDao implements OnlineDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId) throws DataAccessException {
-		return onlineMapper.getOnlineItemListByCategory(categoryId);
-	}
-
-	@Override
-	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId) throws DataAccessException {
-		return onlineMapper.getOnlineItemListByTheme(categoryId, themeId);
-	}
-
-	@Override
-	public List<Online> getOnlineItemListByDevice(int categoryId, int device) throws DataAccessException {
 	
-		List<Online> onlineItemList = onlineMapper.getOnlineItemListByCategory(categoryId);
-
-		List<Online> listFilteredByDevice = new ArrayList<>();
+	
+	@Override
+	public List<Online> getOnlineItemListByCategory(int categoryId, String keyword, int sortBy) throws DataAccessException {
 		
-		switch(device) {
-			case 1:
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getPcFile() != null) {
-						listFilteredByDevice.add(onlineitem);
-					}
-				}
-				break;
-			case 2:
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getTabletFile() != null)
-						listFilteredByDevice.add(onlineitem);
-				}
-				break;
-			case 3: 
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getPhoneFile() != null)
-						listFilteredByDevice.add(onlineitem);
-				}
-				break;
-		}
-		
-		return listFilteredByDevice;
+		if (sortBy == 1)
+			return onlineMapper.getOnlineItemListByCategoryOrderByUploadDate(categoryId, keyword);
+		else if (sortBy == 2)
+			return onlineMapper.getOnlineItemListByCategoryOrderByLikeNum(categoryId, keyword);
+		else if (sortBy == 3)
+			return onlineMapper.getOnlineItemListByCategoryOrderByTotalRate(categoryId, keyword);
+		else if (sortBy == 4)
+			return onlineMapper.getOnlineItemListByCategoryOrderByPriceLow(categoryId, keyword);
+		else // (sortBy == 5)
+			return onlineMapper.getOnlineItemListByCategoryOrderByPriceHigh(categoryId, keyword);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device)
-			throws DataAccessException {
-		List<Online> onlineItemList = onlineMapper.getOnlineItemListByTheme(categoryId, themeId);
-
-		List<Online> listFilteredByDevice = new ArrayList<>();
-		
-		switch(device) {
-			case 1:
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getPcFile() != null)
-						listFilteredByDevice.add(onlineitem);
-				}
-				break;
-			case 2:
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getTabletFile() != null)
-						listFilteredByDevice.add(onlineitem);
-				}
-				break;
-			case 3: 
-				for (Online onlineitem : onlineItemList) {
-					if (onlineitem.getPhoneFile() != null)
-						listFilteredByDevice.add(onlineitem);
-				}
-				break;
-		}
-		
-		return listFilteredByDevice;
+	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId, String keyword, int sortBy) throws DataAccessException {
+		if (sortBy == 1)
+			return onlineMapper.getOnlineItemListByThemeOrderByUploadDate(categoryId, themeId, keyword);
+		else if (sortBy == 2)
+			return onlineMapper.getOnlineItemListByThemeOrderByLikeNum(categoryId, themeId, keyword);
+		else if (sortBy == 3)
+			return onlineMapper.getOnlineItemListByThemeOrderByTotalRate(categoryId, themeId, keyword);
+		else if (sortBy == 4)
+			return onlineMapper.getOnlineItemListByThemeOrderByPriceLow(categoryId, themeId, keyword);
+		else // (sortBy == 5)
+			return onlineMapper.getOnlineItemListByThemeOrderByPriceHigh(categoryId, themeId, keyword);
 	}
 
 	@Override
