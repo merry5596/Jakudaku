@@ -21,8 +21,9 @@ public class ViewOnlineItemController {
 		this.jkdkStore = jkdkStore;
 	}
 	
-	@RequestMapping("item/viewOnlineItem.do")
+	@RequestMapping("/item/viewOnlineItem.do")
 	public String handleRequest(@RequestParam("itemId") int itemId, ModelMap model) throws Exception {
+		System.out.println("online ok");
 		Online online = this.jkdkStore.getOnlineItemById(itemId);
 		model.put("online", online);
 		return "/viewOnlineItem";
