@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.SellOnlineItemFormValidator;
@@ -41,9 +42,7 @@ public class SellOnlineItemController {
 	}
 	
 	@ModelAttribute("sellOnlineForm")
-	public SellOnlineForm formBackingObject(HttpServletRequest request) throws Exception { // accessor method
-		String itemId = request.getParameter("itemId");
-		
+	public SellOnlineForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception { // accessor method		
 		if (itemId != null) {
 			return new SellOnlineForm(jkdk.getOnlineItemById(Integer.parseInt(itemId)));
 		} else { 

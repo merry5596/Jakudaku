@@ -289,8 +289,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Funding> getFundingItemListByProducerId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingDao.getFundingItemListByProducerId(userId);
 	}
 
 	@Override
