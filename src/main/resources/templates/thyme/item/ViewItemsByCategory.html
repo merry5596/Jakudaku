@@ -108,9 +108,11 @@
 										<img th:src="@{${item.thumbnail1}}"/>
 									</a>
 									<div class="card-body ">
-                                        <span class="itemName" th:text="${item.name}" >
-                                            name
-                                        </span>
+										<a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+	                                        <span class="itemName" th:text="${item.name}" >
+	                                            name
+	                                        </span>
+                                        </a>
                                         <small class="text-muted" th:text="${item.categoryName}">
                                             categoryName
                                         </small>
