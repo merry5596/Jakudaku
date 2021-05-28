@@ -19,7 +19,7 @@ import passionx3.jkdk.domain.Theme;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@SessionAttributes({"userSession", "onlineList"})
+@SessionAttributes("userSession")
 public class ViewCategoryController {
 	
 	@Autowired

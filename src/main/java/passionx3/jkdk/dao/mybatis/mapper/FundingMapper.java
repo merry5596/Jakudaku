@@ -18,9 +18,11 @@ package passionx3.jkdk.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import passionx3.jkdk.domain.Funding;
 
@@ -40,11 +42,11 @@ public interface FundingMapper {
 			"FROM item i, fundingitem f WHERE approval = 0 AND i.itemid = f.itemid")
 	List<Funding> getNotApprovedFundingItems();
   
-	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
-			+ "ISFORSALE, DESCRIPTION, APPROVAL, FINISHDATE, PURCHASEQUANTITY, TARGETQUANTITY, ISSALEENDED"
-			+ " FROM ITEM, FUNDINGITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = FUNDINGITEM.ITEMID ORDER BY UPLOADDATE")
-	List<Funding> getFundingItemListByProducerId(String userId);
-
+	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, I.NAME, I.UPLOADDATE, I.PRICE, I.LIKENUM, "
+			+ "I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, F.FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
+			+ " FROM ITEM I, FUNDINGITEM F"
+			+ " WHERE I.USERID = #{userId} AND I.ITEMID = F.ITEMID ORDER BY UPLOADDATE")
+	List<Funding> getFundingItemListByProducerId(@Param("userId") String userId);
 
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale," + 
 			"description, themeid, userid, finishdate, targetquantity FROM fundingitem f, item i " + 
@@ -57,8 +59,18 @@ public interface FundingMapper {
 			+ " F.FINISHDATE AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, LINEITEM L THEME T, ACCOUNT A"
 			+ " WHERE #{lineItemId} = L.LINEITEMID AND L.ITEMID = I.ITEMID AND I.ITEMID = F.ITEMID AND T.THEMEID = I.THEMEID AND A.USERID = I.USERID")
-	Funding getFundingItemByLineItemId(int lineItemId);
+	Funding getFundingItemByLineItemId(@Param("lineItemId") int lineItemId);
 
+	@Insert("INSERT INTO fundingitem (itemId, finishDate, purchaseQuantity, targetQuantity) "
+			+ "values (#{funding.itemId}, TO_DATE(#{funding.finishDate}, 'YYYY/MM/DD HH24:MI'), #{funding.purchaseQuantity}, #{funding.targetQuantity})")
+	int registerFundingItem(@Param("funding") Funding funding);
+	
+	@Update("UPDATE onlineitem "
+			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
+			+ "WHERE ITEMID = #{onlineItem.itemId}")
+	int updateFundingItem(@Param("funding") Funding funding);
+
+  // 여기부터 조건 검색
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, I.UPLOADDATE, I.PRICE, I.LIKENUM,"
 			+ " I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, F.FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"
@@ -70,13 +82,13 @@ public interface FundingMapper {
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"
 			+ " WHERE I.ITEMID = F.ITEMID AND I.THEMEID = T.THEMEID AND I.USERID = A.USERID AND i.name LIKE '%' ||  #{keyword} || '%' ORDER BY LIKENUM DESC")
 	List<Funding> getFundingItemListOrderByLikeNum(String keyword);
-
+   
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, I.UPLOADDATE, I.PRICE, I.LIKENUM,"
 			+ " I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, F.FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"
 			+ " WHERE I.ITEMID = F.ITEMID AND I.THEMEID = T.THEMEID AND I.USERID = A.USERID AND i.name LIKE '%' ||  #{keyword} || '%' ORDER BY FINISHDATE")
 	List<Funding> getFundingItemListOrderByFinishDate(String keyword);
-
+  
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, I.UPLOADDATE, I.PRICE, I.LIKENUM,"
 			+ " I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, F.FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"

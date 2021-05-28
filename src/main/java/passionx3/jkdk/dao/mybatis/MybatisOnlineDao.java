@@ -1,7 +1,6 @@
 package passionx3.jkdk.dao.mybatis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +65,7 @@ public class MybatisOnlineDao implements OnlineDao {
 
 	@Override
 	public List<Online> getOnlineItemListByProducerId(String userId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return onlineMapper.getOnlineItemListByProducerId(userId);
 	}
 
 	@Override
@@ -76,9 +74,8 @@ public class MybatisOnlineDao implements OnlineDao {
 	}
 
 	@Override
-	public int registerOnlineItem(Online OnlineItem) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int registerOnlineItem(Online onlineItem) throws DataAccessException {
+		return onlineMapper.registerOnlineItem(onlineItem);
 	}
 
 	@Override
@@ -116,6 +113,16 @@ public class MybatisOnlineDao implements OnlineDao {
 	@Override
 	public List<Online> getNewOnlineItemListforHome() throws DataAccessException {
 		return onlineMapper.getNewOnlineItemListforHome();
+	}
+
+	@Override
+	public int updateOnlineItemSaleState(int itemId) throws DataAccessException {
+		return onlineMapper.updateOnlineItemSaleState(itemId);
+	}
+
+	@Override
+	public int updateOnlineItem(Online onlineItem) throws DataAccessException {
+		return onlineMapper.updateOnlineItem(onlineItem);
 	}
 
 

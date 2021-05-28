@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Order;
-import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.service.jkdkFacade;
 import passionx3.jkdk.domain.Account;
@@ -53,7 +51,10 @@ public class MyPageController {
 	
 	@RequestMapping("/user/myPage/sell.do")
 	public String viewSellItem(ModelMap model, HttpSession session) throws Exception {
-		String userId = (String) session.getAttribute("userId");
+		Account account = (Account)session.getAttribute("userSession");
+		System.out.println("이건" + account.getUserId());
+		
+		String userId = account.getUserId();
 		
 		List<Online> onlineList = jkdk.getOnlineItemListByProducerId(userId);
 		List<Funding> fundingList = jkdk.getFundingItemListByProducerId(userId);

@@ -24,16 +24,18 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.dao.DataAccessException;
 
 import passionx3.jkdk.domain.Online;
 
 @Mapper
 public interface OnlineMapper {
 	@Select("SELECT i.itemId AS itemId,  i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
-			+ "i.isForSale AS isForSale, o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile "
+			+ "o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile, o.saleState AS saleState "
 			+ "FROM item i, onlineitem o "
 			+ "WHERE i.itemId = o.itemId "
-			+ "AND i.name LIKE '%#{keyword}%' "
+			+ "AND i.name LIKE '%' + #{keyword} + '%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
@@ -42,23 +44,32 @@ public interface OnlineMapper {
 			"FROM item i, onlineitem o WHERE approval = 0 AND i.itemId = o.itemId")
 	List<Online> getNotApprovedOnlineItems();
 
-	@Insert("UPDATE ITEM SET APPROVAL = -1 WHERE ITEMID = #{itemId}")
+	@Update("UPDATE ITEM SET APPROVAL = -1 WHERE ITEMID = #{itemId}")
 	int refuseItem(@Param("itemId") int itemId);
 
-	@Insert("UPDATE ITEM SET APPROVAL = 1 WHERE ITEMID = #{itemId}")
+	@Update("UPDATE ITEM SET APPROVAL = 1 WHERE ITEMID = #{itemId}")
 	int approveItem(@Param("itemId") int itemId);
 	
-	@Select("SELECT ITEMID, USERID, NAME, UPLOADDATE, PRICE, LIKENUM, THUMNAIL1, THUMNAIL2, THUMNAIL3, "
-			+ "ISFORSALE, DESCRIPTION, APPROVAL, CATEGORYID, THEMEID, PCFILE, TABLETFILE, PHONEFILE"
-			+ " FROM ITEM, ONLINEITEM WHERE ITEM.USERID = #{userId} AND ITEM.ITEMID = ONLINEITEM.ITEMID ORDER BY UPLOADDATE")
-	List<Online> getOnlineItemListByProducerId(String userId);
+	
+	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, I.NAME, I.UPLOADDATE, I.PRICE, I.LIKENUM, "
+			+ "I.THUMBNAIL1, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, O.CATEGORYID, O.PCFILE, "
+			+ "O.TABLETFILE, O.PHONEFILE, O.SALESTATE "
+			+ "FROM ITEM I, ONLINEITEM O "
+			+ "WHERE I.USERID = #{userId} AND I.ITEMID = O.ITEMID ORDER BY UPLOADDATE")
+	List<Online> getOnlineItemListByProducerId(@Param("userId") String userId);
 
 	@Select("SELECT i.itemID AS itemID FROM ITEM i, ONLINEITEM o WHERE categoryID = #{categoryId}  AND i.itemId = o.itemId AND ROWNUM = 1 order by dbms_random.value")
 	String getOnlineItemIdByCategoryforSale(@Param("categoryId") int categoryId);
 	
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, thumbnail2, thumbnail3, isforsale, categoryid, description, themeid, userid, approval, pcfile, tabletfile, phonefile\r\n" + 
-			"FROM item i, onlineitem o WHERE i.itemid = o.itemid AND i.itemId = #{itemId}")
-	Online getOnlineItemById(@Param("itemId") int itemId);
+	@Select("SELECT i.itemId AS itemId, a.userId AS producerId, a.alias AS producerName, t.themeId AS themeId, t.name AS themeName, "
+				+ "i.name AS name, TO_DATE(i.uploadDate, 'YYYY-MM-DD') AS uploadDate, i.price AS price, i.likeNum AS likeNum, "
+				+ "i.thumbnail1 AS thumbnail1, i.thumbnail2 AS thumbnail2, i.thumbnail3 AS thumbnail3, i.isforsale AS isForSale, "
+				+ "i.description AS description, c.categoryid AS categoryId, c.name AS categoryName, o.totalRate AS totalRate, "
+				+ "o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " 
+			+ "FROM item i, onlineitem o, account a, theme t, category c "
+			+ "WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId "
+				+ "AND i.itemId = #{itemId}")
+	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 
 			"FROM ONLINEITEM o, item i WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
@@ -74,7 +85,20 @@ public interface OnlineMapper {
 			+ " FROM ITEM I, ONLINEITEM O LINEITEM L, ACCOUNT A, THEME T, CATEGORY C"
 			+ " WHERE LINEITEM.LINEITEMID = #{lineItemId} AND LINEITEM.ITEMID = I.ITEMID"
 			+ " AND I.ITEMID = O.ITEMID AND A.USERID = ITEM.USERID AND T.THEMEID = I.THEMEID AND C.CATEGORYID = O.CATEGORYID")
-	Online getOnlineItemByLineItemId(int lineItemId);
+	Online getOnlineItemByLineItemId(@Param("lineItemId") int lineItemId);
+
+	@Insert("INSERT INTO onlineitem (itemid, totalrate, pcfile, tabletfile, phonefile, categoryid, salestate) "
+			+ "values (#{onlineItem.itemId}, 0, #{onlineItem.pcFile}, #{onlineItem.tabletFile}, #{onlineItem.phoneFile}, "
+				+ "#{onlineItem.categoryId}, 0")
+	int registerOnlineItem(@Param("onlineItem") Online onlineItem);
+	
+	@Update("UPDATE onlineitem "
+			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
+			+ "WHERE ITEMID = #{onlineItem.itemId}")
+	int updateOnlineItem(@Param("onlineItem") Online onlineItem);
+	
+	@Update("UPDATE onlineitem SET salestate = 0 WHERE itemid = #{itemId}")
+	int updateOnlineItemSaleState(@Param("itemId") int itemId) throws DataAccessException;
 
 	// 여기부터 조건 검색
 	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
@@ -84,7 +108,7 @@ public interface OnlineMapper {
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.uploaddate DESC")
 	List<Online> getOnlineItemListByCategoryOrderByUploadDate(int categoryId, String keyword);
-
+  
 	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
 			+ " FROM ONLINEITEM o, item i"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"

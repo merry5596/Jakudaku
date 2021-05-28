@@ -23,10 +23,9 @@ public class SellFundingItemFormValidator implements Validator {
 		Funding funding = sellFundingForm.getFunding();
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.themeId", "THEME_REQUIRED", "테마를 선택하세요.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.categoryId", "CATEGORY_REQUIRED", "카테고리를 선택하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.name", "NAME_REQUIRED", "상품명을 입력하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.price", "PRICE_REQUIRED", "판매 가격을 입력하세요.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.date", "FINISHDATE_REQUIRED", "펀딩 종료 날짜/시간을 입력하세요.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.finishDate", "FINISHDATE_REQUIRED", "펀딩 종료 날짜/시간을 입력하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.targetQuantity", "TARGETQUANTITY_REQUIRED", "목표 수량을 입력하세요.");
 	}
 }

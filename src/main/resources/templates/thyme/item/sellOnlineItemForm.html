@@ -11,16 +11,20 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.css" integrity="sha512-binQUn0abXktVdo5lUPzJyj9ZRouAxqFlchlD22+y2IAivfojjNLPuC6HCZiHT5bx+cM7ZzJstL+jHhwOUtcyg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<form action="#" th:action="@{/item/sellOnlineItem.do}" th:object="${sellOnlineForm}" method="post" class="ui form">
+	<form action="#" th:action="@{/item/sellOnlineItem.do}" th:object="${sellOnlineForm.online}" method="post" class="ui form">
 		<span>미리보기 이미지 </span>
 		<span>(0/3)</span>
 		<br>
-		<input type="file" /> <input type="file" /> <input type="file" />
+		<input type="file" th:field="*{thumbnail1}"/> <input type="file" th:field="*{thumbnail2}" /> <input type="file" th:field="*{thumbnail3}"/>
 		<p>
-			<span th:text="#{precautions.image}"></span><br>
-			<span th:text="#{precautions.image.1}"></span><br>
-			<span th:text="#{precautions.image.2}"></span><br>
-			<span th:text="#{precautions.image.3}"></span><br>
+<!-- 			<span th:text="#{precautions.image}"></span><br> -->
+<!-- 			<span th:text="#{precautions.image.1}"></span><br> -->
+<!-- 			<span th:text="#{precautions.image.2}"></span><br> -->
+<!-- 			<span th:text="#{precautions.image.3}"></span><br> -->
+			<span>상품 이미지는 640x640에 최적화되어있습니다.</span><br>
+			<span>~~~</span><br>
+			<span>~~~</span><br>
+			<span>~~~</span><br>
 		</p>
 		
 		<p>
@@ -31,94 +35,74 @@
 	    <p>
 	    
 	    <p>
-		    <label for="price">판매가격 </label>
+		    <label for="price"><span>판매가격</span></label>
 		    <input type="text" id="price" th:field="*{price}" /> 
 		    <span>원 </span>
 		    <span th:each="err : ${#fields.errors('price')}" th:text="${err}"></span>
-	    </p>
-	    
-	    <p>
-		    <span>테마</span>
-		    
-		    <select class="ui search dropdown" id="select"
-		    		th:field="*{themeId}" th:each="theme : ${themeList}" > <!-- Controller에서 Theme Dto List 가져오는 service 필요 -->
-<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
-				<option value="">테마를 선택하세요.</option>
-				
-				<option th:value="${theme.themeId}" 
-						th:text="'#' + ${theme.name}"
-						value="#">theme name</option>
-				
-				<!-- <option value="cute">#귀여운</option>
-				<option value="moody">#무드있는</option>
-				<option value="simple">#심플한</option>
-				<option value="emotional">#감성적인</option>
-				<option value="fancy">#화려한</option> -->
-			</select>
-	    </p>
-	    
-	    <p>
-		    <span>카테고리</span>
-		    
-		    <select class="ui search dropdown" id="select"
-		    		th:field="*{categoryId}" th:each="category : ${categoryList}" > <!-- Controller에서 Theme Dto List 가져오는 service 필요 -->
-<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
-				<option value="">카테고리를 선택하세요.</option>
-				
-				<option th:value="${category.categoryId}" 
-						th:text="'#' + ${category.name}"
-						value="#">cetegory name</option>
-				
-				<!-- <option value="cute">#귀여운</option>
-				<option value="moody">#무드있는</option>
-				<option value="simple">#심플한</option>
-				<option value="emotional">#감성적인</option>
-				<option value="fancy">#화려한</option> -->
-			</select>
-	    </p>
 	    
 	    <p>
 	    	<span>설명</span>
-<!-- 	    	<textarea id="description" name="description" cols="30" rows="10"  -->
-<!-- 	    			th:value="*{description}"  -->
-<!-- 	    			th:placeholder="#{item.description.message}"  -->
-<!-- 	    			></textarea> -->
-	    			
 	    	<textarea id="description" name="description" cols="30" rows="10" 
+	    			th:field="*{description}"
 	    			th:value="*{description}" 
 	    			placeholder="상품 설명을 입력하세요." ></textarea>
 			<div id="textarea_cnt">(0 / 500)</div>
-	    </p>
 	    
 	    <p>
+		    <span>테마</span>
+		    <select class="ui search dropdown" id="select1" th:field="*{themeId}"> 
+<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
+				<option value="">테마를 선택하세요.</option>
+				<option th:each="theme : ${themeList}"
+						th:value="${theme.themeId}" 
+						th:text="'#' + ${theme.name}"
+						value="#">theme name</option>
+			</select>
+	    </p>
+	   
+	    <p>
+		    <span>카테고리</span>
+		    <select class="ui search dropdown" id="select2" th:field="*{categoryId}"> 
+				<option value="" th:text="#{select.theme.message}">message</option>
+				<option value="">카테고리를 선택하세요.</option>
+				<option th:each="category : ${categoryList}" 
+						th:value="${category.categoryId}" 
+						th:text="${category.name}"
+						value="#">category name</option>
+			</select>
+	    </p>
+	    
+
 	    	<span>기기 종류</span><br>
-	    	pc <input type="file" /> phone <input type="file" /> tablet <input type="file" /> <!-- 추후구현 -->
+	    	pc <input type="file" th:field="*{pcFile}"/> phone <input type="file" th:field="*{phoneFile}"/> tablet <input type="file" th:field="*{tabletFile}"/> <!-- 추후구현 -->
 	    </p>
 	    
 	    <p>
 	    	<div class="inline fields">
+	    		
 			    <span>판매 여부</span> <!-- 반복문으로 할 수 있지 않을까? -->
 			    <div class="field">
 			      <div class="ui radio checkbox">
-			        <input type="radio" th:field="*{isForSale}" th:value="1" disabled="disabled" checked="checked"/>
+			        <input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="1" disabled="disabled" checked="checked"/>
+	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="1" checked="checked"/>
 	    			<label for="${#ids.prev('isForSale')}">판매 중</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui radio checkbox">
-			        <input type="radio" th:field="*{isForSale}" th:value="0" disabled="disabled" />
+			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" disabled="disabled" />
+	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" />
 	    			<label for="${#ids.prev('isForSale')}">판매 중단</label>
 			      </div>
 			    </div>
 			  </div>
-	    </p>
 	    
 	   
 	    <br>
 	    <input class="ui blue button" type="submit" value="등록하기">
     </form>
 	
-	<div th:include="footer::linkToMain"></div>
+<!-- 	<div th:include="footer::linkToMain"></div> -->
 	
 	
 	
@@ -129,7 +113,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js" integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.js" integrity="sha512-xHPfIQ31nhgadqKFR79QIE1P+8QkEJRKYhbO+tNThUtBU1sOC55A29sLgjFxyekM7DUVJqapmIOx0J+G2VH8RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-	$('#select')
+	$('#select1')
+	  .dropdown({ fullTextSearch: true })
+	;
+	
+	$('#select2')
 	  .dropdown()
 	;
 	

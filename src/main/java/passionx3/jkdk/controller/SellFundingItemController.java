@@ -12,17 +12,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.SellFundingItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Category;
+import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
 @SessionAttributes("userSession")
 public class SellFundingItemController {
-	@Value("sellFundingItemForm")
+	@Value("thyme/item/sellFundingItemForm")
 	private String formViewName;
 		
 	private jkdkFacade jkdk;
@@ -38,9 +41,7 @@ public class SellFundingItemController {
 	}
 	
 	@ModelAttribute("sellFundingForm")
-	public SellFundingForm formBackingObject(HttpServletRequest request) throws Exception {
-//		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
-		String itemId = request.getParameter("itemId");
+	public SellFundingForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception {
 		
 		if (itemId != null) {
 			return new SellFundingForm(jkdk.getFundingItemById(Integer.parseInt(itemId)));
@@ -74,15 +75,20 @@ public class SellFundingItemController {
 		if (result.hasErrors()) return formViewName;
 		try {
 			if (sellFundingForm.isNewFunding()) {
+				Funding funding = sellFundingForm.getFunding();
+				Account account = (Account)session.getAttribute("userSession");
+				funding.setProducerId(account.getUserId());
 				jkdk.registerFundingItem(sellFundingForm.getFunding());
 			}
 			else {
-				jkdk.updateFundingItem(sellFundingForm.getFunding()); //request 흐름도에 상품 수정페이지 없음
+				jkdk.updateFundingItem(sellFundingForm.getFunding()); 
 			}
 		}
 		catch (Exception ex) { //추후에 수정
-			result.rejectValue("account.username", "FUNDINGITEM_SELL_FAIL",
-					"처리하지 못했습니다. 다시 시도해주세요.");
+			System.out.println(ex.getMessage());
+
+//			result.rejectValue("account.username", "FUNDINGITEM_SELL_FAIL",
+//					"처리하지 못했습니다. 다시 시도해주세요.");
 			return formViewName; 
 		}
 		

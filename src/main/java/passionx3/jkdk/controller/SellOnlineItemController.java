@@ -13,17 +13,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.SellOnlineItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Category;
+import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
 @SessionAttributes("userSession")
 public class SellOnlineItemController {
-	@Value("sellOnlineItemForm")
+	@Value("thyme/item/sellOnlineItemForm")
 	private String formViewName;
 	
 	private jkdkFacade jkdk;
@@ -39,9 +42,7 @@ public class SellOnlineItemController {
 	}
 	
 	@ModelAttribute("sellOnlineForm")
-	public SellOnlineForm formBackingObject(HttpServletRequest request) throws Exception { // accessor method
-		String itemId = request.getParameter("itemId");
-		
+	public SellOnlineForm formBackingObject(HttpServletRequest request, @RequestParam("itemId") String itemId) throws Exception { // accessor method		
 		if (itemId != null) {
 			return new SellOnlineForm(jkdk.getOnlineItemById(Integer.parseInt(itemId)));
 		} else { 
@@ -74,18 +75,22 @@ public class SellOnlineItemController {
 		if (result.hasErrors()) return formViewName;
 		try {
 			if (sellOnlineForm.isNewOnline()) {
-				jkdk.registerOnlineItem(sellOnlineForm.getOnline());
+				Online online = sellOnlineForm.getOnline();
+				Account account = (Account)session.getAttribute("userSession");
+				online.setProducerId(account.getUserId());
+				jkdk.registerOnlineItem(online);
 			}
 			else {
 				jkdk.updateOnlineItem(sellOnlineForm.getOnline()); 
 			}
 		}
 		catch (Exception ex) { //추후에 수정
-			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
-					"처리하지 못했습니다. 다시 시도해주세요.");
+			System.out.println(ex.getMessage());
+//			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
+//					"처리하지 못했습니다. 다시 시도해주세요.");
 			return formViewName; 
 		}
-		
+				
 		return "redirect:/user/myPage.do"; 
 	}
 }
