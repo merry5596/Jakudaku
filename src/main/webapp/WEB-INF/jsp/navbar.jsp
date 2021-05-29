@@ -3,6 +3,7 @@
 <%@ include file="header.jsp" %>
 <body>
   <!--navbar-->
+  <div align="center">
   <nav class="mainnav navbar navbar-expand-lg navbar-light sticky-top bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><b>자꾸다꾸</b></a>
@@ -62,38 +63,38 @@
         </div>
       </div>
     </div>
-        <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">login</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-              </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">no</button>
-            <button type="button" class="btn btn-primary">yes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+  </nav> 
+    <!-- Modal -->
+	<div align="left" class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="exampleModalLabel">자꾸다꾸 로그인</h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	                <form action="/user/signon.do" method = "Post">
+	                    <div class="mb-3">
+	                        <label class="form-label">ID</label>
+	                        <input type="text" class="form-control" id="userId" name="userId" placeholder="Id를 입력하세요" />
+	                    </div>
+	                    <div class="mb-3">
+	                        <label class="form-label">Password</label>
+	                        <input type="password" class="form-control" id="password" name="password" placeholder="패쓰워드를 입력하세요" />
+	                    </div>
+	                    <div class="mb-3 form-check">
+	                        <input  type="checkbox" class="form-check-input" id="rememberMe" />
+	                        <label class="form-check-label" for="rememberMe">Remember me</label>
+	                    </div>
+	                    <div class="modal-footer d-block">
+	                        <p class="float-start">Not yet account <a href="/user/newAccount.do">Sign Up</a></p>
+	                        <button type="submit" class="btn btn-warning float-end">로그인</button>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+  </div>
   
  

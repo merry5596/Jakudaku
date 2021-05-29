@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.CategoryDao;
+import passionx3.jkdk.dao.FundOrderDao;
 import passionx3.jkdk.dao.OnlineDao;
 import passionx3.jkdk.dao.OrderDao;
 import passionx3.jkdk.dao.ThemeDao;
@@ -53,6 +54,9 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private FundOrderDao fundOrderDao;
 	
 	@Override
 	public Account getAccount(String userId) {
@@ -523,10 +527,20 @@ public class jkdkImpl implements jkdkFacade {
 	public int insertOrder(Order order) {
 		return orderDao.insertOrder(order);
 	}
+	
+	@Override
+	public int insertFundOrder(FundOrder fundOrder) {
+		return fundOrderDao.insertFundOrder(fundOrder);
+	}
 
 	@Override
 	public Order getOrderByOrderId(int orderId) {
 		return orderDao.getOrderByOrderId(orderId);
+	}
+	
+	@Override
+	public FundOrder getFundOrderByOrderId(int orderId) {
+		return fundOrderDao.getFundOrderByOrderId(orderId);
 	}
 
 	@Override
@@ -558,5 +572,6 @@ public class jkdkImpl implements jkdkFacade {
 	public Category getCategoryByCategoryId(int categoryId) {
 		return categoryDao.getCategoryByCategoryId(categoryId);
 	}
+
 
 }
