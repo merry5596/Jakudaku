@@ -2,6 +2,7 @@ package passionx3.jkdk.dao.mybatis;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import passionx3.jkdk.dao.LineItemDao;
@@ -12,9 +13,11 @@ import passionx3.jkdk.domain.LineItem;
 
 @Repository
 public class MybatisLineItemDao implements LineItemDao {
-
+	@Autowired
 	private LineItemMapper lineItemMapper;
+	@Autowired
 	private OnlineMapper onlineMapper;
+	@Autowired
 	private FundingMapper fundingMapper;
 
 // funding

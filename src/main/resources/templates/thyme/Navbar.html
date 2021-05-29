@@ -22,19 +22,19 @@
         </div>
 
         <div class="col-4">
-        <div th:unless=${userSession}>
+        <div th:unless=${session.userSession}>
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
             login
           </button>        
          </div>  
          
-         <div class="row" th:if = ${userSession}>
-	         <div class="col-5" th:if = ${userSession.userId.equals('admin')} >
-	         	<a th:href="@{/manager/myPage/onlineItem.do}"><span th:text=${userSession.name}></span>님</a>
+         <div class="row" th:if = ${session.userSession}>
+	         <div class="col-5" th:if = ${session.userSession.userId.equals('admin')} >
+	         	<a th:href="@{/manager/myPage/onlineItem.do}"><span th:text=${session.userSession.name}></span>님</a>
 	         </div>
-	         <div class="col-5" th:unless = ${userSession.userId.equals('admin')} >
-	         	<a th:href="@{/user/myPage.do}"><span th:text=${userSession.alias}></span> 님</a>
+	         <div class="col-5" th:unless = ${session.userSession.userId.equals('admin')} >
+	         	<a th:href="@{/user/myPage.do}"><span th:text=${session.userSession.alias}></span> 님</a>
 	         </div>
 	         <!-- 장바구니 -->
 	         <div class= "col-2">

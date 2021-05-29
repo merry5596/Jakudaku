@@ -32,9 +32,13 @@ public class LineItem implements Serializable {
 	public LineItem(int lineNumber, CartItem cartItem) {
 	    this.lineNumber = lineNumber;
 	    this.item = cartItem.getOnlineItem();
-	    this.item.setItemId(cartItem.getOnlineItem().getItemId());
+	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
 		this.isDownloaded = 0;	// 여기서 설정?
 	    this.unitPrice = cartItem.getOnlineItem().getPrice();
+	    
+	    //추가?
+	    this.quantity = 1;
+	    this.saleState = cartItem.getOnlineItem().getSaleState();
 	  }
 	
 

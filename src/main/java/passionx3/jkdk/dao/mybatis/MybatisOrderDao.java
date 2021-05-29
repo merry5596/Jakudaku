@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.OrderDao;
 import passionx3.jkdk.dao.SequenceDao;
+import passionx3.jkdk.dao.mybatis.mapper.AccountMapper;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
 import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
 import passionx3.jkdk.dao.mybatis.mapper.OrderMapper;
@@ -33,10 +34,14 @@ public class MybatisOrderDao implements OrderDao {
 	private LineItemMapper lineItemMapper;
 
 	@Autowired
+	private AccountMapper accountMapper;
+	
+	@Autowired
 	private LineItemDao lineItemDao;
 	
 	@Autowired
 	private SequenceDao sequenceDao;
+	
 	
 	@Override
 	@Transactional
@@ -51,8 +56,8 @@ public class MybatisOrderDao implements OrderDao {
 	@Override
 	@Transactional
 	public int insertOrder(Order order) throws DataAccessException {  
-    	order.setOrderId(sequenceDao.getNextId("ordernum"));
-    	
+    	order.setOrderId(sequenceDao.getOrderSequenceNextVal());
+    	// order.setOrderId(-3);
     	// order 테이블에 insert
     	int result = orderMapper.insertOrder(order);
     	if (result == 0)
@@ -61,8 +66,18 @@ public class MybatisOrderDao implements OrderDao {
     	// lineitem 테이블에 insert
     	for (LineItem lineItem : order.getLineItems()) {
     		lineItem.setOrderId(order.getOrderId());
+    		lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
+    		// lineItem.setLineItemId(-3);
     		lineItemMapper.insertLineItem(lineItem);
     	}
+    	
+    	//적립금 사용했다면
+    	if (order.getUsedMileage() > 0) {
+    		accountMapper.useMileage(order.getUsedMileage(), order.getUserId());
+    	}
+    	
+    	// 적립금 받기
+    	accountMapper.getMileage(order.getEarningMileage(), order.getUserId());
     	
     	return 1;
 	}
