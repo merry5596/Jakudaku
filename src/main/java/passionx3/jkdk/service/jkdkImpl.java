@@ -15,6 +15,7 @@ import passionx3.jkdk.dao.AccountDao;
 import passionx3.jkdk.dao.BattleSaleDao;
 import passionx3.jkdk.dao.CategoryDao;
 import passionx3.jkdk.dao.OnlineDao;
+import passionx3.jkdk.dao.OrderDao;
 import passionx3.jkdk.dao.ThemeDao;
 import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.dao.FundingDao;
@@ -49,6 +50,9 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Autowired
 	private ItemDao itemDao;
+	
+	@Autowired
+	private OrderDao orderDao;
 	
 	@Override
 	public Account getAccount(String userId) {
@@ -516,15 +520,13 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public void insertOrder(Order order) {
-		// TODO Auto-generated method stub
-		
+	public int insertOrder(Order order) {
+		return orderDao.insertOrder(order);
 	}
 
 	@Override
 	public Order getOrderByOrderId(int orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		return orderDao.getOrderByOrderId(orderId);
 	}
 
 	@Override

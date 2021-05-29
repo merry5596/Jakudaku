@@ -102,7 +102,7 @@ public interface jkdkFacade {
 	
 	Item getItem(String itemId);
 
-	void insertOrder(Order order);
+	int insertOrder(Order order);
 
 	Order getOrderByOrderId(int orderId);
 

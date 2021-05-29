@@ -33,4 +33,11 @@ public class MybatisSequenceDao implements SequenceDao {
 	    sequenceMapper.updateSequence(parameterObject);
 	    return sequence.getNextId();
 	}
+	
+	public int getOrderSequenceNextVal() throws DataAccessException {
+		return sequenceMapper.getOrderSequenceNextVal();
+	}
+	public int getLineItemSequenceNextVal() throws DataAccessException {
+		return sequenceMapper.getLineItemSequenceNextVal();
+	}
 }
