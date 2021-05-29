@@ -11,11 +11,11 @@ import passionx3.jkdk.domain.FundOrder;
 @Mapper
 public interface FundOrderMapper {
 
-	@Select("SELECT o.orderId, o.orderDate, o.totalPrice, o.creditCard, o.expireDate, o.cardType, o.discountCost, o.usedMileage, o.userId"
+	@Select("SELECT o.orderId, o.orderDate, o.totalPrice, o.creditCard, o.expireDate, o.cardType, o.discountCost, o.usedMileage, o.userId,"
 			+ "	f.address1, f.address2, f.zip, f.phone, f.receiverName, f.deliveryNumber, f.deliveryStatus"
 			+ "	FROM FUNDORDERS f, ORDERS o"
 			+ " WHERE f.orderId = #{orderId} AND f.orderId = o.orderId")
-	FundOrder getFundOrder(int orderId);
+	FundOrder getFundOrderByOrderId(int orderId);
 	
 	@Insert("INSERT INTO FUNDORDERS (orderId, address1, address2, zip, phone, receiverName, deliveryNumber, deliveryStatus)"
 			+ "	VALUES(#{orderId}, #{address1}, #{address2}, #{zip}, #{phone}, #{receiverName}, #{deliveryNumber}, #{deliveryStatus})")

@@ -41,6 +41,18 @@ public class LineItem implements Serializable {
 	    this.saleState = cartItem.getOnlineItem().getSaleState();
 	  }
 	
+	public LineItem(int lineNumber, Funding funding, int quantity) {
+	    this.lineNumber = lineNumber;
+	    this.item = funding;
+	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
+		this.isDownloaded = 0;	// 여기서 설정?
+	    this.unitPrice = funding.getPrice();
+	    
+	    //추가?
+	    this.quantity = quantity;
+	    this.saleState = 0;
+	}
+	
 
 	
 	public int getLineItemId() {

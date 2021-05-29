@@ -31,6 +31,7 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	@Autowired
 	private SequenceDao sequenceDao;
 
+	@Autowired
 	private LineItemDao lineItemDao;
 	
 	@Override
@@ -40,8 +41,8 @@ public class MybatisFundOrderDao implements FundOrderDao {
 
 	@Override
 	@Transactional
-	public FundOrder getFundOrder(int orderId) throws DataAccessException {
-		FundOrder fundOrder = fundOrderMapper.getFundOrder(orderId);
+	public FundOrder getFundOrderByOrderId(int orderId) throws DataAccessException {
+		FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(orderId);
 		if (fundOrder != null) {
 			fundOrder.setLineItem(lineItemDao.getLineItemByOrderId(orderId));
 		}
@@ -51,7 +52,7 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	@Override
 	@Transactional
 	public int insertFundOrder(FundOrder fundOrder) throws DataAccessException {
-    	fundOrder.setOrderId(sequenceDao.getNextId("ordernum"));
+    	fundOrder.setOrderId(sequenceDao.getOrderSequenceNextVal());
     	
     	// fundOrder 필드 중 order 테이블 속성에 포함되는 것들의 정보를 order 테이블에 insert
     	int result = orderMapper.insertOrder(fundOrder);
@@ -64,9 +65,12 @@ public class MybatisFundOrderDao implements FundOrderDao {
     		return 0;
     	
     	// lineitem 테이블에 insert
-    	LineItem lineItem = (LineItem) fundOrder.getLineItem();
+    	LineItem lineItem = fundOrder.getLineItem();
     	lineItem.setOrderId(fundOrder.getOrderId());
-    	lineItemMapper.insertLineItem(lineItem);
+    	lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
+    	result = lineItemMapper.insertLineItem(lineItem);
+    	if (result == 0)
+    		return 0;
     	
     	return 1;
 	}

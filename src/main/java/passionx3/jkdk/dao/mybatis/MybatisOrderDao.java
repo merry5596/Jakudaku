@@ -68,16 +68,22 @@ public class MybatisOrderDao implements OrderDao {
     		lineItem.setOrderId(order.getOrderId());
     		lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
     		// lineItem.setLineItemId(-3);
-    		lineItemMapper.insertLineItem(lineItem);
+    		result = lineItemMapper.insertLineItem(lineItem);
+    		if (result == 0)
+    			return 0;
     	}
     	
     	//적립금 사용했다면
     	if (order.getUsedMileage() > 0) {
-    		accountMapper.useMileage(order.getUsedMileage(), order.getUserId());
+    		result = accountMapper.useMileage(order.getUsedMileage(), order.getUserId());
+    		if (result == 0)
+    			return 0;
     	}
     	
     	// 적립금 받기
-    	accountMapper.getMileage(order.getEarningMileage(), order.getUserId());
+    	result = accountMapper.getMileage(order.getEarningMileage(), order.getUserId());
+    	if (result == 0)
+			return 0;
     	
     	return 1;
 	}
@@ -105,7 +111,7 @@ public class MybatisOrderDao implements OrderDao {
 			if(onlineList.get(i).getOrderDate().equals(fundingList.get(j).getOrderDate())) {
 				Order order = orderMapper.getOrderByOrderId(orderId);
 				order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(order);
 				orderList.add(fundOrder);
@@ -122,7 +128,7 @@ public class MybatisOrderDao implements OrderDao {
 				i++;
 			}
 			else {
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(fundOrder);
 				
@@ -150,7 +156,7 @@ public class MybatisOrderDao implements OrderDao {
 			for(int k = j; k < fundingList.size(); k++) {
 				int fundOrderId = fundingList.get(i).getOrderId();
 
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(fundOrderId));
 				orderList.add(fundOrder);
 				

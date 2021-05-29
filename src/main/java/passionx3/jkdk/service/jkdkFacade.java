@@ -103,8 +103,12 @@ public interface jkdkFacade {
 	Item getItem(String itemId);
 
 	int insertOrder(Order order);
+	
+	int insertFundOrder(FundOrder fundOrder);
 
 	Order getOrderByOrderId(int orderId);
+	
+	FundOrder getFundOrderByOrderId(int orderId);
 
 	String getOnlineItemIdByCategoryforSale(int category);
 
@@ -117,4 +121,5 @@ public interface jkdkFacade {
 	int updateOnlineItemSaleState(int itemId);
 	
 	Category getCategoryByCategoryId(int categoryId);
+
 }

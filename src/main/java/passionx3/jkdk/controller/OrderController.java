@@ -122,6 +122,8 @@ public class OrderController {
 
 			Order o = jkdkStore.getOrderByOrderId(-2);
 			
+			System.out.println(o.getLineItems().get(0).getUnitPrice());
+			
 			ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");
 			mav.addObject("order", o);
 			System.out.println(o.getOrderId());
