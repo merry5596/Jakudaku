@@ -17,7 +17,6 @@ public interface jkdkFacade {
 	
 	int removeAccount(String userId);     
 
-	
 	int existingUser(String userId);	
 	
 	int updateLike(int itemId, String userId);
@@ -32,7 +31,7 @@ public interface jkdkFacade {
 	
 	int deleteReview (int reviewId);
 	
-	List<Review> getReviewsByItemId(int reviewId);
+	List<Review> getReviewsByItemId(int itemId);
 	
 	Online getOnlineItemById(int itemId);
 	
