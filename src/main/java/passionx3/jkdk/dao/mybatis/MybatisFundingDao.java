@@ -51,7 +51,7 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public Funding getFundingItemById(int itemId) throws DataAccessException {
-		return fundingMapper.getOnlineItemById(itemId);
+		return fundingMapper.getFundingItemById(itemId);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Online;
+import passionx3.jkdk.domain.Order;
 import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.service.jkdkFacade;
@@ -40,11 +41,13 @@ public class MyPageController {
 	
 	@RequestMapping("/user/myPage/buy.do")
 	public String viewBuyItem(ModelMap model, HttpSession session) throws Exception {
-		String userId = (String) session.getAttribute("userId"); 
+		Account account = (Account)session.getAttribute("userSession");
 		
-		Map<String, List<LineItem>> orderMap = jkdk.getLineItemsByUserId(userId); //dao 인터페이스에 추가해야 할 메소드
+		String userId = account.getUserId();
+		
+		Map<String, List<Order>> orderMap = jkdk.getLineItemsByUserId(userId); //dao 인터페이스에 추가해야 할 메소드
 
-		model.put("lineItemMap", orderMap);
+		model.put("orderMap", orderMap);
 		
 		return "/buy";
 	}
@@ -52,7 +55,6 @@ public class MyPageController {
 	@RequestMapping("/user/myPage/sell.do")
 	public String viewSellItem(ModelMap model, HttpSession session) throws Exception {
 		Account account = (Account)session.getAttribute("userSession");
-		System.out.println("이건" + account.getUserId());
 		
 		String userId = account.getUserId();
 		

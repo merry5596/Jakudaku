@@ -13,6 +13,9 @@ public class LineItem implements Serializable {
 	int unitPrice;
 	Item item;
 	int saleState;
+	int itemId;
+	Online online;
+	Funding funding;
 
 	public LineItem() {
 	}
@@ -114,4 +117,31 @@ public class LineItem implements Serializable {
 	public int getSalePrice() {
 		return unitPrice - getDiscount();
 	}
+
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	public Online getOnline() {
+		return online;
+	}
+
+	public void setOnline(Online online) {
+		this.online = online;
+	}
+
+	public Funding getFunding() {
+		return funding;
+	}
+
+	public void setFunding(Funding funding) {
+		this.funding = funding;
+	}
+	
+	
+	
 }
