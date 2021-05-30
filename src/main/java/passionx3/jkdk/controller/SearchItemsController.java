@@ -24,7 +24,7 @@ public class SearchItemsController {
 		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
 		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));
 		
-		return "thyme/item/searchItems";
+		return "thyme/item/SearchItems";
 	} 
 }
 

@@ -1,40 +1,40 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Review implements Serializable{
 	private int reviewId;
-	private Date date;
-	private int rate;
-	private String comment;
+	private String writtenDate;
+	private Double rate;
+	private String content;
 	private String userId;
+	private String userName;
 	private int itemId;
-	private int lineItemId;
+	
 	public int getReviewId() {
 		return reviewId;
 	}
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;
 	}
-	public Date getDate() {
-		return date;
+	public String getWrittenDate() {
+		return writtenDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setWrittenDate(String writtenDate) {
+		this.writtenDate = writtenDate;
 	}
-	public int getRate() {
+	public Double getRate() {
 		return rate;
 	}
-	public void setRate(int rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
-	public String getComment() {
-		return comment;
+	public String getContent() {
+		return content;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getUserId() {
 		return userId;
@@ -42,18 +42,17 @@ public class Review implements Serializable{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getItemId() {
 		return itemId;
 	}
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
-	public int getLineItemId() {
-		return lineItemId;
-	}
-	public void setLineItemId(int lineItemId) {
-		this.lineItemId = lineItemId;
-	}
-	
 	
 }

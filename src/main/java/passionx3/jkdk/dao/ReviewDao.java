@@ -12,6 +12,6 @@ public interface ReviewDao {
 	
 	int deleteReview (int reviewId);
 	
-	List<Review> getReviewsByItemId(int reviewId);
+	List<Review> getReviewsByItemId(int itemId);
 	
 }
