@@ -8,16 +8,23 @@
 		var inputM = document.getElementById('inputMileage');
 		var printM = document.getElementById('printMileage');
 		var havingM = document.getElementById('havingMileage');
+		
 		if (inputM.value == "") {
+			inputM.value = "0";
 			printM.innerText = "0";
 		}
-		else if (havingM.innerText < inputM.value) {
+		else if (parseInt(havingM.innerText) < parseInt(inputM.value)) {
 			alert("보유하고 계신 적립금 가격 내에서 입력해주세요.");
-			inputM.value = "";
+			inputM.value = "0";
 		}
 		else {
-			printM.innerText = inputM.value;
+			printM.innerText = parseInt(inputM.value);
 		}
+		
+		var totalP = document.getElementById('totalPrice');
+		var discountC = document.getElementById('discountCost');
+		var finalP = document.getElementById('finalPrice');
+		finalP.innerText = parseInt(totalP.innerText) - parseInt(discountC.innerText) - parseInt(inputM.value);
 	}
 	
 	function useAllMileage() {
@@ -28,105 +35,113 @@
 	}
 </script>
 <body>
-
+<div class="wrap">
 <div th:replace="thyme/Header :: header"></div>
-
-<div align="center">
-  <h2>상품 결제</h2>
-  <table style="width:1000px; align:center;">
-    <tr>
-      	<td colspan="5"><b>상품 정보</b></td>
-    </tr>
-    <tr bgcolor="#CCCCCC">
-      	<td style="text-align:center"><b>이미지</b></td>
- 	  	<td style="text-align:center"><b>상품</b></td>
-	  	<td style="text-align:center"><b>판매가</b></td>
-	  	<td style="text-align:center"><b>할인</b></td>
-	  	<td style="text-align:center"><b>결제 금액</b></td>
-    </tr>
-    <tr th:each="lineItem : ${orderForm.order.lineItems}" bgcolor="#EEEEEE">
-		<td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineitem.item.itemId})}">
-			<img th:src="@{${lineitem.item.thumbnail1}}"/></a></td>
-        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineitem.item.itemId})}">
-            <span th:text="${lineitem.item.name}">상품명</span></a>
-            <div>옵션: 
-            <span th:if="${lineitem.item.pcFile != ''}">PC </span>
-            <span th:if="${lineitem.item.tabletFile != ''}">TABLET </span>
-            <span th:if="${lineitem.item.phoneFile != ''}">PHONE </span></div>
-        <td style="text-align:center" th:text="${lineitem.item.price}">판매가</td>
-        <td style="text-align:center" th:switch="${lineitem.item.saleState}">
-	        <span th:case="1">Time Sale</span>
-	        <span th:case="2">Battle Sale</span>
-	        <p th:text="'-' + ${lineitem.item.discount}">-0</p></td>
-        <td style="text-align:center" th:text="${lineitem.item.salePrice}">0</td>
-    </tr>
-    <tr bgcolor="#CCCCCC">
-      <td style="text-align:right" colspan="5" th:text="'총 ' + ${order.totalPrice} - ${order.discountCost} + '원'"><b>총 0원</b></td>
-    </tr>
-  </table>
-  
-  <br><br>
-  
-  <form action="#" th:action="@{confirmOrder.do}" th:object="${orderForm}" method="POST">
-	  <table style="width:1000px; align:center;">
-	  	<tr>
-	      <td colspan="2"><b>결제 상세</b></td>
-	    </tr>
-	    <tr style="vertical-align:top">
-	      <td width="65%" height="200px">
-	      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-	      		<tr>
-	      			<td bgcolor="#CCCCCC">적립금 사용</td>
-	      			<td>보유 <p id="havingMileage" style="display:inline" th:text="${userSession.mileage}">0</p>원 <button type="button" onclick="useAllMileage()">전액 사용</button>
-	      				<br>사용 <input type="text" id="inputMileage" th:field="*{order.usedMileage}"/>원</td>
-	      		</tr>
-	      		<tr>
-	      			<td bgcolor="#CCCCCC">결제 수단</td>
-	      			<td>카드사
-	      				<select th:field="*{order.cardType}">
-	      					<option value="">선택</option>
-	      					<option value="shinhan">신한</option>
-			      			<option value="kookmin">국민</option>
-			      			<option value="hana">하나</option></select>
-	      				<br>카드 번호 <input type="text" th:field="*{order.creditCard}" />
-	      				<br>만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{order.expireDate}" /></td>
-	      		</tr>
-	      	</table>
-	      </td>
-	      <td height="200px">
-	      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-	      		<tr>
-		      		<td>상품 금액</td>
-		      		<td>&nbsp;</td>
-		      		<td style="text-align:center" width="20%"><span th:text="*{order.totalPrice}">0</span></td></tr>
-			   	<tr>
-			      	<td>세일</td>
-			      	<td>-</td>
-			     	<td style="text-align:center"><span th:text="*{order.discountCost}">0</span></td></tr>
-			    <tr>
-			      	<td>적립금 사용</td>
-			      	<td>-</td>
-			    	<td style="text-align:center"><span id="printMileage">0</span></td></tr>
-			    <tr>
-			    	<td colspan=3><hr></td>
-			    </tr>
-			    <tr>
-			      	<td>최종 결제 금액</td>
-			      	<td>&nbsp;</td>
-			      	<td style="text-align:center"><span th:text="*{order.totalPrice} - *{order.discountCost}">0</span>원</td>
-			    </tr>
-			    <tr>
-			    	<td colspan=3 style="text-align:right">(<span th:text="*{order.totalPrice} * 0.05">0</span>원 적립 예정)</td>
-	      		</tr>
-	      	</table>
-	      </td>
-	    </tr>
+<div class="row row-margin">
+	<div th:replace="thyme/Sidebar :: sidebar"></div>
+	<div class="col-7 base">
+	<div class="row">
+	<div class="col-md-12">
+	  <h2>상품 결제</h2>
+	  <table style="width:100%; align:center;">
 	    <tr>
-	      <td style="text-align:center" colspan="2" ><input type="submit" value="결제하기" /></td>
+	      	<td colspan="5"><b>상품 정보</b></td>
+	    </tr>
+	    <tr bgcolor="#CCCCCC">
+	      	<td style="text-align:center"><b>이미지</b></td>
+	 	  	<td style="text-align:center"><b>상품</b></td>
+		  	<td style="text-align:center"><b>판매가</b></td>
+		  	<td style="text-align:center"><b>할인</b></td>
+		  	<td style="text-align:center"><b>결제 금액</b></td>
+	    </tr>
+	    <tr th:each="lineItem : ${orderForm.order.lineItems}" bgcolor="#EEEEEE">
+	  		<td><a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.item.itemId})}">
+				<img th:src="@{'${lineItem.item.thumbnail1}'}"/></a></td>
+				
+	        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.item.itemId})}">
+	            <span th:text="${lineItem.item.name}">상품명</span></a>
+	            <div>옵션: 
+	            <span th:if="${lineItem.item.pcFile != null}">PC </span>
+	            <span th:if="${lineItem.item.tabletFile != null}">TABLET </span>
+	            <span th:if="${lineItem.item.phoneFile != null}">PHONE </span></div>
+	        <td style="text-align:center" th:text="${lineItem.item.price}">판매가</td>
+	        <td style="text-align:center" th:switch="${lineItem.item.saleState}">
+		        <span th:case="1">Time Sale</span>
+		        <span th:case="2">Battle Sale</span>
+		        <p th:text="'-' + ${lineItem.item.discount}">-0</p></td>
+	        <td style="text-align:center" th:text="${lineItem.item.salePrice}">0</td>
+	    </tr>
+	    <tr bgcolor="#CCCCCC">
+	      <td style="text-align:right" colspan="5" th:text="'총 ' + ${orderForm.order.totalPrice - orderForm.order.discountCost} + '원'"><b>총 0원</b></td>
 	    </tr>
 	  </table>
-  </form>
+	  
+	  <br><br>
+	  
+	  <form action="#" th:action="@{newOrderSubmitted.do}" th:object="${orderForm}" method="POST">
+		  <table style="width:100%; align:center;">
+		  	<tr>
+		      <td colspan="2"><b>결제 상세</b></td>
+		    </tr>
+		    <tr style="vertical-align:top">
+		      <td width="65%" height="200px">
+		      	<table width="100%" height="100%" bgcolor="#EEEEEE">
+		      		<tr>
+		      			<td bgcolor="#CCCCCC">적립금 사용</td>
+		      			<td>보유 <p id="havingMileage" style="display:inline" th:text="${session.userSession.mileage}">0</p>원 <button type="button" onclick="useAllMileage()">전액 사용</button>
+		      				<br>사용 <input type="text" id="inputMileage" th:field="*{order.usedMileage}"/>원</td>
+		      		</tr>
+		      		<tr>
+		      			<td bgcolor="#CCCCCC">결제 수단</td>
+		      			<td>카드사
+		      				<select th:field="*{order.cardType}">
+		      					<option value="">선택</option>
+		      					<option value="shinhan">신한</option>
+				      			<option value="kookmin">국민</option>
+				      			<option value="hana">하나</option></select>
+		      				<br>카드 번호 <input type="text" th:field="*{order.creditCard}" />
+		      				<br>만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{order.expireDate}" /></td>
+		      		</tr>
+		      	</table>
+		      </td>
+		      <td height="200px">
+		      	<table width="100%" height="100%" bgcolor="#EEEEEE">
+		      		<tr>
+			      		<td>상품 금액</td>
+			      		<td>&nbsp;</td>
+			      		<td style="text-align:center" width="30%"><span id="totalPrice" th:text="*{order.totalPrice}">0</span></td></tr>
+				   	<tr>
+				      	<td>세일</td>
+				      	<td>-</td>
+				     	<td style="text-align:center"><span id="discountCost" th:text="*{order.discountCost}">0</span></td></tr>
+				    <tr>
+				      	<td>적립금 사용</td>
+				      	<td>-</td>
+				    	<td style="text-align:center"><span id="printMileage">0</span></td></tr>
+				    <tr>
+				    	<td colspan=3><hr></td>
+				    </tr>
+				    <tr>
+				      	<td>최종 결제 금액</td>
+				      	<td>&nbsp;</td>
+				      	<td style="text-align:center"><span id="finalPrice" th:text="*{order.totalPrice} - *{order.discountCost}">0</span>원</td>
+				    </tr>
+				    <tr>
+				    	<td colspan=3 style="text-align:right">(<span th:text="*{order.earningMileage}">0</span>원 적립 예정)</td>
+		      		</tr>
+		      	</table>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td style="text-align:center" colspan="2" ><input type="submit" value="결제하기" /></td>
+		    </tr>
+		  </table>
+	  </form>
+	</div>
+	</div>
+	</div>
 </div>
-
+</div>
+<div th:replace="thyme/Bottom :: footer"></div>
 </body>
 </html>

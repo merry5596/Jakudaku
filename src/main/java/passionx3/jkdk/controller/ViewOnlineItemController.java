@@ -30,6 +30,5 @@ public class ViewOnlineItemController {
 			model.put("reviewList", reviewList);
 		}
 		return "thyme/item/ViewOnlineItem";
-		
 	}
 }

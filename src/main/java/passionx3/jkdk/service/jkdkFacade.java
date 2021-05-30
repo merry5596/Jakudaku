@@ -42,18 +42,14 @@ public interface jkdkFacade {
 	List<Online> getOnlineItemsByKeyword(String keyword);
 
 	List<Funding> getFundingItemsByKeyword(String keyword);
+	
+	List<Online> getOnlineItemListByCategory(int cateogryId, int themeId, int device, String keyword, int sortBy);
 
-	List<Online> getOnlineItemListByCategory(int categoryId);
-
-	List<Online> getOnlineItemListByTheme(int categoryId, int themeId);
-
-	List<Online> getOnlineItemListByDevice(int categoryId, int device);
-
-	List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device);
-
-	List<Funding> getFundingItemList();
-
-	List<Funding> getFundingItemListByTheme(int themeId);
+	List<Funding> getFundingItemList(int themeId, String keyword, int sortBy);
+	
+	void sortOnlineItemList(List<Online> onlineList, int sortBy);
+	
+	void sortFundingItemList(List<Funding> fundingList, int sortBy);
 
 	List<Online> getBestOnlineItemListforHome();
 
@@ -105,9 +101,13 @@ public interface jkdkFacade {
 	
 	Item getItem(String itemId);
 
-	void insertOrder(Order order);
+	int insertOrder(Order order);
+	
+	int insertFundOrder(FundOrder fundOrder);
 
 	Order getOrderByOrderId(int orderId);
+	
+	FundOrder getFundOrderByOrderId(int orderId);
 
 	String getOnlineItemIdByCategoryforSale(int category);
 
@@ -120,4 +120,5 @@ public interface jkdkFacade {
 	int updateOnlineItemSaleState(int itemId);
 	
 	Category getCategoryByCategoryId(int categoryId);
+
 }

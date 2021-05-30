@@ -5,60 +5,15 @@
 </head>
 <body>
 <div th:replace="thyme/Header :: header"></div>
-
-<!-- side bar-->
     <div class="row row-margin">
-        <div
-			class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky"
-			style="width: 250px; height: 500px;">
-			<a th:href="@{/}"
-				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-				<svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg> <span class="fs-4">Sidebar</span>
-			</a>
-			<hr>
-			<ul class="nav nav-pills flex-column mb-auto">
-				<li><a
-					th:href="@{/item/viewCategory.do(categoryId = '0', themeId = '-1', device = '-1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg> Diary
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '1', themeId = '-1', device = '-1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#table"></use>
-                        </svg> Font
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '2', themeId = '-1', device = '-1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg> Wallpaper
-				</a></li>
-				<li><a th:href="@{/item/viewCategory.do(categoryId = '3', themeId = '-1', device = '-1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> Icon
-				</a></li>
-				<hr>
-				<li><a th:href="@{/item/viewFundings.do(themeId = '-1')}"
-					class="nav-link link-dark"> <svg class="bi me-2" width="16"
-							height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg> funding
-				</a></li>
-			</ul>
-		</div>
+    	<div th:replace="thyme/Sidebar :: sidebar"></div>
         <div class="col-7 base">
         <!-- 여기서부터 content -->
         <a href="#" th:href="@{/item/sellOnlineItem.do}">온라인상품 등록 test</a> <!-- 상품등록 test -->
         <a href="#" th:href="@{/item/sellFundingItem.do}">펀딩상품 등록 test</a> <!-- 상품등록 test --> <br>
         <a href="#" th:href="@{/item/viewOnlineItem.do(itemId=20)}">온라인상세페이지 test</a> <!-- 온라인상세페이지 test -->
         <a href="#" th:href="@{/item/viewFundingItem.do(itemId=24)}">펀딩상세페이지 test</a> <!-- 펀딩상세페이지 test -->
+
             <!-- event banner -->
             <div id="carouselExampleCaptions" class="banner carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -261,3 +216,5 @@
     
     
    <div th:replace="thyme/Bottom :: footer"></div>
+</body>
+</html>

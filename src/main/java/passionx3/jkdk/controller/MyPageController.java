@@ -51,7 +51,10 @@ public class MyPageController {
 	
 	@RequestMapping("/user/myPage/sell.do")
 	public String viewSellItem(ModelMap model, HttpSession session) throws Exception {
-		String userId = (String) session.getAttribute("userId");
+		Account account = (Account)session.getAttribute("userSession");
+		System.out.println("이건" + account.getUserId());
+		
+		String userId = account.getUserId();
 		
 		List<Online> onlineList = jkdk.getOnlineItemListByProducerId(userId);
 		List<Funding> fundingList = jkdk.getFundingItemListByProducerId(userId);

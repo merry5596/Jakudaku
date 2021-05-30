@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import passionx3.jkdk.domain.Account;
 
@@ -37,6 +38,10 @@ public interface AccountMapper {
 
 	@Select("SELECT USERID FROM ACCOUNT WHERE ACCOUNT.USERID = #{userId}")
 	int exisingUser(String userId);	
+
+	@Update("UPDATE ACCOUNT set MILEAGE = MILEAGE - #{mileage} WHERE USERID = #{userId}")
+	int useMileage(int mileage, String userId);
 	
-	
+	@Update("UPDATE ACCOUNT set MILEAGE = MILEAGE + #{mileage} WHERE USERID = #{userId}")
+	int getMileage(int mileage, String userId);
 }

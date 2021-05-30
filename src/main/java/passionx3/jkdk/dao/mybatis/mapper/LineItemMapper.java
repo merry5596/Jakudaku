@@ -11,18 +11,18 @@ import passionx3.jkdk.domain.LineItem;
 @Mapper
 public interface LineItemMapper {
 	
-	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, price AS unitPrice, saleState"
+	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, saleState"
 			+ "	FROM LINEITEM l, ITEM i"
 			+ " WHERE l.itemId = i.itemId AND l.orderId = #{orderId}")
 	LineItem getLineItemByOrderId(int orderId);
 	
-	@Insert("INSERT INTO LINEITEM (lineItemId, orderId, lineNumber, quantity, isDownloaded, unitPrice, saleState"
-			+ "	VALUES(#{lineItemId}, #{orderId}, #{lineNumber}, #{quantity}, #{isDownloaded}, #{unitPrice}, #{saleState})")
-	void insertLineItem(LineItem lineItem);
+	@Insert("INSERT INTO LINEITEM (lineItemId, orderId, lineNumber, quantity, isDownloaded, itemId, saleState)"
+			+ "	VALUES(#{lineItemId}, #{orderId}, #{lineNumber}, #{quantity}, #{isDownloaded}, #{item.itemId}, #{saleState})")
+	int insertLineItem(LineItem lineItem);
 
-	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, price AS unitPrice, saleState"
+	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, saleState"
 			+ "	FROM LINEITEM l, ITEM i"
-			+ " WHERE l.itemId = i.itemId AND l.orderId = #{orderId}")
+			+ " WHERE l.orderId = #{orderId} AND l.itemId = i.itemId")
 	List<LineItem> getLineItemsByOrderId(int orderId);
 
 }

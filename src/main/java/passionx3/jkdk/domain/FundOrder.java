@@ -2,12 +2,16 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class FundOrder extends Order implements Serializable {
 	String address1;
 	String address2;
-	int zip;
+	String zip;
 	String phone;
 	String receiverName;
 	String deliveryNumber;
@@ -17,7 +21,7 @@ public class FundOrder extends Order implements Serializable {
 	public FundOrder() { }
 	
 	public FundOrder(int orderId, String orderDate, int totalPrice, String creditCard, String expireDate, String cardType,
-			int discountCost, int usedMileage, String userId, String address1, String address2, int zip, 
+			int discountCost, int usedMileage, String userId, String address1, String address2, String zip, 
 			String phone, String receiverName, String deliveryNumber, int deliveryStatus, LineItem lineItem) {
 		super(orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId);
 		this.address1 = address1;
@@ -30,6 +34,42 @@ public class FundOrder extends Order implements Serializable {
 		this.lineItem = lineItem;
 	}
 
+	public void initFundOrder(Account account, Funding funding, int quantity) {
+		lineItems = new ArrayList<LineItem>();
+		
+		userId = account.getUserId();
+		
+		Calendar cal= Calendar.getInstance ( );
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
+		orderDate = today;
+
+		lineItem = new LineItem(lineItems.size() + 1, funding, quantity);
+		totalPrice = funding.getPrice() * quantity;
+		
+		//creditCard = "0";
+		//expireDate = "12/03";
+		//cardType = "Visa";
+		
+		addLineItem(lineItem);
+		
+		discountCost = 0;
+		
+		usedMileage = 0;
+		earningMileage = 0;
+		
+		address1 = account.getAddress1();
+		address2 = account.getAddress2();
+		zip = account.getZip();
+		phone = account.getPhone();
+		receiverName = account.getName();
+		
+		deliveryNumber = "0";
+		deliveryStatus = 0;
+		
+	}
+	
 	public String getAddress1() {
 		return address1;
 	}
@@ -42,10 +82,10 @@ public class FundOrder extends Order implements Serializable {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public String getPhone() {

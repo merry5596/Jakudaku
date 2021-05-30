@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.OrderDao;
 import passionx3.jkdk.dao.SequenceDao;
+import passionx3.jkdk.dao.mybatis.mapper.AccountMapper;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
 import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
 import passionx3.jkdk.dao.mybatis.mapper.OrderMapper;
@@ -33,10 +34,14 @@ public class MybatisOrderDao implements OrderDao {
 	private LineItemMapper lineItemMapper;
 
 	@Autowired
+	private AccountMapper accountMapper;
+	
+	@Autowired
 	private LineItemDao lineItemDao;
 	
 	@Autowired
 	private SequenceDao sequenceDao;
+	
 	
 	@Override
 	@Transactional
@@ -51,8 +56,8 @@ public class MybatisOrderDao implements OrderDao {
 	@Override
 	@Transactional
 	public int insertOrder(Order order) throws DataAccessException {  
-    	order.setOrderId(sequenceDao.getNextId("ordernum"));
-    	
+    	order.setOrderId(sequenceDao.getOrderSequenceNextVal());
+    	// order.setOrderId(-3);
     	// order 테이블에 insert
     	int result = orderMapper.insertOrder(order);
     	if (result == 0)
@@ -61,8 +66,24 @@ public class MybatisOrderDao implements OrderDao {
     	// lineitem 테이블에 insert
     	for (LineItem lineItem : order.getLineItems()) {
     		lineItem.setOrderId(order.getOrderId());
-    		lineItemMapper.insertLineItem(lineItem);
+    		lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
+    		// lineItem.setLineItemId(-3);
+    		result = lineItemMapper.insertLineItem(lineItem);
+    		if (result == 0)
+    			return 0;
     	}
+    	
+    	//적립금 사용했다면
+    	if (order.getUsedMileage() > 0) {
+    		result = accountMapper.useMileage(order.getUsedMileage(), order.getUserId());
+    		if (result == 0)
+    			return 0;
+    	}
+    	
+    	// 적립금 받기
+    	result = accountMapper.getMileage(order.getEarningMileage(), order.getUserId());
+    	if (result == 0)
+			return 0;
     	
     	return 1;
 	}
@@ -90,7 +111,7 @@ public class MybatisOrderDao implements OrderDao {
 			if(onlineList.get(i).getOrderDate().equals(fundingList.get(j).getOrderDate())) {
 				Order order = orderMapper.getOrderByOrderId(orderId);
 				order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(order);
 				orderList.add(fundOrder);
@@ -107,7 +128,7 @@ public class MybatisOrderDao implements OrderDao {
 				i++;
 			}
 			else {
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
 				orderList.add(fundOrder);
 				
@@ -135,7 +156,7 @@ public class MybatisOrderDao implements OrderDao {
 			for(int k = j; k < fundingList.size(); k++) {
 				int fundOrderId = fundingList.get(i).getOrderId();
 
-				FundOrder fundOrder = fundOrderMapper.getFundOrder(fundOrderId);
+				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 				fundOrder.setLineItems(lineItemMapper.getLineItemsByOrderId(fundOrderId));
 				orderList.add(fundOrder);
 				

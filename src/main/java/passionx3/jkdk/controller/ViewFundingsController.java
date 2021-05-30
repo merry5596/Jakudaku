@@ -1,7 +1,5 @@
 package passionx3.jkdk.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,41 +19,29 @@ public class ViewFundingsController {
 
 	@Autowired
 	private jkdkFacade jkdkStore;
-	
-	@RequestMapping("/item/viewFundings.do")
-	public ModelAndView handleRequest(@RequestParam("themeId") int themeId) throws Exception {
-		SimpleDateFormat toFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date today = new Date();
-	
-		
-		List<Funding> fundingList = null;
-		
-		if (themeId == -1) {	// theme 선택 안됨
-			fundingList = jkdkStore.getFundingItemList();
-			
-			
-		} else {	// theme 선택됨, device 선택됨
-			fundingList = jkdkStore.getFundingItemListByTheme(themeId);
-		}
-		
-		// finish Date 형식 바꿔주
-//		for (Funding item : fundingList) {
-//			String findate = item.getFinishDate();
-//			Date finish = toFormat.parse(findate);
-//			
-//			long gap = finish.getTime() - today.getTime();
-//			long diffDays = gap / (24 * 60 * 60 * 1000);
-//			
-//			item.setFinishDate(Long.toString(diffDays));
-//		}
-		
 
+	@RequestMapping("/item/viewFundings.do")
+	public ModelAndView handleRequest(
+			@RequestParam("themeId") int themeId, 
+			@RequestParam("sortBy") int sortBy,
+			@RequestParam(value="keyword", required=false) String keyword) throws Exception {
+		
+		System.out.println(keyword);
+
+		if (keyword == null) keyword = "";
+		
+		System.out.println("/item/viewFundings.do");
+		
+		List<Funding> fundingList = jkdkStore.getFundingItemList(themeId, keyword, sortBy);
+		
 		List<Theme> allThemes = jkdkStore.getAllThemes();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("thyme/item/ViewFundings");
 		mav.addObject("allThemes", allThemes);
 		mav.addObject("themeId", themeId);
+		mav.addObject("keyword", keyword);
+		mav.addObject("sortBy", sortBy);
 		mav.addObject("fundingList", fundingList);
 		
 		return mav;
