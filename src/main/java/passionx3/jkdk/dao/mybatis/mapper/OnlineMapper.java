@@ -35,7 +35,7 @@ public interface OnlineMapper {
 			+ "o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile, o.saleState AS saleState "
 			+ "FROM item i, onlineitem o "
 			+ "WHERE i.itemId = o.itemId "
-			+ "AND i.name LIKE '%' + #{keyword} + '%' "
+			+ "AND i.name LIKE '%' || #{keyword} || '%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
@@ -66,7 +66,7 @@ public interface OnlineMapper {
 				+ "o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " 
 			+ "FROM item i, onlineitem o, account a, theme t, category c "
 			+ "WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId "
-				+ "AND i.itemId = #{itemId}")
+				+ "AND i.itemId = #{itemId} AND i.isForSale = 1")
 	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
 	@Select("SELECT * FROM (SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid " + 

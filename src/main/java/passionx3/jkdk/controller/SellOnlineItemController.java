@@ -25,7 +25,7 @@ import passionx3.jkdk.domain.Theme;
 @Controller
 @SessionAttributes("userSession")
 public class SellOnlineItemController {
-	@Value("thyme/item/sellOnlineItemForm")
+	@Value("thyme/item/SellOnlineItemForm")
 	private String formViewName;
 	
 	private jkdkFacade jkdk;
