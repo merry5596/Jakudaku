@@ -1,5 +1,6 @@
 package passionx3.jkdk.service;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +90,7 @@ public interface jkdkFacade {
 
 	List<Funding> getNotApprovedFundingItems();
 
-	Map<String, List<LineItem>> getLineItemsByUserId(String userId);
+	Map<String, List<Order>> getLineItemsByUserId(String userId) throws ParseException;
 
 	List<Online> getOnlineItemListByProducerId(String userId);
 

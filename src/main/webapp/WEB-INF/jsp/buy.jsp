@@ -35,40 +35,51 @@
 <br><br>
 
 <table style="width:100%; border:1px solid #444444;">
+
 	<c:if test="${fn:length(orderMap) == 0}">
 			<span text-aline:center;>구매한 내역이 없습니다.</span>
 	</c:if>
+	
 	<c:forEach var="d" items="${orderMap}">
 		<c:forEach var="o" items="${orderMap[d.key]}">
-		<tr>
-			<td>${d.key}</td>
-			<td><button type="button"  onClick="location.href='/user/confirmOrder.do'">상세보기</button></td>
-		</tr>
-		<c:forEach var="l" items="${o.value.lineItems}">
 			<tr>
-			<td>${l.item.thumnail1}</td>
-			<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${l.item.name}</td>
-			<c:if test="${l.item.getClass().getSimpleName() eq Online}">
-				<td>
-				<c:if test="${not empty l.item.pcFile}">
-					<a href="${l.item.pcFile}" download><button>pc용 다운로드</button></a>
-				</c:if>
-				<c:if test="${not empty l.item.tableFile}">
-					<a href="${l.item.tableFile}" download><button>테블릿용 다운로드</button></a>
-				</c:if>	
-				<c:if test="${not empty l.item.phoneFile}">
-					<a href="${l.item.phoneFile}" download><button>모바일용 다운로드</button></a>
-				</c:if>	
-				</td>
-			</c:if>
-			<td>
-				<button type="button"  onClick="location.href='/review/writeReview.do'">리뷰쓰기</button>
-			</td>
+				<td>${d.key}</td>
+				<td><button type="button"  onClick="location.href='<c:url value="/user/confirmOrder.do"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
 			</tr>
-		</c:forEach>
+			<c:forEach var="l" items="${o.lineItems}">
+				
+				<tr>
+				<c:choose>
+					<c:when test="${not empty l.online}">
+						<td>${l.online.thumbnail1}</td>
+						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.online.name}</td>
+						<td>
+							<c:if test="${not empty l.online.pcFile}">
+								<a href="${l.online.pcFile}" download><button>pc용 다운로드</button></a>
+							</c:if>
+							<c:if test="${not empty l.online.tabletFile}">
+								<a href="${l.online.tabletFile}" download><button>테블릿용 다운로드</button></a>
+							</c:if>	
+							<c:if test="${not empty l.online.phoneFile}">
+								<a href="${l.online.phoneFile}" download><button>모바일용 다운로드</button></a>
+							</c:if>	
+						</td>
+					</c:when>
+					<c:otherwise>
+						<td>${l.itemId}</td>
+						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.funding.name}</td>
+						<td></td>
+					</c:otherwise>
+				</c:choose>
+				<td>
+					<button type="button"  onClick="location.href='<c:url value="/review/writeReview.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'">리뷰쓰기</button>
+				</td>
+				</tr>
+			</c:forEach>
+			<tr><td><br></td></tr>
 		</c:forEach>
 	</c:forEach>
 </table>
 </div>
-</BODY>
-</HTML>
+<%@ include file="bottom.jsp" %>
+

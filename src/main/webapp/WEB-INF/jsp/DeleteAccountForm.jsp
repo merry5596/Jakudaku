@@ -29,4 +29,5 @@
 		 <button  type="button" onclick="window.history.back();">취소</button>
     </form:form>
     </div>
-        
+    </div>
+<%@ include file="bottom.jsp" %>    

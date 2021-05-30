@@ -104,5 +104,5 @@
 	</c:forEach>
 </table>
 </div>
-</BODY>
-</HTML>
+
+<%@ include file="bottom.jsp" %>
