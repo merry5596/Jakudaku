@@ -50,8 +50,10 @@
                             <span th:text="${salePrice}"> salePrice </span>
                         </div>
                         <p class="lead" th:text="${item.description}">description</p> 
-                        <button type="button" class="btn btn-success"><small>남은 수량</small> 
-                        	<span th:text="${timeSale.quantity}">quantity</span>개!</button>
+               	           <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+	                        <button type="button" class="btn btn-success"><small>남은 수량</small> 
+	                        	<span th:text="${timeSale.quantity}">quantity</span>개!</button>
+                       	</a>
 				</div>
 			</div>
 		</div>
