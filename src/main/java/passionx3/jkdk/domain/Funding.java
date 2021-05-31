@@ -66,23 +66,32 @@ public class Funding extends Item implements Serializable {
 			try {
 				finish = transFormat.parse(finishDate);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			Date today = new Date();
 		
-			int remainingDays = (int) (finish.getTime() - today.getTime()) / (24*60*60*1000);
+			int remainingDays = (int) ((finish.getTime() - today.getTime()) / (24*60*60*1000));
 			
 			return remainingDays;
 		}
 		
-//		소수점 자르는 과정에서 double -> String, String -> double 을 거치는데
-//		출력용이면 그냥 반환값을 String으로 바꿔서 'return sPercentage;' 해도 되지 않을까
-		public double getQuantityPercentage() {
-			double percentage = (double) purchaseQuantity / targetQuantity * 100;
+		public String getFinishDateExceptTime() {
+			System.out.println(finishDate);
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date finish = null;
+			try {
+				finish = transFormat.parse(finishDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			return transFormat.format(finish);
+		}
+		
+		public String getQuantityPercentage() {
+			double percentage = purchaseQuantity / (double) targetQuantity * 100;
 			String sPercentage = String.format("%.2f", percentage);
-			return Double.parseDouble(sPercentage);
+			return sPercentage;
 		}
 
 }

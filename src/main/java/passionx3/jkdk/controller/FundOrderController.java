@@ -17,8 +17,7 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Order;
-import passionx3.jkdk.service.OrderValidator;
+import passionx3.jkdk.service.FundOrderValidator;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
@@ -27,18 +26,7 @@ public class FundOrderController {
 	@Autowired
 	private jkdkFacade jkdkStore;
 	@Autowired
-	private OrderValidator orderValidator;
-
-/*
-	@ModelAttribute("creditCardTypes")
-	public List<String> referenceData() {
-		ArrayList<String> creditCardTypes = new ArrayList<String>();
-		creditCardTypes.add("Visa");
-		creditCardTypes.add("MasterCard");
-		creditCardTypes.add("American Express");
-		return creditCardTypes;			
-	}
-	*/
+	private FundOrderValidator fundOrderValidator;
 	
 	@ModelAttribute("fundOrderForm")
 	public FundOrderForm createFundOrderForm() {
@@ -54,19 +42,24 @@ public class FundOrderController {
 //	}
 	
 	@RequestMapping("/order/newFundOrder.do")
-	public String initNewFundOrder(HttpServletRequest request,
+	public ModelAndView initNewFundOrder(HttpServletRequest request,
 			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm,
 			@RequestParam("itemId") String itemId,
 			@RequestParam("quantity") int quantity
 			) throws ModelAndViewDefiningException {
 		Account userSession = (Account) request.getSession().getAttribute("userSession");
 		// Re-read account from DB at team's request.
-		Account account = jkdkStore.getAccount(userSession.getUserId());	//변경함
+		Account account = jkdkStore.getAccount(userSession.getUserId());
 		
-		// 개별 구매
 		Funding funding = jkdkStore.getFundingItemById(Integer.parseInt(itemId));
 		fundOrderForm.getFundOrder().initFundOrder(account, funding, quantity);
-		return "thyme/order/NewFundOrder";	
+		
+		System.out.println("contr: " + fundOrderForm.getFundOrder().getLineItem().getLineItemId());
+		
+		ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
+		mav.addObject("isValidation", false);
+		mav.addObject("account", account);
+		return mav;
 
 //		else {
 //			ModelAndView modelAndView = new ModelAndView("cart");
@@ -81,10 +74,16 @@ public class FundOrderController {
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
 			// from NewOrderForm
-			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
+			fundOrderValidator.validate(fundOrderForm.getFundOrder(), result);
 
-			if (result.hasErrors())
-				return new ModelAndView("thyme/order/NewFundOrder");
+			if (result.hasErrors()) {
+				Account userSession = (Account) request.getSession().getAttribute("userSession");
+				Account account = jkdkStore.getAccount(userSession.getUserId());
+				ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
+				mav.addObject("isValidation", true);
+				mav.addObject("account", account);
+				return mav;
+			}
 
 			int dbResult = jkdkStore.insertFundOrder(fundOrderForm.getFundOrder());
 			
@@ -103,6 +102,7 @@ public class FundOrderController {
 			return mav;
 	}
 	
+	// test 후 삭제
 	@RequestMapping("/order/test2.do")
 	public ModelAndView test(HttpServletRequest request,
 			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 

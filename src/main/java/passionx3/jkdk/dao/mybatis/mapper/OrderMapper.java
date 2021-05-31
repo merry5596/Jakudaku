@@ -19,7 +19,7 @@ public interface OrderMapper {
 
 	@Insert("INSERT INTO ORDERS (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId)"
 			+ "	VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{discountCost}, #{usedMileage}, #{userId})")
-	int insertOrder(@Param("order") Order order);
+	int insertOrder(Order order);
 	
 	@Select("SELECT ORDERID, ORDERDATE, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"
 			+ " FROM ORDERS WHERE USERID = #{userId} ORDER BY ORDERDATE DESC")

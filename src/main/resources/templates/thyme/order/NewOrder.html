@@ -55,21 +55,21 @@
 		  	<td style="text-align:center"><b>결제 금액</b></td>
 	    </tr>
 	    <tr th:each="lineItem : ${orderForm.order.lineItems}" bgcolor="#EEEEEE">
-	  		<td><a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.item.itemId})}">
-				<img th:src="@{'${lineItem.item.thumbnail1}'}"/></a></td>
+	  		<td><a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+				<img th:src="@{'${lineItem.online.thumbnail1}'}"/></a></td>
 				
-	        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.item.itemId})}">
-	            <span th:text="${lineItem.item.name}">상품명</span></a>
+	        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+	            <span th:text="${lineItem.online.name}">상품명</span></a>
 	            <div>옵션: 
-	            <span th:if="${lineItem.item.pcFile != null}">PC </span>
-	            <span th:if="${lineItem.item.tabletFile != null}">TABLET </span>
-	            <span th:if="${lineItem.item.phoneFile != null}">PHONE </span></div>
-	        <td style="text-align:center" th:text="${lineItem.item.price}">판매가</td>
-	        <td style="text-align:center" th:switch="${lineItem.item.saleState}">
+	            <span th:if="${lineItem.online.pcFile != null}">PC </span>
+	            <span th:if="${lineItem.online.tabletFile != null}">TABLET </span>
+	            <span th:if="${lineItem.online.phoneFile != null}">PHONE </span></div>
+	        <td style="text-align:center" th:text="${lineItem.online.price}">판매가</td>
+	        <td style="text-align:center" th:switch="${lineItem.online.saleState}">
 		        <span th:case="1">Time Sale</span>
 		        <span th:case="2">Battle Sale</span>
-		        <p th:text="'-' + ${lineItem.item.discount}">-0</p></td>
-	        <td style="text-align:center" th:text="${lineItem.item.salePrice}">0</td>
+		        <p th:text="'-' + ${lineItem.online.discount}">-0</p></td>
+	        <td style="text-align:center" th:text="${lineItem.online.salePrice}">0</td>
 	    </tr>
 	    <tr bgcolor="#CCCCCC">
 	      <td style="text-align:right" colspan="5" th:text="'총 ' + ${orderForm.order.totalPrice - orderForm.order.discountCost} + '원'"><b>총 0원</b></td>
@@ -95,12 +95,17 @@
 		      			<td bgcolor="#CCCCCC">결제 수단</td>
 		      			<td>카드사
 		      				<select th:field="*{order.cardType}">
-		      					<option value="">선택</option>
+		      					<option value="notSelected" selected disabled hidden>선택</option>
 		      					<option value="shinhan">신한</option>
 				      			<option value="kookmin">국민</option>
 				      			<option value="hana">하나</option></select>
-		      				<br>카드 번호 <input type="text" th:field="*{order.creditCard}" />
-		      				<br>만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{order.expireDate}" /></td>
+		      				<p th:errors="*{order.cardType}">Invalid cardType~</p>
+		      				<br>
+		      				카드 번호 <input type="text" th:field="*{order.creditCard}" />
+		      				<p th:errors="*{order.creditCard}">Invalid creditCard~</p>
+		      				<br>
+		      				만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{order.expireDate}" />
+		      				<p th:errors="*{order.expireDate}">Invalid expireDate~</p></td>
 		      		</tr>
 		      	</table>
 		      </td>
