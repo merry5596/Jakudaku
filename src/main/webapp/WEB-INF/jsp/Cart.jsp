@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="wrap">
 <%@ include file="navbar.jsp" %>
-	<div class="row row-margin">
 <%@ include file="sidebar.jsp" %>
         <div class="col-7 base">
         	<div class="row">
@@ -27,7 +25,6 @@
 					              <td style="text-align:center" colspan="6"><b>Your cart is empty.</b></td>
 					            </tr>
 					          </c:if>
-					
 					          <c:forEach var="cartItem" items="${cart.cartItemList.pageList}">
 					            <tr bgcolor="#EEEEEE">
 					              <td><a href='<c:url value="/item/viewOnlineItem.do">
@@ -94,6 +91,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 <%@ include file="bottom.jsp" %>

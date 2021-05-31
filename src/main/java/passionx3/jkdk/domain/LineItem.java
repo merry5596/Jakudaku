@@ -11,8 +11,12 @@ public class LineItem implements Serializable {
 	int quantity;
 	int isDownloaded;
 	int unitPrice;
+	// 지워도?
 	Item item;
 	int saleState;
+	int itemId;
+	Online online;
+	Funding funding;
 
 	public LineItem() {
 	}
@@ -29,9 +33,10 @@ public class LineItem implements Serializable {
 	  	this.saleState = saleState;
 	}
   
+	// online
 	public LineItem(int lineNumber, CartItem cartItem) {
 	    this.lineNumber = lineNumber;
-	    this.item = cartItem.getOnlineItem();
+	    this.online = cartItem.getOnlineItem();
 	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
 		this.isDownloaded = 0;	// 여기서 설정?
 	    this.unitPrice = cartItem.getOnlineItem().getPrice();
@@ -41,9 +46,10 @@ public class LineItem implements Serializable {
 	    this.saleState = cartItem.getOnlineItem().getSaleState();
 	  }
 	
+	// funding
 	public LineItem(int lineNumber, Funding funding, int quantity) {
 	    this.lineNumber = lineNumber;
-	    this.item = funding;
+	    this.funding = funding;
 	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
 		this.isDownloaded = 0;	// 여기서 설정?
 	    this.unitPrice = funding.getPrice();
@@ -114,4 +120,31 @@ public class LineItem implements Serializable {
 	public int getSalePrice() {
 		return unitPrice - getDiscount();
 	}
+
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	public Online getOnline() {
+		return online;
+	}
+
+	public void setOnline(Online online) {
+		this.online = online;
+	}
+
+	public Funding getFunding() {
+		return funding;
+	}
+
+	public void setFunding(Funding funding) {
+		this.funding = funding;
+	}
+	
+	
+	
 }

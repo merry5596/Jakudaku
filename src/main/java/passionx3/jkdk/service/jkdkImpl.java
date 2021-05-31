@@ -2,6 +2,7 @@ package passionx3.jkdk.service;
 
 import java.util.List;
 import java.util.Map;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -487,9 +488,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public Map<String, List<LineItem>> getLineItemsByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, List<Order>> getLineItemsByUserId(String userId) throws ParseException {
+		return orderDao.getLineItemsByUserId(userId);
 	}
 
 	@Override

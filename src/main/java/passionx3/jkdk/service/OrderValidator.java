@@ -1,5 +1,9 @@
 package passionx3.jkdk.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Pattern;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -16,24 +20,35 @@ public class OrderValidator implements Validator {
 
 	public void validate(Object obj, Errors errors) {
 		validateCreditCard((Order) obj, errors);
-		validateAddress((Order) obj, errors);
 	}
 	
 	public void validateCreditCard(Order order, Errors errors) {
 		errors.setNestedPath("order");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "creditCard", "CCN_REQUIRED", "FAKE (!) credit card number required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "expiryDate", "EXPIRY_DATE_REQUIRED", "Expiry date is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardType", "CARD_TYPE_REQUIRED", "Card type is required.");
-		errors.setNestedPath("");
-	}
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "expireDate", "EXPIRY_DATE_REQUIRED", "Expiry date is required.");
 
-	public void validateAddress(Order order, Errors errors) {
-		errors.setNestedPath("order");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receiverName", "RECEIVER_NAME_REQUIRED", "Billing Info: receiver name is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "ADDRESS1_REQUIRED", "Billing Info: address1 is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address2", "ADDRESS2_REQUIRED", "Billing Info: address2 is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zip", "ZIP_REQUIRED", "Billing Info: zip is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "PHONE_REQUIRED", "Billing Info: phone is required.");
+		// Validate expireDate
+		String expireDate = order.getExpireDate();
+		
+		if (expireDate == null || expireDate.trim().isEmpty()) {	// null
+			errors.rejectValue("expireDate", "EXPIRY_DATE_REQUIRED", "Expiry date is required.");
+		}
+		else if (!Pattern.matches("^(0[1-9]|1[0-2])/[0-9]{2}$", expireDate)) {	// type error
+			errors.rejectValue("expireDate", "EXPIRY_DATE_INVALID", "Expire Date type is wrong.");
+		} else {
+			SimpleDateFormat format = new SimpleDateFormat("MM/yy");
+				String today = format.format(new Date());
+
+				if (expireDate.compareTo(today) < 0) {	// is expired
+					errors.rejectValue("expireDate", "EXPIRY_DATE_EXPIRED", "Expired Date");
+				}
+		}
+		
+		if (order.getCardType().equals("notSelected")) {
+			errors.rejectValue("cardType", "CARD_TYPE_REQUIRED", "Card type is required.");
+		}
+		
+		
 		errors.setNestedPath("");
 	}
 

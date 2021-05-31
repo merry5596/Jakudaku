@@ -20,7 +20,7 @@ public interface LineItemMapper {
 			+ "	VALUES(#{lineItemId}, #{orderId}, #{lineNumber}, #{quantity}, #{isDownloaded}, #{item.itemId}, #{saleState})")
 	int insertLineItem(LineItem lineItem);
 
-	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, saleState"
+	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, saleState, i.itemid"
 			+ "	FROM LINEITEM l, ITEM i"
 			+ " WHERE l.orderId = #{orderId} AND l.itemId = i.itemId")
 	List<LineItem> getLineItemsByOrderId(int orderId);

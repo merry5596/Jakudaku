@@ -105,22 +105,21 @@
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 							<div id="onlineListDiv" th:each="item : ${onlineList}" class="col">
 								<div class="card shadow-sm">
-									<a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 										<img th:src="@{${item.thumbnail1}}"/>
 									</a>
 									<div class="card-body ">
-										<a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-	                                        <span class="itemName" th:text="${item.name}" >
-	                                            name
-	                                        </span>
-                                        </a>
-                                        <small class="text-muted" th:text="${item.categoryName}">
-                                            categoryName
-                                        </small>
-                                        <div class = "mt-1 mb-3">
-	                                        <small class="text-muted" th:text="${item.description}">
-	                                        	description
-	                                        </small>
+										<div>
+											<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+		                                        <span class="itemName" th:text="${item.name}" >
+		                                            name
+		                                        </span>
+	                                        </a>
+	                                    </div>
+	                                    <div>
+	                                    	<small class="text-muted">#</small><small class="text-muted" th:text="${item.themeName}">
+	                                    		themeName
+	                                    	</small>
                                         </div>
 
                                        <span th:text="${item.price}" >price</span>원

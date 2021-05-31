@@ -4,16 +4,60 @@
     <title>New Fund Order</title>
 </head>
 <script>
-	window.onclick = function() {
-		var m = document.getElementById('usedMileage');
-		var printM = document.getElementById('usedMileageValue');
-		if (m.value == "") {
-			printM.innerText = "0";
-		}
-		else {
-			printM.innerText = m.value;
+	 window.onload = function() {
+		 var isValidation = document.getElementById('isValidation');
+		 var another = document.getElementById('another');
+		 if (isValidation.value == 'true') {
+			 another.checked = true;
+		 }
+	 }
+	
+	function changeType() {
+		var typeId = document.querySelector('input[name="group"]:checked').id;
+		var receiverName = document.getElementById('receiverName');
+		var zip = document.getElementById('zip');
+		var address1 = document.getElementById('address1');
+		var address2 = document.getElementById('address2');
+		var phone = document.getElementById('phone');
+		var isValidation = document.getElementById('isValidation');
+		
+		if (typeId == 'same') {
+			receiverName.readOnly = true;
+			zip.readOnly = true;
+			address1.readOnly = true;
+			address2.readOnly = true;
+			phone.readOnly = true;
+
+			
+			if (isValidation.value == 'false') {
+				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
+				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
+				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
+				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
+				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
+			} else if (isValidation.value == 'true') {
+				receiverName.value = '[[${account.name}]]';
+				zip.value = '[[${account.zip}]]';
+				address1.value = '[[${account.address1}]]';
+				address2.value = '[[${account.address2}]]';
+				phone.value = '[[${account.phone}]]';
+			}
+			
+		} else if (typeId == 'another') {
+			receiverName.readOnly = false;
+			zip.readOnly = false;
+			address1.readOnly = false;
+			address2.readOnly = false;
+			phone.readOnly = false;
+			
+			receiverName.value = '';
+			zip.value = '';
+			address1.value = '';
+			address2.value = '';
+			phone.value = '';
 		}
 	}
+	
 </script>
 <body>
 <div class="wrap">
@@ -25,7 +69,7 @@
 			<div class="col-md-12">
 			  <h2>펀딩 상품 결제</h2>
 
-			  	<table style="width:1000px; align:center;">
+			  	<table style="width:100%; align:center;">
 				    <tr>
 				      	<td colspan="5"><b>상품 정보</b></td>
 				    </tr>
@@ -37,13 +81,13 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrderForm.fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
-							<img th:src="@{${lineItem.item.thumbnail1}}"/></a></td>
-				        <td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
-				            <span th:text="${lineItem.item.name}">상품명</span></a>
-				        <td style="text-align:center" th:text="${lineItem.item.price}">0</td>
+						<td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+							<img th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
+				        <td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+				            <span th:text="${lineItem.funding.name}">상품명</span></a>
+				        <td style="text-align:center" th:text="${lineItem.funding.price}">0</td>
 				        <td style="text-align:center" th:text="${lineItem.quantity}">1</td>
-				        <td style="text-align:center" th:text="${lineItem.item.price} * ${lineItem.quantity}">0</td>
+				        <td style="text-align:center" th:text="${lineItem.funding.price} * ${lineItem.quantity}">0</td>
 				    </tr>
 				    <tr bgcolor="#CCCCCC">
 				      <td style="text-align:right" colspan="5" th:text="'총 ' + ${fundOrderForm.fundOrder.totalPrice} + '원'"><b>총 0원</b></td>
@@ -52,29 +96,41 @@
 			  <br><br>
 			  
 			  <form action="#" th:action="@{newFundOrderSubmitted.do}" th:object="${fundOrderForm}" method="POST">
-				  <table style="width:1000px; align:center;">
+				  <table style="width:100%; align:center;">
 			  	  	<tr>
-			  	  		<td width="20%"><b>배송 정보</b></td>
-			  	  		<td><input type="radio" name="group" checked="">회원 정보와 동일
-							<input type="radio" name="group">새로운 수령인</td>
+			  	  		<td colspan="2" width="30%"><b>배송 정보</b></td>
+			  	  		<td><input type="radio" name="group" id="same" onclick="changeType();" checked="true"/>
+			  	  			<label for="same">회원 정보와 동일</label>
+							<input type="radio" name="group" id="another" onclick="changeType();"/>
+							<label for="another">새로운 수령인</label>
+							<input type="hidden" id="isValidation" th:value="${isValidation}" /></td>
 			  	  	</tr>
 			  	  	<tr>
-			  	  		<td bgcolor="#CCCCCC">수령인</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.receiverName}" /></td>
+			  	  		<td colspan="2" bgcolor="#CCCCCC">수령인</td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" />
+			  	  		<span th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
 			  	  	</tr>
 			  	  	<tr>
-			  	  		<td bgcolor="#CCCCCC"><br>수령 주소</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.zip}" /> <button type="button">주소 찾기</button>
-				  	  		<br><input type="text" th:field="*{fundOrder.address1}" />
-				  	  		<br><input type="text" th:field="*{fundOrder.address2}" /></td>
+			  	  		<td rowspan="3" bgcolor="#CCCCCC"><br>수령 주소</td>
+			  	  		<td bgcolor="#CCCCCC">우편 번호</td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" /> <span th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
 			  	  	</tr>
 			  	  	<tr>
-			  	  		<td bgcolor="#CCCCCC">휴대폰 번호</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" th:field="*{fundOrder.phone}" /></td>
+			  	  		<td bgcolor="#CCCCCC">주소</td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" /> <span th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
+			  	  	</tr>
+			  	  	<tr>
+			  	  		<td bgcolor="#CCCCCC">상세 주소</td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" /> <span th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
+			  	  	</tr>
+			  	  	<tr>
+			  	  		<td colspan="2" bgcolor="#CCCCCC">휴대폰 번호</td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" />
+			  	  		<span th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
 			  	  	</tr>
 			  	  </table>
 			  	  <br>
-				  <table style="width:1000px; align:center;">
+				  <table style="width:100%; align:center;">
 				  	<tr>
 				      <td colspan="2"><b>결제 상세 <span style="font-size:10pt">※펀딩 상품 구매시에는 적립금 사용이 불가합니다.</span></b></td>
 				    </tr>
@@ -85,12 +141,17 @@
 				      			<td bgcolor="#CCCCCC">결제 수단</td>
 				      			<td>카드사
 				      				<select th:field="*{fundOrder.cardType}">
-				      					<option value="">선택</option>
+				      					<option value="notSelected" selected>선택</option>
 				      					<option value="shinhan">신한</option>
 						      			<option value="kookmin">국민</option>
 						      			<option value="hana">하나</option></select>
-				      				<br>카드 번호 <input type="text" th:field="*{fundOrder.creditCard}" />
-				      				<br>만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{fundOrder.expireDate}" /></td>
+				      				<br>
+						      		<p th:errors="*{fundOrder.cardType}">Invalid cardType~</p>
+				      				카드 번호 <input type="text" th:field="*{fundOrder.creditCard}" />
+				      				<br>
+				      				<p th:errors="*{fundOrder.creditCard}">Invalid creditCard~</p>
+				      				만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{fundOrder.expireDate}" />
+				      				<p th:errors="*{fundOrder.expireDate}">Invalid expireDate~</p></td>
 				      		</tr>
 				      	</table>
 				      </td>
