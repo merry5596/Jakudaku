@@ -25,7 +25,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Online;
 
 @Mapper
 public interface FundingMapper {
@@ -33,7 +32,7 @@ public interface FundingMapper {
 			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
 			+ "FROM item i, fundingitem f "
 			+ "WHERE i.itemId = f.itemId "
-			+ "AND i.name LIKE '%#{keyword}%' "
+			+ "AND i.name LIKE '%' || #{keyword} || '%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
 	List<Funding> getFundingItemsByKeyword(@Param("keyword") String keyword);
@@ -56,10 +55,10 @@ public interface FundingMapper {
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE, "
 			+ "I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3, "
 			+ "I.ISFORSALE AS ISFORSALE, I.DESCRIPTION AS DESCRIPTION, I.APPROVAL AS APPROVAL, "
-			+ "F.FINISHDATE AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY "
+			+ "TO_CHAR(F.FINISHDATE, 'YYYY/MM/DD HH24:MI:SS') AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY "
 			+ "FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A "
 			+ "WHERE i.itemId = #{itemId} AND I.ITEMID = F.ITEMID AND T.THEMEID = I.THEMEID AND A.USERID = I.USERID")
-	Funding getOnlineItemById(@Param("itemId") int itemId);
+	Funding getFundingItemById(@Param("itemId") int itemId);
 	
 	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, T.NAME AS THEMENAME, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE,"
 			+ " I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3,"

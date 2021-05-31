@@ -104,7 +104,7 @@ div {
 		
 		<p>
 			<div class="ui large red button"><a class="order" href="#" th:href="@{/user/addItemToCart.do(itemId=${online.itemId})}" >장바구니</a></div> <!-- redirection으로 request 파라미터(itemId) 넘기기 -->
-			<div class="ui large red button"><a class="order" href="#" th:href="@{/order/newOrder.do}">구매하기</a></div>
+			<div class="ui large red button"><a class="order" href="#" th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a></div>
 
 		
 		<div class="ui segment">
@@ -168,6 +168,9 @@ div {
     function goToReview() {
     	$("#review_tab").trigger("click");
     }
+    
+    date = new Date('2019/5/16 17:24:30');
+    console.log(date);
     </script>
 </body>
 </html>
