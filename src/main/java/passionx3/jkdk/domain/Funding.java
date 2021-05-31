@@ -1,6 +1,8 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("serial")
