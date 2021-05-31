@@ -28,17 +28,6 @@ public class OrderController {
 	private jkdkFacade jkdkStore;
 	@Autowired
 	private OrderValidator orderValidator;
-
-/*
-	@ModelAttribute("creditCardTypes")
-	public List<String> referenceData() {
-		ArrayList<String> creditCardTypes = new ArrayList<String>();
-		creditCardTypes.add("Visa");
-		creditCardTypes.add("MasterCard");
-		creditCardTypes.add("American Express");
-		return creditCardTypes;			
-	}
-	*/
 	
 	@ModelAttribute("orderForm")
 	public OrderForm createOrderForm() {
@@ -87,11 +76,13 @@ public class OrderController {
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
 			// from NewOrderForm
-			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
-
-			if (result.hasErrors())
+			orderValidator.validateCreditCard(orderForm.getOrder(), result);
+			
+			if (result.hasErrors()) {
+				System.out.println(result.toString());
 				return new ModelAndView("thyme/order/NewOrder");
-
+			}
+			
 			int dbResult = jkdkStore.insertOrder(orderForm.getOrder());
 			
 			if (dbResult < 1) {
@@ -108,7 +99,8 @@ public class OrderController {
 			
 			return mav;
 	}
-	
+
+	// test 후 삭제
 	@RequestMapping("/order/test.do")
 	public ModelAndView test(HttpServletRequest request,
 			@ModelAttribute("orderForm") OrderForm orderForm, 

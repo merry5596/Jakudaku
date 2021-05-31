@@ -94,53 +94,51 @@
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 							<div th:each="item : ${fundingList}" class="col">
 								<div class="card shadow-sm">
-									<a href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
+									<a class="link-unstyled " href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
 										<img th:src="@{${item.thumbnail1}}"/>
 									</a>
 									<div class="card-body ">
-										<a href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-	                                        <span class="itemName" th:text="${item.name}" >
-	                                            name
-	                                        </span>
-                                        </a>
-                                        <small class="text-muted" th:text="${item.targetQuantity}">
-                                            target
-                                        </small>
-                                        <div class = "mt-1 mb-3">
-	                                        <small class="text-muted" th:text="${item.description}">
-	                                        	description
-	                                        </small>
+										<div>
+											<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+		                                        <span class="itemName" th:text="${item.name}" >
+		                                            name
+		                                        </span>
+	                                        </a>
+	                                    </div>
+	                                    <div>
+	                                    	<small class="text-muted">#</small><small class="text-muted" th:text="${item.themeName}">
+	                                    		themeName
+	                                    	</small>
                                         </div>
 
                                        <span th:text="${item.price}" >price</span>원
-								</div>
+									</div>
 									
-								<div class="progress mx-2">
-								  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-								</div>
-								<div class="d-flex justify-content-between align-items-center">
-									<span class= "mx-2" style="text-align:left" >
-										<small class="text-info" th:text="${item.targetQuantity}"> 목표 퍼센티지 </small><small class="text-info">% </small>
-									</span>
-									<span class= "mx-2" style="text-align:right" >
-										<small style="text-align:left" class="text-muted text-sm" th:text="${item.remainingDays}"> remainingDays</small>
-										<small class="text-muted text-sm">일 남음</small>
-									</span>
-								</div>
-								<div style="text-align:right">
-									<small class="text-muted text-sm" th:text="${item.finishDate}"> finishDate</small>
-									<small class="text-muted text-sm">에 마감&nbsp;</small>
-								</div>
-								<div class="mx-2 text-danger" style="text-align:right">
-									<small th:text="${item.likeNum}">12</small>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-									  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-									</svg>
+									<div class="progress mx-2">
+									  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+									</div>
+									<div class="d-flex justify-content-between align-items-center">
+										<span class= "mx-2" style="text-align:left" >
+											<small class="text-info" th:text="${item.quantityPercentage}"> 목표 퍼센티지 </small><small class="text-info">% </small>
+										</span>
+										<span class= "mx-2" style="text-align:right" th:if="${item.remainingDays} != 0">
+											<small style="text-align:left" class="text-muted text-sm" th:text="${item.remainingDays}"> remainingDays</small>
+											<small class="text-muted text-sm">일 남음</small>
+										</span>
+										<span class= "mx-2" style="text-align:right" th:if="${item.remainingDays} == 0">
+											<small class="text-muted text-sm">오늘 마감</small>
+										</span>
+									</div>
+									<div class="mx-2 text-danger" style="text-align:right">
+										<small th:text="${item.likeNum}">12</small>
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+										  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+										</svg>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</div>
 
 				<!-- 상품 등록-->

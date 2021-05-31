@@ -69,6 +69,15 @@ public class FundOrder extends Order implements Serializable {
 		deliveryStatus = 0;
 		
 	}
+
+	// for after validate error
+	public void resetFundOrder(Account account) {
+		address1 = account.getAddress1();
+		address2 = account.getAddress2();
+		zip = account.getZip();
+		phone = account.getPhone();
+		receiverName = account.getName();
+	}
 	
 	public String getAddress1() {
 		return address1;
@@ -118,6 +127,7 @@ public class FundOrder extends Order implements Serializable {
 	public void setLineItem(LineItem lineItem) {
 		this.lineItem = lineItem;
 	}
+
 	
 	
 }

@@ -70,6 +70,7 @@ public interface OnlineMapper {
 			"AND i.itemId = #{itemId} AND i.isForSale = 1")
 	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
+
 	@Select("SELECT itemID, name, uploaddate, price, likenum, thumbnail1, categoryname, description, themeid, userid FROM \r\n" + 
 			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, likenum, thumbnail1, isforsale, c.name AS categoryName, description, themeid, userid\r\n" + 
 			"FROM ONLINEITEM o, item i , category c WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
@@ -102,77 +103,87 @@ public interface OnlineMapper {
 	int updateOnlineItemSaleState(@Param("itemId") int itemId) throws DataAccessException;
 
 	// 여기부터 조건 검색
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, o.categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid"
 			+ " AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.uploaddate DESC")
 	List<Online> getOnlineItemListByCategoryOrderByUploadDate(int categoryId, String keyword);
   
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, o.categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"
-			+ " AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
+			+ " AND o.categoryid = #{categoryId} AND i.themeid = t.themeid"
+			+ " AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.uploaddate DESC")
 	List<Online> getOnlineItemListByThemeOrderByUploadDate(int categoryId, int themeId, String keyword);
 	
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid"
 			+ " AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.likenum DESC")
 	List<Online> getOnlineItemListByCategoryOrderByLikeNum(int categoryId, String keyword);
 
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.likenum DESC")
 	List<Online> getOnlineItemListByThemeOrderByLikeNum(int categoryId, int themeId, String keyword);
 	
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid"
 			+ " AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY o.totalrate DESC")
 	List<Online> getOnlineItemListByCategoryOrderByTotalRate(int categoryId, String keyword);
 
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY o.totalrate DESC")
 	List<Online> getOnlineItemListByThemeOrderByTotalRate(int categoryId, int themeId, String keyword);
 	
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid"
 			+ " AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.price")
 	List<Online> getOnlineItemListByCategoryOrderByPriceLow(int categoryId, String keyword);
 
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.price")
 	List<Online> getOnlineItemListByThemeOrderByPriceLow(int categoryId, int themeId, String keyword);
 	
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid"
 			+ " AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.price DESC")
 	List<Online> getOnlineItemListByCategoryOrderByPriceHigh(int categoryId, String keyword);
 
-	@Select("SELECT i.itemId AS itemId, name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, description, themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
-			+ " FROM ONLINEITEM o, item i"
+	@Select("SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
+			+ " FROM ONLINEITEM o, item i, theme t"
 			+ " WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1"
+			+ " AND i.themeid = t.themeid"
 			+ " AND o.categoryid = #{categoryId} AND i.themeId = #{themeId} AND i.name LIKE '%' ||  #{keyword} || '%'"
 			+ " ORDER BY i.price DESC")
 	List<Online> getOnlineItemListByThemeOrderByPriceHigh(int categoryId, int themeId, String keyword);
