@@ -71,14 +71,14 @@ public interface OnlineMapper {
 	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
 
-	@Select("SELECT itemID, name, uploaddate, price, likenum, thumbnail1, categoryname, description, themeid, userid FROM \r\n" + 
-			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, likenum, thumbnail1, isforsale, c.name AS categoryName, description, themeid, userid\r\n" + 
-			"FROM ONLINEITEM o, item i , category c WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
+	@Select("SELECT itemID, name, uploaddate, price, likenum, thumbnail1, categoryname, pcfile, tabletfile, phonefile, themeid, themename, userid FROM " + 
+			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
+			"FROM ONLINEITEM o, item i , category c, theme t WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId AND i.themeId = t.themeId ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
 	List<Online> getBestOnlineItemListforHome();
 	
-	@Select("SELECT itemID, name, uploaddate, price, likenum, thumbnail1, categoryname, description, themeid, userid FROM \r\n" + 
-			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, likenum, thumbnail1, isforsale, c.name AS categoryName, description, themeid, userid\r\n" + 
-			"			FROM ONLINEITEM o, item i , category c WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId ORDER BY i.uploaddate DESC) WHERE ROWNUM < 5")
+	@Select("SELECT itemID, name, uploaddate, price, likenum, thumbnail1, categoryname, pcfile, tabletfile, phonefile, themeid, themename, userid FROM " + 
+			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
+			"FROM ONLINEITEM o, item i , category c, theme t WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId AND i.themeId = t.themeId ORDER BY i.uploaddate DESC) WHERE ROWNUM < 5")
 	List<Online> getNewOnlineItemListforHome();
 
 	@Select("SELECT I.ITEMID AS ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, T.NAME AS THEMENAME, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE,"
