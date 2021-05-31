@@ -16,6 +16,6 @@ public interface CategoryMapper {
 	@Select("SELECT Name FROM category WHERE categoryId = #{categoryId}")
 	String getCategoryNameByCategoryId(@Param("categoryId") int categoryId);	
 
-	@Select("SELECT CATEGORYID, NAME FROM CATEGORY WHERE CATEGORYID=#{CATEGORYID}")
+	@Select("SELECT CATEGORYID, NAME FROM CATEGORY WHERE CATEGORYID=#{categoryId}")
 	Category getCategoryByCategoryId(@Param("categoryId") int categoryId);
 }

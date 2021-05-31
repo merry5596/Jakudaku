@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <body>
+<div class="wrap">
   <!--navbar-->
   <div align="center">
   <nav class="mainnav navbar navbar-expand-lg navbar-light sticky-top bg-light">
