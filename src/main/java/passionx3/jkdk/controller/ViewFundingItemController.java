@@ -5,13 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller
-@SessionAttributes("userSession")
 public class ViewFundingItemController {
 	
 	private jkdkFacade jkdkStore;
@@ -23,9 +21,8 @@ public class ViewFundingItemController {
 	
 	@RequestMapping("/item/viewFundingItem.do")
 	public String handleRequest(@RequestParam("itemId") int itemId, ModelMap model) throws Exception {
-		System.out.println("funding ok");
 		Funding funding = this.jkdkStore.getFundingItemById(itemId);
 		model.put("funding", funding);
-		return "thyme/ViewFundingItem";
+		return "thyme/item/ViewFundingItem";
 	}
 }
