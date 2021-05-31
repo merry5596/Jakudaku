@@ -44,14 +44,14 @@
 		<c:forEach var="o" items="${orderMap[d.key]}">
 			<tr>
 				<td>${d.key}</td>
-				<td><button type="button"  onClick="location.href='<c:url value="/order/viewOrder"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
+				<td><button type="button"  onClick="location.href='<c:url value="/order/viewOrder.do"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
 			</tr>
 			<c:forEach var="l" items="${o.lineItems}">
 				
 				<tr>
 				<c:choose>
 					<c:when test="${not empty l.online}">
-						<td>${l.online.thumbnail1}</td>
+						<td><img src="${l.online.thumbnail1}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.online.name}</td>
 						<td>
 							<c:if test="${not empty l.online.pcFile}">
@@ -69,7 +69,7 @@
 						</td>
 					</c:when>
 					<c:otherwise>
-						<td>${l.itemId}</td>
+						<td><img src="${l.funding.thumbnail1}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.funding.name}</td>
 						<td></td>
 					</c:otherwise>

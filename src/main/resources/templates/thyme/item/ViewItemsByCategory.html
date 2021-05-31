@@ -106,7 +106,7 @@
 							<div id="onlineListDiv" th:each="item : ${onlineList}" class="col">
 								<div class="card shadow-sm">
 									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}"/>
+										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
 									</a>
 									<div class="card-body ">
 										<div>
