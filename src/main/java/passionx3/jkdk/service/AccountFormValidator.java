@@ -21,6 +21,10 @@ public class AccountFormValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.userId", 
 		"USERID_REQUIRED", "아이디를 입력해주세요");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.password", 
+				"PASSWORD_REQUIRED", "비밀번호를 입력해주세요");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "repeatedPassword", 
+				"REPEATEDPASSWORD_REQUIRED", "비밀번호를 다시 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.alias", 
 		"ALIAS_REQUIRED", "닉네임을 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.name", 
