@@ -119,7 +119,7 @@ public class MybatisOrderDao implements OrderDao {
 			int fundOrderId = fundingList.get(j).getOrderId();
 
 			try {
-				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date onlineDate = format.parse(onlineList.get(i).getOrderDate());
 				Date fundingDate = format.parse(fundingList.get(j).getOrderDate());
 						
@@ -165,9 +165,8 @@ public class MybatisOrderDao implements OrderDao {
 		if(i < onlineList.size()) {
 			for(int k = i; k < onlineList.size(); k++) {
 				List<Order> orderList = new ArrayList<Order>();
-					System.out.println("이곳은 2의 online " + i);
-					int orderId = onlineList.get(i).getOrderId();
-					Order order = orderMapper.getOrderByOrderId(orderId);
+				int orderId = onlineList.get(i).getOrderId();
+				Order order = orderMapper.getOrderByOrderId(orderId);
 				
 				List<LineItem> lineItemList = new ArrayList<LineItem>();
 				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
@@ -187,7 +186,6 @@ public class MybatisOrderDao implements OrderDao {
 			for(int k = j; k < fundingList.size(); k++) {
 			
 				List<Order> orderList = new ArrayList<Order>();
-				System.out.println("이곳은 2의 funding " + j);
 				int fundOrderId = fundingList.get(j).getOrderId();
 				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
 			

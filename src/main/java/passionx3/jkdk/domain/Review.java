@@ -11,6 +11,7 @@ public class Review implements Serializable{
 	private String userId;
 	private String userName;
 	private int itemId;
+	private int lineItemId;
 	
 	public int getReviewId() {
 		return reviewId;
@@ -54,5 +55,12 @@ public class Review implements Serializable{
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
+	public int getLineItemId() {
+		return lineItemId;
+	}
+	public void setLineItemId(int lineItemId) {
+		this.lineItemId = lineItemId;
+	}
+	
 	
 }

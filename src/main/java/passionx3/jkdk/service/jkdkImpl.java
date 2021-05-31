@@ -114,20 +114,17 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public int insertReview(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
+		return reviewDao.insertReview(review);
 	}
 
 	@Override
 	public int updateReview(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
+		return reviewDao.updateReview(review);
 	}
 
 	@Override
 	public int deleteReview(int reviewId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return reviewDao.deleteReview(reviewId);
 	}
 
 	@Override
@@ -520,12 +517,6 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public Item getItem(String itemId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int insertOrder(Order order) {
 		return orderDao.insertOrder(order);
 	}
@@ -573,6 +564,16 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public Category getCategoryByCategoryId(int categoryId) {
 		return categoryDao.getCategoryByCategoryId(categoryId);
+	}
+
+	@Override
+	public Review getReview(int reviewId) {
+		return reviewDao.getReview(reviewId);
+	}
+
+	@Override
+	public String getReviewIdByLineItmeId(int lineItemId) {
+		return reviewDao.getReviewIdByLineItemId(lineItemId);
 	}
 
 
