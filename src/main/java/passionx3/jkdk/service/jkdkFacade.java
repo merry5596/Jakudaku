@@ -26,12 +26,16 @@ public interface jkdkFacade {
 	
 	int refuseItem(int itemId);
 	
+	Review getReview(int reviewId);
+	
+	String getReviewIdByLineItmeId(int lineItemId);
+	
 	int insertReview (Review review);
 
 	int updateReview (Review review);
 	
 	int deleteReview (int reviewId);
-	
+		
 	List<Review> getReviewsByItemId(int itemId);
 	
 	Online getOnlineItemById(int itemId);
@@ -100,8 +104,6 @@ public interface jkdkFacade {
 
 	int updateOnlineItem(Online online);
 	
-	Item getItem(String itemId);
-
 	int insertOrder(Order order);
 	
 	int insertFundOrder(FundOrder fundOrder);

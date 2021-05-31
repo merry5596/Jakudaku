@@ -14,4 +14,8 @@ public interface ReviewDao {
 	
 	List<Review> getReviewsByItemId(int itemId);
 	
+	Review getReview(int reviewId);
+
+	String getReviewIdByLineItemId(int lineItemId);
+	
 }

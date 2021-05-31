@@ -20,34 +20,32 @@ public class AccountFormValidator implements Validator {
 		Account account = accountForm.getAccount();
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.userId", 
-		"FIRST_NAME_REQUIRED", "First name is required.");
+		"USERID_REQUIRED", "아이디를 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.alias", 
-		"LAST_NAME_REQUIRED", "Last name is required.");
+		"ALIAS_REQUIRED", "닉네임을 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.name", 
-				"LAST_NAME_REQUIRED", "Last name is required.");
+				"NAME_REQUIRED", "이름을 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.email", "EMAIL_REQUIRED", 
-		"Email address is required.");
+		"이메일을 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.phone", "PHONE_REQUIRED", 
-		"Phone number is required.");
+		"핸드폰번호를 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address1", 
-		"ADDRESS_REQUIRED", "Address (1) is required.");
+		"ADDRESS_REQUIRED", "주소를 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address2", 
-				"ADDRESS_REQUIRED", "Address (1) is required.");
+				"ADDRESS_REQUIRED", "주소를 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.zip", "ZIP_REQUIRED", 
-		"ZIP is required.");
+		"우편번호를 입력해주세요");
 		
 		if (accountForm.isNewAccount()) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.name", 
-			"USER_ID_REQUIRED", "User ID is required.");
 			if (account.getPassword() == null || account.getPassword().length() < 1 ||
 			!account.getPassword().equals(accountForm.getRepeatedPassword())) {
 				errors.reject("PASSWORD_MISMATCH",
-				"Passwords did not match or were not provided. Matching passwords are required.");
+				"비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 			}
 		}
 		else if (account.getPassword() != null && account.getPassword().length() > 0) {
 			if (!account.getPassword().equals(accountForm.getRepeatedPassword())) {
-				errors.reject("PASSWORD_MISMATCH", "Passwords did not match. Matching passwords are required.");
+				errors.reject("PASSWORD_MISMATCH", "비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 			}
 		}
 	}

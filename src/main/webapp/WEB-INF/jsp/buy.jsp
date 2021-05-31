@@ -44,7 +44,7 @@
 		<c:forEach var="o" items="${orderMap[d.key]}">
 			<tr>
 				<td>${d.key}</td>
-				<td><button type="button"  onClick="location.href='<c:url value="/user/confirmOrder.do"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
+				<td><button type="button"  onClick="location.href='<c:url value="/order/viewOrder"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
 			</tr>
 			<c:forEach var="l" items="${o.lineItems}">
 				
@@ -64,6 +64,9 @@
 								<a href="${l.online.phoneFile}" download><button>모바일용 다운로드</button></a>
 							</c:if>	
 						</td>
+						<td>
+							<button type="button"  onClick="location.href='<c:url value="/review/writeReview.do"><c:param name="lineItemId" value="${l.lineItemId}"/></c:url>'">리뷰쓰기</button>
+						</td>
 					</c:when>
 					<c:otherwise>
 						<td>${l.itemId}</td>
@@ -71,9 +74,7 @@
 						<td></td>
 					</c:otherwise>
 				</c:choose>
-				<td>
-					<button type="button"  onClick="location.href='<c:url value="/review/writeReview.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'">리뷰쓰기</button>
-				</td>
+				
 				</tr>
 			</c:forEach>
 			<tr><td><br></td></tr>

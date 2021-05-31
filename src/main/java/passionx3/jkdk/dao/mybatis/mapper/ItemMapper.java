@@ -22,6 +22,7 @@ package passionx3.jkdk.dao.mybatis.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
@@ -40,4 +41,5 @@ public interface ItemMapper {
 				+ "isforsale = #{item.isForSale}, description = #{item.description}, approval = 0 "
 			+ "WHERE itemid = #{item.itemId}")
 	int updateItem(@Param("item") Item item);
+	
 }

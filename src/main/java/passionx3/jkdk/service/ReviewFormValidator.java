@@ -19,21 +19,10 @@ public class ReviewFormValidator implements Validator {
 		ReviewForm reviewForm = (ReviewForm)obj; 
 		Review review = reviewForm.getReview();
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.userId", 
-		"FIRST_NAME_REQUIRED", "First name is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.alias", 
-		"LAST_NAME_REQUIRED", "Last name is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.name", 
-				"LAST_NAME_REQUIRED", "Last name is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.email", "EMAIL_REQUIRED", 
-		"Email address is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.phone", "PHONE_REQUIRED", 
-		"Phone number is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address1", 
-		"ADDRESS_REQUIRED", "Address (1) is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address2", 
-				"ADDRESS_REQUIRED", "Address (1) is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.zip", "ZIP_REQUIRED", 
-		"ZIP is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "review.rate", 
+		"FIRST_NAME_REQUIRED", "평점을 입력해주세요");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "review.content", 
+		"LAST_NAME_REQUIRED", "내용을 입력해주세요");
+		
 	}
 }
