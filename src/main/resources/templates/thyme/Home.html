@@ -71,7 +71,7 @@
                             <div th:each="item: ${bestOnlineList}" class="col">
 	                            <div class="card shadow-sm">
 									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}"/>
+										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
 									</a>
 									<div class="card-body ">
 										<div>
@@ -119,7 +119,7 @@
                             <div th:each="item: ${newOnlineList}" class="col">
                             <div class="card shadow-sm">
 									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}"/>
+										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
 									</a>
 									<div class="card-body ">
 										<div>
@@ -169,7 +169,7 @@
                             <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
                                 <div class="card shadow-sm">
 									<a class="link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}"/>
+										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
 									</a>
 									<div class="card-body ">
 										<div>

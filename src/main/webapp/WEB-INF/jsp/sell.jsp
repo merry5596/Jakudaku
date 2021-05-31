@@ -65,7 +65,7 @@
 		<tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
 		<td>${status.index}</td>
-		<td>${o.thumbnail1}</td>
+		<td><img src="${o.thumbnail1}" style="width:100px; height:100px;"/></td>
 		<td onclick="location.href='thyme/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
 		<td>${o.uploadDate}</td>
 		<td><button type="button" onClick="location.href='<c:url value="/item/sellOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'">수정</button></td>
@@ -95,7 +95,7 @@
 		<tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
 		<td>${status.index}</td>
-		<td>${f.thumbnail1}</td>
+		<td><img src="${f.thumbnail1}" style="width:100px; height:100px;""/></td>
 		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${f.name}</td>
 		<td>${f.uploadDate}</td>
 		<td><button type="button" onClick="location.href='<c:url value="/item/sellFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'">수정</button></td>
