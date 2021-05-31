@@ -26,10 +26,12 @@
                             <span th:text="${item.price}">price</span>
                         </div>
                         <p class="lead" th:text="${item.description}">description</p>
+                        <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
                          <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 	구매
-                            </button>
+                         </button>
+                         </a>
                     </div>
                 </div>
             </div>

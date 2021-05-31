@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.util.Message;
 
 @Controller
 @SessionAttributes("userSession")
-public class SignonController {
+public class SignonController{
 	
 	@Autowired
 	private jkdkFacade jkdkStore;
@@ -29,7 +30,8 @@ public class SignonController {
 		Account userSession = jkdkStore.getAccount(userId, password);
 		
 		if (userSession == null) {	// 로그인 정보 일치하지 않음
-			return "redirect:/";
+			model.addAttribute("data", new Message(" 가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "/"));
+			return "thyme/utils/MessagePage";
 		}
 		
 		model.addAttribute("userSession", userSession);
