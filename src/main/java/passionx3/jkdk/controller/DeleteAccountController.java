@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.util.WebUtils;
 
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.util.Message;
 
 @Controller
 @RequestMapping("/user/deleteAccount.do")
@@ -41,7 +43,7 @@ public class DeleteAccountController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String deleteAccount(@RequestParam("account.password") String password, 
-			 HttpSession session) throws Exception {
+			 HttpSession session, Model model) throws Exception {
 		Account curAccount = (Account)session.getAttribute("userSession");
 		try {
 			System.out.println(curAccount.getPassword() + " " + password + " " + curAccount.getName());
@@ -57,6 +59,7 @@ public class DeleteAccountController {
 			return formViewName; 
 		}
 		
-		return "thyme/user/Goodbye";
+		model.addAttribute("data", new Message("회원탈퇴가 완료되었습니다.", "/"));
+		return "thyme/utils/MessagePage";
 	}
 }
