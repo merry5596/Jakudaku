@@ -44,7 +44,7 @@
 }
 
 div {
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 }
 
 .order {
@@ -103,8 +103,8 @@ div {
 		<div th:unless="*{tabletFile}" class="file_fail">TABLET</div>
 		
 		<p>
-			<div class="ui large red button"><a class="order" href="#" th:href="@{/user/addItemToCart.do(itemId=${online.itemId})}" >장바구니</a></div> <!-- redirection으로 request 파라미터(itemId) 넘기기 -->
-			<div class="ui large red button"><a class="order" href="#" th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a></div>
+			<div class="ui large red button" th:onclick="|location.href='@{/shop/addItemToCart.do(itemId=${online.itemId})}'|"><a class="order" href="#" th:href="@{/shop/addItemToCart.do(itemId=${online.itemId})}" >장바구니</a></div> 
+			<div class="ui large red button" th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|"><a class="order" href="#" th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a></div>
 
 		
 		<div class="ui segment">
