@@ -77,22 +77,6 @@ public class Funding extends Item implements Serializable {
 //			return remainingDays;
 //		}
 
-		public int getRemainingDays() {
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date finish = null;
-			try {
-				finish = transFormat.parse(finishDate);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-
-			Date today = new Date();
-		
-			int remainingDays = (int) ((finish.getTime() - today.getTime()) / (24*60*60*1000));
-			
-			return remainingDays;
-		}
-
 		
 		public String getFinishDateExceptTime() {
 			System.out.println(finishDate);

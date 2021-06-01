@@ -24,10 +24,8 @@ public class AddItemToCartController {
 	
 	@RequestMapping("/shop/addItemToCart.do")
 	public ModelAndView handleRequest(
-			@RequestParam("workingItemId") String workingItemId,
-			@ModelAttribute("sessionCart") Cart cart 
-			) throws Exception {
-		int itemId = Integer.parseInt(workingItemId);
+			@RequestParam("itemId") int itemId,
+			@ModelAttribute("sessionCart") Cart cart) throws Exception {
 		if (cart.containsItemId(itemId)) {
 			// 처리
 			// UI에 "이미 담겼음" 출력
