@@ -78,22 +78,45 @@ public class Funding extends Item implements Serializable {
 		}
 
 		
-//		public String getFinishDateExceptTime() {
-//			System.out.println(finishDate);
-//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			Date finish = null;
-//			try {
-//				finish = transFormat.parse(finishDate);
-//			} catch (ParseException e) {
-//				e.printStackTrace();
-//			}
-//			return transFormat.format(finish);
-//		}
+		public String getFinishDateExceptTime() {
+			System.out.println(finishDate);
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date finish = null;
+			try {
+				finish = transFormat.parse(finishDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			return transFormat.format(finish);
+		}
+
 		
 		public String getQuantityPercentage() {
 			double percentage = purchaseQuantity / (double) targetQuantity * 100;
 			String sPercentage = String.format("%.2f", percentage);
 			return sPercentage;
 		}
-
+		
+		public boolean isFundingSuccess() {
+			double per = purchaseQuantity / (double) targetQuantity;
+			
+			if(per >= 1) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
+		public boolean isFinishedFunding() {
+			int remainingDay = getRemainingDays();
+			
+			if(remainingDay < 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
 }
