@@ -16,7 +16,7 @@
 				  <br><br>
 				  <h2 align="center">펀딩 내역</h2>
 				  
-				  <table style="width:1000px; align:center;">
+				  <table style="width:100%; align:center;">
 				  	<tr>
 				  		<td style="text-align:left" colspan="5">
 				 			펀딩 번호: <span th:text="${fundOrder.orderId}">00000</span>
@@ -33,13 +33,13 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
-							<img th:src="@{${lineItem.item.thumbnail1}}"/></a></td>
-				        <td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.item.itemId})}">
-				            <span th:text="${lineItem.item.name}">상품명</span></a>
-				        <td style="text-align:center" th:text="${lineItem.item.price}">판매가</td>
+						<td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+							<img th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
+				        <td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+				            <span th:text="${lineItem.funding.name}">상품명</span></a>
+				        <td style="text-align:center" th:text="${lineItem.funding.price}">판매가</td>
 				        <td style="text-align:center" th:text="${lineItem.quantity}">1</td>
-				        <td style="text-align:center" th:text="${lineItem.item.price} * ${lineItem.quantity}"><b>0</b></td>
+				        <td style="text-align:center" th:text="${lineItem.funding.price} * ${lineItem.quantity}"><b>0</b></td>
 				    </tr>
 				    <tr bgcolor="#CCCCCC">
 				      <td style="text-align:right" colspan="5" th:text="'총 ' + ${fundOrder.totalPrice} + '원'">총 0원</td>
@@ -48,7 +48,7 @@
 				  
 				  <br><br>
 				  
-				  <table style="width:1000px; align:center;">
+				  <table style="width:100%; align:center;">
 				 	  	<tr>
 				  	  		<td colspan=2><b>배송 정보</b></td>
 				  	  	</tr>
@@ -73,7 +73,7 @@
 				  	  	</tr>
 				 	  </table>
 				 	  <br>
-				  <table style="width:1000px; align:center;">
+				  <table style="width:100%; align:center;">
 				  	<tr>
 				      <td colspan="2"><b>결제 상세</b></td>
 				    </tr>

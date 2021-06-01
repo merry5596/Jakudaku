@@ -65,11 +65,17 @@ public class Order implements Serializable {
 		
 		discountCost = 0;
 		for (LineItem lineItem : lineItems) {
-			discountCost += lineItem.getDiscount();
+			discountCost += lineItem.getDiscount();			
 		}
 		
 		usedMileage = 0;
 		
+	}
+	
+	public void removePaymentMethod() {
+		creditCard = "0";
+		expireDate = "12/99";
+		cardType = "shinhan";
 	}
 	 
 	public void addLineItem(CartItem cartItem) {

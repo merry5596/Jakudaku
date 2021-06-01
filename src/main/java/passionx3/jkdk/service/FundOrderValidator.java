@@ -7,12 +7,13 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
 import passionx3.jkdk.domain.FundOrder;
 import passionx3.jkdk.domain.Order;
 
 @Component
-public class FundOrderValidator {
+public class FundOrderValidator implements Validator {
 
 	public boolean supports(Class<?> clazz) {
 		return Order.class.isAssignableFrom(clazz);

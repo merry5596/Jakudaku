@@ -97,8 +97,6 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public int updateLike(int itemId, String userId) {
 		return itemId;
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -145,8 +143,7 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public List<Funding> getFundingItemsByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return fundingDao.getFundingItemsByKeyword(keyword);
 	}
 
 	@Override
