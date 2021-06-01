@@ -75,6 +75,10 @@ public class OrderController {
 			@ModelAttribute("orderForm") OrderForm orderForm, 
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
+			if (orderForm.getOrder().getUsedMileage() == orderForm.getOrder().getTotalPrice()) {	// 적립금으로만 구매
+				orderForm.getOrder().removePaymentMethod();
+			}
+		
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
 			

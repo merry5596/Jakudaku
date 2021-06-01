@@ -9,29 +9,46 @@
 		var printM = document.getElementById('printMileage');
 		var havingM = document.getElementById('havingMileage');
 		
-		if (inputM.value == "") {
-			inputM.value = "0";
-			printM.innerText = "0";
-		}
-		else if (parseInt(havingM.innerText) < parseInt(inputM.value)) {
-			alert("보유하고 계신 적립금 가격 내에서 입력해주세요.");
-			inputM.value = "0";
-		}
-		else {
-			printM.innerText = parseInt(inputM.value);
-		}
-		
 		var totalP = document.getElementById('totalPrice');
 		var discountC = document.getElementById('discountCost');
 		var finalP = document.getElementById('finalPrice');
+		
+		var paymentMethod = document.getElementById('paymentMethod');
+
+		if (inputM.value == "") {	// "" 입력
+			paymentMethod.hidden = false;
+			inputM.value = "0";
+			printM.innerText = "0";
+		} else if (parseInt(havingM.innerText) < parseInt(inputM.value)) {	// 보유한 적립금보다 큰 액수 입력
+			alert("보유하고 계신 적립금 가격 내에서 입력해주세요.");
+			inputM.value = "0";
+		} else if (parseInt(totalP.innerText) < parseInt(inputM.value)) {	// 결제할 금액보다 큰 액수 입력
+			alert("결제 금액 내에서 입력해주세요.");
+			inputM.value = "0";
+		} else if (parseInt(totalP.innerText) == parseInt(inputM.value)) {
+			printM.innerText = parseInt(inputM.value);
+			paymentMethod.hidden = true;
+		} else if (parseInt(totalP.innerText) != parseInt(inputM.value)) {
+			printM.innerText = parseInt(inputM.value);
+			paymentMethod.hidden = false;
+		} else {	// 정상 처리
+			printM.innerText = parseInt(inputM.value);
+		}
+		
+		
 		finalP.innerText = parseInt(totalP.innerText) - parseInt(discountC.innerText) - parseInt(inputM.value);
 	}
 	
 	function useAllMileage() {
 		var inputM = document.getElementById('inputMileage');
 		var havingM = document.getElementById('havingMileage');
+		var totalP = document.getElementById('totalPrice');
 		
-		inputM.value = havingM.innerText;
+		if (parseInt(totalP.innerText) < parseInt(havingM.innerText)) {
+			inputM.value = totalP.innerText;
+		} else {
+			inputM.value = havingM.innerText;
+		}
 	}
 </script>
 <body>
@@ -91,11 +108,11 @@
 		      			<td>보유 <p id="havingMileage" style="display:inline" th:text="${session.userSession.mileage}">0</p>원 <button type="button" onclick="useAllMileage()">전액 사용</button>
 		      				<br>사용 <input type="text" id="inputMileage" th:field="*{order.usedMileage}"/>원</td>
 		      		</tr>
-		      		<tr>
+		      		<tr id="paymentMethod">
 		      			<td bgcolor="#CCCCCC">결제 수단</td>
 		      			<td>카드사
 		      				<select th:field="*{order.cardType}">
-		      					<option value="notSelected" selected disabled hidden>선택</option>
+		      					<option value="notSelected" selected>선택</option>
 		      					<option value="shinhan">신한</option>
 				      			<option value="kookmin">국민</option>
 				      			<option value="hana">하나</option></select>

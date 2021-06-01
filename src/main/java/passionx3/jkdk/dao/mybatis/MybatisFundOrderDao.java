@@ -67,6 +67,7 @@ public class MybatisFundOrderDao implements FundOrderDao {
     	// lineitem 테이블에 insert
     	LineItem lineItem = fundOrder.getLineItem();
     	lineItem.setOrderId(fundOrder.getOrderId());
+    	System.out.println(lineItem.getItemId());
     	lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
     	result = lineItemMapper.insertLineItem(lineItem);
     	if (result == 0)

@@ -17,7 +17,7 @@ public interface LineItemMapper {
 	LineItem getLineItemByOrderId(int orderId);
 	
 	@Insert("INSERT INTO LINEITEM (lineItemId, orderId, lineNumber, quantity, isDownloaded, itemId, saleState)"
-			+ "	VALUES(#{lineItemId}, #{orderId}, #{lineNumber}, #{quantity}, #{isDownloaded}, #{item.itemId}, #{saleState})")
+			+ "	VALUES(#{lineItemId}, #{orderId}, #{lineNumber}, #{quantity}, #{isDownloaded}, #{itemId}, #{saleState})")
 	int insertLineItem(LineItem lineItem);
 
 	@Select("SELECT lineItemId, orderId, lineNumber, quantity, isDownloaded, saleState, i.itemid"
