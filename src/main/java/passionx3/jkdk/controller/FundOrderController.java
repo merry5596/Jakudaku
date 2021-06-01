@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,14 +75,25 @@ public class FundOrderController {
 			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
+			boolean isValidationOfAddress = false;
+			
 			// from NewOrderForm
 			fundOrderValidator.validate(fundOrderForm.getFundOrder(), result);
-
+			
+			for (ObjectError error : result.getAllErrors()) {
+				String errorCode = error.getCode();
+				if (errorCode.equals("RECEIVER_NAME_REQUIRED") || errorCode.equals("ZIP_REQUIRED") || errorCode.equals("ZIP_INVALID") || errorCode.equals("ADDRESS1_REQUIRED") || errorCode.equals("ADDRESS2_REQUIRED") || errorCode.equals("PHONE_REQUIRED") || errorCode.equals("PHONE_INVALID")) {
+					isValidationOfAddress = true;
+					System.out.println(isValidationOfAddress);
+					break;
+				}
+			}
+			
 			if (result.hasErrors()) {
 				Account userSession = (Account) request.getSession().getAttribute("userSession");
 				Account account = jkdkStore.getAccount(userSession.getUserId());
 				ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
-				mav.addObject("isValidation", true);
+				mav.addObject("isValidationOfAddress", isValidationOfAddress);
 				mav.addObject("account", account);
 				return mav;
 			}

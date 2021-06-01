@@ -5,9 +5,9 @@
 </head>
 <script>
 	 window.onload = function() {
-		 var isValidation = document.getElementById('isValidation');
+		 var isValidationOfAddress = document.getElementById('isValidationOfAddress');
 		 var another = document.getElementById('another');
-		 if (isValidation.value == 'true') {
+		 if (isValidationOfAddress.value == 'true') {
 			 another.checked = true;
 		 }
 	 }
@@ -19,23 +19,27 @@
 		var address1 = document.getElementById('address1');
 		var address2 = document.getElementById('address2');
 		var phone = document.getElementById('phone');
-		var isValidation = document.getElementById('isValidation');
+		var isValidationOfAddress = document.getElementById('isValidationOfAddress');
 		
-		if (typeId == 'same') {
+		if (typeId == 'same') {	// '회원 정보와 동일'
 			receiverName.readOnly = true;
 			zip.readOnly = true;
 			address1.readOnly = true;
 			address2.readOnly = true;
 			phone.readOnly = true;
 
-			
-			if (isValidation.value == 'false') {
+			if (isValidationOfAddress.value == 'false') {	// addressValidation error가 난 페이지가 아닌 경우 (기본)
 				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
 				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
 				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
 				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
 				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
-			} else if (isValidation.value == 'true') {
+			} else if (isValidationOfAddress.value == 'true') { // addressValidation error가 난 페이지인 경우
+				var messages = document.getElementsByClassName('validationMessage');
+				for (var i = 0; i < messages.length; i++) {
+					messages[i].innerText = '';
+				}
+				
 				receiverName.value = '[[${account.name}]]';
 				zip.value = '[[${account.zip}]]';
 				address1.value = '[[${account.address1}]]';
@@ -43,7 +47,8 @@
 				phone.value = '[[${account.phone}]]';
 			}
 			
-		} else if (typeId == 'another') {
+			
+		} else if (typeId == 'another') {	// '새로운 수령인'
 			receiverName.readOnly = false;
 			zip.readOnly = false;
 			address1.readOnly = false;
@@ -103,30 +108,30 @@
 			  	  			<label for="same">회원 정보와 동일</label>
 							<input type="radio" name="group" id="another" onclick="changeType();"/>
 							<label for="another">새로운 수령인</label>
-							<input type="hidden" id="isValidation" th:value="${isValidation}" /></td>
+							<input type="hidden" id="isValidationOfAddress" th:value="${isValidationOfAddress}" /></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td colspan="2" bgcolor="#CCCCCC">수령인</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" />
-			  	  		<span th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" readOnly />
+			  	  		<span class="validationMessage" th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td rowspan="3" bgcolor="#CCCCCC"><br>수령 주소</td>
 			  	  		<td bgcolor="#CCCCCC">우편 번호</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" /> <span th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td bgcolor="#CCCCCC">주소</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" /> <span th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td bgcolor="#CCCCCC">상세 주소</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" /> <span th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td colspan="2" bgcolor="#CCCCCC">휴대폰 번호</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" />
-			  	  		<span th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
+			  	  		<td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" readOnly />
+			  	  		<span class="validationMessage" th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
 			  	  	</tr>
 			  	  </table>
 			  	  <br>

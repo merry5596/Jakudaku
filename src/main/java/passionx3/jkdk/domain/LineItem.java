@@ -35,6 +35,7 @@ public class LineItem implements Serializable {
   
 	// online
 	public LineItem(int lineNumber, CartItem cartItem) {
+		this.itemId = cartItem.getOnlineItem().getItemId();
 	    this.lineNumber = lineNumber;
 	    this.online = cartItem.getOnlineItem();
 	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
@@ -48,6 +49,7 @@ public class LineItem implements Serializable {
 	
 	// funding
 	public LineItem(int lineNumber, Funding funding, int quantity) {
+		this.itemId = funding.getItemId();
 	    this.lineNumber = lineNumber;
 	    this.funding = funding;
 	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
