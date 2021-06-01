@@ -60,35 +60,35 @@ public class Funding extends Item implements Serializable {
 
 //		이 부분은 실시간으로 바뀌어야 돼서 javascript로 가져가서 구현하기
 
-//		public int getRemainingDays() {
-//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//			Date finish = null;
-//			try {
-//				finish = transFormat.parse(finishDate);
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//			Date today = new Date();
-//		
-//			int remainingDays = (int) (finish.getTime() - today.getTime()) / (24*60*60*1000);
-//			
-//			return remainingDays;
-//		}
-
-		
-		public String getFinishDateExceptTime() {
-			System.out.println(finishDate);
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		public int getRemainingDays() {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date finish = null;
 			try {
 				finish = transFormat.parse(finishDate);
 			} catch (ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return transFormat.format(finish);
+
+			Date today = new Date();
+		
+			int remainingDays = (int) (finish.getTime() - today.getTime()) / (24*60*60*1000);
+			
+			return remainingDays;
 		}
+
+		
+//		public String getFinishDateExceptTime() {
+//			System.out.println(finishDate);
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			Date finish = null;
+//			try {
+//				finish = transFormat.parse(finishDate);
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+//			return transFormat.format(finish);
+//		}
 		
 		public String getQuantityPercentage() {
 			double percentage = purchaseQuantity / (double) targetQuantity * 100;

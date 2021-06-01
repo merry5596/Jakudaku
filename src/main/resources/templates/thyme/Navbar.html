@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
     <title>Navbar</title>
     <link rel="stylesheet" href="/style/modal.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css" integrity="sha512-8Tb+T7SKUFQWOPIQCaLDWWe1K/SY8hvHl7brOH8Nz5z1VT8fnf8B+9neoUzmFY3OzkWMMs3OjrwZALgB1oXFBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <div th:fragment="navbar" align="center">
@@ -15,8 +16,8 @@
       <!--검색 창-->
       <div class="row">
         <div class="col-5">
-          <form class="d-flex">
-            <input class="form-control me-2" size="50" type="search" placeholder="Search" aria-label="Search">
+          <form class="d-flex" action="#" th:action="@{/item/searchItems.do}" method="get">
+            <input class="form-control me-2" size="50" name="keyword" id="keyword" type="text" placeholder="전체 상품 검색" aria-label="Search" />
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
