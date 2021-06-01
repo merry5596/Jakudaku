@@ -153,7 +153,7 @@ div {
 	;
 	
 	//상품 총 별점
-	var properties1=[{"rating":"[[${online.totalRate}]]", "maxRating":"5", "minRating":"0.5", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
+	var properties1=[{"rating":"[[${online.totalRate}]]", "maxRating":"5", "minRating":"0.0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
     rateSystem("ratingStar", properties1, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
     
     //리뷰 각각의 별점

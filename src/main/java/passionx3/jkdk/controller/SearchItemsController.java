@@ -24,6 +24,8 @@ public class SearchItemsController {
 		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
 		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));
 		
+//		System.out.println("/item/searchItems.do의 onlineList: " + jkdk.getOnlineItemsByKeyword(keyword).get(0).getItemId());		
+		
 		return "thyme/item/SearchItems";
 	} 
 }
