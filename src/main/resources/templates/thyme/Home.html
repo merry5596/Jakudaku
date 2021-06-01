@@ -70,12 +70,12 @@
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${bestOnlineList}" class="col">
 	                            <div class="card shadow-sm">
-									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
-									</a>
 									<div class="card-body ">
 										<div>
-											<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+										<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+											<img class = "img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 150px; height: 150px;"/>
+										</a>
+											<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 		                                        <span class="itemName" th:text="${item.name}" >
 		                                            name
 		                                        </span>
@@ -118,12 +118,12 @@
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${newOnlineList}" class="col">
                             <div class="card shadow-sm">
-									<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
-									</a>
 									<div class="card-body ">
 										<div>
-											<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+										<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+											<img class = "img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 150px; height: 150px;"/>
+										</a>
+											<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 		                                        <span class="itemName" th:text="${item.name}" >
 		                                            name
 		                                        </span>
@@ -166,14 +166,13 @@
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${newFundingList}" class="col">
-                            <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
                                 <div class="card shadow-sm">
-									<a class="link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-										<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
-									</a>
 									<div class="card-body ">
 										<div>
-											<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+										<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
+											<img class = "img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 150px; height: 150px;"/>
+										</a>
+											<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 		                                        <span class="itemName" th:text="${item.name}" >
 		                                            name
 		                                        </span>
