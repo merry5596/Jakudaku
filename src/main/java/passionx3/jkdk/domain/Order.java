@@ -21,6 +21,7 @@ public class Order implements Serializable {
 	String userId;
 	int earningMileage;
 	List<LineItem> lineItems;
+	boolean isOrder;
 		
 	public Order() { }
 
@@ -150,5 +151,14 @@ public class Order implements Serializable {
 	public int getPaymentCost() {
 		return totalPrice - discountCost - usedMileage;
 	}
+
+	public boolean getIsOrder() {
+		return isOrder;
+	}
+
+	public void setIsOrder(boolean isOrder) {
+		this.isOrder = isOrder;
+	}
+
 
 }

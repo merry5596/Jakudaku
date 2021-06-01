@@ -56,7 +56,9 @@
 		<td>썸네일</td>
 		<td>상품명</td>
 		<td>등록날짜</td>
+		<td>승인여부</td>
 		<td>수정</td>
+		<td>펀딩가능여부</td>
 	</tr>
 	<c:if test="${fn:length(onlineList) == 0}">
 			<td style="text-align:center" colspan="6"><b>판매한 내역이 없습니다.</b></td>
@@ -65,10 +67,22 @@
 		<tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
 		<td>${status.index}</td>
-		<td><img src="${o.thumbnail1}" style="width:100px; height:100px;"/></td>
-		<td onclick="location.href='thyme/item/viewOnlineItem.do'"; style="cursor:pointer;" >${o.name}</td>
+		<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${o.thumbnail1}" style="width:100px; height:100px;"/></td>
+		<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'"; style="cursor:pointer;" >${o.name}</td>
 		<td>${o.uploadDate}</td>
+		<td>
+			<c:choose>
+			<c:when test="${o.approval eq 1}">승인완료</c:when>
+			<c:when test="${o.approval eq -1}">승인거부</c:when>
+			<c:otherwise>승인대기</c:otherwise>
+			</c:choose>
+		</td>
 		<td><button type="button" onClick="location.href='<c:url value="/item/sellOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'">수정</button></td>
+		<td>
+			<c:if test="${o.like >= 50}">
+				<button type="button" onClick="location.href='/item/sellFundingItem.do'">등록하기</button>
+			</c:if>
+		</td>
 		</tr>
 	</c:forEach>
 </table>
@@ -86,6 +100,7 @@
 		<td>썸네일</td>
 		<td>상품명</td>
 		<td>등록날짜</td>
+		<td>승인여부</td>
 		<td>수정</td>
 	</tr>
 	<c:if test="${fn:length(fundingList) == 0}">
@@ -95,9 +110,16 @@
 		<tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
 		<td>${status.index}</td>
-		<td><img src="${f.thumbnail1}" style="width:100px; height:100px;""/></td>
-		<td onclick="location.href='/item/viewOnlineItem.do'"; style="cursor:pointer;" >${f.name}</td>
+		<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${f.thumbnail1}" style="width:100px; height:100px;""/></td>
+		<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'"; style="cursor:pointer;" >${f.name}</td>
 		<td>${f.uploadDate}</td>
+		<td>
+			<c:choose>
+			<c:when test="${f.approval eq 1}">승인완료</c:when>
+			<c:when test="${f.approval eq -1}">승인거부</c:when>
+			<c:otherwise>승인대기</c:otherwise>
+			</c:choose>
+		</td>
 		<td><button type="button" onClick="location.href='<c:url value="/item/sellFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'">수정</button></td>
 
 		</tr>

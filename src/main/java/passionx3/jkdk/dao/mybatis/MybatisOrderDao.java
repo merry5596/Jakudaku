@@ -125,6 +125,7 @@ public class MybatisOrderDao implements OrderDao {
 						
 				if(onlineDate.getTime() > fundingDate.getTime()) {
 					Order order = orderMapper.getOrderByOrderId(orderId);
+					order.setIsOrder(true);
 					
 					List<LineItem> lineItemList = new ArrayList<LineItem>();
 					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
@@ -141,7 +142,8 @@ public class MybatisOrderDao implements OrderDao {
 				}
 				else {
 					FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
-					
+					fundOrder.setIsOrder(false);
+
 					List<LineItem> lineItemList = new ArrayList<LineItem>();
 					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 						LineItem lineItem = lineItemMapper.getLineItemsByOrderId(fundOrderId).get(a);
@@ -167,7 +169,8 @@ public class MybatisOrderDao implements OrderDao {
 				List<Order> orderList = new ArrayList<Order>();
 				int orderId = onlineList.get(i).getOrderId();
 				Order order = orderMapper.getOrderByOrderId(orderId);
-				
+				order.setIsOrder(true);
+
 				List<LineItem> lineItemList = new ArrayList<LineItem>();
 				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
@@ -188,7 +191,8 @@ public class MybatisOrderDao implements OrderDao {
 				List<Order> orderList = new ArrayList<Order>();
 				int fundOrderId = fundingList.get(j).getOrderId();
 				FundOrder fundOrder = fundOrderMapper.getFundOrderByOrderId(fundOrderId);
-			
+				fundOrder.setIsOrder(false);
+
 				List<LineItem> lineItemList = new ArrayList<LineItem>();
 				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(fundOrderId).get(a);

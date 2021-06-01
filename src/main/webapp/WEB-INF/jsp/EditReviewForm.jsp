@@ -15,7 +15,7 @@
         <h3><font color="darkgreen">Review</font></h3>
         <table>
         	<tr>
-            <td> ${item.thumbnail1} </td>
+            <td> <img src="${item.thumbnail1}" style="width:100px; height:100px;"/> </td>
             </tr>
             <tr>
             <td> 상품명 : ${item.name}</td>

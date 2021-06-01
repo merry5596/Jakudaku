@@ -78,7 +78,7 @@ public class Funding extends Item implements Serializable {
 //		}
 
 		public int getRemainingDays() {
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date finish = null;
 			try {
 				finish = transFormat.parse(finishDate);
@@ -96,7 +96,7 @@ public class Funding extends Item implements Serializable {
 		
 		public String getFinishDateExceptTime() {
 			System.out.println(finishDate);
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
 			Date finish = null;
 			try {
 				finish = transFormat.parse(finishDate);
@@ -111,5 +111,27 @@ public class Funding extends Item implements Serializable {
 			String sPercentage = String.format("%.2f", percentage);
 			return sPercentage;
 		}
-
+		
+		public boolean isFundingSuccess() {
+			double per = purchaseQuantity / (double) targetQuantity;
+			
+			if(per >= 1) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
+		public boolean isFinishedFunding() {
+			int remainingDay = getRemainingDays();
+			
+			if(remainingDay < 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
 }

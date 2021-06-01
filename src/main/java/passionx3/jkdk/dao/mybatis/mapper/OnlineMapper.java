@@ -91,7 +91,7 @@ public interface OnlineMapper {
 
 	@Insert("INSERT INTO onlineitem (itemid, totalrate, pcfile, tabletfile, phonefile, categoryid, salestate) "
 			+ "values (#{onlineItem.itemId}, 0, #{onlineItem.pcFile}, #{onlineItem.tabletFile}, #{onlineItem.phoneFile}, "
-				+ "#{onlineItem.categoryId}, 0")
+				+ "#{onlineItem.categoryId}, 0)")
 	int registerOnlineItem(@Param("onlineItem") Online onlineItem);
 	
 	@Update("UPDATE onlineitem "

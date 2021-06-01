@@ -44,14 +44,21 @@
 		<c:forEach var="o" items="${orderMap[d.key]}">
 			<tr>
 				<td>${d.key}</td>
+				<c:choose>
+				<c:when test = "${o.isOrder}">
 				<td><button type="button"  onClick="location.href='<c:url value="/order/viewOrder.do"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
+				</c:when>
+				<c:otherwise>
+				<td><button type="button"  onClick="location.href='<c:url value="/order/viewFundOrder.do"><c:param name="orderId" value="${o.orderId}"/></c:url>'">상세보기</button></td>
+				</c:otherwise>
+				</c:choose>
 			</tr>
 			<c:forEach var="l" items="${o.lineItems}">
 				
 				<tr>
 				<c:choose>
-					<c:when test="${not empty l.online}">
-						<td><img src="${l.online.thumbnail1}" style="width:100px; height:100px;"/></td>
+					<c:when test="${not empty l.online}">					
+						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.online.thumbnail1}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.online.name}</td>
 						<td>
 							<c:if test="${not empty l.online.pcFile}">
@@ -69,8 +76,18 @@
 						</td>
 					</c:when>
 					<c:otherwise>
-						<td><img src="${l.funding.thumbnail1}" style="width:100px; height:100px;"/></td>
+						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.funding.thumbnail1}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.funding.name}</td>
+						<td>
+						<c:if test = "${!l.funding.isFundingSuccess()}">
+							<c:choose>
+							<c:when test="${l.funding.isFinishedFunding()}">펀딩실패</c:when>
+							<c:otherwise>펀딩중</c:otherwise>
+							</c:choose>
+						</c:if>
+						<c:if test = "${l.funding.isFundingSuccess()}">펀딩성공</c:if>
+						</td>
+						
 						<td></td>
 					</c:otherwise>
 				</c:choose>
@@ -84,3 +101,4 @@
 </div>
 <%@ include file="bottom.jsp" %>
 
+s
