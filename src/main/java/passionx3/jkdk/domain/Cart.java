@@ -39,6 +39,8 @@ public class Cart implements Serializable {
     if (cartItem == null) {
       cartItem = new CartItem();
       cartItem.setOnlineItem(item);
+	  System.out.println("Cart.java - if(cartItem == null): " + cartItem.getOnlineItem().getItemId());
+
       itemMap.put(item.getItemId(), cartItem);
       itemList.getSource().add(cartItem);
     }
