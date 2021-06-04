@@ -25,15 +25,10 @@ public class ViewFundingsController {
 			@RequestParam("themeId") int themeId, 
 			@RequestParam("sortBy") int sortBy,
 			@RequestParam(value="keyword", required=false) String keyword) throws Exception {
-		
-		System.out.println(keyword);
 
 		if (keyword == null) keyword = "";
 		
-		System.out.println("/item/viewFundings.do");
-		
 		List<Funding> fundingList = jkdkStore.getFundingItemList(themeId, keyword, sortBy);
-		
 		List<Theme> allThemes = jkdkStore.getAllThemes();
 		
 		ModelAndView mav = new ModelAndView();

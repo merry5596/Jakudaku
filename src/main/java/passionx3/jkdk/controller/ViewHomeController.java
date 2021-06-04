@@ -52,7 +52,7 @@ public class ViewHomeController {
 		
 		List<Online> bestOnlineList = jkdkStore.getBestOnlineItemListforHome();
 		List<Online> newOnlineList = jkdkStore.getNewOnlineItemListforHome();
-		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome();
+		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome(today);
 
 		model.put("bestOnlineList", bestOnlineList);
 		model.put("newOnlineList", newOnlineList);

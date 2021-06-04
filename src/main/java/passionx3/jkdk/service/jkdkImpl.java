@@ -544,8 +544,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Funding> getNewFundingItemListforHome(){
-		return fundingDao.getNewFundingItemListforHome();
+	public List<Funding> getNewFundingItemListforHome(String today){
+		return fundingDao.getNewFundingItemListforHome(today);
 	}
 
 	@Override

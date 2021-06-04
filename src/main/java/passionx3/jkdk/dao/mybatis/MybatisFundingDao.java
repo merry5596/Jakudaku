@@ -2,6 +2,9 @@ package passionx3.jkdk.dao.mybatis;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +29,17 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public List<Funding> getFundingItemList(String keyword, int sortBy) throws DataAccessException {
+		Calendar cal= Calendar.getInstance ( );
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
+		
 		if (sortBy == 1)
-			return fundingMapper.getFundingItemListOrderByUploadDate(keyword);
+			return fundingMapper.getFundingItemListOrderByUploadDate(keyword, today);
 		else if (sortBy == 2)
-			return fundingMapper.getFundingItemListOrderByLikeNum(keyword);
+			return fundingMapper.getFundingItemListOrderByLikeNum(keyword, today);
 		else // (sortBy == 6)
-			return fundingMapper.getFundingItemListOrderByFinishDate(keyword);
+			return fundingMapper.getFundingItemListOrderByFinishDate(keyword, today);
 	}
 
 	@Override
@@ -70,8 +78,8 @@ public class MybatisFundingDao implements FundingDao {
 	}
 
 	@Override
-	public List<Funding> getNewFundingItemListforHome() throws DataAccessException {
-		return fundingMapper.getNewFundingItemListforHome();
+	public List<Funding> getNewFundingItemListforHome(String today) throws DataAccessException {
+		return fundingMapper.getNewFundingItemListforHome(today);
 	}
 
 	@Override
