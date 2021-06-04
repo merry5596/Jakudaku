@@ -93,7 +93,7 @@ public class Funding extends Item implements Serializable {
 		
 		public String getQuantityPercentage() {
 			double percentage = purchaseQuantity / (double) targetQuantity * 100;
-			String sPercentage = String.format("%.2f", percentage);
+			String sPercentage = String.format("%d", (int)percentage);
 			return sPercentage;
 		}
 		
