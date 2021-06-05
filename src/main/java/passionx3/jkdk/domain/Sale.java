@@ -9,8 +9,8 @@ public class Sale implements Serializable {
   /* Private Fields */
 	private int saleId;
 	private int discountRate;
-	private Date openTime;
-	private Date closeTime;
+	private String openTime;
+	private String closeTime;
 	
 
   /* JavaBeans Properties */
@@ -26,16 +26,16 @@ public class Sale implements Serializable {
 	public void setDiscountRate(int discountRate) {
 		this.discountRate = discountRate;
 	}
-	public Date getOpenTime() {
+	public String getOpenTime() {
 		return openTime;
 	}
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
-	public Date getCloseTime() {
+	public String getCloseTime() {
 		return closeTime;
 	}
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(String closeTime) {
 		this.closeTime = closeTime;
 	}
 }

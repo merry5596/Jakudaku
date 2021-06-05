@@ -3,9 +3,12 @@ package passionx3.jkdk.service;
 import java.util.List;
 import java.util.Map;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -395,8 +398,27 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public void insertTimeSale(String itemId, String openTime, String closeTime) {
-		timeSaleDao.insertTimeSale(itemId, openTime, closeTime);
+	public void insertTimeSale() {
+		Calendar cal= Calendar.getInstance ( );
+		
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
+		cal.add(Calendar.DATE, 1);
+		String tomorrow = sDate.format(cal.getTime());
+		
+		int categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
+		
+		List<Integer> itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
+
+		while(itemList.size() < 1) {
+			cal.add(Calendar.DATE, 1);
+			categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
+			itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
+		}
+		
+		timeSaleDao.insertTimeSale(itemList.get(0), today, tomorrow);
+		onlineDao.updateSaleState(1, itemList.get(0));
 	}
 
 	@Override
@@ -467,8 +489,28 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) {
-		battleSaleDao.insertBattleSale(itemId1, itemId2, openTime, closeTime);
+	public void insertBattleSale() {
+		Calendar cal= Calendar.getInstance ( );
+		
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
+		cal.add(Calendar.DATE, 2);
+		String tomorrow = sDate.format(cal.getTime());
+		
+		int categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
+		
+		List<Integer> itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
+		
+		while(itemList.size() < 2) {
+			cal.add(Calendar.DATE, 1);
+			categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
+			itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
+		}
+		
+		battleSaleDao.insertBattleSale(itemList.get(0), itemList.get(1), today, tomorrow);
+		onlineDao.updateSaleState(2, itemList.get(0));
+		onlineDao.updateSaleState(2, itemList.get(1));
 	}
   
 	@Override
@@ -533,10 +575,6 @@ public class jkdkImpl implements jkdkFacade {
 		return fundOrderDao.getFundOrderByOrderId(orderId);
 	}
 
-	@Override
-	public String getOnlineItemIdByCategoryforSale(int category) {
-		return onlineDao.getOnlineItemIdByCategoryforSale(category);
-	}
 
 	@Override
 	public List<Online> getNewOnlineItemListforHome() {
@@ -571,6 +609,17 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public String getReviewIdByLineItmeId(int lineItemId) {
 		return reviewDao.getReviewIdByLineItemId(lineItemId);
+	}
+
+	@Override
+	public void updateSaleState(int state, int itemId) {
+		onlineDao.updateSaleState(state, itemId);
+	}
+
+	@Override
+	public void updateNotSale(String date) {
+		battleSaleDao.updateNotSale(date);
+		timeSaleDao.updateNotSale(date);
 	}
 
 

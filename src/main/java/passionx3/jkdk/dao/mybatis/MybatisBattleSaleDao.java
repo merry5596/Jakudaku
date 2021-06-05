@@ -26,7 +26,7 @@ public class MybatisBattleSaleDao implements BattleSaleDao {
 	}
 	
 	@Override
-	public void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) throws DataAccessException {
+	public void insertBattleSale(int itemId1, int itemId2, String openTime, String closeTime) throws DataAccessException {
 		battleSaleMapper.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
 
@@ -49,6 +49,11 @@ public class MybatisBattleSaleDao implements BattleSaleDao {
 	@Override
 	public void updateBattleSaleVote2(String battleId) throws DataAccessException {
 		battleSaleMapper.updateBattleSaleVote2(battleId);
+	}
+	
+	@Override
+	public void updateNotSale(String date) throws DataAccessException {
+		battleSaleMapper.updateNotSale(date);
 	}
 	
 }

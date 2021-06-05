@@ -20,8 +20,13 @@ public class MybatisTimeSaleDao implements TimeSaleDao {
 	}
 
 	@Override
-	public void insertTimeSale(String itemId, String openTime, String closeTime) throws DataAccessException {
+	public void insertTimeSale(int itemId, String openTime, String closeTime) throws DataAccessException {
 		timeSaleMapper.insertTimeSale(itemId, openTime, closeTime);
+	}
+
+	@Override
+	public void updateNotSale(String date) {
+		timeSaleMapper.updateNotSale(date);
 	}
 	
 }

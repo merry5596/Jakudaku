@@ -23,7 +23,6 @@ public class ManagerViewController {
 	@RequestMapping("/manager/myPage/onlineItem.do") 	//관리자 마이페이지의 default
 	public String viewOnlineItem(ModelMap model) throws Exception {
 		List<Online> items = jkdk.getNotApprovedOnlineItems();
-		System.out.println(items);
 		model.put("items", items);
 		
 		return "thyme/manager/Manager";

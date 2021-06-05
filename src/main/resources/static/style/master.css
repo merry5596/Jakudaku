@@ -31,7 +31,7 @@ body{
 
 .base{
     margin: auto 0;
-    margin-top: 8%;
+    margin-top: 5%;
     margin-left: 5%;
 }
 
@@ -73,6 +73,7 @@ body{
 .evnet-page{
 	background: linear-gradient(to bottom, #ffffff , #e9ecef);
 	border-radius: 60px;
+	padding-bottom: 30px;
 }
 .timeSale-image-banner{
 	width: 300px;

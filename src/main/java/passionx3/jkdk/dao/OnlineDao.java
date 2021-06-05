@@ -28,7 +28,8 @@ public interface OnlineDao {
 	List<Online> getNotApprovedOnlineItems() throws DataAccessException; // 조건문에서 approval 무조건 0 (수정)
 	int refuseItem(int itemId) throws DataAccessException;
 	int approveItem(int itemId);
-	String getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException; //세일 선정을 위해 카테고리 동일의 랜덤으로 뽑기 위한 함수
+	void updateSaleState(int state, int itemId) throws DataAccessException; //(타임 = 1, 배틀 = 2, 끝 = 0)
+	List<Integer> getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException; //세일 선정을 위해 카테고리 동일의 랜덤으로 뽑기 위한 함수
 	List<Online> getBestOnlineItemListforHome()throws DataAccessException;
 	List<Online> getNewOnlineItemListforHome()throws DataAccessException;
 	//	+조건 검색 내 키워드 검색

@@ -11,7 +11,9 @@ public interface BattleSaleDao {
 	int insertVote(String battleId, String userId) throws DataAccessException;// 추천 뒤에 컬럼 생성
 	void updateBattleSaleVote1(String battleId)throws DataAccessException;
 	void updateBattleSaleVote2(String battleId)throws DataAccessException;
-	void insertBattleSale(String itemId1, String itemId2, String openTime, String closeTime) throws DataAccessException;
+	void insertBattleSale(int itemId1, int itemId2, String openTime, String closeTime) throws DataAccessException;
 	void resetVote() throws DataAccessException;
 	int getWinnerItemId() throws DataAccessException;
+	void updateNotSale(String date) throws DataAccessException;
+
 }

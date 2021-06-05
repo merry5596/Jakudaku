@@ -35,9 +35,7 @@ public class ViewTimeSaleController {
 		if(day_of_week != 1 && day_of_week != 7){ //주말이 아니면 타임 세일 진행
 			TimeSale timeSale = jkdkStore.getTimeSale(today);
 			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
-			int salePrice = item.getPrice() * timeSale.getDiscountRate();
-			
-			model.put("salePrice", salePrice);
+
 			model.put("timeSale", timeSale);
 			model.put("item", item);
 			
