@@ -1,60 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title})">
-<title>TimeSale</title>
+    <title>TimeSale</title>
 </head>
 <body>
-	<div th:replace="thyme/Header :: header"></div>
-
-	<div class="pt-5 salecover" align="center">
-		<div th:unless="${item}" class="container evnet-page">
-			<p class="event-des">no sale</p>
-		</div>
-
-		<div th:if="${item}" class="container evnet-page">
-			<p class="event-title">Time Sale</p>
-			
-			<div class="row">
-				<div class="col m-5  timeSale-image-banner">
-					<div id="carouselExampleFade" class="carousel slide carousel-fade"
-						data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="/image/tmp.jpg" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/image/tmp2.jpg" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/image/tmp.jpg" class="d-block w-100" alt="...">
+<div th:replace="thyme/Header :: header"></div>
+    <div class="row row-margin">
+    	<div th:replace="thyme/Sidebar :: sidebar"></div>
+        <div class="col-7 base">
+        <!-- 여기서부터 content -->
+        
+        	<div align="center">
+				<div th:unless="${item}" class="container evnet-page">
+					<p class="event-des">no sale</p>
+				</div>
+		
+				<div th:if="${item}" class="container evnet-page">
+					<p class="event-title">Time Sale</p>
+					
+					<div class="row">
+						<div class="col m-5  timeSale-image-banner">
+							<div id="carouselExampleFade" class="carousel slide carousel-fade"
+								data-bs-ride="carousel">
+								<div class="carousel-inner " >
+									<div class="carousel-item active">
+										<img th:src="@{${item.thumbnail1}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일1">
+									</div>
+									<div th:if="${item.thumbnail2}" class="carousel-item">
+										<img th:src="@{${item.thumbnail2}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일2">
+									</div>
+									<div th:if="${item.thumbnail3}" class="carousel-item">
+										<img th:src="@{${item.thumbnail3}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일3">
+									</div>
+								</div>
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#carouselExampleFade" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
 							</div>
 						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#carouselExampleFade" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
+		
+						<div class="col mt-5 position-relative" align="left">
+							<div class="small mb-1" th:text="${item.categoryName}" >ItemCategory</div>
+		                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
+		                        <div class="fs-5 mb-5">
+		                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
+		                            <span th:text="${item.salePrice}"> salePrice </span>
+		                        </div>
+		                        <p class="lead" th:text="${item.description}">description</p> 
+		                        <div class="position-absolute bottom-0 start-50 translate-middle-x" align = "center">
+		                        	<p class="text-success mb-0"><span id="remaining_time"> </span></p>
+		            	        	<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+			                       	 	<button type="button" class="btn btn-success ">바로가기!</button>
+		                      		</a>
+		                       	</div>
+						</div>
 					</div>
 				</div>
-
-				<div class="col mt-5" align="left">
-					<div class="small mb-1" th:text="${item.categoryName}" >ItemCategory</div>
-                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
-                        <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
-                            <span th:text="${salePrice}"> salePrice </span>
-                        </div>
-                        <p class="lead" th:text="${item.description}">description</p> 
-               	           <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-	                        <button type="button" class="btn btn-success"><small>남은 수량</small> 
-	                        	<span th:text="${timeSale.quantity}">quantity</span>개!</button>
-                       	</a>
-				</div>
 			</div>
-		</div>
-	</div>
+        </div>
+    </div>
+    
+   <div th:replace="thyme/Bottom :: footer"></div>
+   
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js" integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js" integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script th:inline="javascript">
+		// 남은 시간 타이머
+		const countDownTimer = function (id, date) { 
+			var _vDate = new Date(date); // 전달 받은 일자 
+			var _second = 1000; 
+			var _minute = _second * 60; 
+			var _hour = _minute * 60; 
+			var _day = _hour * 24; 
+			var timer; 
+			
+			function showRemaining() { 
+				var now = new Date(); 
+				var distDt = _vDate - now; 
+				
+				var days = Math.floor(distDt / _day); 
+				var hours = Math.floor((distDt % _day) / _hour); 
+				var minutes = Math.floor((distDt % _hour) / _minute); 
+				var seconds = Math.floor((distDt % _minute) / _second); 
+				
+				document.getElementById(id).textContent = hours + ' : '; 
+				document.getElementById(id).textContent += minutes + ' : '; 
+				document.getElementById(id).textContent += seconds;
+				
+			} 
+			
+			timer = setInterval(showRemaining, 1000); 
+		}
+	
+		$(function() {
+		    countDownTimer('remaining_time', [[${timeSale.closeTime}]]); 
+		});
+	</script>
+</body>
+</html>

@@ -23,41 +23,42 @@
         </div>
 
         <div class="col-4">
-        <div th:unless=${session.userSession}>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
-            login
-          </button>        
-         </div>  
-         
-         <div class="row" th:if = ${session.userSession}>
-	         <div class="col-5" th:if = ${session.userSession.userId.equals('admin')} >
-	         	<a th:href="@{/manager/myPage/onlineItem.do}"><span th:text=${session.userSession.name}></span>님</a>
-	         </div>
-	         <div class="col-5" th:unless = ${session.userSession.userId.equals('admin')} >
-	         	<a th:href="@{/user/myPage.do}"><span th:text=${session.userSession.alias}></span> 님</a>
-	         </div>
-	         <!-- 장바구니 -->
-	         <div class= "col-2">
-		         <form action="#" th:action="@{/order/viewCart.do}">
-			         <button type="submit" class="btn btn-secondary">
-		                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-						  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
-						</svg>
-		              </button>
-	              </form>
-	         </div>
-	         <!-- 로그아웃 -->
-	         <div class="col">
-		         <form action="#" th:action="@{/user/signoff.do}">
-		          <button type="submit" class="btn btn-primary">
-		            logout
-		          </button>   
-		          </form>
-	          </div>              
-         </div>  
-         
-        </div>
+	        <div class="row">
+		        <div class="col-5" th:unless=${session.userSession}>
+		          <!-- Button trigger modal -->
+		          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
+		            login
+		          </button>        
+		         </div>  
+		         
+		          <!-- 장바구니 -->
+		         <div class= "col-3">
+			         <form action="#" th:action="@{/order/viewCart.do}">
+				         <button type="submit" class="btn btn-secondary">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+							  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
+							</svg>
+			              </button>
+		              </form>
+		         </div>
+		         
+	           <div class="col" th:if = ${session.userSession}>
+			         <div class="d-inline" th:if = ${session.userSession.userId.equals('admin')} >
+			         	<a class="link-unstyled text-dark" th:href="@{/manager/myPage/onlineItem.do}"><span th:text="${session.userSession.name} + '님'"></span></a>
+			         </div>
+			         <div th:unless = ${session.userSession.userId.equals('admin')} >
+			         	<a class="link-unstyled text-dark" th:href="@{/user/myPage.do}"><span th:text=${session.userSession.alias}></span> 님</a>
+			         </div>
+		       </div>
+		         <!-- 로그아웃 -->
+		         <div th:if = ${session.userSession} class="col">
+			         <form action="#" th:action="@{/user/signoff.do}">
+			          <button type="submit" class="btn btn-primary">
+			            logout
+			          </button>   
+			          </form>
+		          </div>                       
+	        </div>
       </div>
     </div>
   </nav>

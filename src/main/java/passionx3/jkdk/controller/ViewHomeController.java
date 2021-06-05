@@ -34,20 +34,14 @@ public class ViewHomeController {
 		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
-		cal.add(Calendar.DATE, 1);
-		String tomorrow = sDate.format(cal.getTime());
+		
+		jkdkStore.updateNotSale(today);//세일기간이 지나면 state 변경
 		
 		if(day_of_week == 7) { // 토요일이면 battleSale set
-			//같은 카테고리 내에서 랜덤으로 itemId 2개 뽑기
-			int category = cal.get(Calendar.DAY_OF_MONTH) % 4;
-			String item1 = jkdkStore.getOnlineItemIdByCategoryforSale(category);
-			String item2 = jkdkStore.getOnlineItemIdByCategoryforSale(category);
-			jkdkStore.insertBattleSale(item1, item2, today, tomorrow);
+			jkdkStore.insertBattleSale();
 		}
 		else if(day_of_week != 1){ //평일에는 timeSale 진행
-			int category = cal.get(Calendar.DAY_OF_MONTH) % 4;
-			String item = jkdkStore.getOnlineItemIdByCategoryforSale(category);
-			jkdkStore.insertTimeSale(item, today, tomorrow);
+			jkdkStore.insertTimeSale();
 		}
 		
 		List<Online> bestOnlineList = jkdkStore.getBestOnlineItemListforHome();

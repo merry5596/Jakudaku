@@ -100,7 +100,7 @@ public class MybatisOnlineDao implements OnlineDao {
 	}
 
 	@Override
-	public String getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException {
+	public List<Integer> getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException {
 		return onlineMapper.getOnlineItemIdByCategoryforSale(categoryId);
 	}
 
@@ -125,6 +125,9 @@ public class MybatisOnlineDao implements OnlineDao {
 		return onlineMapper.updateOnlineItem(onlineItem);
 	}
 
-
+	@Override
+	public void updateSaleState(int state, int itemId) throws DataAccessException {
+		onlineMapper.updateSaleState(state, itemId);
+	}
 	
 }
