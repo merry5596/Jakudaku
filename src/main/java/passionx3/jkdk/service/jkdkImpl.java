@@ -104,6 +104,13 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public int approveItem(int itemId) {
+		Calendar cal= Calendar.getInstance ( );
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		cal.setTime(new Date());
+		String today = sDate.format(cal.getTime());
+		
+		onlineDao.updateUploadDate(itemId, today);
+		
 		return onlineDao.approveItem(itemId);
 		
 	}
@@ -333,10 +340,6 @@ public class jkdkImpl implements jkdkFacade {
 			
 			Collections.sort(fundingList, uploadDateComparator);
 			
-			for (Funding funding : fundingList) {
-				System.out.println(funding.getUploadDate());
-			}
-			
 			break;
 		case 2: 	// 좋아요순
 			Comparator<Funding> likesComparator = new Comparator<Funding>() {
@@ -348,10 +351,6 @@ public class jkdkImpl implements jkdkFacade {
 			
 			Collections.sort(fundingList, likesComparator);
 			
-			for (Funding funding : fundingList) {
-				System.out.println(funding.getLike());
-			}
-			
 			break;
 		case 6:		// 마감임박순
 			Comparator<Funding> finishDateComparator = new Comparator<Funding>() {
@@ -362,10 +361,6 @@ public class jkdkImpl implements jkdkFacade {
 			};
 			
 			Collections.sort(fundingList, finishDateComparator);
-			
-			for (Funding funding : fundingList) {
-				System.out.println(funding.getFinishDate());
-			}
 			
 			break;
 		case 7: 	// 마감 기간 긴 순...?
