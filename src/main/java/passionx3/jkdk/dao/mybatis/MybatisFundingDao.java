@@ -50,11 +50,11 @@ public class MybatisFundingDao implements FundingDao {
 		String today = sDate.format(cal.getTime());
 		
 		if (sortBy == 1)
-			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword, today);
+			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword);
 		else if (sortBy == 2)
-			return fundingMapper.getFundingItemListByThemeOrderByLikeNum(themeId, keyword, today);
+			return fundingMapper.getFundingItemListByThemeOrderByLikeNum(themeId, keyword);
 		else // (sortBy == 6)
-			return fundingMapper.getFundingItemListByThemeOrderByFinishDate(themeId, keyword, today);
+			return fundingMapper.getFundingItemListByThemeOrderByFinishDate(themeId, keyword);
 	}
 
 	@Override
