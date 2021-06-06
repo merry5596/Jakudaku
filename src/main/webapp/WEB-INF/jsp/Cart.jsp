@@ -54,12 +54,12 @@
                              <td style="text-align:center"><c:out value="${cartItem.onlineItem.salePrice}" /></td>
                              <td style="text-align:center">
                                <button type="button" onclick="location.href='/order/newOrder.do?itemId=' + ${cartItem.onlineItem.itemId}">구매</button>
-                               <br><button type="button" onclick="location.href='/user/removeItemFromCart.do?workingItemId=' + ${cartItem.onlineItem.itemId}">삭제 </button></td>
+                               <br><button type="button" onclick="location.href='/order/removeItemFromCart.do?workingItemId=' + ${cartItem.onlineItem.itemId}">삭제 </button></td>
                            </tr>
                          </c:forEach>
                          <tr bgcolor="#cccccc">
                             <td colspan="3" align="left">
-                               <button type="button" onclick="location.href='/user/removeItemFromCart.do?">전체 삭제</button>
+                               <button type="button" onclick="location.href='/order/removeItemFromCart.do'">전체 삭제</button>
                             </td>
                            <td colspan="3" align="right">
                               <b>총 <c:out value="${cart.subTotal}" />원</b><br><br>

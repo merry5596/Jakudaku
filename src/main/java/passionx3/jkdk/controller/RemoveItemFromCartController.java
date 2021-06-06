@@ -13,21 +13,22 @@ import passionx3.jkdk.domain.Cart;
 
 
 @Controller
-@SessionAttributes("sessionCart, userSession")
+@SessionAttributes("sessionCart")
 public class RemoveItemFromCartController { 
 
 	@RequestMapping("/order/removeItemFromCart.do")
 	public ModelAndView handleRequest(
-			@RequestParam("workingItemId") String workingItemId,
-			@ModelAttribute("sessionCart") Cart cart,
-			HttpSession session
+			@RequestParam(value = "workingItemId", required = false) String workingItemId,
+			@ModelAttribute("sessionCart") Cart cart
 		) throws Exception {
 		// 전체 삭제
 		if (workingItemId == null) {
+			System.out.println("removeItemFromCartController: removeAll");
 			cart.removeAllItems();
 		}
 		// 단일 상품 삭제
 		else {
+			System.out.println("removeItemFromCartController: removeOne");
 			cart.removeItemById(Integer.parseInt(workingItemId));
 		}
 		return new ModelAndView("Cart", "cart", cart);
