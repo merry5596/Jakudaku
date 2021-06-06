@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title})">
-    <title>battleWinner</title>
+    <title>BattleSaleWinner</title>
 </head>
 <body>
 <div th:replace="thyme/Header :: header"></div>
-
-<div class="pt-2 ">
-<div th:unless="${item}" class="container evnet-page">
-		<p class="event-des"> no Battle Winner </p>
-	</div>
-	
-	<div th:if="${item}"  class="container evnet-page">
-	<p class="event-title mt-3" align = "center"><b> Battle Winner </b> </p>
-	<p class="lead text-center" > 배틀 세일 우승을 축하합니다. 승자는 20% 세일을 진행합니다. </p>
-	<section class="pb-5 px-5 mx-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..."></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1" th:text="${item.categoryName}" >ItemCategory</div>
-                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
-                        <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
-                            <span th:text="${item.price}">price</span>
-                        </div>
-                        <p class="lead" th:text="${item.description}">description</p>
-                        <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-                         <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                	구매
-                         </button>
-                         </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-	</div>
-</div>
+    <div class="row row-margin">
+    	<div th:replace="thyme/Sidebar :: sidebar"></div>
+        <div class="col-7 base">
+        <!-- 여기서부터 content -->
+        	<div class="pt-2 ">
+				<div th:unless="${item}" class="container evnet-page">
+						<p class="event-des"> no Battle Winner </p>
+					</div>
+					
+					<div th:if="${item}"  class="container evnet-page">
+					<p class="event-title mt-3" align = "center"><b> Battle Winner </b> </p>
+					<p class="lead text-center" > 배틀 세일 우승을 축하합니다. 승자는 20% 세일을 진행합니다. </p>
+					<section class="pb-5 px-5 mx-5">
+				            <div class="container px-4 px-lg-5 my-5">
+				                <div class="row gx-4 gx-lg-5 align-items-center">
+				                    <div class="col-md-6">
+				                    	<img th:src="@{${item.thumbnail1}}" style="width: 300px; height: 500px;" class="card-img-top mb-5 mb-md-0" alt="썸네일1">
+				                    </div>
+				                    <div class="col-md-6">
+				                        <span class="small mb-1" th:text="${item.categoryName}" >ItemCategory</span> / 
+				                        <span class="small mb-1" th:text="${item.themeName}" >themeName</span>
+				                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
+				                        <p class="lead" th:text="${item.producerName}">producerName</p>
+				                        <div class="fs-5 mb-5">
+				                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
+				                            <span th:text="${item.salePrice}"> salePrice </span>
+				                        </div>
+				                        
+				                        <p class="lead" th:text="${item.description}">description</p>
+				                        <a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+				                         <button class="btn btn-outline-dark flex-shrink-0" type="button">
+				                                <i class="bi-cart-fill me-1"></i>
+				                                	구매
+				                         </button>
+				                         </a>
+				                    </div>
+				                </div>
+				            </div>
+				        </section>
+					</div>
+				</div>
+        </div>
+    </div>
+    
+   <div th:replace="thyme/Bottom :: footer"></div>
+   
+   
+</body>
+</html>

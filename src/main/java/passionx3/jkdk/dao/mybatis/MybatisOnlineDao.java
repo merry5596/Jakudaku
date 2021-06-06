@@ -130,4 +130,9 @@ public class MybatisOnlineDao implements OnlineDao {
 		onlineMapper.updateSaleState(state, itemId);
 	}
 	
+	public void updateUploadDate(int itemId, String today) throws DataAccessException {
+		onlineMapper.updateUploadDate(itemId, today);
+
+	}
+	
 }
