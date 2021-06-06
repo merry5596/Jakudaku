@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,7 @@ public class ViewCategoryController {
 		if (keyword == null) keyword = "";
 		
 		List<Online> onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId, device, keyword, sortBy);
+		
 		
 		Category category = jkdkStore.getCategoryByCategoryId(categoryId);
 		

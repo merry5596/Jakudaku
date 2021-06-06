@@ -87,13 +87,21 @@
 	                                    		themeName
 	                                    	</small>
                                         </div>
-
-                                       <span th:text="${item.price}" >price</span>원
+                                        <div th:unless="${item.saleState}">
+											<span th:text="${item.price} + '원'">정가</span>
+										</div>
+										<div th:if="${item.saleState}">
+											<span th:text="${item.price} + '원'" style="text-decoration:line-through;">정가</span>
+											<span th:text="${item.salePrice} + '원'">할인가</span>
+										</div>
 									</div>
 									<div class= "mx-1" style="text-align:right" >
 										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
 										<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
 										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
+									</div>
+									<div class="text-muted" style="text-align:right">
+										<small th:text="${item.totalRate}">4</small>
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>
@@ -135,13 +143,21 @@
 	                                    		themeName
 	                                    	</small>
                                         </div>
-
-                                       <span th:text="${item.price}" >price</span>원
+                                        <div th:unless="${item.saleState}">
+											<span th:text="${item.price} + '원'">정가</span>
+										</div>
+										<div th:if="${item.saleState}">
+											<span th:text="${item.price} + '원'" style="text-decoration:line-through;">정가</span>
+											<span th:text="${item.salePrice} + '원'">할인가</span>
+										</div>
 									</div>
 									<div class= "mx-1" style="text-align:right" >
 										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
 										<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
 										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
+									</div>
+									<div class="text-muted" style="text-align:right">
+										<small th:text="${item.totalRate}">4</small>
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>

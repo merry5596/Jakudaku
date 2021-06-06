@@ -104,6 +104,7 @@
 					<div class="container">
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-2">
 							<div id="onlineListDiv" th:each="item : ${onlineList}" class="col">
+								<!-- 상품 한 개 -->
 								 <div class="card shadow-sm">
 									<div class="card-body d-block mx-auto">
 										<div>
@@ -126,8 +127,13 @@
 	                                    		themeName
 	                                    	</small>
                                         </div>
-
-                                       <span th:text="${item.price}" >price</span>원
+                                        <div th:unless="${item.saleState}">
+											<span th:text="${item.price} + '원'">정가</span>
+										</div>
+										<div th:if="${item.saleState}">
+											<span th:text="${item.price} + '원'" style="text-decoration:line-through;">정가</span>
+											<span th:text="${item.salePrice} + '원'">할인가</span>
+										</div>
 									</div>
 									<div class= "mx-1" style="text-align:right" >
 										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
@@ -136,7 +142,7 @@
 									</div>
 									<div class="text-muted" style="text-align:right">
 										<small th:text="${item.totalRate}">4</small>
-									</div>3
+									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
@@ -148,12 +154,7 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- 상품 등록-->
-				<div class="mt-4 d-grid gap-2 d-md-flex justify-content-md-end">
-					<a href="productR.html"><button class="btn btn-secondary"
-							type="button">상품 등록</button></a>
-				</div>
+				
 
 				<!-- 페이징네이션-->
 				<div class=" text-center mt-4 position-relative">

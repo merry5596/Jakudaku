@@ -11,6 +11,7 @@ import passionx3.jkdk.dao.FundOrderDao;
 import passionx3.jkdk.dao.LineItemDao;
 import passionx3.jkdk.dao.SequenceDao;
 import passionx3.jkdk.dao.mybatis.mapper.FundOrderMapper;
+import passionx3.jkdk.dao.mybatis.mapper.FundingMapper;
 import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
 import passionx3.jkdk.dao.mybatis.mapper.OrderMapper;
 import passionx3.jkdk.domain.FundOrder;
@@ -27,6 +28,9 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	
 	@Autowired
 	private LineItemMapper lineItemMapper;
+	
+	@Autowired
+	private FundingMapper fundingMapper;
 
 	@Autowired
 	private SequenceDao sequenceDao;
@@ -72,6 +76,9 @@ public class MybatisFundOrderDao implements FundOrderDao {
     	result = lineItemMapper.insertLineItem(lineItem);
     	if (result == 0)
     		return 0;
+    	
+    	// funding 상품 purchaseQuantity +1
+    	fundingMapper.updatePurchaseQuantity(fundOrder.getLineItem().getItemId(), fundOrder.getLineItem().getQuantity());
     	
     	return 1;
 	}

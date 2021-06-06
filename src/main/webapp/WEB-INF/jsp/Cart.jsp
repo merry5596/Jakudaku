@@ -12,14 +12,13 @@
                      <form action='<c:url value="/order/newOrder.do?"/>' method="post">
                        <table style="width:100%;" id="cart">
                          <tr bgcolor="#cccccc">
-                           <td style="text-align:center"><b>이미지 </b></td>
-                        <td style="text-align:center"><b>상품</b></td>
-                         <td style="text-align:center"><b>판매가</b></td>
-                         <td style="text-align:center"><b>할인</b></td>
-                         <td style="text-align:center"><b>결제 금액</b></td>
-                         <td style="text-align:center">&nbsp;</td>
+                           	<td style="text-align:center"><b>이미지 </b></td>
+                        	<td style="text-align:center"><b>상품</b></td>
+                       		<td style="text-align:center"><b>판매가</b></td>
+                         	<td style="text-align:center"><b>할인</b></td>
+                         	<td style="text-align:center"><b>결제 금액</b></td>
+                         	<td style="text-align:center">&nbsp;</td>
                          </tr>
-               
                          <c:if test="${cart.numberOfItems == 0}">
                            <tr bgcolor="#EEEEEE">
                              <td style="text-align:center" colspan="6"><b>Your cart is empty.</b></td>
@@ -27,30 +26,28 @@
                          </c:if>
                          <c:forEach var="cartItem" items="${cart.cartItemList.pageList}">
                            <tr bgcolor="#EEEEEE">
-                             <td><a href='<c:url value="/item/viewOnlineItem.do">
+                             <td style="width: 120px; height:120px"><a href='<c:url value="/item/viewOnlineItem.do">
                                  <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'>
-                                 <img src="${cartItem.onlineItem.thumbnail1}}"/></a></td>
+                                 <img src="${cartItem.onlineItem.thumbnail1}" style="max-width: 100%; max-height: 100%;"/></a><span></span></td>
                              <td><b>
                                <a href='<c:url value="/item/viewOnlineItem.do">
                                  <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'>
                                  <c:out value="${cartItem.onlineItem.name}" /></a>
-                               <br><br>옵션:
-                               <c:if test="${cartitem.onlineItem.pcFile != ''}">PC </c:if>
-                               <c:if test="${cartItem.onlineItem.tabletFile != ''}">TABLET </c:if>
-                               <c:if test="${cartItem.onlineItem.phoneFile != ''}">PHONE </c:if>
-                              </b></td>
+                               <div>옵션:
+                               	 <c:if test="${not empty cartItem.onlineItem.pcFile}">PC </c:if>
+                               	 <c:if test="${not empty cartItem.onlineItem.tabletFile}">TABLET </c:if>
+                               	 <c:if test="${not empty cartItem.onlineItem.phoneFile}">PHONE </c:if> </div></td>
                              <td style="text-align:center"><c:out value="${cartItem.onlineItem.price}" /></td>
                              <td style="text-align:center">
                                 <c:choose>
-                                   <c:when test="cartItem.item.saleState == 0">    <!-- No Sale -->
-                                      <c:set var="discountPrice" value="0" /></c:when>
                                    <c:when test="cartItem.item.saleState == 1">   <!-- Time Sale -->
                                       <c:set var="discountPrice" value="${cartItem.onlineItem.price} * 0.1" />
-                                 Time Sale</c:when>
+                                	 Time Sale<br></c:when>
                                    <c:when test="cartItem.item.saleState == 2">   <!-- Battle Sale -->
                                       <c:set var="discountPrice" value="${cartItem.onlineItem.price} * 0.1" />
-                                 Battle Sale</c:when></c:choose>
-                           <br>-<c:out value="${cartItem.onlineItem.discount}"/></td>
+                                 	Battle Sale<br></c:when>
+                                 </c:choose>
+                           		 -<c:out value="${cartItem.onlineItem.discount}"/></td>
                              <td style="text-align:center"><c:out value="${cartItem.onlineItem.salePrice}" /></td>
                              <td style="text-align:center">
                                <button type="button" onclick="location.href='/order/newOrder.do?itemId=' + ${cartItem.onlineItem.itemId}">구매</button>

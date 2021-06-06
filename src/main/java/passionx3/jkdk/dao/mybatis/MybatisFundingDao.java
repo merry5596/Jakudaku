@@ -29,17 +29,17 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public List<Funding> getFundingItemList(String keyword, int sortBy) throws DataAccessException {
-		Calendar cal= Calendar.getInstance ( );
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-		cal.setTime(new Date());
-		String today = sDate.format(cal.getTime());
+//		Calendar cal= Calendar.getInstance ( );
+//		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+//		cal.setTime(new Date());
+//		String today = sDate.format(cal.getTime());
 		
 		if (sortBy == 1)
-			return fundingMapper.getFundingItemListOrderByUploadDate(keyword, today);
+			return fundingMapper.getFundingItemListOrderByUploadDate(keyword);
 		else if (sortBy == 2)
-			return fundingMapper.getFundingItemListOrderByLikeNum(keyword, today);
+			return fundingMapper.getFundingItemListOrderByLikeNum(keyword);
 		else // (sortBy == 6)
-			return fundingMapper.getFundingItemListOrderByFinishDate(keyword, today);
+			return fundingMapper.getFundingItemListOrderByFinishDate(keyword);
 	}
 
 	@Override
@@ -87,5 +87,7 @@ public class MybatisFundingDao implements FundingDao {
 		return fundingMapper.updateFundingItem(funding);
 	}
 
-	
+	public void closeFunding(int itemId) {
+		fundingMapper.closeFunding(itemId);
+	}
 }
