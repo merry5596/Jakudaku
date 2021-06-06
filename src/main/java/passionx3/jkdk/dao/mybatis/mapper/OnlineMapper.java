@@ -90,12 +90,12 @@ public interface OnlineMapper {
 	Online getOnlineItemByLineItemId(@Param("lineItemId") int lineItemId);
 
 	@Insert("INSERT INTO onlineitem (itemid, totalrate, pcfile, tabletfile, phonefile, categoryid, salestate) "
-			+ "values (#{onlineItem.itemId}, 0, #{onlineItem.pcFile}, #{onlineItem.tabletFile}, #{onlineItem.phoneFile}, "
-				+ "#{onlineItem.categoryId}, 0)")
-	int registerOnlineItem(@Param("onlineItem") Online onlineItem);
+			+ "values (#{itemId}, 0, #{pcFile, jdbcType=VARCHAR}, #{tabletFile, jdbcType=VARCHAR}, #{phoneFile, jdbcType=VARCHAR}, "
+				+ "#{categoryId}, 0)")
+	int registerOnlineItem(Online onlineItem);
 	
 	@Update("UPDATE onlineitem "
-			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
+			+ "SET pcfile = #{onlineItem.pcFile, jdbcType=VARCHAR}, tabletfile = #{onlineItem.tabletFile, jdbcType=VARCHAR}, phonefile = #{onlineItem.phoneFile, jdbcType=VARCHAR}, categoryid = #{onlineItem.categoryId} "
 			+ "WHERE ITEMID = #{onlineItem.itemId}")
 	int updateOnlineItem(@Param("onlineItem") Online onlineItem);
 	

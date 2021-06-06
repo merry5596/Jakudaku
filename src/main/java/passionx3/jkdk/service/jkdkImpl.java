@@ -56,7 +56,7 @@ public class jkdkImpl implements jkdkFacade {
 	@Autowired
 	private ReviewDao reviewDao;
   
-  @Autowired
+	@Autowired
 	private OrderDao orderDao;
 	
 	@Autowired
