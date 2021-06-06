@@ -26,6 +26,7 @@ public class ViewOrderController {
 	public ModelAndView handleRequest(HttpServletRequest request, @RequestParam("orderId") int orderId) throws Exception {
 
 		Order o = jkdkStore.getOrderByOrderId(orderId);
+
 				
 		ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");
 		mav.addObject("order", o);
