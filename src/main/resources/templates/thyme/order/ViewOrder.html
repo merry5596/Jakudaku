@@ -40,8 +40,8 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${order.lineItems}" bgcolor="#EEEEEE">
-						<td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
-							<img th:src="@{${lineItem.online.thumbnail1}}"/></a></td>
+						<td style="width: 120px; height:120px"><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1}}"/></a></td>
 				        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
 				            <p th:text="${lineItem.online.name}">상품명</p></a>
 				            <div>옵션: 

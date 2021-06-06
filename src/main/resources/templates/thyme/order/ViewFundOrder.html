@@ -33,8 +33,8 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-							<img th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
+						<td style="width: 120px; height:120px"><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
 				        <td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
 				            <span th:text="${lineItem.funding.name}">상품명</span></a>
 				        <td style="text-align:center" th:text="${lineItem.funding.price}">판매가</td>

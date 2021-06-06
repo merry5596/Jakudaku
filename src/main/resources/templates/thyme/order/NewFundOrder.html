@@ -5,62 +5,97 @@
 </head>
 <script>
 	 window.onload = function() {
-		 var isValidationOfAddress = document.getElementById('isValidationOfAddress');
+		 var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
 		 var another = document.getElementById('another');
-		 if (isValidationOfAddress.value == 'true') {
-			 another.checked = true;
-		 }
-	 }
-	
-	function changeType() {
-		var typeId = document.querySelector('input[name="group"]:checked').id;
-		var receiverName = document.getElementById('receiverName');
-		var zip = document.getElementById('zip');
-		var address1 = document.getElementById('address1');
-		var address2 = document.getElementById('address2');
-		var phone = document.getElementById('phone');
-		var isValidationOfAddress = document.getElementById('isValidationOfAddress');
-		
-		if (typeId == 'same') {	// '회원 정보와 동일'
-			receiverName.readOnly = true;
-			zip.readOnly = true;
-			address1.readOnly = true;
-			address2.readOnly = true;
-			phone.readOnly = true;
-
-			if (isValidationOfAddress.value == 'false') {	// addressValidation error가 난 페이지가 아닌 경우 (기본)
-				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
-				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
-				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
-				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
-				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
-			} else if (isValidationOfAddress.value == 'true') { // addressValidation error가 난 페이지인 경우
-				var messages = document.getElementsByClassName('validationMessage');
-				for (var i = 0; i < messages.length; i++) {
-					messages[i].innerText = '';
-				}
-				
-				receiverName.value = '[[${account.name}]]';
-				zip.value = '[[${account.zip}]]';
-				address1.value = '[[${account.address1}]]';
-				address2.value = '[[${account.address2}]]';
-				phone.value = '[[${account.phone}]]';
-			}
+		 
+		 if (isNewAddress == 'true') {
+			another.checked = true;
 			
-			
-		} else if (typeId == 'another') {	// '새로운 수령인'
 			receiverName.readOnly = false;
 			zip.readOnly = false;
 			address1.readOnly = false;
 			address2.readOnly = false;
 			phone.readOnly = false;
-			
-			receiverName.value = '';
-			zip.value = '';
-			address1.value = '';
-			address2.value = '';
-			phone.value = '';
+		 }
+	 }
+	
+	// radio button change
+	function changeType() {
+		var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
+
+		var same = document.getElementById('same');
+		var another = document.getElementById('another');
+		var receiverName = document.getElementById('receiverName');
+		var zip = document.getElementById('zip');
+		var address1 = document.getElementById('address1');
+		var address2 = document.getElementById('address2');
+		var phone = document.getElementById('phone');
+		
+		
+		if (isNewAddress == 'false') {	// 1. 기존 주소로 주문한 뒤 validation에 걸렸거나, 아예 새로운 주문서인 경우
+			if (same.checked == true) {	// a. 이때 기존 주소 버튼 클릭 시
+				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
+				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
+				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
+				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
+				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
+				
+				receiverName.readOnly = true;
+				zip.readOnly = true;
+				address1.readOnly = true;
+				address2.readOnly = true;
+				phone.readOnly = true;
+			} else if (another.checked == true) {	// b. 이때 새로운 주소 버튼 클릭 시
+				receiverName.value = '';
+				zip.value = '';
+				address1.value = '';
+				address2.value = '';
+				phone.value = '';
+				
+				receiverName.readOnly = false;
+				zip.readOnly = false;
+				address1.readOnly = false;
+				address2.readOnly = false;
+				phone.readOnly = false;
+			}
+		} else if (isNewAddress == 'true') {	// 2. 새로운 주소로 주문한 뒤 validation에 걸린 경우
+			if (same.checked == true) {	// a. 이때 기존 주소 버튼 클릭 
+				var messages = document.getElementsByClassName('validationMessage');
+				for (var i = 0; i < messages.length; i++) {
+					messages[i].style.visibility="hidden";
+				}
+				receiverName.value = '[[${account.name}]]';
+				zip.value = '[[${account.zip}]]';
+				address1.value = '[[${account.address1}]]';
+				address2.value = '[[${account.address2}]]';
+				phone.value = '[[${account.phone}]]';
+				
+				receiverName.readOnly = true;
+				zip.readOnly = true;
+				address1.readOnly = true;
+				address2.readOnly = true;
+				phone.readOnly = true;
+			} else if (another.checked == true) {	// b. 이때 새로운 주소 버튼 클릭 시
+				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
+				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
+				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
+				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
+				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
+				
+				var messages = document.getElementsByClassName('validationMessage');
+				for (var i = 0; i < messages.length; i++) {
+					messages[i].style.visibility="visible";
+				}
+				
+				receiverName.readOnly = false;
+				zip.readOnly = false;
+				address1.readOnly = false;
+				address2.readOnly = false;
+				phone.readOnly = false;
+			}
 		}
+		
+		
 	}
 	
 </script>
@@ -86,8 +121,8 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrderForm.fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-							<img th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
+						<td style="width: 120px; height:120px"><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
 				        <td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
 				            <span th:text="${lineItem.funding.name}">상품명</span></a>
 				        <td style="text-align:center" th:text="${lineItem.funding.price}">0</td>
@@ -104,11 +139,11 @@
 				  <table style="width:100%; align:center;">
 			  	  	<tr>
 			  	  		<td colspan="2" width="30%"><b>배송 정보</b></td>
-			  	  		<td><input type="radio" name="group" id="same" onclick="changeType();" checked="true"/>
+			  	  		<td><input type="radio" name="group" id="same" th:field=*{isNewAddress} th:value="false" th:onclick="changeType();" checked="true"/>
 			  	  			<label for="same">회원 정보와 동일</label>
-							<input type="radio" name="group" id="another" onclick="changeType();"/>
+							<input type="radio" name="group" id="another" th:field=*{isNewAddress} th:value="true" th:onclick="changeType();"/>
 							<label for="another">새로운 수령인</label>
-							<input type="hidden" id="isValidationOfAddress" th:value="${isValidationOfAddress}" /></td>
+							<input type="text" id="testInput" th:value="*{isNewAddress}" /></td>
 			  	  	</tr>
 			  	  	<tr>
 			  	  		<td colspan="2" bgcolor="#CCCCCC">수령인</td>

@@ -110,8 +110,9 @@
 	                                    		themeName
 	                                    	</small>
                                         </div>
-
-                                       <span th:text="${item.price}" >price</span>원
+                                        <div>
+                                      		<span th:text="${item.price}" >price</span>원
+                                        </div>	
 									</div>
 									
 									<div class="progress mx-2">
@@ -142,11 +143,6 @@
 					</div>
 				</div>
 
-				<!-- 상품 등록-->
-				<div class="mt-4 d-grid gap-2 d-md-flex justify-content-md-end">
-					<a href="productR.html"><button class="btn btn-secondary"
-							type="button">펀딩 등록</button></a>
-				</div>
 
 				<!-- 페이징네이션-->
 				<div class=" text-center mt-4 position-relative">

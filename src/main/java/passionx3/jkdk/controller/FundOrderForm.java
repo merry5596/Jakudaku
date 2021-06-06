@@ -10,8 +10,9 @@ import passionx3.jkdk.domain.Order;
 public class FundOrderForm implements Serializable {
 
 	private final FundOrder fundOrder;
-	private boolean shippingAddressRequired = false;
-	private boolean shippingAddressProvided = false;
+	private boolean isNewAddress = false;
+	//private boolean shippingAddressRequired = false;
+	//private boolean shippingAddressProvided = false;
 	
 	public FundOrderForm(FundOrder fundOrder) {
 		this.fundOrder = fundOrder;
@@ -21,19 +22,29 @@ public class FundOrderForm implements Serializable {
 		return fundOrder;
 	}
 
-	public void setShippingAddressRequired(boolean shippingAddressRequired) {
-		this.shippingAddressRequired = shippingAddressRequired;
+	public boolean getIsNewAddress() {
+		return isNewAddress;
 	}
 
-	public boolean isShippingAddressRequired() {
-		return shippingAddressRequired;
+	public void setIsNewAddress(boolean isNewAddress) {
+		this.isNewAddress = isNewAddress;
 	}
+	
+	
 
-	public void setShippingAddressProvided(boolean shippingAddressProvided) {
-		this.shippingAddressProvided = shippingAddressProvided;
-	}
-
-	public boolean didShippingAddressProvided() {
-		return shippingAddressProvided;
-	}
+//	public void setShippingAddressRequired(boolean shippingAddressRequired) {
+//		this.shippingAddressRequired = shippingAddressRequired;
+//	}
+//
+//	public boolean isShippingAddressRequired() {
+//		return shippingAddressRequired;
+//	}
+//
+//	public void setShippingAddressProvided(boolean shippingAddressProvided) {
+//		this.shippingAddressProvided = shippingAddressProvided;
+//	}
+//
+//	public boolean didShippingAddressProvided() {
+//		return shippingAddressProvided;
+//	}
 }

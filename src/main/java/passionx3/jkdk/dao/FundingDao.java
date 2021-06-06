@@ -1,6 +1,7 @@
 
 package passionx3.jkdk.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -20,6 +21,7 @@ public interface FundingDao {
 
 	List<Funding> getNotApprovedFundingItems() throws DataAccessException; // 조건문에서 approval 무조건 0 (수정)
 	List<Funding> getNewFundingItemListforHome(String today)throws DataAccessException;
+	void closeFunding(int itemId);
 
 	// +조건 검색 내 키워드 검색	
 }

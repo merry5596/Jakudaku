@@ -59,7 +59,7 @@ public class FundOrderController {
 		System.out.println("contr: " + fundOrderForm.getFundOrder().getLineItem().getLineItemId());
 		
 		ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
-		mav.addObject("isValidation", false);
+		mav.addObject("isValidationOfAddress", false);
 		mav.addObject("account", account);
 		return mav;
 
@@ -75,25 +75,25 @@ public class FundOrderController {
 			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
-			boolean isValidationOfAddress = false;
+//			boolean isValidationOfAddress = false;
 			
 			// from NewOrderForm
 			fundOrderValidator.validate(fundOrderForm.getFundOrder(), result);
 			
-			for (ObjectError error : result.getAllErrors()) {
-				String errorCode = error.getCode();
-				if (errorCode.equals("RECEIVER_NAME_REQUIRED") || errorCode.equals("ZIP_REQUIRED") || errorCode.equals("ZIP_INVALID") || errorCode.equals("ADDRESS1_REQUIRED") || errorCode.equals("ADDRESS2_REQUIRED") || errorCode.equals("PHONE_REQUIRED") || errorCode.equals("PHONE_INVALID")) {
-					isValidationOfAddress = true;
-					System.out.println(isValidationOfAddress);
-					break;
-				}
-			}
+//			for (ObjectError error : result.getAllErrors()) {
+//				String errorCode = error.getCode();
+//				if (errorCode.equals("RECEIVER_NAME_REQUIRED") || errorCode.equals("ZIP_REQUIRED") || errorCode.equals("ZIP_INVALID") || errorCode.equals("ADDRESS1_REQUIRED") || errorCode.equals("ADDRESS2_REQUIRED") || errorCode.equals("PHONE_REQUIRED") || errorCode.equals("PHONE_INVALID")) {
+//					isValidationOfAddress = true;
+//					System.out.println(isValidationOfAddress);
+//					break;
+//				}
+//			}
 			
 			if (result.hasErrors()) {
 				Account userSession = (Account) request.getSession().getAttribute("userSession");
 				Account account = jkdkStore.getAccount(userSession.getUserId());
 				ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
-				mav.addObject("isValidationOfAddress", isValidationOfAddress);
+//				mav.addObject("isValidationOfAddress", isValidationOfAddress);
 				mav.addObject("account", account);
 				return mav;
 			}
@@ -116,25 +116,25 @@ public class FundOrderController {
 	}
 	
 	// test 후 삭제
-	@RequestMapping("/order/test2.do")
-	public ModelAndView test(HttpServletRequest request,
-			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
-			BindingResult result, SessionStatus status) {
-		
-			// from NewOrderForm
-			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
-
-			if (result.hasErrors())
-				return new ModelAndView("thyme/order/NewFundOrder");
-
-			FundOrder fo = jkdkStore.getFundOrderByOrderId(22);
-			
-			ModelAndView mav = new ModelAndView("thyme/order/ViewFundOrder");
-			mav.addObject("fundOrder", fo);
-			System.out.println(fo.getOrderId());
-			mav.addObject("message", "펀딩이 완료되었습니다.");
-			status.setComplete();  // remove sessionCart and orderForm from session
-			return mav;
-	}
+//	@RequestMapping("/order/test2.do")
+//	public ModelAndView test(HttpServletRequest request,
+//			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
+//			BindingResult result, SessionStatus status) {
+//		
+//			// from NewOrderForm
+//			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
+//
+//			if (result.hasErrors())
+//				return new ModelAndView("thyme/order/NewFundOrder");
+//
+//			FundOrder fo = jkdkStore.getFundOrderByOrderId(22);
+//			
+//			ModelAndView mav = new ModelAndView("thyme/order/ViewFundOrder");
+//			mav.addObject("fundOrder", fo);
+//			System.out.println(fo.getOrderId());
+//			mav.addObject("message", "펀딩이 완료되었습니다.");
+//			status.setComplete();  // remove sessionCart and orderForm from session
+//			return mav;
+//	}
 	
 }

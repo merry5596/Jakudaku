@@ -1,13 +1,16 @@
 package passionx3.jkdk.service;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import passionx3.jkdk.domain.*;
 
 public interface jkdkFacade {
-
+	
+	void closeFunding(int itemId, Date closingTime);
+	
 	Account getAccount(String userId);
 
 	Account getAccount(String userId, String password);

@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +66,24 @@ public class jkdkImpl implements jkdkFacade {
 	@Autowired
 	private FundOrderDao fundOrderDao;
   
+	@Autowired    // task scheduler 객체를 주입 받음
+	private ThreadPoolTaskScheduler scheduler;
+	
+	public void closeFunding(int itemId, Date closingTime) {
+		Runnable updateTableRunner = new Runnable() { 
+		@Override
+		public void run() {   // 스케줄러에 의해 미래의 특정 시점에 실행될 작업을 정의    
+			Date curTime = new Date();
+			// 실행 시점의 시각을 전달하여 그 시각 이전의 closing time 값을 갖는 event들의 상태를 변경 
+			fundingDao.closeFunding(itemId);    // EVENTS 테이블의 레코드 갱신 
+			System.out.println("updateTableRunner is executed at " + curTime);
+			}
+		};
+		  
+		// task schedule 생성: closingTime에 updateTableRunner.run() 메소드가 자동 실행됨
+		scheduler.schedule(updateTableRunner, closingTime);   
+	}
+	
 	@Override
 	public Account getAccount(String userId) {
 		return accountDao.getAccount(userId);
@@ -112,7 +131,6 @@ public class jkdkImpl implements jkdkFacade {
 		onlineDao.updateUploadDate(itemId, today);
 		
 		return onlineDao.approveItem(itemId);
-		
 	}
 
 	@Override
@@ -465,6 +483,21 @@ public class jkdkImpl implements jkdkFacade {
 		
 		if (r1 * r2 == 0)
 			return 0;
+		
+	
+		
+		//펀딩 마감시 isForSale 자동 변경할 수 있도록 closeFunding 추가
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		Date finish = null;
+		try {
+			finish = transFormat.parse(funding.getFinishDate());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		closeFunding(funding.getItemId(), finish);
+		
+		
+		
 		return 1;
 	}
 
