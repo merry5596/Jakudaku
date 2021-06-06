@@ -41,7 +41,7 @@ public interface OnlineMapper {
 	List<Online> getOnlineItemsByKeyword(@Param("keyword") String keyword);
 	
 	@Select("SELECT i.itemId AS itemId, a.userId AS producerId, a.alias AS producerName, t.themeId AS themeId, t.name AS themeName, " +
-			"i.name AS name, TO_DATE(i.uploadDate, 'YYYY/MM/DD') AS uploadDate, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "+ 
+			"i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "+ 
 			"i.thumbnail2 AS thumbnail2, i.thumbnail3 AS thumbnail3, i.isforsale AS isForSale, i.description AS description, c.categoryid AS categoryId, "+ 
 			"c.name AS categoryName, o.totalRate AS totalRate, o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " + 
 			"FROM item i, onlineitem o, account a, theme t, category c " + 
@@ -197,5 +197,6 @@ public interface OnlineMapper {
 	@Insert("UPDATE onlineitem SET salestate = #{state} where itemid = #{itemId}")
 	void updateSaleState(int state, int itemId);
 
-
+	@Insert("UPDATE item SET uploaddate = #{today} where itemid = #{itemId}")
+	void updateUploadDate(int itemId, String today);
 }

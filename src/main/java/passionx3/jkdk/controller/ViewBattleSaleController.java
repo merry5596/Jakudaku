@@ -32,7 +32,7 @@ public class ViewBattleSaleController {
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
 		
-		if(day_of_week == 7){ //주말이면 타임 세일 진행
+		if(day_of_week == 7){ //토요일이면 배틀세일 선정 후 진행
 			BattleSale battleSale = jkdkStore.getBattleSale(today);
 			Online item1 = jkdkStore.getOnlineItemById(battleSale.getItemId1());
 			Online item2 = jkdkStore.getOnlineItemById(battleSale.getItemId2());
@@ -43,7 +43,7 @@ public class ViewBattleSaleController {
 			
 			return "thyme/sale/BattleSale";
 		}
-		else if (day_of_week == 1) {
+		else if (day_of_week == 1) { //일요일이면 배틀세일 winner 진행
 			jkdkStore.resetVote();
 			
 			cal.add(Calendar.DATE, -1);

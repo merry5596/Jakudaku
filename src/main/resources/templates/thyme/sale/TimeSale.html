@@ -47,8 +47,10 @@
 						</div>
 		
 						<div class="col mt-5 position-relative" align="left">
-							<div class="small mb-1" th:text="${item.categoryName}" >ItemCategory</div>
+							<span class="small mb-1" th:text="${item.categoryName}" >ItemCategory</span> / 
+	                        <span class="small mb-1" th:text="${item.themeName}" >themeName</span>
 		                        <h1 class="display-5 fw-bolder" th:text="${item.name}">name</h1>
+		                        <p class="lead" th:text="${item.producerName}">producerName</p>
 		                        <div class="fs-5 mb-5">
 		                            <span class="text-decoration-line-through" th:text="${item.price}">price</span>
 		                            <span th:text="${item.salePrice}"> salePrice </span>

@@ -4,6 +4,62 @@
     <title>Manager</title>
 </head>
 <body>
+
+ <!-- download Modal -->
+<div th:each="item:${items}" class="modal fade" th:attr="id=|down${itemStat.index}|" tabindex="-1" aria-labelledby="downModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Download</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table caption-top">
+		  <caption>다운로드 후 파일을 확인해주세요.</caption>
+		  <thead>
+		    <tr>
+		      <th scope="col"></th>
+		      <th scope="col">PC</th>
+		      <th scope="col">PHONE</th>
+		      <th scope="col">TAB</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row"></th>
+		      <td>
+		      	<a th:if="${item.pcFile}" th:href="${item.pcFile}" download>
+          			<button type="button" class="btn btn-success">
+		            	download
+		         	</button>   
+				 </a>
+		      </td>
+		      <td>
+		      	<a th:if="${item.phoneFile}" th:href="${item.phoneFile}" download>
+          			<button type="button" class="btn btn-success">
+		            	download
+		         	</button>   
+				 </a>
+		      </td>
+		      <td>
+		      	<a th:if="${item.tabletFile}" th:href="${item.tabletFile}" download>
+          			<button type="button" class="btn btn-success">
+		            	download
+		         	</button>   
+				 </a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div th:replace="thyme/Header :: header"></div>
 
 <!-- side bar-->
@@ -44,13 +100,13 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>Date</th>
 						<th>Name</th>
 						<th>Category</th>
 						<th>Theme</th>
 						<th>Description</th>
 						<th>Price</th>
 						<th>Producer</th>
+						<th>Download</th>
 						<th>Approve</th>
 						<th>Reject</th>
 					</tr>
@@ -62,14 +118,17 @@
 								<img class = " img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 50px; height: 50px;"/>
 							</a>
 						</td>
-						
-						<td th:text="${item.uploadDate}">uploadDate</td>
 						<td th:text="${item.name}">name</td>
 						<td th:text="${item.categoryName}">category</td>
-						<td th:text="${item.themeName}">category</td>
+						<td th:text="${item.themeName}">theme</td>
 						<td th:text="${item.description}">description</td>
 						<td th:text="${item.price}">price</td>
 						<td th:text="${item.producerName}">producer</td>
+						<td> 
+		          			<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target=|#down${itemStat.index}|">
+				            	download
+				         	</button>   
+				        </td>
 						<td> 
 							<form action="#" th:action="@{/manager/online/approveItem.do}">
 							<input type="hidden" id="itemId" name="itemId" th:value="${item.itemId}"/>
@@ -93,3 +152,4 @@
             
         </div>
     </div>
+     <div th:replace="thyme/Bottom :: footer"></div>

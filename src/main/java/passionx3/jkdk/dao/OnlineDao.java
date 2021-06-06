@@ -33,4 +33,6 @@ public interface OnlineDao {
 	List<Online> getBestOnlineItemListforHome()throws DataAccessException;
 	List<Online> getNewOnlineItemListforHome()throws DataAccessException;
 	//	+조건 검색 내 키워드 검색
+	
+	void updateUploadDate(int itemId, String today);
 }
