@@ -28,7 +28,7 @@ public class MybatisLineItemDao implements LineItemDao {
 		LineItem lineItem = lineItemMapper.getLineItemByOrderId(orderId);
 		if (lineItem != null) {
 			Funding funding = fundingMapper.getFundingItemByLineItemId(lineItem.getLineItemId());
-			lineItem.setItem(funding);
+			lineItem.setFunding(funding);
 			lineItem.setUnitPrice(funding.getPrice());
 		}
 		return lineItem;
@@ -40,7 +40,7 @@ public class MybatisLineItemDao implements LineItemDao {
 		List<LineItem> lineItems = lineItemMapper.getLineItemsByOrderId(orderId);
 		for (LineItem lineItem : lineItems) {
 			Online online = onlineMapper.getOnlineItemByLineItemId(lineItem.getLineItemId());
-			lineItem.setItem(online);
+			lineItem.setOnline(online);
 			lineItem.setUnitPrice(online.getPrice());
 		}
 		return lineItems;
