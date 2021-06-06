@@ -2,6 +2,8 @@ package passionx3.jkdk.domain;
 
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @SuppressWarnings("serial")
 public abstract class Item implements Serializable {
 	private int itemId;
@@ -16,59 +18,16 @@ public abstract class Item implements Serializable {
 	private String thumbnail1;
 	private String thumbnail2;
 	private String thumbnail3;
+	
+	private MultipartFile[] mulThumbnail1;
+//	private MultipartFile mulThumbnail2;
+//	private MultipartFile mulThumbnail3;
+	
 	private int isForSale;
 	private String description;
 	private int approval;
 	
 	public Item() {
-	}
-	
-	public Item(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale) {
-		this.itemId = itemId;
-		this.name = name;
-		this.price = price;
-		this.likeNum = likeNum;
-		this.thumbnail1 = thumbnail1;
-		this.isForSale = isForSale;
-	}
-
-	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, String name,
-			String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
-			int isForSale, String description) {
-		this.itemId = itemId;
-		this.producerId = producerId;
-		this.producerName = producerName;
-		this.themeId = themeId;
-		this.themeName = themeName;
-		this.name = name;
-		this.uploadDate = uploadDate;
-		this.price = price;
-		this.likeNum = likeNum;
-		this.thumbnail1 = thumbnail1;
-		this.thumbnail2 = thumbnail2;
-		this.thumbnail3 = thumbnail3;
-		this.isForSale = isForSale;
-		this.description = description;
-	}
-
-	public Item(int itemId, String producerId, String producerName, int themeId, String themeName, 
-			String name, String uploadDate, int price, int likeNum, String thumbnail1, String thumbnail2, String thumbnail3,
-			int isForSale, String description, int approval) {
-		this.itemId = itemId;
-		this.producerId = producerId;
-		this.producerName = producerName;
-		this.themeId = themeId;
-		this.themeName = themeName;
-		this.name = name;
-		this.uploadDate = uploadDate;
-		this.price = price;
-		this.likeNum = likeNum;
-		this.thumbnail1 = thumbnail1;
-		this.thumbnail2 = thumbnail2;
-		this.thumbnail3 = thumbnail3;
-		this.isForSale = isForSale;
-		this.description = description;
-		this.approval = approval;
 	}
 	
 	public int getItemId() {
@@ -146,6 +105,27 @@ public abstract class Item implements Serializable {
 	public void setThumbnail3(String thumbnail3) {
 		this.thumbnail3 = thumbnail3;
 	}
+	
+	public MultipartFile[] getMulThumbnail1() {
+		return mulThumbnail1;
+	}
+	public void setMulThumbnail1(MultipartFile[] mulThumbnail1) {
+		this.mulThumbnail1 = mulThumbnail1;
+	}
+//	public MultipartFile getMulThumbnail2() {
+//		return mulThumbnail2;
+//	}
+//	public void setMulThumbnail2(MultipartFile mulThumbnail2) {
+//		this.mulThumbnail2 = mulThumbnail2;
+//	}
+//	public MultipartFile getMulThumbnail3() {
+//		return mulThumbnail3;
+//	}
+//	public void setMulThumbnail3(MultipartFile mulThumbnail3) {
+//		this.mulThumbnail3 = mulThumbnail3;
+//	}
+	
+	
 	public int getIsForSale() {
 		return isForSale;
 	}

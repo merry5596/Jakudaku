@@ -12,26 +12,7 @@ public class Funding extends Item implements Serializable {
 		private int targetQuantity;
 
 		public Funding() {
-		}
-
-		public Funding(String finishDate, int purchaseQuantity, int targetQuantity) {
-			this.finishDate = finishDate;
-			this.purchaseQuantity = purchaseQuantity;
-			this.targetQuantity = targetQuantity;
-		}
-		
-		public Funding(int itemId, String name, int price, int likeNum, String thumbnail1, int isForSale, String finishDate, int purchaseQuantity, int targetQuantity) {
-			super(itemId, name, price, likeNum, thumbnail1, isForSale);
-			this.finishDate = finishDate;
-			this.purchaseQuantity = purchaseQuantity;
-			this.targetQuantity = targetQuantity;
-		}
-
-		public Funding(int itemId, String producerId, String producerName, int themeId, String themeName,
-				int categoryId, String name, Date uploadDate, int price, int likeNum, String thumbnail1,
-				String thumbnail2, String thumbnail3, int isForSale, String description, int approval) {
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		public String getFinishDate() {

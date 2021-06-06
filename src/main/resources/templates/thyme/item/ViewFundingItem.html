@@ -82,7 +82,7 @@
 	function calc(btn) {
 		var option = $('#option');
 		
-		if (option.val() > 0 && btn.id == 'option_minus') {
+		if (option.val() > 1 && btn.id == 'option_minus') {
 			option.val(option.val() - 1);
 		}	
 		
@@ -140,7 +140,7 @@
 			수량 
 			<div id="wrap_option">
 				<button type="button" class="left attached ui button" id="option_minus" onClick="calc(this)">-</button>
-				<input type="text" value="0" id="option" name="quantity" pattern="[0-9]+"/>
+				<input type="text" value="1" id="option" name="quantity" pattern="[0-9]+"/>
 				<button type="button" class="right attached ui button" id="option_plus" onClick="calc(this)">+</button>
 			</div>
 			<br>
