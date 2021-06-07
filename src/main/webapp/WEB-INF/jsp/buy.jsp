@@ -62,13 +62,24 @@
 						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.online.name}</td>
 						<td>
 							<c:if test="${not empty l.online.pcFile}">
-								<a href="${l.online.pcFile}" download><button>pc용 다운로드</button></a>
+								<button onclick="location.href='<c:url value="/item/download.do">
+								<c:param name="itemId" value="${l.itemId}"/>
+								<c:param name="uploadDate" value="${l.online.uploadDate}"/>
+								<c:param name="fileName" value="${l.online.pcFile}"/></c:url>'">pc용 다운로드</button>
 							</c:if>
 							<c:if test="${not empty l.online.tabletFile}">
-								<a href="${l.online.tabletFile}" download><button>테블릿용 다운로드</button></a>
+<%-- 								<a href="${l.online.tabletFile}" download><button>테블릿용 다운로드</button></a> --%>
+								<button onclick="location.href='<c:url value="/item/download.do">
+								<c:param name="itemId" value="${l.itemId}"/>
+								<c:param name="uploadDate" value="${l.online.uploadDate}"/>
+								<c:param name="fileName" value="${l.online.phoneFile}"/></c:url>'">태블릿용 다운로드</button>
 							</c:if>	
 							<c:if test="${not empty l.online.phoneFile}">
-								<a href="${l.online.phoneFile}" download><button>모바일용 다운로드</button></a>
+<%-- 								<a href="${l.online.phoneFile}" download><button>모바일용 다운로드</button></a> --%>
+								<button onclick="location.href='<c:url value="/item/download.do">
+								<c:param name="itemId" value="${l.itemId}"/>
+								<c:param name="uploadDate" value="${l.online.uploadDate}"/>
+								<c:param name="fileName" value="${l.online.tabletFile}"/></c:url>'">모바일용 다운로드</button>
 							</c:if>	
 						</td>
 						<td>

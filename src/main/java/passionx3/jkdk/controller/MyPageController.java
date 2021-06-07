@@ -2,8 +2,13 @@
 package passionx3.jkdk.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,38 +66,52 @@ public class MyPageController {
 		return "/buy";
 	}
 	
-//	@GetMapping("/item/download.do")
-//	public void downloadAttachFile(@RequestParam(value = "itemId", required = false) final Long itemId, Model model, HttpServletResponse response) {
-//
+	@GetMapping("/item/download.do")
+	public void downloadAttachFile(
+			@RequestParam(value = "itemId", required = true) int itemId, 
+			@RequestParam(value = "uploadDate", required = true) String uploadDate,
+			@RequestParam(value = "fileName", required = true) String fileName, 
+			HttpServletResponse response) {
+
 //		if (itemId == null) throw new RuntimeException("올바르지 않은 접근입니다.");
 //
 //		AttachDTO fileInfo = boardService.getAttachDetail(itemId);
 //		if (fileInfo == null || "Y".equals(fileInfo.getDeleteYn())) {
 //			throw new RuntimeException("파일 정보를 찾을 수 없습니다.");
 //		}
-//
-//		String uploadDate = fileInfo.getInsertTime().format(DateTimeFormatter.ofPattern("yyMMdd"));
-//		String uploadPath = Paths.get("C:", "jkdk", "upload", uploadDate).toString();
-//
-//		String filename = fileInfo.getOriginalName();
-//		File file = new File(uploadPath, fileInfo.getSaveName());
-//
-//		try {
-//			byte[] data = FileUtils.readFileToByteArray(file);
-//			response.setContentType("application/octet-stream");
-//			response.setContentLength(data.length);
-//			response.setHeader("Content-Transfer-Encoding", "binary");
-//			response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(filename, "UTF-8") + "\";");
-//
-//			response.getOutputStream().write(data);
-//			response.getOutputStream().flush();
-//			response.getOutputStream().close();
-//		} catch (IOException e) {
-//			throw new RuntimeException("파일 다운로드에 실패하였습니다.");
-//		} catch (Exception e) {
-//			throw new RuntimeException("시스템에 문제가 발생하였습니다.");
-//		}
-//	}
+		
+		System.out.println(uploadDate); //uploadDate 들어오는지 테스트. 테스트 후 삭제 바람
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date to = null;
+		try {
+			to = transFormat.parse(uploadDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		transFormat = new SimpleDateFormat("yyMMdd");
+		String file_uploadDate = transFormat.format(to);
+		String uploadPath = Paths.get("C:", "jkdk", "upload", uploadDate).toString();
+
+		File file = new File(uploadPath, fileName);
+
+		try {
+			byte[] data = FileUtils.readFileToByteArray(file);
+			response.setContentType("application/octet-stream");
+			response.setContentLength(data.length);
+			response.setHeader("Content-Transfer-Encoding", "binary");
+			response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
+
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			throw new RuntimeException("파일 다운로드에 실패하였습니다.");
+		} catch (Exception e) {
+			throw new RuntimeException("시스템에 문제가 발생하였습니다.");
+		}
+	}
 	
 	@RequestMapping("/user/myPage/sell.do")
 	public String viewSellItem(ModelMap model, HttpSession session) throws Exception {
