@@ -11,7 +11,7 @@
 	<div class="col-7 base">
 		<div class="row">
 			<div class="col-md-12">
-				<div align="center" th:if="${message != null}">
+				<div align="center">
 				  <b><span th:text="${message}"></span></b>
 				  <br><br>
 				  <h2 align="center">펀딩 내역</h2>
@@ -33,10 +33,12 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td style="width: 120px; height:120px"><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
-				        <td><a href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+						<td style="width: 120px; height:120px"><a th:if="${message == ''}" href="" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></a>
+							<img th:unless="${message == ''}" style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></td>
+				        <td><a th:if="${message == ''}" href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
 				            <span th:text="${lineItem.funding.name}">상품명</span></a>
+				             <span th:unless="${message == ''}" th:text="${lineItem.funding.name}">상품명</span>
 				        <td style="text-align:center" th:text="${lineItem.funding.price}">판매가</td>
 				        <td style="text-align:center" th:text="${lineItem.quantity}">1</td>
 				        <td style="text-align:center" th:text="${lineItem.funding.price} * ${lineItem.quantity}"><b>0</b></td>

@@ -5,7 +5,7 @@
 </head>
 <script>
 	window.onload = function() {
-		if ('[[${order.totalPrice}]]' == '[[${order.usedMileage}]]') {
+		if ('[[${order.paymentCost}]]' == 0) {
 			document.getElementById('paymentMethod').innerText = '전액 적립금 결제';
 		}
 	}
@@ -18,7 +18,7 @@
 	<div class="col-7 base">
 		<div class="row">
 			<div class="col-md-12">
-	  			<div align="center" th:if="${message != null}">
+	  			<div align="center">
 				  <b><span th:text="${message}"></span></b>
 				  <br><br>
 				  <h2 align="center">주문서</h2>
@@ -40,19 +40,21 @@
 					  	<td style="text-align:center"><b>결제 금액</b></td>
 				    </tr>
 				    <tr th:each="lineItem : ${order.lineItems}" bgcolor="#EEEEEE">
-						<td style="width: 120px; height:120px"><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
-							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1}}"/></a></td>
-				        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+				    	<td style="width: 120px; height:120px"><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1}}"/></a>
+							<img th:unless="${message == ''}" style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1}}"/></td>
+				        <td><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
 				            <p th:text="${lineItem.online.name}">상품명</p></a>
+				        	<p  th:unless="${message == ''}" th:text="${lineItem.online.name}">상품명</p>
 				            <div>옵션: 
 				            	<span th:if="${lineItem.online.pcFile != null}">PC </span>
 					            <span th:if="${lineItem.online.tabletFile != null}">TABLET </span>
 					            <span th:if="${lineItem.online.phoneFile != null}">PHONE </span></div>
 				        <td style="text-align:center" th:text="${lineItem.online.price}">판매가</td>
 				        <td style="text-align:center" th:switch="${lineItem.saleState}">
-					        <span th:case="1">Time Sale</span>
-					        <span th:case="2">Battle Sale</span>
-					        <p th:text="'-' + ${lineItem.online.discount}">-0</p></td>
+					        <p th:case="1">Time Sale</p>
+					        <p th:case="2">Battle Sale</p>
+					        <span th:text="'-' + ${lineItem.online.discount}">-0</span></td>
 				        <td style="text-align:center" th:text="${lineItem.online.salePrice}"><b>0</b></td>
 				    </tr>
 				    <tr bgcolor="#CCCCCC">

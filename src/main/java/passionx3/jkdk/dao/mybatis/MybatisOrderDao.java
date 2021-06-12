@@ -61,6 +61,8 @@ public class MybatisOrderDao implements OrderDao {
 		if (order != null) {
 			order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
 		}
+		
+		System.out.println("mybatisorderdao: " + order.getOrderDate());
 	    return order;
 	}	
 	
