@@ -22,13 +22,15 @@
 		} else if (parseInt(havingM.innerText) < parseInt(inputM.value)) {	// 보유한 적립금보다 큰 액수 입력
 			alert("보유하고 계신 적립금 가격 내에서 입력해주세요.");
 			inputM.value = "0";
-		} else if (parseInt(totalP.innerText) < parseInt(inputM.value)) {	// 결제할 금액보다 큰 액수 입력
+			printM.innerText = "0";
+		} else if (parseInt(totalP.innerText) - parseInt(discountC.innerText) < parseInt(inputM.value)) {	// 결제할 금액보다 큰 액수 입력
 			alert("결제 금액 내에서 입력해주세요.");
 			inputM.value = "0";
-		} else if (parseInt(totalP.innerText) == parseInt(inputM.value)) {
+			printM.innerText = "0";
+		} else if (parseInt(totalP.innerText) - parseInt(discountC.innerText) == parseInt(inputM.value)) {
 			printM.innerText = parseInt(inputM.value);
 			paymentMethod.hidden = true;
-		} else if (parseInt(totalP.innerText) != parseInt(inputM.value)) {
+		} else if (parseInt(totalP.innerText) - parseInt(discountC.innerText) != parseInt(inputM.value)) {
 			printM.innerText = parseInt(inputM.value);
 			paymentMethod.hidden = false;
 		} else {	// 정상 처리
@@ -42,10 +44,11 @@
 	function useAllMileage() {
 		var inputM = document.getElementById('inputMileage');
 		var havingM = document.getElementById('havingMileage');
+		var discountC = document.getElementById('discountCost');
 		var totalP = document.getElementById('totalPrice');
 		
-		if (parseInt(totalP.innerText) < parseInt(havingM.innerText)) {
-			inputM.value = totalP.innerText;
+		if (parseInt(totalP.innerText) - parseInt(discountC.innerText) < parseInt(havingM.innerText)) {
+			inputM.value = parseInt(totalP.innerText) - parseInt(discountC.innerText);
 		} else {
 			inputM.value = havingM.innerText;
 		}
@@ -83,9 +86,9 @@
 	            <span th:if="${lineItem.online.phoneFile != null}">PHONE </span></div>
 	        <td style="text-align:center"><p th:text="${lineItem.online.price}">판매가</p></td>
 	        <td style="text-align:center" th:switch="${lineItem.online.saleState}">
-		        <span th:case="1">Time Sale</span>
-		        <span th:case="2">Battle Sale</span>
-		        <p th:text="'-' + ${lineItem.online.discount}">-0</p></td>
+		        <p th:case="1">Time Sale</p>
+		        <p th:case="2">Battle Sale</p>
+		        <span th:text="'-' + ${lineItem.online.discount}">-0</span></td>
 	        <td style="text-align:center"><p th:text="${lineItem.online.salePrice}">0</p></td>
 	    </tr>
 	    <tr bgcolor="#CCCCCC">

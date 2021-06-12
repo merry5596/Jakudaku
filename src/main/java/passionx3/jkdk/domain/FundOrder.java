@@ -40,7 +40,7 @@ public class FundOrder extends Order implements Serializable {
 		userId = account.getUserId();
 		
 		Calendar cal= Calendar.getInstance ( );
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
 		orderDate = today;

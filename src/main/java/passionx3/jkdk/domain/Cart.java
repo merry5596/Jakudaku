@@ -57,6 +57,8 @@ public class Cart implements Serializable {
   }
 
   // 할인까지 된 총 금액을 반환합니다!!! (DB 저장 아니므로 출력용 정보인 할인된 금액이 더 중요하기 때문)
+  // 아니다
+  // 할인 안된 금액 반환해야!!! (order의 total로 즉시 들어가기 때문)
   public int getSubTotal() {
     int subTotal = 0;
     Iterator<CartItem> items = getAllCartItems();
@@ -64,7 +66,7 @@ public class Cart implements Serializable {
       CartItem cartItem = (CartItem) items.next();
       Online onlineItem = cartItem.getOnlineItem();
       
-      subTotal += onlineItem.getSalePrice();
+      subTotal += onlineItem.getPrice();
     }
     return subTotal;
   }
@@ -74,5 +76,17 @@ public class Cart implements Serializable {
 	  itemMap.clear();
 	  itemList.getSource().clear();
 	  
+  }
+  
+  public int getActualTotal() {
+	  int actualTotal = 0;
+	  Iterator<CartItem> items = getAllCartItems();
+	  while (items.hasNext()) {
+	      CartItem cartItem = (CartItem) items.next();
+	      Online onlineItem = cartItem.getOnlineItem();
+	      
+	      actualTotal += onlineItem.getSalePrice();
+	  }
+	  return actualTotal;
   }
 }
