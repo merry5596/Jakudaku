@@ -39,14 +39,10 @@
                                	 <c:if test="${not empty cartItem.onlineItem.phoneFile}">PHONE </c:if> </div></td>
                              <td style="text-align:center"><c:out value="${cartItem.onlineItem.price}" /></td>
                              <td style="text-align:center">
-                                <c:choose>
-                                   <c:when test="cartItem.item.saleState == 1">   <!-- Time Sale -->
-                                      <c:set var="discountPrice" value="${cartItem.onlineItem.price} * 0.1" />
-                                	 Time Sale<br></c:when>
-                                   <c:when test="cartItem.item.saleState == 2">   <!-- Battle Sale -->
-                                      <c:set var="discountPrice" value="${cartItem.onlineItem.price} * 0.1" />
-                                 	Battle Sale<br></c:when>
-                                 </c:choose>
+                                  <c:if test="${cartItem.onlineItem.saleState eq 1}">   <!-- Time Sale -->
+                               	  <p>Time Sale</p>></c:if>
+                                  <c:if test="${cartItem.onlineItem.saleState eq 2}">   <!-- Battle Sale -->
+                                  <p>Battle Sale</p></c:if>
                            		 -<c:out value="${cartItem.onlineItem.discount}"/></td>
                              <td style="text-align:center"><c:out value="${cartItem.onlineItem.salePrice}" /></td>
                              <td style="text-align:center">
@@ -59,18 +55,18 @@
                                <button type="button" onclick="location.href='/order/removeItemFromCart.do'">전체 삭제</button>
                             </td>
                            <td colspan="3" align="right">
-                              <b>총 <c:out value="${cart.subTotal}" />원</b><br><br>
+                              <b>총 <c:out value="${cart.actualTotal}" />원</b><br><br>
                            </td>
                          </tr>
                        </table>
                        
                        <div style="text-align:center">
                          <c:if test="${!cart.cartItemList.firstPage}">
-                           <a href='<c:url value="viewCart.do?page=previousCart"/>'>
+                           <a href='<c:url value="/order/viewCart.do?page=previousCart"/>'>
                              <font color="green"><B>&lt;&lt; Prev</B></font></a>
                          </c:if>
                          <c:if test="${!cart.cartItemList.lastPage}">
-                           <a href='<c:url value="viewCart.do?page=nextCart"/>'>
+                           <a href='<c:url value="/order/viewCart.do?page=nextCart"/>'>
                              <font color="green"><B>Next &gt;&gt;</B></font></a>
                          </c:if>
                        </div>
