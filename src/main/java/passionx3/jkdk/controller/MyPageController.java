@@ -92,7 +92,7 @@ public class MyPageController {
 		
 		transFormat = new SimpleDateFormat("yyMMdd");
 		String file_uploadDate = transFormat.format(to);
-		String uploadPath = Paths.get("C:", "jkdk", "upload", uploadDate).toString();
+		String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
 
 		File file = new File(uploadPath, fileName);
 
@@ -120,6 +120,7 @@ public class MyPageController {
 		String userId = account.getUserId();
 		
 		List<Online> onlineList = jkdk.getOnlineItemListByProducerId(userId);
+		System.out.println("dkdk " + onlineList.get(0).getUploadDate());
 		List<Funding> fundingList = jkdk.getFundingItemListByProducerId(userId);
 
 		model.put("onlineList", onlineList);

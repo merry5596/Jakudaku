@@ -1,6 +1,10 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -151,4 +155,20 @@ public abstract class Item implements Serializable {
 	public void setLikeNum(int likeNum) {
 		this.likeNum = likeNum;
 	}
+	
+	public String getThumbnail1Path() {
+	      SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	      Date to = null;
+	      try {
+	         to = transFormat.parse(uploadDate);
+	      } catch (ParseException e1) {
+	         e1.printStackTrace();
+	      }
+	      
+	      transFormat = new SimpleDateFormat("yyMMdd");
+	      String file_uploadDate = transFormat.format(to);
+	      String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
+	      
+	      return uploadPath + uploadDate;
+	   }
 }
