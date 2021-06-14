@@ -20,7 +20,7 @@ public interface OrderMapper {
 			+ "	VALUES(#{orderId}, sysdate, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{discountCost}, #{usedMileage}, #{userId})")
 	int insertOrder(Order order);
 	
-	@Select("SELECT ORDERID, ORDERDATE, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"
+	@Select("SELECT ORDERID, TO_CHAR(orderDate, 'YYYY/MM/DD HH24:MI:SS') AS orderDate, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"
 			+ " FROM ORDERS WHERE USERID = #{userId} ORDER BY ORDERDATE DESC")
 	List<Order> getOrdersByUserId(String userId);
 

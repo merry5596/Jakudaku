@@ -121,7 +121,7 @@ public class MybatisOrderDao implements OrderDao {
 			int fundOrderId = fundingList.get(j).getOrderId();
 
 			try {
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 				Date onlineDate = format.parse(onlineList.get(i).getOrderDate());
 				Date fundingDate = format.parse(fundingList.get(j).getOrderDate());
 						
@@ -133,7 +133,7 @@ public class MybatisOrderDao implements OrderDao {
 					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 						LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 						lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
-						
+						System.out.println("라인아이템 매퍼에서 가져올 때 : " + lineItem.getUploadDate());
 						lineItemList.add(lineItem);
 					}
 					
@@ -177,7 +177,8 @@ public class MybatisOrderDao implements OrderDao {
 				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 					lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
-					
+					System.out.println("라인아이템 매퍼에서 가져올 때 : " + lineItem.getUploadDate());
+
 					lineItemList.add(lineItem);
 				}
 				
