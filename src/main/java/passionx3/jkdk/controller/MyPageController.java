@@ -79,9 +79,7 @@ public class MyPageController {
 //		if (fileInfo == null || "Y".equals(fileInfo.getDeleteYn())) {
 //			throw new RuntimeException("파일 정보를 찾을 수 없습니다.");
 //		}
-		
-		System.out.println(uploadDate); //uploadDate 들어오는지 테스트. 테스트 후 삭제 바람
-		
+				
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date to = null;
 		try {
@@ -120,7 +118,6 @@ public class MyPageController {
 		String userId = account.getUserId();
 		
 		List<Online> onlineList = jkdk.getOnlineItemListByProducerId(userId);
-		System.out.println("dkdk " + onlineList.get(0).getUploadDate());
 		List<Funding> fundingList = jkdk.getFundingItemListByProducerId(userId);
 
 		model.put("onlineList", onlineList);
