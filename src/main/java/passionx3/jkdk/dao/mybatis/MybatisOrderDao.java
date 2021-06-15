@@ -62,7 +62,6 @@ public class MybatisOrderDao implements OrderDao {
 			order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
 		}
 		
-		System.out.println("mybatisorderdao: " + order.getOrderDate());
 	    return order;
 	}	
 	
@@ -133,7 +132,6 @@ public class MybatisOrderDao implements OrderDao {
 					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 						LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 						lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
-						System.out.println("라인아이템 매퍼에서 가져올 때 : " + lineItem.getUploadDate());
 						lineItemList.add(lineItem);
 					}
 					
@@ -177,7 +175,6 @@ public class MybatisOrderDao implements OrderDao {
 				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 					lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
-					System.out.println("라인아이템 매퍼에서 가져올 때 : " + lineItem.getUploadDate());
 
 					lineItemList.add(lineItem);
 				}
