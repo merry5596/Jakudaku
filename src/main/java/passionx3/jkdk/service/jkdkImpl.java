@@ -122,14 +122,7 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public int approveItem(int itemId) {
-		Calendar cal= Calendar.getInstance ( );
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-		cal.setTime(new Date());
-		String today = sDate.format(cal.getTime());
-		
-		onlineDao.updateUploadDate(itemId, today);
-		
+	public int approveItem(int itemId) {	
 		return onlineDao.approveItem(itemId);
 	}
 
