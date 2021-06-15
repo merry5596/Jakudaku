@@ -12,7 +12,7 @@ import passionx3.jkdk.domain.Order;
 
 @Mapper
 public interface OrderMapper {
-	@Select("SELECT orderId, TO_CHAR(orderdate, 'YY/MM/DD HH24:MI:SS') as orderdate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId"
+	@Select("SELECT orderId, TO_CHAR(orderdate, 'YYYY/MM/DD HH24:MI:SS') as orderdate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId"
 			+ "	FROM ORDERS, dual WHERE orderId = #{orderId}")
 	Order getOrderByOrderId(@Param("orderId") int orderId);
 
