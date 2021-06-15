@@ -31,10 +31,10 @@ public class ViewHomeController {
 		Calendar cal= Calendar.getInstance ( );
 		int day_of_week = cal.get ( Calendar.DAY_OF_WEEK );
 		
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
-		
 		jkdkStore.updateNotSale(today);//세일기간이 지나면 state 변경
 		
 		if(day_of_week == 7) { // 토요일이면 battleSale set
@@ -46,7 +46,7 @@ public class ViewHomeController {
 		
 		List<Online> bestOnlineList = jkdkStore.getBestOnlineItemListforHome();
 		List<Online> newOnlineList = jkdkStore.getNewOnlineItemListforHome();
-		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome(today);
+		List<Funding> newFundingList = jkdkStore.getNewFundingItemListforHome();
 
 		model.put("bestOnlineList", bestOnlineList);
 		model.put("newOnlineList", newOnlineList);

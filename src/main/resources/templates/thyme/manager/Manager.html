@@ -35,14 +35,14 @@
 				 </a>
 		      </td>
 		      <td>
-		      	<a th:if="${item.phoneFile}" th:href="${item.phoneFile}" download>
+		      	<a th:if="${item.phoneFile}" th:href="@{/item/download.do(itemId = ${item.itemId}, uploadDate = ${item.uploadDate}, fileName = ${item.phoneFile})}">
           			<button type="button" class="btn btn-success">
 		            	download
 		         	</button>   
 				 </a>
 		      </td>
 		      <td>
-		      	<a th:if="${item.tabletFile}" th:href="${item.tabletFile}" download>
+		      	<a th:if="${item.tabletFile}" th:href="@{/item/download.do(itemId = ${item.itemId}, uploadDate = ${item.uploadDate}, fileName = ${item.tabletFile})}">
           			<button type="button" class="btn btn-success">
 		            	download
 		         	</button>   
