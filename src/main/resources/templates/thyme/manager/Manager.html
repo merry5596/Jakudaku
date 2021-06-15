@@ -28,7 +28,7 @@
 		    <tr>
 		      <th scope="row"></th>
 		      <td>
-		      	<a th:if="${item.pcFile}" th:href="${item.pcFile}" download>
+		      	<a th:if="${item.pcFile}" th:href="@{/item/download.do(itemId = ${item.itemId}, uploadDate = ${item.uploadDate}, fileName = ${item.pcFile})}">
           			<button type="button" class="btn btn-success">
 		            	download
 		         	</button>   
@@ -114,9 +114,7 @@
 				<tbody>
 					<tr th:each="item:${items}">
 						<td> 
-							<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-								<img class = " img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 50px; height: 50px;"/>
-							</a>
+							<img class = " img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 50px; height: 50px;"/>
 						</td>
 						<td th:text="${item.name}">name</td>
 						<td th:text="${item.categoryName}">category</td>
