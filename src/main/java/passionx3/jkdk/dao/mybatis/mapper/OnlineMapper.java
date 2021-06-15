@@ -67,12 +67,12 @@ public interface OnlineMapper {
 			+ "AND i.itemId = o.itemId AND i.isforsale = 1 AND i.approval = 1 order by dbms_random.value) WHERE ROWNUM < 3")
 	List<Integer> getOnlineItemIdByCategoryforSale(@Param("categoryId") int categoryId);
 	
-	@Select("SELECT i.itemId AS itemId, a.userId AS producerId, a.alias AS producerName, t.themeId AS themeId, t.name AS themeName, \r\n" + 
-			"i.name AS name, TO_DATE(i.uploadDate, 'YYYY-MM-DD') AS uploadDate, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1,\r\n" + 
-			"i.thumbnail2 AS thumbnail2, i.thumbnail3 AS thumbnail3, i.isforsale AS isForSale, i.description AS description, c.categoryid AS categoryId,\r\n" + 
-			"c.name AS categoryName, o.totalRate AS totalRate, o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState\r\n" + 
-			"FROM item i, onlineitem o, account a, theme t, category c\r\n" + 
-			"WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId\r\n" + 
+	@Select("SELECT i.itemId AS itemId, a.userId AS producerId, a.alias AS producerName, t.themeId AS themeId, t.name AS themeName, " + 
+			"i.name AS name, TO_CHAR(i.uploadDate, 'YYYY/MM/DD HH24:MI:SS') AS uploadDate, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, " + 
+			"i.thumbnail2 AS thumbnail2, i.thumbnail3 AS thumbnail3, i.isforsale AS isForSale, i.description AS description, c.categoryid AS categoryId, " + 
+			"c.name AS categoryName, o.totalRate AS totalRate, o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " + 
+			"FROM item i, onlineitem o, account a, theme t, category c " + 
+			"WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId " + 
 			"AND i.itemId = #{itemId} AND i.isForSale = 1")
 	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
