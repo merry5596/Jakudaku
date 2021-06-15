@@ -26,7 +26,6 @@ public class SignonController{
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception {
-		
 		Account userSession = jkdkStore.getAccount(userId, password);
 		
 		if (userSession == null) {	// 로그인 정보 일치하지 않음
