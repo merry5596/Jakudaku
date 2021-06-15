@@ -156,27 +156,30 @@ public abstract class Item implements Serializable {
 		this.likeNum = likeNum;
 	}
 	
-	public String getThumbnail1Path() {
-	      System.out.println("item: " + uploadDate);
-	      SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	public String getPath() {
+		 SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	      Date to = null;
 	      try {
 	         to = transFormat.parse(uploadDate);
 	      } catch (ParseException e1) {
 	         e1.printStackTrace();
 	      }
-
-	      System.out.println("item: " + uploadDate);
 	      
 	      transFormat = new SimpleDateFormat("yyMMdd");
 	      String file_uploadDate = transFormat.format(to);
-//	      String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
-//	      
-//	      return uploadPath + uploadDate;
-	      
 
-	      String uploadPath = Paths.get("thumbnail", file_uploadDate).toString();
-	      System.out.println("/thumbnail/" + file_uploadDate);
-	      return "/thumbnail/" + file_uploadDate;
-	   }
+	      return "/thumbnail/" + file_uploadDate + "/";
+	}
+	
+	public String getThumbnail1Path() {
+	     return getPath() + thumbnail1;
+	}
+	
+	public String getThumbnail2Path() {
+	     return getPath() + thumbnail2;
+	}
+	
+	public String getThumbnail3Path() {
+	     return getPath() + thumbnail3;
+	}
 }
