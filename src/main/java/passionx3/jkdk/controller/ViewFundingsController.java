@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Funding;
+import passionx3.jkdk.domain.Pagination;
 import passionx3.jkdk.domain.Theme;
 import passionx3.jkdk.service.jkdkFacade;
 
@@ -24,11 +25,20 @@ public class ViewFundingsController {
 	public ModelAndView handleRequest(
 			@RequestParam("themeId") int themeId, 
 			@RequestParam("sortBy") int sortBy,
+			@RequestParam("page") int page,
 			@RequestParam(value="keyword", required=false) String keyword) throws Exception {
 
 		if (keyword == null) keyword = "";
 		
-		List<Funding> fundingList = jkdkStore.getFundingItemList(themeId, keyword, sortBy);
+		int itemPerPage = 20;
+		int end = page * itemPerPage;
+		int start = end - itemPerPage + 1;
+		
+		List<Funding> fundingList = jkdkStore.getFundingItemList(themeId, keyword, sortBy, start, end);
+		int totalItemCount = jkdkStore.getCountOfFundingItemList(themeId, keyword, start, end);
+		
+		Pagination pagination = new Pagination(page, itemPerPage, totalItemCount);
+		
 		List<Theme> allThemes = jkdkStore.getAllThemes();
 		
 		ModelAndView mav = new ModelAndView();
@@ -38,6 +48,7 @@ public class ViewFundingsController {
 		mav.addObject("keyword", keyword);
 		mav.addObject("sortBy", sortBy);
 		mav.addObject("fundingList", fundingList);
+		mav.addObject("pagination", pagination);
 		
 		return mav;
 	}
