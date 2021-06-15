@@ -116,9 +116,10 @@
 		      			<td>카드사
 		      				<select th:field="*{order.cardType}">
 		      					<option value="notSelected" selected>선택</option>
-		      					<option value="shinhan">신한</option>
-				      			<option value="kookmin">국민</option>
-				      			<option value="hana">하나</option></select>
+				      			<option value="국민">국민</option>
+		      					<option value="신한">신한</option>
+		      					<option value="우리">우리</option>
+				      			<option value="하나">하나</option></select>
 		      				<p th:errors="*{order.cardType}">Invalid cardType~</p>
 		      				<br>
 		      				카드 번호 <input type="text" th:field="*{order.creditCard}" />

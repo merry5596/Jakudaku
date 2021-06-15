@@ -157,6 +157,7 @@ public abstract class Item implements Serializable {
 	}
 	
 	public String getThumbnail1Path() {
+	      System.out.println("item: " + uploadDate);
 	      SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	      Date to = null;
 	      try {
@@ -164,11 +165,18 @@ public abstract class Item implements Serializable {
 	      } catch (ParseException e1) {
 	         e1.printStackTrace();
 	      }
+
+	      System.out.println("item: " + uploadDate);
 	      
 	      transFormat = new SimpleDateFormat("yyMMdd");
 	      String file_uploadDate = transFormat.format(to);
-	      String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
+//	      String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
+//	      
+//	      return uploadPath + uploadDate;
 	      
-	      return uploadPath + uploadDate;
+
+	      String uploadPath = Paths.get("thumbnail", file_uploadDate).toString();
+	      System.out.println("/thumbnail/" + file_uploadDate);
+	      return "/thumbnail/" + file_uploadDate;
 	   }
 }
