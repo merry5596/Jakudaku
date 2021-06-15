@@ -23,9 +23,12 @@
 	        	<c:if test="${empty userSession}">
 			        <div class="col-5">
 			          <!-- Button trigger modal -->
-			          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
-			            login
-			          </button>        
+			          <form action="/user/signonForm.do">
+				          <!-- Button trigger modal -->
+				          <button type="submit" class="btn btn-primary">
+				            login
+				          </button>     
+				      </form>       
 			         </div>  
 		         </c:if>
 		         
@@ -67,37 +70,6 @@
       </div>
     </div>
   </nav> 
-    <!-- Modal -->
-	<div align="left" class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h5 class="modal-title" id="exampleModalLabel">자꾸다꾸 로그인</h5>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	                <form action="/user/signon.do" method = "Post">
-	                    <div class="mb-3">
-	                        <label class="form-label">ID</label>
-	                        <input type="text" class="form-control" id="userId" name="userId" placeholder="Id를 입력하세요" />
-	                    </div>
-	                    <div class="mb-3">
-	                        <label class="form-label">Password</label>
-	                        <input type="password" class="form-control" id="password" name="password" placeholder="패쓰워드를 입력하세요" />
-	                    </div>
-	                    <div class="mb-3 form-check">
-	                        <input  type="checkbox" class="form-check-input" id="rememberMe" />
-	                        <label class="form-check-label" for="rememberMe">Remember me</label>
-	                    </div>
-	                    <div class="modal-footer d-block">
-	                        <p class="float-start">Not yet account <a href="/user/newAccount.do">Sign Up</a></p>
-	                        <button type="submit" class="btn btn-warning float-end">로그인</button>
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
-	</div>
   </div>
   
  
