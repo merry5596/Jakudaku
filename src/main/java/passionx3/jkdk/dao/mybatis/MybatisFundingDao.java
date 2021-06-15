@@ -28,34 +28,45 @@ public class MybatisFundingDao implements FundingDao {
 	}
 
 	@Override
-	public List<Funding> getFundingItemList(String keyword, int sortBy) throws DataAccessException {
+	public List<Funding> getFundingItemList(String keyword, int sortBy, int start, int end) throws DataAccessException {
 //		Calendar cal= Calendar.getInstance ( );
 //		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
 //		cal.setTime(new Date());
 //		String today = sDate.format(cal.getTime());
 		
 		if (sortBy == 1)
-			return fundingMapper.getFundingItemListOrderByUploadDate(keyword);
+			return fundingMapper.getFundingItemListOrderByUploadDate(keyword, start, end);
 		else if (sortBy == 2)
-			return fundingMapper.getFundingItemListOrderByLikeNum(keyword);
+			return fundingMapper.getFundingItemListOrderByLikeNum(keyword, start, end);
 		else // (sortBy == 6)
-			return fundingMapper.getFundingItemListOrderByFinishDate(keyword);
+			return fundingMapper.getFundingItemListOrderByFinishDate(keyword, start, end);
 	}
 
 	@Override
-	public List<Funding> getFundingItemListByTheme(int themeId, String keyword, int sortBy) throws DataAccessException {
+	public List<Funding> getFundingItemListByTheme(int themeId, String keyword, int sortBy, int start, int end) throws DataAccessException {
 		Calendar cal= Calendar.getInstance ( );
 		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
 		cal.setTime(new Date());
 		String today = sDate.format(cal.getTime());
 		
 		if (sortBy == 1)
-			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword);
+			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword, start, end);
 		else if (sortBy == 2)
-			return fundingMapper.getFundingItemListByThemeOrderByLikeNum(themeId, keyword);
+			return fundingMapper.getFundingItemListByThemeOrderByLikeNum(themeId, keyword, start, end);
 		else // (sortBy == 6)
-			return fundingMapper.getFundingItemListByThemeOrderByFinishDate(themeId, keyword);
+			return fundingMapper.getFundingItemListByThemeOrderByFinishDate(themeId, keyword, start, end);
 	}
+	
+	@Override
+	public int getCountOfFundingItemList(String keyword, int start, int end) throws DataAccessException {
+		return fundingMapper.getCountOfFundingItemList(keyword, start, end);
+	}
+	
+	@Override
+	public int getCountOfFundingItemListByTheme(int themeId, String keyword, int start, int end) throws DataAccessException {
+		return fundingMapper.getCountOfFundingItemListByTheme(themeId, keyword, start, end);
+	}
+
 
 	@Override
 	public List<Funding> getFundingItemsByKeyword(String keyword) throws DataAccessException {

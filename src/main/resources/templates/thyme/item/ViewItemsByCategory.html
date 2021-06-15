@@ -28,7 +28,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a class= "text-secondary link-unstyled" th:href="@{/}">Home</a></li>
 							<li class="breadcrumb-item active " aria-current="page">
-								<a th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = '-1', device = '-1', sortBy='1')}"><span th:text="${category.name}">category</span></a>
+								<a th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = '-1', device = '-1', sortBy='1', page='1')}"><span th:text="${category.name}">category</span></a>
 							</li>
 						</ol>
 					</nav>
@@ -38,11 +38,11 @@
 					<table width=100%>
 						<tr>
 							<td style="width:100px">
-							<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = -1, device = ${device}, sortBy=${sortBy})}">
+							<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = -1, device = ${device}, sortBy=${sortBy}, page=1)}">
 			     				<span th:if="${themeId eq -1}" style="font-weight:bold">#전체테마</span>
 			     				<span th:unless="${themeId eq -1}">#전체테마</span></a></td>
 							<td style="width:100px" th:each="theme : ${allThemes}">
-								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${theme.themeId}, device = ${device}, sortBy=${sortBy})}">
+								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${theme.themeId}, device = ${device}, sortBy=${sortBy}, page=1)}">
 			     				<span th:if="${theme.themeId eq themeId}" th:text="'#' + ${theme.name}" style="font-weight:bold">#테마</span>
 			     				<span th:unless="${theme.themeId eq themeId}" th:text="'#' + ${theme.name}">#테마</span></a>
 							</td>
@@ -52,14 +52,14 @@
 				<br><br>
 				<hr>
 			    <div class="col-md-7">
-					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq -1}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '-1', sortBy=${sortBy})}">전체&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq -1}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '-1', sortBy=${sortBy})}">전체&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 1}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '1', sortBy=${sortBy})}">PC&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 1}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '1', sortBy=${sortBy})}">PC&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 2}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '2', sortBy=${sortBy})}">TABLET&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 2}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '2', sortBy=${sortBy})}">TABLET&nbsp;</a>
-					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 3}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '3', sortBy=${sortBy})}">PHONE</a>
-					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 3}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '3', sortBy=${sortBy})}">PHONE</a>
+					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq -1}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '-1', sortBy=${sortBy}, page=1)}">전체&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq -1}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '-1', sortBy=${sortBy}, page=1)}">전체&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 1}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '1', sortBy=${sortBy}, page=1)}">PC&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 1}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '1', sortBy=${sortBy}, page=1)}">PC&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 2}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '2', sortBy=${sortBy}, page=1)}">TABLET&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 2}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '2', sortBy=${sortBy}, page=1)}">TABLET&nbsp;</a>
+					<a class= "text-secondary link-unstyled" href="#" th:if="${device eq 3}" style="font-weight:bold" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '3', sortBy=${sortBy}, page=1)}">PHONE</a>
+					<a class= "text-secondary link-unstyled" href="#" th:unless="${device eq 3}" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = ${themeId}, device = '3', sortBy=${sortBy}, page=1)}">PHONE</a>
 				</div>
 				<!-- 검색 창 -->
 				<div class="col-md-5">
@@ -69,6 +69,7 @@
 							<input type="hidden" th:value="${themeId}" th:attr="name='themeId'">
 							<input type="hidden" th:value="${device}" th:attr="name='device'">
 							<input type="hidden" th:value="${sortBy}" th:attr="name='sortBy'">
+							<input type="hidden" th:value="1" th:attr="name='page'">
 							<input type="text" id="keyword" class="form-control"
 								aria-label="Text input with segmented dropdown button" th:attr="name='keyword'">
 							<button type="submit" class="btn btn-outline-secondary" >Search</button>
@@ -91,11 +92,11 @@
 						<span th:if="${sortBy eq 5}">높은가격순</span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=1)}">신상품순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=2)}">좋아요순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=3)}">평점순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=4)}">낮은가격순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=5)}">높은가격순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=1, page=1)}">신상품순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=2, page=1)}">좋아요순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=3, page=1)}">평점순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=4, page=1)}">낮은가격순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=5, page=1)}">높은가격순</a></li>
 					</ul>
 				</div>
 				
@@ -158,19 +159,28 @@
 
 				<!-- 페이징네이션-->
 				<div class=" text-center mt-4 position-relative">
-					<nav aria-label="Page navigation example">
-						<ul class="justify-content-center pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
+					<nav aria-label="Page navigation example pagination">
+						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.beforeSectionLastPage})}" th:if="${pagination.curSection != 1}">&laquo;</a>
+						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == 1}">&laquo;</a>
+						<div class="btn-group" th:each="i : ${#numbers.sequence(pagination.sectionStartPage, pagination.sectionEndPage)}">
+							<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${i})}" th:text="${i}">pageNum</a>
+						</div>
+						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.nextSectionFirstPage})}" th:if="${pagination.curSection != pagination.lastSection}">&raquo;</a>
+						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == pagination.lastSection}">&raquo;</a>
 					</nav>
+					
+					<!-- 테스트 -->
+					<span th:text="'현재페이지:' + ${pagination.curPage}"></span>
+					<span th:text="'한페이지아이템수:' + ${pagination.itemPerPage}"></span>
+					<span th:text="'총아이템수:' + ${pagination.totalItemCount}"></span>
+					<span th:text="'페이지단위:' + ${pagination.pageUnit}"></span>
+					<span th:text="'총페이지수:' + ${pagination.pageCount}"></span>
+					<span th:text="'현재섹션:' + ${pagination.curSection}"></span>
+					<span th:text="'섹션시작페이지:' + ${pagination.sectionStartPage}"></span>
+					<span th:text="'섹션끝페이지:' + ${pagination.sectionEndPage}"></span>
+					<span th:text="'다음섹션시작페이지:' + ${pagination.nextSectionFirstPage}"></span>
+					<span th:text="'이전섹션끝페이지:' + ${pagination.beforeSectionLastPage}"></span>
+					<span th:text="'마지막섹션번호:' + ${pagination.lastSection}"></span>
 				</div>
 			</div>	
 		</div>

@@ -12,7 +12,7 @@
 		<hr>
 	    <ul class="nav nav-pills flex-column mb-auto">
 	        <li>
-	            <a href="<c:url value='/item/viewCategory.do?categoryId=0&themeId=-1&device=-1&sortBy=1' />" class="nav-link link-dark">
+	            <a href="<c:url value='/item/viewCategory.do?categoryId=0&themeId=-1&device=-1&sortBy=1&page=1' />" class="nav-link link-dark">
 	                <svg class="bi me-2" width="16" height="16">
 	                    <use xlink:href="#speedometer2"></use>
 	                </svg>
@@ -20,7 +20,7 @@
 	            </a>
 	        </li>
 	        <li>
-	            <a href="<c:url value='/item/viewCategory.do?categoryId=1&themeId=-1&device=-1&sortBy=1' />" class="nav-link link-dark">
+	            <a href="<c:url value='/item/viewCategory.do?categoryId=1&themeId=-1&device=-1&sortBy=1&page=1' />" class="nav-link link-dark">
 	                <svg class="bi me-2" width="16" height="16">
 	                    <use xlink:href="#table"></use>
 	                </svg>
@@ -28,7 +28,7 @@
 	            </a>
 	        </li>
 	        <li>
-	            <a href="<c:url value='/item/viewCategory.do?categoryId=2&themeId=-1&device=-1&sortBy=1' />" class="nav-link link-dark">
+	            <a href="<c:url value='/item/viewCategory.do?categoryId=2&themeId=-1&device=-1&sortBy=1&page=1' />" class="nav-link link-dark">
 	                <svg class="bi me-2" width="16" height="16">
 	                    <use xlink:href="#grid"></use>
 	                </svg>
@@ -36,7 +36,7 @@
 	            </a>
 	        </li>
 	        <li>
-	            <a href="<c:url value='/item/viewCategory.do?categoryId=3&themeId=-1&device=-1&sortBy=1' />" class="nav-link link-dark">
+	            <a href="<c:url value='/item/viewCategory.do?categoryId=3&themeId=-1&device=-1&sortBy=1&page=1' />" class="nav-link link-dark">
 	                 <svg class="bi me-2" width="16" height="16">
 	                     <use xlink:href="#people-circle"></use>
 	                 </svg>
@@ -44,7 +44,7 @@
 	             </a>
 	        </li>
 	        <hr>
-			<li><a href="<c:url value='/item/viewFundings.do?themeId=-1&sortBy=1'/>" class="nav-link link-dark">
+			<li><a href="<c:url value='/item/viewFundings.do?themeId=-1&sortBy=1&page=1'/>" class="nav-link link-dark">
 					<svg class="bi me-2" width="16" height="16">
 			                        <use xlink:href="#people-circle"></use>
 			                    </svg> funding
