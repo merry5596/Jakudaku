@@ -28,7 +28,7 @@
                            <tr bgcolor="#EEEEEE">
                              <td style="width: 120px; height:120px"><a href='<c:url value="/item/viewOnlineItem.do">
                                  <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'>
-                                 <img src="${cartItem.onlineItem.thumbnail1}" style="max-width: 100%; max-height: 100%;"/></a><span></span></td>
+                                 <img src="${cartItem.onlineItem.thumbnail1Path}" style="max-width: 100%; max-height: 100%;"/></a><span></span></td>
                              <td><b>
                                <a href='<c:url value="/item/viewOnlineItem.do">
                                  <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'>

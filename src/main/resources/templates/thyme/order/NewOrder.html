@@ -76,7 +76,7 @@
 	    </tr>
 	    <tr th:each="lineItem : ${orderForm.order.lineItems}" bgcolor="#EEEEEE">
 	  		<td style="width: 120px; height:120px"><a href="#" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
-				<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1}}"/></a></td>
+				<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1Path}}"/></a></td>
 				
 	        <td><a href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
 	            <span th:text="${lineItem.online.name}">상품명</span></a>
