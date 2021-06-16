@@ -42,4 +42,13 @@ public interface ItemMapper {
 			+ "WHERE itemid = #{item.itemId}")
 	int updateItem(@Param("item") Item item);
 	
+	@Update("UPDATE item "
+			+ "SET likeNum = likeNum + 1 "
+			+ "WHERE itemid = #{itemId}")
+	int plusLikeNum(int itemId);
+	
+	@Update("UPDATE item "
+			+ "SET likeNum = likeNum - 1 "
+			+ "WHERE itemid = #{itemId}")
+	int minusLikeNum(int itemId);
 }

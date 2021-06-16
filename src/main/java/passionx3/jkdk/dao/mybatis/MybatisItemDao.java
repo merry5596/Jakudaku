@@ -23,5 +23,15 @@ public class MybatisItemDao implements ItemDao{
 	public int updateItem(Item item) throws DataAccessException {
 		return itemMapper.updateItem(item);
 	}
+
+	@Override
+	public int plusLikeNum(int itemId) throws DataAccessException {
+		return itemMapper.plusLikeNum(itemId);
+	}
+
+	@Override
+	public int minusLikeNum(int itemId) throws DataAccessException {
+		return itemMapper.minusLikeNum(itemId);
+	}
 	
 }

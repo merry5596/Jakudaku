@@ -2,6 +2,7 @@ package passionx3.jkdk.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import passionx3.jkdk.dao.TimeSaleDao;
 import passionx3.jkdk.dao.FundingDao;
 import passionx3.jkdk.dao.ItemDao;
 import passionx3.jkdk.domain.*;
+import passionx3.jkdk.repository.LikeRepository;
 
 @Service
 @Transactional
@@ -65,6 +67,9 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Autowired
 	private FundOrderDao fundOrderDao;
+	
+	@Autowired
+	private LikeRepository likeRepo;
   
 	@Autowired    // task scheduler 객체를 주입 받음
 	private ThreadPoolTaskScheduler scheduler;
@@ -696,4 +701,32 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 
+	@Override
+	@Transactional
+	public UserLike plusLike(UserLike userLike) {		
+		UserLike updateUserLike = likeRepo.save(userLike);
+		itemDao.plusLikeNum(userLike.getItemId());
+		
+		return updateUserLike;
+	}
+
+	@Override
+	@Transactional
+	public UserLike minusLike(UserLike userLike) {
+		UserLike updateUserLike = likeRepo.save(userLike);
+		itemDao.minusLikeNum(userLike.getItemId());
+		
+		return updateUserLike;
+	}
+
+	@Override
+	public UserLike getUserLike(int itemId, String userId) {		
+		Optional<UserLike> result = likeRepo.findByItemIdAndUserId(itemId, userId);
+		
+		if (result.isPresent()) {
+			return result.get();
+		} else {
+			return null;
+		}
+	}
 }

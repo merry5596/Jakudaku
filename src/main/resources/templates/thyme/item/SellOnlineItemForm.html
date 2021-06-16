@@ -244,8 +244,10 @@
 			    </div>
 			    <div class="field">
 			      <div class="ui radio checkbox">
-			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" disabled="disabled" />
-	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" />
+			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" />
+			      
+<!-- 			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" /> -->
+<!-- 	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" /> -->
 	    			<label for="${#ids.prev('isForSale')}">판매 중단</label>
 			      </div>
 			    </div>
