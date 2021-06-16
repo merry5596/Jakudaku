@@ -4,7 +4,7 @@
     <title>Manager</title>
 </head>
 <body>
-
+<div class="wrap">
  <!-- download Modal -->
 <div th:each="item:${items}" class="modal fade" th:attr="id=|down${itemStat.index}|" tabindex="-1" aria-labelledby="downModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -61,38 +61,8 @@
 
 
 <div th:replace="thyme/Header :: header"></div>
-
-<!-- side bar-->
     <div class="row row-margin">
-        <div class="col-3 sidebar d-flex flex-column p-3 bg-light make-me-sticky" style="width: 250px;">
-            <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">Sidebar</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li>
-                    <a th:href="@{/manager/myPage/onlineItem.do}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg>
-                       Online Items
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/manager/myPage/fundingItem.do}" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
-                        </svg>
-                        Funding Items
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-        
+    	<div th:replace="thyme/Sidebar :: sidebar"></div>
         <div class="col-7 base">
          <!-- 관리자 영역 -->
         <div>			
@@ -149,5 +119,6 @@
 		</div>
             
         </div>
+    </div>
     </div>
      <div th:replace="thyme/Bottom :: footer"></div>
