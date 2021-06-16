@@ -28,6 +28,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.dao.DataAccessException;
 
 import passionx3.jkdk.domain.Online;
+import passionx3.jkdk.domain.Review;
 
 @Mapper
 public interface OnlineMapper {
@@ -384,5 +385,7 @@ public interface OnlineMapper {
 
 	@Insert("UPDATE item SET uploaddate = #{today} where itemid = #{itemId}")
 	void updateUploadDate(int itemId, String today);
-
+	
+	@Update("UPDATE onlineitem SET totalRate = (SELECT TRUNC((SELECT AVG(RATE) FROM REVIEW WHERE ITEMID = #{ItemId}), 1) AS RATE FROM DUAL) WHERE itemId = #{ItemId}")
+	int updateTotalrate(int ItemId);
 }
