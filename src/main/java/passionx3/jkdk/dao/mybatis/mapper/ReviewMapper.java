@@ -41,5 +41,5 @@ public interface ReviewMapper {
 	Review getReview(int reviewId);
 
 	@Select("SELECT REVIEWID FROM REVIEW WHERE LINEITEMID = #{lineItemId}")
-	String getReviewIdByLineItemId(int lineItemId);
+	String getReviewIdByLineItemId(int lineItemId);	
 }
