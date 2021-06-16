@@ -7,7 +7,6 @@ import java.net.URLEncoder;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Order;
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.LineItem;
 import passionx3.jkdk.service.jkdkFacade;
 import passionx3.jkdk.domain.Account;
-import passionx3.jkdk.domain.AttachDTO;
 
 @Controller
 @SessionAttributes("userSession")
@@ -92,7 +88,7 @@ public class MyPageController {
 		
 		transFormat = new SimpleDateFormat("yyMMdd");
 		String file_uploadDate = transFormat.format(to);
-		String uploadPath = Paths.get("C:", "jkdk", "upload", uploadDate).toString();
+		String uploadPath = Paths.get("C:", "jkdk", "upload", file_uploadDate).toString();
 
 		File file = new File(uploadPath, fileName);
 

@@ -1,7 +1,6 @@
 
 package passionx3.jkdk.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;

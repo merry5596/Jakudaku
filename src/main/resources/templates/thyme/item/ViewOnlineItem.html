@@ -23,6 +23,73 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"
 	type="text/javascript"></script>
+	
+<script th:inline="javascript">
+var likeId;
+
+/*[# th:if="${userLike}"]*/
+	likeId = /*[[${userLike.likeId}]]*/ null;
+/*[/]*/
+/*[# th:unless="${userLike}"]*/
+	likeId = null;
+/*[/]*/
+
+function toggleLike(id) {
+	 /*<![CDATA[*/
+	if ([[${session.userSession}]] == null) {
+		alert("로그인 후 이용해주세요.");
+		return;
+	}
+		
+	var clicked;
+	if (id == 'plus') {
+		clicked = true;
+	} 
+	if (id == 'minus') {
+		clicked = false;
+	}
+	
+	var userLike = {
+			"likeId" : likeId,
+			"itemId" : /*[[${online.itemId}]]*/ null, 
+			/*[# th:if="${session.userSession}"]*/
+			"userId" : /*[[${session.userSession.userId}]]*/ "", 
+			/*[/]*/
+			/*[# th:unless="${session.userSession}"]*/
+				"userId" : null, 
+			/*[/]*/
+			"clicked" : clicked
+		};
+
+	$.ajax({
+		url: "/item/toggleLike.json",
+	    type:"post",
+	    data: JSON.stringify(userLike),
+	    contentType: "application/json",
+	    success: function(data) {
+	        if (data == null) {
+    	        alert("no data"); //나중에 수정
+	        } else {	
+	        	var likeNum = $('#likeNum').text();
+	        	likeId = data.likeId;
+	        	if(clicked == true) {
+	        		$('#plus').attr('class', 'ui red button');
+	        		$('#plus').attr('id', 'minus');
+	        		$('#likeNum').text(likeNum * 1 + 1);
+	        	} else {
+	        		$('#minus').attr('class', 'ui basic red button');
+	        		$('#minus').attr('id', 'plus');
+	        		$('#likeNum').text(likeNum * 1 - 1);
+	        	}
+	        }    	        
+	    },
+	    error: function() {
+	        alert("다시 시도하세요.");
+	    }
+	})
+}
+/*]]>*/
+</script>
 <style>
 .ui.fixed.sticky + p {
   margin-top: 39px;
@@ -87,11 +154,21 @@ div {
 			<span th:text="'(' + *{totalRate} + ')'">(4.08)</span> 
 			<a onClick="goToReview()" id="total_review"><span th:text="'총 ' + ${reviewList.size()} + '건의 후기'">총 o건의 후기</span></a> 
 		
-		<div class="ui labeled button" tabindex="0">
- 			<div class="ui red button">
+		<div th:if="${session.userSession == null or 
+					(session.userSession != null and userLike == null) or 
+					(session.userSession != null and userLike != null and userLike.clicked == false)}" 
+			class="ui labeled button" tabindex="0">
+ 			<div class="ui basic red button" id="plus" onClick="toggleLike(this.id)">
     		<i class="heart icon"></i> Like
   			</div>
-  			<a class="ui basic red left pointing label"><span th:text="*{likeNum}">추천수</span></a> <!-- 눌렀을 때 toggle 처리는 js로 & db에 어떻게 들어가게 할건지..? 누를 때마다 페이지가 새로고침될 순 없으니까 -->
+  			<a class="ui basic red left pointing label"><span id="likeNum" th:text="*{likeNum}">추천수</span></a> 
+		</div>
+		
+		<div th:if="${session.userSession != null and userLike != null and userLike.clicked == true}" class="ui labeled button" tabindex="0">
+ 			<div class="ui red button" id="minus" onClick="toggleLike(this.id)">
+    		<i class="heart icon"></i> Like 
+  			</div>
+  			<a class="ui basic red left pointing label"><span id="likeNum" th:text="*{likeNum}">추천수</span></a>
 		</div>
 		<br>
 		
@@ -103,9 +180,12 @@ div {
 		<div th:unless="*{tabletFile}" class="file_fail">TABLET</div>
 		
 		<p>
-			<div class="ui large red button" th:onclick="|location.href='@{/shop/addItemToCart.do(itemId=${online.itemId})}'|"><a class="order" href="#" th:href="@{/shop/addItemToCart.do(itemId=${online.itemId})}" >장바구니</a></div> 
-			<div class="ui large red button" th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|"><a class="order" href="#" th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a></div>
-
+		<div class="ui large red button" th:onclick="|location.href='@{/shop/addItemToCart.do(itemId=${online.itemId})}'|">
+			<a class="order" href="#" th:href="@{/shop/addItemToCart.do(itemId=${online.itemId})}" >장바구니</a>
+		</div> 
+		<div class="ui large red button" th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">
+			<a class="order" href="#" th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a>
+		</div>
 		
 		<div class="ui segment">
 	  		<div class="ui sticky" style="width: 670px !important; height: 42.6px !important; left: 417.8px;">
@@ -169,8 +249,7 @@ div {
     	$("#review_tab").trigger("click");
     }
     
-    date = new Date('2019/5/16 17:24:30');
-    console.log(date);
+    
     </script>
 </body>
 </html>

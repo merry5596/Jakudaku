@@ -57,8 +57,6 @@ public class FileUtils {
 			/* form의 name */
 			String formName = file.getName();
 
-			System.out.println("FileUtils: " + formName);
-
 			/* 파일 확장자 */
 			final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 			/* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
@@ -103,11 +101,6 @@ public class FileUtils {
 				continue;
 			}
 			try {
-				/* form의 name */
-				String formName = file.getName();
-
-				System.out.println("FileUtils: " + formName);
-
 				/* 파일 확장자 */
 				final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 				/* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
@@ -120,9 +113,6 @@ public class FileUtils {
 				/* 파일 정보 저장 */
 				if (cnt == 0) {
 					online.setThumbnail1(saveName);
-					System.out.println("FileUtils- thumbnail1: " + saveName);
-					System.out.println("FileUtils- thumbnail1: " + online.getThumbnail1());
-
 				} else if (cnt == 1) {
 					online.setThumbnail2(saveName);
 				} else if (cnt == 2) {

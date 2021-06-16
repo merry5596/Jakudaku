@@ -128,4 +128,10 @@ public interface jkdkFacade {
 	void updateSaleState(int state, int itemId);
 	
 	void updateNotSale(String date);
+	
+	public UserLike plusLike(UserLike userLike);
+	
+	public UserLike minusLike(UserLike userLike);
+	
+	public UserLike getUserLike(int itemId, String userId);
 }
