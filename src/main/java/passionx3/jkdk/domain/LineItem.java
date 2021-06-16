@@ -11,6 +11,7 @@ public class LineItem implements Serializable {
 	int quantity;
 	int isDownloaded;
 	int unitPrice;
+	String uploadDate;
 	// 지워도?
 	Item item;
 	int saleState;
@@ -145,6 +146,14 @@ public class LineItem implements Serializable {
 
 	public void setFunding(Funding funding) {
 		this.funding = funding;
+	}
+
+	public String getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 	
 	

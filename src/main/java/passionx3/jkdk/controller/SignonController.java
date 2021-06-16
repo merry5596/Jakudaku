@@ -26,7 +26,6 @@ public class SignonController{
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception {
-		
 		Account userSession = jkdkStore.getAccount(userId, password);
 		
 		if (userSession == null) {	// 로그인 정보 일치하지 않음
@@ -39,7 +38,7 @@ public class SignonController{
 		// 로그인 하기 직전 페이지로 이동
 		// forwardAction(이전 페이지) 값은 GET 요청 시 interceptor에서 form으로 보낸 뒤 POST 요청 시에 parameter로 받아오는 것
 		if (forwardAction != null)
-			return "redirect:/" + forwardAction;
+			return "redirect:" + forwardAction;
 		else 
 			return "redirect:/";
 	}

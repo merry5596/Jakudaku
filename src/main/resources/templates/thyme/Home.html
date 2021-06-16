@@ -4,6 +4,7 @@
     <title>Home</title>
 </head>
 <body>
+<div class="wrap">
 <div th:replace="thyme/Header :: header"></div>
     <div class="row row-margin">
     	<div th:replace="thyme/Sidebar :: sidebar"></div>
@@ -64,7 +65,7 @@
             <h3 class="text-primary pt-5 container fw-bolder">Best</h3>
                 <div class="album bg-light">
                     <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${bestOnlineList}" class="col">
 	                            <div class="card shadow-sm">
 									<div class="card-body d-block mx-auto">
@@ -120,7 +121,7 @@
             <h3 class="text-success pt-5 container fw-bolder">New</h3>
                 <div class="album bg-light">
                     <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${newOnlineList}" class="col">
                             <div class="card shadow-sm">
 									<div class="card-body d-block mx-auto">
@@ -177,7 +178,7 @@
             <h3 class="text-danger pt-5 container fw-bolder">Funding</h3>
                 <div class="album bg-light">
                     <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div th:each="item: ${newFundingList}" class="col">
                                 <div class="card shadow-sm">
 									<div class="card-body  d-block mx-auto">
@@ -201,8 +202,9 @@
 									</div>
 									
 									<div class="progress mx-2">
-									  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-									</div>
+									  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="${item.quantityPercentage}" 
+									  	aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${item.quantityPercentage} + '%;'"></div>
+										</div>
 									<div class="d-flex justify-content-between align-items-center">
 										<span class= "mx-2" style="text-align:left" >
 											<small class="text-info" th:text="${item.quantityPercentage}"> 목표 퍼센티지 </small><small class="text-info">% </small>
@@ -229,7 +231,8 @@
                 
         </div>
     </div>
-    
+
+   </div>
    <div th:replace="thyme/Bottom :: footer"></div>
 </body>
 </html>

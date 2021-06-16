@@ -13,8 +13,8 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><b>자꾸다꾸</b></a>
 
-      <!--검색 창-->
       <div class="row">
+      	<!--검색 창-->
         <div class="col-5">
           <form class="d-flex" action="#" th:action="@{/item/searchItems.do}" method="get">
             <input class="form-control me-2" size="50" name="keyword" id="keyword" type="text" placeholder="전체 상품 검색" aria-label="Search" />
@@ -24,14 +24,18 @@
 
         <div class="col-4">
 	        <div class="row">
-		        <div class="col-5" th:unless=${session.userSession}>
-		          <!-- Button trigger modal -->
-		          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
-		            login
-		          </button>        
-		         </div>  
-		         
-		          <!-- 장바구니 -->
+	          
+		       <!-- 회원 alias (마이페이지) -->
+	           <div class="col" th:if = ${session.userSession}>
+			         <div class="d-inline" th:if = ${session.userSession.userId.equals('admin')} >
+			         	<a class="link-unstyled text-dark" th:href="@{/manager/myPage/onlineItem.do}"><span th:text="${session.userSession.alias} + ' 님'"></span></a>
+			         </div>
+			         <div th:unless = ${session.userSession.userId.equals('admin')} >
+			         	<a class="link-unstyled text-dark" th:href="@{/user/myPage.do}"><span th:text=${session.userSession.alias}></span> 님</a>
+			         </div>
+		       </div>
+		       
+		         <!-- 장바구니 -->
 		         <div class= "col-3">
 			         <form action="#" th:action="@{/order/viewCart.do}">
 				         <button type="submit" class="btn btn-secondary">
@@ -42,54 +46,28 @@
 		              </form>
 		         </div>
 		         
+	        	<!-- 로그인 -->
+		        <div class="col-5" th:unless=${session.userSession}>
+		          <form action="#" th:action="@{/user/signonForm.do}">
+		          <!-- Button trigger modal -->
+		          <button type="submit" class="btn btn-primary">
+		            login
+		          </button>     
+		          </form>   
+		        </div>  
+		       
+	           <!-- 로그아웃 -->
 	           <div class="col" th:if = ${session.userSession}>
-			         <div class="d-inline" th:if = ${session.userSession.userId.equals('admin')} >
-			         	<a class="link-unstyled text-dark" th:href="@{/manager/myPage/onlineItem.do}"><span th:text="${session.userSession.name} + '님'"></span></a>
-			         </div>
-			         <div th:unless = ${session.userSession.userId.equals('admin')} >
-			         	<a class="link-unstyled text-dark" th:href="@{/user/myPage.do}"><span th:text=${session.userSession.alias}></span> 님</a>
-			         </div>
-		       </div>
-		         <!-- 로그아웃 -->
-		         <div th:if = ${session.userSession} class="col">
-			         <form action="#" th:action="@{/user/signoff.do}">
-			          <button type="submit" class="btn btn-primary">
-			            logout
-			          </button>   
-			          </form>
-		          </div>                       
+		         <form action="#" th:action="@{/user/signoff.do}">
+		          <button type="submit" class="btn btn-primary">
+		            logout
+		          </button>   
+		          </form>
+	           </div>                       
 	        </div>
       </div>
     </div>
+    </div>
   </nav>
-  
-  <!-- Modal HTML -->
-  <!-- Modal -->
-	<div align="left" th:fragment="modal" class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h5 class="modal-title" id="exampleModalLabel">자꾸다꾸 로그인</h5>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	                <form action="#" th:action="@{/user/signon.do}" th:method = "Post">
-	                    <div class="mb-3">
-	                        <label class="form-label">ID</label>
-	                        <input type="text" class="form-control" id="userId" name="userId" placeholder="Id를 입력하세요" />
-	                    </div>
-	                    <div class="mb-3">
-	                        <label class="form-label">Password</label>
-	                        <input type="password" class="form-control" id="password" name="password" placeholder="패쓰워드를 입력하세요" />
-	                    </div>
-	                    <div class="modal-footer d-block">
-	                        <p class="float-start">Not yet account <a th:href="@{/user/newAccount.do}">Sign Up</a></p>
-	                        <button type="submit" class="btn btn-warning float-end">로그인</button>
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
-	</div>
 </div>
 </body>

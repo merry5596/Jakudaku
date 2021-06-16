@@ -28,7 +28,7 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a class= "text-secondary link-unstyled" th:href="@{/}">Home</a></li>
 								<li class="breadcrumb-item active " aria-current="page" >
-									<a th:href="@{/item/viewFundings.do(themeId = '-1', sortBy = '1')}">Funding</a></li>
+									<a th:href="@{/item/viewFundings.do(themeId = '-1', sortBy = '1', page='1')}">Funding</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -37,11 +37,11 @@
 					<table width=100%>
 						<tr>
 							<td style="width:100px">
-								<a class="text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = -1, sortBy=${sortBy})}">
+								<a class="text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = -1, sortBy=${sortBy}, page=1)}">
 				     				<span th:if="${themeId eq -1}" style="font-weight:bold">#전체테마</span>
 				     				<span th:unless="${themeId eq -1}">#전체테마</span></a></td>
 							<td style="width:100px" th:each="theme : ${allThemes}">
-								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = ${theme.themeId}, sortBy=${sortBy})}">
+								<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewFundings.do(themeId = ${theme.themeId}, sortBy=${sortBy}, page=1)}">
 			     				<span th:if="${theme.themeId eq themeId}" th:text="'#' + ${theme.name}" style="font-weight:bold">#테마</span>
 			     				<span th:unless="${theme.themeId eq themeId}" th:text="'#' + ${theme.name}">#테마</span></a>
 							</td>
@@ -58,6 +58,7 @@
 						<div class="input-group">
 							<input type="hidden" th:value="${themeId}" th:attr="name='themeId'">
 							<input type="hidden" th:value="${sortBy}" th:attr="name='sortBy'">
+							<input type="hidden" th:value="1" th:attr="name='page'">
 							<input type="text" id="keyword" class="form-control"
 								aria-label="Text input with segmented dropdown button" th:attr="name='keyword'">
 							<button type="submit" class="btn btn-outline-secondary" >Search</button>
@@ -78,9 +79,9 @@
 						<span th:if="${sortBy eq 6}">마감임박순</span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '1')}">신상품순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '2')}">좋아요순</a></li>
-						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '6')}">마감임박순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '1', page='1')}">신상품순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '2', page='1')}">좋아요순</a></li>
+						<li><a class="dropdown-item" href="#" th:href="@{/item/viewFundings.do(themeId = ${themeId}, keyword=${keyword}, sortBy = '6', page='1')}">마감임박순</a></li>
 					</ul>
 				</div>
 				
@@ -91,13 +92,13 @@
 				<!-- 상품 목록-->
 				<div class="mt-4 album bg-light">
 					<div class="container">
-						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-2">
+						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-2">
 							<div th:each="item : ${fundingList}" class="col">
 								<div class="card shadow-sm">
 									<div class="card-body  d-block mx-auto">
 										<div>
 										<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-											<img class = "img-fluid img-thumbnail" th:src="@{${item.thumbnail1}}" style="width: 150px; height: 150px;"/>
+											<img class = "img-fluid img-thumbnail" th:src="@{${item.thumbnail1Path}}" style="width: 150px; height: 150px;"/>
 										</a>
 											<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
 		                                        <p class= "mt-1 mb-0" th:text="${item.name}" >
@@ -145,7 +146,32 @@
 
 
 				<!-- 페이징네이션-->
+								<!-- 페이징네이션-->
 				<div class=" text-center mt-4 position-relative">
+					<nav aria-label="Page navigation example pagination">
+						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewFundings.do(themeId=${themeId}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.beforeSectionLastPage})}" th:if="${pagination.curSection != 1}">&laquo;</a>
+						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == 1}">&laquo;</a>
+						<div class="btn-group" th:each="i : ${#numbers.sequence(pagination.sectionStartPage, pagination.sectionEndPage)}">
+							<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewFundings.do(themeId=${themeId}, keyword=${keyword}, sortBy=${sortBy}, page=${i})}" th:text="${i}">pageNum</a>
+						</div>
+						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewFundings.do(themeId=${themeId}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.nextSectionFirstPage})}" th:if="${pagination.curSection != pagination.lastSection}">&raquo;</a>
+						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == pagination.lastSection}">&raquo;</a>
+					</nav>
+					
+					<!-- 테스트 -->
+					<span th:text="'현재페이지:' + ${pagination.curPage}"></span>
+					<span th:text="'한페이지아이템수:' + ${pagination.itemPerPage}"></span>
+					<span th:text="'총아이템수:' + ${pagination.totalItemCount}"></span>
+					<span th:text="'페이지단위:' + ${pagination.pageUnit}"></span>
+					<span th:text="'총페이지수:' + ${pagination.pageCount}"></span>
+					<span th:text="'현재섹션:' + ${pagination.curSection}"></span>
+					<span th:text="'섹션시작페이지:' + ${pagination.sectionStartPage}"></span>
+					<span th:text="'섹션끝페이지:' + ${pagination.sectionEndPage}"></span>
+					<span th:text="'다음섹션시작페이지:' + ${pagination.nextSectionFirstPage}"></span>
+					<span th:text="'이전섹션끝페이지:' + ${pagination.beforeSectionLastPage}"></span>
+					<span th:text="'마지막섹션번호:' + ${pagination.lastSection}"></span>
+				</div>
+<!-- 				<div class=" text-center mt-4 position-relative">
 					<nav aria-label="Page navigation example">
 						<ul class="justify-content-center pagination">
 							<li class="page-item"><a class="page-link" href="#"
@@ -159,7 +185,7 @@
 							</a></li>
 						</ul>
 					</nav>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

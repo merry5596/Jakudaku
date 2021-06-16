@@ -45,11 +45,11 @@ public class Order implements Serializable {
 		
 		userId = account.getUserId();
 		
-		Calendar cal= Calendar.getInstance ( );
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-		cal.setTime(new Date());
-		String today = sDate.format(cal.getTime());
-		orderDate = today;
+//		Calendar cal= Calendar.getInstance ( );
+//		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+//		cal.setTime(new Date());
+//		String today = sDate.format(cal.getTime());
+//		orderDate = today;
 
 		totalPrice = (int) cart.getSubTotal();
 		

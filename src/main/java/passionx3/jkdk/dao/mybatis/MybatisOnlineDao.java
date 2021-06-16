@@ -27,37 +27,78 @@ public class MybatisOnlineDao implements OnlineDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+	// online by category
 	@Override
-	public List<Online> getOnlineItemListByCategory(int categoryId, String keyword, int sortBy) throws DataAccessException {
-		
-		if (sortBy == 1)
-			return onlineMapper.getOnlineItemListByCategoryOrderByUploadDate(categoryId, keyword);
-		else if (sortBy == 2)
-			return onlineMapper.getOnlineItemListByCategoryOrderByLikeNum(categoryId, keyword);
-		else if (sortBy == 3)
-			return onlineMapper.getOnlineItemListByCategoryOrderByTotalRate(categoryId, keyword);
-		else if (sortBy == 4)
-			return onlineMapper.getOnlineItemListByCategoryOrderByPriceLow(categoryId, keyword);
-		else // (sortBy == 5)
-			return onlineMapper.getOnlineItemListByCategoryOrderByPriceHigh(categoryId, keyword);
+	public int getCountOfOnlineItemListByCategory(int categoryId, String keyword, int start, int end) {
+		return onlineMapper.getCountOfOnlineItemListByCategory(categoryId, keyword, start, end);
 	}
 
 	@Override
-	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId, String keyword, int sortBy) throws DataAccessException {
+	public int getCountOfOnlineItemListByTheme(int categoryId, int themeId, String keyword, int start, int end)
+			throws DataAccessException {
+		return onlineMapper.getCountOfOnlineItemListByTheme(categoryId, themeId, keyword, start, end);
+	}
+	
+	@Override
+	public List<Online> getOnlineItemListByCategory(int categoryId, String keyword, int sortBy, int start, int end) throws DataAccessException {
+		System.out.println("mybatis: " + categoryId + sortBy + start + end);
 		if (sortBy == 1)
-			return onlineMapper.getOnlineItemListByThemeOrderByUploadDate(categoryId, themeId, keyword);
+			return onlineMapper.getOnlineItemListByCategoryOrderByUploadDate(categoryId, keyword, start, end);
 		else if (sortBy == 2)
-			return onlineMapper.getOnlineItemListByThemeOrderByLikeNum(categoryId, themeId, keyword);
+			return onlineMapper.getOnlineItemListByCategoryOrderByLikeNum(categoryId, keyword, start, end);
 		else if (sortBy == 3)
-			return onlineMapper.getOnlineItemListByThemeOrderByTotalRate(categoryId, themeId, keyword);
+			return onlineMapper.getOnlineItemListByCategoryOrderByTotalRate(categoryId, keyword, start, end);
 		else if (sortBy == 4)
-			return onlineMapper.getOnlineItemListByThemeOrderByPriceLow(categoryId, themeId, keyword);
+			return onlineMapper.getOnlineItemListByCategoryOrderByPriceLow(categoryId, keyword, start, end);
 		else // (sortBy == 5)
-			return onlineMapper.getOnlineItemListByThemeOrderByPriceHigh(categoryId, themeId, keyword);
+			return onlineMapper.getOnlineItemListByCategoryOrderByPriceHigh(categoryId, keyword, start, end);
+	}
+	
+	@Override
+	public List<Online> getOnlineItemListByTheme(int categoryId, int themeId, String keyword, int sortBy, int start, int end) throws DataAccessException {
+		if (sortBy == 1)
+			return onlineMapper.getOnlineItemListByThemeOrderByUploadDate(categoryId, themeId, keyword, start, end);
+		else if (sortBy == 2)
+			return onlineMapper.getOnlineItemListByThemeOrderByLikeNum(categoryId, themeId, keyword, start, end);
+		else if (sortBy == 3)
+			return onlineMapper.getOnlineItemListByThemeOrderByTotalRate(categoryId, themeId, keyword, start, end);
+		else if (sortBy == 4)
+			return onlineMapper.getOnlineItemListByThemeOrderByPriceLow(categoryId, themeId, keyword, start, end);
+		else // (sortBy == 5)
+			return onlineMapper.getOnlineItemListByThemeOrderByPriceHigh(categoryId, themeId, keyword, start, end);
 	}
 
+	@Override
+	public List<Online> getOnlineItemListByDevice(int categoryId, int device, String keyword, int sortBy, int start,
+			int end) throws DataAccessException {
+		if (sortBy == 1)
+			return onlineMapper.getOnlineItemListByDeviceOrderByUploadDate(categoryId, device, keyword, start, end);
+		else if (sortBy == 2)
+			return onlineMapper.getOnlineItemListByDeviceOrderByLikeNum(categoryId, device, keyword, start, end);
+		else if (sortBy == 3)
+			return onlineMapper.getOnlineItemListByDeviceOrderByTotalRate(categoryId, device, keyword, start, end);
+		else if (sortBy == 4)
+			return onlineMapper.getOnlineItemListByDeviceOrderByPriceLow(categoryId, device, keyword, start, end);
+		else // (sortBy == 5)
+			return onlineMapper.getOnlineItemListByDeviceOrderByPriceHigh(categoryId, device, keyword, start, end);
+	}
+
+	@Override
+	public List<Online> getOnlineItemListByThemeAndDevice(int categoryId, int themeId, int device, String keyword,
+			int sortBy, int start, int end) throws DataAccessException {
+		if (sortBy == 1)
+			return onlineMapper.getOnlineItemListByThemeAndDeviceOrderByUploadDate(categoryId, themeId, device, keyword, start, end);
+		else if (sortBy == 2)
+			return onlineMapper.getOnlineItemListByThemeAndDeviceOrderByLikeNum(categoryId, themeId, device, keyword, start, end);
+		else if (sortBy == 3)
+			return onlineMapper.getOnlineItemListByThemeAndDeviceOrderByTotalRate(categoryId, themeId, device, keyword, start, end);
+		else if (sortBy == 4)
+			return onlineMapper.getOnlineItemListByThemeAndDeviceOrderByPriceLow(categoryId, themeId, device, keyword, start, end);
+		else // (sortBy == 5)
+			return onlineMapper.getOnlineItemListByThemeAndDeviceOrderByPriceHigh(categoryId, themeId, device, keyword, start, end);
+	}
+	
 	@Override
 	public List<Online> getOnlineItemsByKeyword(String keyword) throws DataAccessException {
 		return onlineMapper.getOnlineItemsByKeyword(keyword);
@@ -134,5 +175,7 @@ public class MybatisOnlineDao implements OnlineDao {
 		onlineMapper.updateUploadDate(itemId, today);
 
 	}
+
+
 	
 }

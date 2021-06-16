@@ -109,8 +109,8 @@
 	<c:forEach var="f" items="${fundingList}" varStatus="status" >
 		<tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
-		<td>${status.index}</td>
-		<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${f.thumbnail1}" style="width:100px; height:100px;""/></td>
+		<td>${status.index} ${f.uploadDate }</td>
+		<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="C:\jkdk\upload\${f.uploaddate}\${f.thumbnail1}" style="width:100px; height:100px;""/></td>
 		<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'"; style="cursor:pointer;" >${f.name}</td>
 		<td>${f.uploadDate}</td>
 		<td>

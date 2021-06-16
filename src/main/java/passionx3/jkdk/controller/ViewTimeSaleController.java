@@ -28,16 +28,29 @@ public class ViewTimeSaleController {
 		Calendar cal= Calendar.getInstance ( );	
 		int day_of_week = cal.get ( Calendar.DAY_OF_WEEK );
 
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-		cal.setTime(new Date());
-		String today = sDate.format(cal.getTime());
-
 		if(day_of_week != 1 && day_of_week != 7){ //주말이 아니면 타임 세일 진행
-			TimeSale timeSale = jkdkStore.getTimeSale(today);
+			TimeSale timeSale = jkdkStore.getTimeSale();
 			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
+			
+			SimpleDateFormat sDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			cal.setTime(new Date());
 
+			String now = sDate.format(cal.getTime());
+			if(timeSale.getOpenTime().compareTo(now) > 0 ) {
+				model.put("isSale", -1);
+			}
+			else if(timeSale.getOpenTime().compareTo(now) < 0 ) {
+				if(timeSale.getCloseTime().compareTo(now) < 0 ) {
+					model.put("isSale", 1);
+				}
+				else if(timeSale.getCloseTime().compareTo(now) > 0 ) {
+					model.put("isSale", -1);
+				}
+			}
+			
 			model.put("timeSale", timeSale);
 			model.put("item", item);
+			
 			
 			return "thyme/sale/TimeSale";
 		}

@@ -16,6 +16,7 @@ import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Funding;
 import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
+import passionx3.jkdk.domain.Pagination;
 import passionx3.jkdk.domain.Theme;
 import passionx3.jkdk.service.jkdkFacade;
 
@@ -32,14 +33,21 @@ public class ViewCategoryController {
 			@RequestParam("themeId") int themeId,
 			@RequestParam("device") int device,
 			@RequestParam("sortBy") int sortBy,
+			@RequestParam("page") int page,
 			@RequestParam(value="keyword", required=false) String keyword) throws Exception {
 		
 		System.out.println(keyword);
 		
 		if (keyword == null) keyword = "";
+	
+		int itemPerPage = 20;
+		int end = page * itemPerPage;
+		int start = end - itemPerPage + 1;
 		
-		List<Online> onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId, device, keyword, sortBy);
+		List<Online> onlineList = jkdkStore.getOnlineItemListByCategory(categoryId, themeId, device, keyword, sortBy, start, end);
+		int totalItemCount = jkdkStore.getCountOfOnlineItemListByCategory(categoryId, themeId, keyword, start, end);
 		
+		Pagination pagination = new Pagination(page, itemPerPage, totalItemCount);
 		
 		Category category = jkdkStore.getCategoryByCategoryId(categoryId);
 		
@@ -54,6 +62,7 @@ public class ViewCategoryController {
 		mav.addObject("keyword", keyword);
 		mav.addObject("sortBy", sortBy);
 		mav.addObject("onlineList", onlineList);
+		mav.addObject("pagination", pagination);
 		
 		return mav;
 	}

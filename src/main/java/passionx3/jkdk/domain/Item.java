@@ -172,4 +172,31 @@ public abstract class Item implements Serializable {
 	public void setLikeNum(int likeNum) {
 		this.likeNum = likeNum;
 	}
+	
+	public String getPath() {
+		 SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	      Date to = null;
+	      try {
+	         to = transFormat.parse(uploadDate);
+	      } catch (ParseException e1) {
+	         e1.printStackTrace();
+	      }
+	      
+	      transFormat = new SimpleDateFormat("yyMMdd");
+	      String file_uploadDate = transFormat.format(to);
+
+	      return "/thumbnail/" + file_uploadDate + "/";
+	}
+	
+	public String getThumbnail1Path() {
+	     return getPath() + thumbnail1;
+	}
+	
+	public String getThumbnail2Path() {
+	     return getPath() + thumbnail2;
+	}
+	
+	public String getThumbnail3Path() {
+	     return getPath() + thumbnail3;
+	}
 }

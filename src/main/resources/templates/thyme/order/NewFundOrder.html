@@ -122,7 +122,7 @@
 				    </tr>
 				    <tr th:each="lineItem : ${fundOrderForm.fundOrder.lineItem}" bgcolor="#EEEEEE">
 						<td style="width: 120px; height:120px"><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1}}"/></a></td>
+							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1Path}}"/></a></td>
 				        <td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
 				            <span th:text="${lineItem.funding.name}">상품명</span></a>
 				        <td style="text-align:center" th:text="${lineItem.funding.price}">0</td>
@@ -182,9 +182,10 @@
 				      			<td>카드사
 				      				<select th:field="*{fundOrder.cardType}">
 				      					<option value="notSelected" selected>선택</option>
-				      					<option value="shinhan">신한</option>
-						      			<option value="kookmin">국민</option>
-						      			<option value="hana">하나</option></select>
+				      					<option value="국민">국민</option>
+				      					<option value="신한">신한</option>
+				      					<option value="우리">우리</option>
+						      			<option value="하나">하나</option></select>
 				      				<br>
 						      		<p th:errors="*{fundOrder.cardType}">Invalid cardType~</p>
 				      				카드 번호 <input type="text" th:field="*{fundOrder.creditCard}" />

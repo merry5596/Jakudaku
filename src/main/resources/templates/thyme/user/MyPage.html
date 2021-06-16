@@ -1,8 +1,8 @@
-<!DOCTYPE>
-<HTML xmlns:th="http://www.thymeleaf.org">
-<HEAD th:replace="thyme/Header :: head(~{::title})">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thyme/Header :: head(~{::title})">
 <meta charset="UTF-8">
-<TITLE>마이페이지</TITLE>
+<title>마이페이지</title>
 <style>
 table {
 	border: 1px solid #444444;
@@ -14,11 +14,10 @@ th, td {
 	padding: 30px;
 }
 </style>
-</HEAD>
+</head>
 <body>
 <div class="wrap">
 	<div th:replace="thyme/Header :: header"></div>
-
 	<div class="row row-margin">
 		<div th:replace="thyme/Sidebar :: sidebar"></div>
 		<div class="col-7 base">
@@ -50,10 +49,9 @@ th, td {
 				<p align="right">
 					<a href="/user/deleteAccount.do">탈퇴하기</a>
 				</p>
-			</div>
 		</div>
 	</div>
-	
-	   <div th:replace="thyme/Bottom :: footer"></div>
-</BODY>
-</HTML>
+</div>
+<div th:replace="thyme/Bottom :: footer"></div>
+</body>
+</html>

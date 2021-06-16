@@ -75,17 +75,17 @@ public class OrderController {
 			@ModelAttribute("orderForm") OrderForm orderForm, 
 			BindingResult result, SessionStatus status, HttpSession session) {
 		
-			if (orderForm.getOrder().getUsedMileage() == orderForm.getOrder().getTotalPrice()) {	// 적립금으로만 구매
+			if (orderForm.getOrder().getPaymentCost() == 0) {	// 적립금으로만 구매
 				orderForm.getOrder().removePaymentMethod();
+			} else {
+				orderValidator.validateCreditCard(orderForm.getOrder(), result);
+				
+				if (result.hasErrors()) {
+					System.out.println(result.toString());
+					return new ModelAndView("thyme/order/NewOrder");
+				}
 			}
-		
-			// from NewOrderForm
-			orderValidator.validateCreditCard(orderForm.getOrder(), result);
-			
-			if (result.hasErrors()) {
-				System.out.println(result.toString());
-				return new ModelAndView("thyme/order/NewOrder");
-			}
+
 			
 			int dbResult = jkdkStore.insertOrder(orderForm.getOrder());
 			
@@ -93,11 +93,12 @@ public class OrderController {
 				return new ModelAndView("thyme/order/NewOrder");	// message는 아직은...
 			}
 			
+			Order order = jkdkStore.getOrderByOrderId(orderForm.getOrder().getOrderId());
+			
 			ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");
-			mav.addObject("order", orderForm.getOrder());
+			mav.addObject("order", order);
 			mav.addObject("message", "주문이 완료되었습니다.");
 			status.setComplete();  // remove sessionCart and orderForm from session
-			
 			Account userSession = jkdkStore.getAccount(((Account)session.getAttribute("userSession")).getUserId());
 			session.setAttribute("userSession", userSession);
 			

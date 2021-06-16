@@ -51,13 +51,17 @@ public interface jkdkFacade {
 
 	List<Funding> getFundingItemsByKeyword(String keyword);
 	
-	List<Online> getOnlineItemListByCategory(int cateogryId, int themeId, int device, String keyword, int sortBy);
+	List<Online> getOnlineItemListByCategory(int cateogryId, int themeId, int device, String keyword, int sortBy, int start, int end);
 
-	List<Funding> getFundingItemList(int themeId, String keyword, int sortBy);
+	int getCountOfOnlineItemListByCategory(int categoryId, int themeId, String keyword, int start, int end);
 	
-	void sortOnlineItemList(List<Online> onlineList, int sortBy);
+	List<Funding> getFundingItemList(int themeId, String keyword, int sortBy, int start, int end);
 	
-	void sortFundingItemList(List<Funding> fundingList, int sortBy);
+	int getCountOfFundingItemList(int themeId, String keyword, int start, int end);
+//
+//	void sortOnlineItemList(List<Online> onlineList, int sortBy);
+//	
+//	void sortFundingItemList(List<Funding> fundingList, int sortBy);
 
 	List<Online> getBestOnlineItemListforHome();
 
@@ -65,7 +69,7 @@ public interface jkdkFacade {
 
 	List<Funding> getNewFundingItemList(); 
 	
-	TimeSale getTimeSale(String openTime);
+	TimeSale getTimeSale();
 	
 	void insertTimeSale();
 	
@@ -117,7 +121,7 @@ public interface jkdkFacade {
 
 	List<Online> getNewOnlineItemListforHome();
 
-	List<Funding> getNewFundingItemListforHome(String today);
+	List<Funding> getNewFundingItemListforHome();
 	
 	String getCategoryNameByCategoryId(int categoryId);
 	

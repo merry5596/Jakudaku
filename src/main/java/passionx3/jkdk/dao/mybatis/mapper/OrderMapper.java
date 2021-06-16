@@ -12,16 +12,15 @@ import passionx3.jkdk.domain.Order;
 
 @Mapper
 public interface OrderMapper {
-
-	@Select("SELECT orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId"
+	@Select("SELECT orderId, TO_CHAR(orderdate, 'YYYY/MM/DD HH24:MI:SS') as orderdate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId"
 			+ "	FROM ORDERS WHERE orderId = #{orderId}")
 	Order getOrderByOrderId(@Param("orderId") int orderId);
 
 	@Insert("INSERT INTO ORDERS (orderId, orderDate, totalPrice, creditCard, expireDate, cardType, discountCost, usedMileage, userId)"
-			+ "	VALUES(#{orderId}, #{orderDate}, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{discountCost}, #{usedMileage}, #{userId})")
+			+ "	VALUES(#{orderId}, sysdate, #{totalPrice}, #{creditCard}, #{expireDate}, #{cardType}, #{discountCost}, #{usedMileage}, #{userId})")
 	int insertOrder(Order order);
 	
-	@Select("SELECT ORDERID, ORDERDATE, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"
+	@Select("SELECT ORDERID, TO_CHAR(orderDate, 'YYYY/MM/DD HH24:MI:SS') AS orderDate, TOTALPRICE, CREDITCARD, EXPIREDATE, CARDTYPE, USEDMILEAGE, DISCOUNTCOST, USERID"
 			+ " FROM ORDERS WHERE USERID = #{userId} ORDER BY ORDERDATE DESC")
 	List<Order> getOrdersByUserId(String userId);
 
