@@ -58,7 +58,7 @@
 				<tr>
 				<c:choose>
 					<c:when test="${not empty l.online}">					
-						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.online.thumbnail1}" style="width:100px; height:100px;"/></td>
+						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.online.thumbnail1Path}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.online.name}</td>
 						<td>
 							<c:if test="${not empty l.online.pcFile}">
