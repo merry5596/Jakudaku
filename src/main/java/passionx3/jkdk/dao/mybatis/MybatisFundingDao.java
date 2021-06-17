@@ -98,11 +98,6 @@ public class MybatisFundingDao implements FundingDao {
 		return fundingMapper.getNewFundingItemListforHome();
 	}
 
-	@Override
-	public int updateFundingItem(Funding funding) throws DataAccessException {
-		return fundingMapper.updateFundingItem(funding);
-	}
-
 	public void closeFunding(int itemId) {
 		fundingMapper.closeFunding(itemId);
 	}

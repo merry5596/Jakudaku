@@ -81,7 +81,6 @@ public class SellFundingItemController {
 				jkdk.registerFundingItem(sellFundingForm.getFunding());
 			}
 			else {
-				jkdk.updateFundingItem(sellFundingForm.getFunding()); 
 			}
 		}
 		catch (Exception ex) { //추후에 수정

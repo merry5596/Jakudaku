@@ -539,11 +539,6 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public int updateFundingItem(Funding funding) {
-		return fundingDao.updateFundingItem(funding);
-	}
-
-	@Override
 	public void resetVote() {
 		battleSaleDao.resetVote();
 	}
