@@ -5,10 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -248,8 +245,6 @@ public class jkdkImpl implements jkdkFacade {
 	
 	@Override
 	public int getCountOfOnlineItemListByCategory(int categoryId, int themeId, String keyword, int start, int end) {
-		List<Online> onlineList = null;
-		
 		if (themeId == -1) {	// theme 선택 안됨, device 선택 안됨
 			return onlineDao.getCountOfOnlineItemListByCategory(categoryId, keyword, start, end);
 		} else {	// theme 선택됨, device 선택 안됨
@@ -528,7 +523,6 @@ public class jkdkImpl implements jkdkFacade {
 		if (r1 * r2 == 0)
 			return 0;
 		
-	
 		
 		//펀딩 마감시 isForSale 자동 변경할 수 있도록 closeFunding 추가
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -539,7 +533,6 @@ public class jkdkImpl implements jkdkFacade {
 			e.printStackTrace();
 		}
 		closeFunding(funding.getItemId(), finish);
-		
 		
 		
 		return 1;
@@ -627,8 +620,21 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
+	@Transactional
 	public int updateOnlineItem(Online online) {
-		return onlineDao.updateOnlineItem(online);
+		Item item = online;
+		
+		System.out.println("jkdkImpl: updateOnlineItem - " + online.getItemId() + ", " + online.getName()+ ", " + online.getPrice()+ ", " + online.getDescription() );
+		int r1 = itemDao.updateItem(item);
+		System.out.println(r1);
+
+		int r2 = onlineDao.updateOnlineItem(online);
+		System.out.println(r2);
+
+		
+		if (r1 * r2 == 0)
+			return 0;
+		return 1;
 	}
 
 	@Override
@@ -696,10 +702,7 @@ public class jkdkImpl implements jkdkFacade {
 	public void updateNotSale(String date) {
 		battleSaleDao.updateNotSale(date);
 		timeSaleDao.updateNotSale(date);
-
-	
 	}
-
 
 	@Override
 	@Transactional

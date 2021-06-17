@@ -28,10 +28,10 @@ import passionx3.jkdk.domain.Funding;
 
 @Mapper
 public interface FundingMapper {
-	@Select("SELECT i.itemId AS itemId, i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
-			+ "TO_DATE(f.finishDate, 'YYYY-MM-DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
-			+ "FROM item i, fundingitem f "
-			+ "WHERE i.itemId = f.itemId "
+	@Select("SELECT i.itemId AS itemId, t.name AS themeName, i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
+			+ "TO_CHAR(f.finishDate, 'YYYY/MM/DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
+			+ "FROM item i, fundingitem f, theme t "
+			+ "WHERE i.itemId = f.itemId AND i.themeId = t.themeId "
 			+ "AND i.name LIKE '%' || #{keyword} || '%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
@@ -78,11 +78,6 @@ public interface FundingMapper {
 	@Insert("INSERT INTO fundingitem (itemId, finishDate, purchaseQuantity, targetQuantity) "
 			+ "values (#{funding.itemId}, TO_DATE(#{funding.finishDate}, 'YYYY/MM/DD HH24:MI'), #{funding.purchaseQuantity}, #{funding.targetQuantity})")
 	int registerFundingItem(@Param("funding") Funding funding);
-	
-	@Update("UPDATE onlineitem "
-			+ "SET pcfile = #{onlineItem.pcFile}, tabletfile = #{onlineItem.tabletFile}, phonefile = #{onlineItem.phoneFile}, categoryid = #{onlineItem.categoryId} "
-			+ "WHERE ITEMID = #{onlineItem.itemId}")
-	int updateFundingItem(@Param("funding") Funding funding);
 
   // 여기부터 조건 검색
 	@Select("SELECT * FROM (SELECT a.*, ROWNUM AS rnum FROM (SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, I.PRICE, I.LIKENUM,"

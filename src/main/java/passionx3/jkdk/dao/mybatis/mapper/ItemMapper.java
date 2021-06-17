@@ -29,14 +29,14 @@ import passionx3.jkdk.domain.Item;
 
 @Mapper
 public interface ItemMapper {
-	@Insert("INSERT INTO item (itemId, themeid, name, uploadDate, price, likeNum, thumbnail1, thumbnail2, thumbnail3, isforsale, description, approval, userid) "
+	@Insert("INSERT INTO item (itemId, themeId, name, uploadDate, price, likeNum, thumbnail1, thumbnail2, thumbnail3, isforsale, description, approval, userid) "
 			+ "values (#{item.itemId}, #{item.themeId}, #{item.name}, sysdate, #{item.price}, 0, "
 				+ "#{item.thumbnail1, jdbcType=VARCHAR}, #{item.thumbnail2, jdbcType=VARCHAR}, #{item.thumbnail3, jdbcType=VARCHAR}, 1, #{item.description}, 0, #{item.producerId})")
 	@SelectKey(statement="select itemId_seq.nextval FROM DUAL", keyProperty="item.itemId", before=true, resultType=int.class)
 	int registerItem(@Param("item") Item item);
 	
 	@Update("UPDATE item "
-			+ "SET themeid = #{item.themeid}, price = #{item.price}, "
+			+ "SET name = #{item.name}, themeid = #{item.themeId}, price = #{item.price}, "
 				+ "thumbnail1 = #{item.thumbnail1, jdbcType=VARCHAR}, thumbnail2 = #{item.thumbnail2, jdbcType=VARCHAR}, thumbnail3 = #{item.thumbnail3, jdbcType=VARCHAR}, "
 				+ "isforsale = #{item.isForSale}, description = #{item.description}, approval = 0 "
 			+ "WHERE itemid = #{item.itemId}")

@@ -68,14 +68,6 @@ public class MyPageController {
 			@RequestParam(value = "uploadDate", required = true) String uploadDate,
 			@RequestParam(value = "fileName", required = true) String fileName, 
 			HttpServletResponse response) {
-
-//		if (itemId == null) throw new RuntimeException("올바르지 않은 접근입니다.");
-//
-//		AttachDTO fileInfo = boardService.getAttachDetail(itemId);
-//		if (fileInfo == null || "Y".equals(fileInfo.getDeleteYn())) {
-//			throw new RuntimeException("파일 정보를 찾을 수 없습니다.");
-//		}
-				
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date to = null;
 		try {
