@@ -192,11 +192,21 @@ div {
 	padding: 30px 0px 30px 0px;
 	text-align: center;
 }
+
+.notForSale {
+ 	pointer-events: none; 
+}
+
+#not_sale{
+	color: red;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
 	<!-- 상품 미리보기 -->
 	<div th:object="${online}">
+	<div th:fragment="online_1">
 		<div class="fotorama" data-width="300" data-ratio="3/2"
 			data-nav="thumbs" data-thumbheight="48">
 			<a href="http://s.fotorama.io/okonechnikov/1-lo.jpg"><img src=""
@@ -222,6 +232,7 @@ div {
 					th:text="*{salePrice} + '원'">할인가</span>
 			</p>
 		</div>
+	</div>
 		<p>
 		<div class="starRatingContainer">
 			<div class="ratingStar"></div>
@@ -245,6 +256,16 @@ div {
 		</div>
 
 		<div
+			th:if="${session.userSession != null and userLike != null and userLike.clicked == true and online.isForSale == 1}"
+			class="ui labeled button" tabindex="0">
+			<div class="ui red button" id="minus" onClick="toggleLike(this.id)">
+				<i class="heart icon"></i> Like
+			</div>
+			<a class="ui basic red left pointing label"><span id="likeNum"
+				th:text="*{likeNum}">추천수</span></a>
+		</div>
+		
+		<div
 			th:if="${session.userSession != null and userLike != null and userLike.clicked == true}"
 			class="ui labeled button" tabindex="0">
 			<div class="ui red button" id="minus" onClick="toggleLike(this.id)">
@@ -253,6 +274,7 @@ div {
 			<a class="ui basic red left pointing label"><span id="likeNum"
 				th:text="*{likeNum}">추천수</span></a>
 		</div>
+		
 		<br>
 
 		<div th:if="*{pcFile}" class="file_ok">PC</div>
@@ -261,10 +283,12 @@ div {
 		<div th:unless="*{phoneFile}" class="file_fail">PHONE</div>
 		<div th:if="*{tabletFile}" class="file_ok">TABLET</div>
 		<div th:unless="*{tabletFile}" class="file_fail">TABLET</div>
+		
+		<p th:unless="*{isForSale}" id="not_sale">※판매가 중지된 상품입니다.</p>
 
 		<p>
 		<div th:if="*{isForSale}" id="cart" class="ui large red button" onClick="addToCart()">장바구니</div>
-		<div th:unless="*{isForSale}" id="cart" class="ui large gray button" onClick="addToCart()">장바구니</div>
+		<div th:unless="*{isForSale}" class="ui large grey button notForSale" onClick="addToCart()" >장바구니</div>
 		
 		
 		<div class="ui mini modal">
@@ -284,11 +308,10 @@ div {
 			</div>
 		</div>
 		
-		<div class="ui large red button"
-			th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">
-			<a class="order" href="#"
-				th:href="@{/order/newOrder.do(itemId=${online.itemId})}">구매하기</a>
-		</div>
+		<div th:if="*{isForSale}" class="ui large red button"
+			th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
+		<div th:unless="*{isForSale}" class="ui large grey button notForSale"
+			th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
 
 
 		<div class="ui segment">

@@ -5,6 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
@@ -12,12 +16,22 @@ public abstract class Item implements Serializable {
 	private int itemId;
 	private String producerId;
 	private String producerName;
+	
+	@NotNull(message="테마를 선택하세요.")
 	private Integer themeId;
+	
 	private String themeName;
+	
+	@NotBlank(message="상품명을 입력하세요.")
 	private String name;
+	
 	private String uploadDate;
+	
+	@Positive(message="판매 가격을 입력하세요.")
 	private int price;
+	
 	private int likeNum;
+	
 	private String thumbnail1;
 	private String thumbnail2;
 	private String thumbnail3;

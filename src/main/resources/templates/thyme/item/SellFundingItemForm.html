@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA==" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css" integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g==" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css" integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css" integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
 </head>
@@ -58,6 +59,8 @@
 						th:text="'#' + ${theme.name}"
 						value="#">theme name</option>
 			</select>
+			<span th:each="err : ${#fields.errors('themeId')}" th:text="${err}"></span>
+			
 	    </p>
 	    
 	    <p>
@@ -65,14 +68,17 @@
 	    	<div class="ui calendar" id="date">
 				<div class="ui input right icon">
 			      <i class="calendar icon"></i>
-			      <input type="text" placeholder="날짜/시간" th:field="*{finishDate}">
+			      <input type="text" placeholder="날짜/시간" th:field="*{finishDate}" readonly>
 			    </div>
 			</div>
+			<span th:each="err : ${#fields.errors('finishDate')}" th:text="${err}"></span>
+			
 			<span>※펀딩 시작시간은 관리자의 승인 직후부터입니다.</span>
 	    
 	    <p>
 	    	<span>목표 수량</span>
 	    	<input type="text" id="targetQuantity" th:field="*{targetQuantity}" />개 
+	    	<span th:each="err : ${#fields.errors('targetQuantity')}" th:text="${err}"></span>
 	    </p>
 	   
 	    <br>

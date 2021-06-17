@@ -91,20 +91,20 @@
 		}
 	};
 </script>
+<style>
+.notForSale {
+ 	pointer-events: none; 
+}
+</style>
 </head>
 <body>
 
 	<!-- 상품 미리보기 -->
 	<div th:object="${funding}">
-		<div class="fotorama" data-width="300" data-ratio="3/2"
-			data-nav="thumbs" data-thumbheight="48">
-			<a href="http://s.fotorama.io/okonechnikov/1-lo.jpg"><img src="" width="144" height="96" alt=""></a>
-			<a href="http://s.fotorama.io/okonechnikov/2-lo.jpg"><img src="" width="144" height="96" alt=""></a>
-			<a href="http://s.fotorama.io/okonechnikov/3-lo.jpg"><img src="" height="96" alt=""></a>
-		</div>
+		<div th:replace="~{/thyme/item/ViewOnlineItem :: .fotorama}"></div>
 		<p><span th:text="*{name}">솜솜 쿠션!</span></p>
 		<p><span th:text="*{price} + '원'">30000원</span></p>
-
+		
 		<div class="ui labeled button" tabindex="0">
  			<div class="ui basic red button">
     		<i class="heart icon"></i> Like
@@ -144,7 +144,8 @@
 				<button type="button" class="right attached ui button" id="option_plus" onClick="calc(this)">+</button>
 			</div>
 			<br>
-			<input class="ui large red button" type="submit" value="펀딩하기">
+			<input th:if="*{isForSale}" class="ui large red button" type="submit" value="펀딩하기">
+			<input th:unless="*{isForSale}" class="ui large grey button notForSale" type="submit" value="펀딩하기">
 		</form>
 		
 		

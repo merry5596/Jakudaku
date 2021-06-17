@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,20 +75,18 @@ public class SellOnlineItemController {
 	@PostMapping("/item/sellOnlineItem.do") 
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
-			@ModelAttribute("sellOnlineForm") SellOnlineForm sellOnlineForm,
+			@Valid @ModelAttribute("sellOnlineForm") SellOnlineForm sellOnlineForm,
 			BindingResult result, Model model, 
 			@RequestParam("thumbnail1") MultipartFile[] thumbnail, 
 			@RequestParam("pcFile") MultipartFile pcFile, 
 			@RequestParam("phoneFile") MultipartFile phoneFile, 
-			@RequestParam("tabletFile") MultipartFile tabletFile,
-			@RequestParam("new") boolean newOnline) throws Exception {
-		validator.validate(sellOnlineForm, result);
+			@RequestParam("tabletFile") MultipartFile tabletFile) throws Exception {
 		
+//		validator.validate(sellOnlineForm, result);
 		if (result.hasErrors()) return formViewName;
 		
-
 		try {
-			if (newOnline) {
+			if (sellOnlineForm.isNewOnline()) {
 				Online online = sellOnlineForm.getOnline();
 				Account account = (Account)session.getAttribute("userSession");
 				online.setProducerId(account.getUserId());
@@ -101,7 +100,6 @@ public class SellOnlineItemController {
 			}
 			else {
 				Online online = sellOnlineForm.getOnline();
-				System.out.println("else문: " + online.getItemId() + ", " + online.getDescription() + ", " + online.getIsForSale());
 				online = fileUtils.uploadFiles(thumbnail, online);
 				online = fileUtils.uploadFiles(pcFile, online);
 				online = fileUtils.uploadFiles(phoneFile, online);
@@ -118,7 +116,8 @@ public class SellOnlineItemController {
 				
 		return "redirect:/user/myPage/sell.do"; 
 	
-		
+	
+
 
 		
 //		DAOFactory daoFactory = new DAOFactory();

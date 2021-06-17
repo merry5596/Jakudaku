@@ -619,13 +619,8 @@ public class jkdkImpl implements jkdkFacade {
 	public int updateOnlineItem(Online online) {
 		Item item = online;
 		
-		System.out.println("jkdkImpl: updateOnlineItem - " + online.getItemId() + ", " + online.getName()+ ", " + online.getPrice()+ ", " + online.getDescription() );
 		int r1 = itemDao.updateItem(item);
-		System.out.println(r1);
-
 		int r2 = onlineDao.updateOnlineItem(online);
-		System.out.println(r2);
-
 		
 		if (r1 * r2 == 0)
 			return 0;

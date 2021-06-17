@@ -80,8 +80,6 @@ public class SellFundingItemController {
 				funding.setProducerId(account.getUserId());
 				jkdk.registerFundingItem(sellFundingForm.getFunding());
 			}
-			else {
-			}
 		}
 		catch (Exception ex) { //추후에 수정
 			System.out.println(ex.getMessage());

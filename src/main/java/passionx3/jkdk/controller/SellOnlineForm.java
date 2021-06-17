@@ -2,11 +2,14 @@ package passionx3.jkdk.controller;
 
 import java.io.Serializable;
 
+import javax.validation.Valid;
+
 import passionx3.jkdk.domain.Online;
 
 @SuppressWarnings("serial")
-public class SellOnlineForm implements Serializable {
 
+public class SellOnlineForm implements Serializable {
+	@Valid
 	private Online online;
 
 	private boolean newOnline;
