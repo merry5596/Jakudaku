@@ -2,10 +2,13 @@ package passionx3.jkdk.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
 public class Online extends Item implements Serializable {
+	@NotNull(message="카테고리를 선택하세요.")
 	private Integer categoryId;
 	private String categoryName;
 	private Double totalRate;

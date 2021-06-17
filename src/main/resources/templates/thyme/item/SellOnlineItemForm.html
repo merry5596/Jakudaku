@@ -208,6 +208,8 @@
 						th:text="'#' + ${theme.name}"
 						value="#">theme name</option>
 			</select>
+			<span th:each="err : ${#fields.errors('themeId')}" th:text="${err}"></span>
+			
 	    </p>
 	   
 	    <p>
@@ -220,6 +222,8 @@
 						th:text="${category.name}"
 						value="#">category name</option>
 			</select>
+			<span th:each="err : ${#fields.errors('categoryId')}" th:text="${err}"></span>
+			
 	    </p>
 	    
 
@@ -228,7 +232,6 @@
 	    	phone <input type="file" name="phoneFile" th:value="*{phoneFile}"/> 
 	    	tablet <input type="file" name="tabletFile" th:value="*{tabletFile}"/> 
 	    	
-	    </p>
 	    
 	    <p>
 	    	<div class="inline fields">
@@ -255,7 +258,7 @@
 	    <br>
 	    <input th:if="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="등록하기">
 	    
-	    <input type="hidden" name="new" th:value="${sellOnlineForm.newOnline}"/>
+	    <input th:unless="${sellOnlineForm.newOnline}" type="hidden" name="itemId" th:value="*{itemId}"/>
 	    <input th:unless="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="수정하기">
     </form>
 	

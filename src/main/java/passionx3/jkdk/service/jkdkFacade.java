@@ -95,8 +95,6 @@ public interface jkdkFacade {
 
 	int registerFundingItem(Funding funding);
 
-	int updateFundingItem(Funding funding);
-
 	List<Online> getNotApprovedOnlineItems();
 
 	List<Funding> getNotApprovedFundingItems();

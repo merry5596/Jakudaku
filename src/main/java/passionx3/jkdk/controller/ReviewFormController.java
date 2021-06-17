@@ -85,7 +85,6 @@ public class ReviewFormController {
 
 		try {
 			if (reviewForm.isNewReview()) {
-				System.out.println("new");
 				Review review = reviewForm.getReview();
 				Account account = (Account)session.getAttribute("userSession");
 				String userId = account.getUserId();
@@ -98,7 +97,6 @@ public class ReviewFormController {
 				jkdkStore.insertReview(review);
 			}
 			else {
-				System.out.println("update");
 				jkdkStore.updateReview(reviewForm.getReview());
 			}
 		}

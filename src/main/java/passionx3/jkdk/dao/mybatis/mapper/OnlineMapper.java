@@ -28,7 +28,6 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.dao.DataAccessException;
 
 import passionx3.jkdk.domain.Online;
-import passionx3.jkdk.domain.Review;
 
 @Mapper
 public interface OnlineMapper {

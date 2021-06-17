@@ -5,10 +5,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 @SuppressWarnings("serial")
 public class Funding extends Item implements Serializable {
+		@NotBlank(message="펀딩종료 날짜/시간을 선택하세요.")
 		private String finishDate;
+	
 		private int purchaseQuantity;
+		
+		@Positive(message="목표 수량을 입력하세요.")
 		private int targetQuantity;
 
 		public Funding() {
