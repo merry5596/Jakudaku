@@ -32,10 +32,10 @@ import passionx3.jkdk.domain.Review;
 
 @Mapper
 public interface OnlineMapper {
-	@Select("SELECT i.itemId AS itemId,  i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
+	@Select("SELECT i.itemId AS itemId, t.name AS themeName,i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
 			+ "o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile, o.saleState AS saleState "
-			+ "FROM item i, onlineitem o "
-			+ "WHERE i.itemId = o.itemId "
+			+ "FROM item i, onlineitem o, theme t "
+			+ "WHERE i.itemId = o.itemId AND i.themeId = t.themeId "
 			+ "AND i.name LIKE '%' || #{keyword} || '%' "
 			+ "AND i.isForSale = 1 "
 			+ "AND i.approval = 1")
@@ -74,7 +74,7 @@ public interface OnlineMapper {
 			"c.name AS categoryName, o.totalRate AS totalRate, o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " + 
 			"FROM item i, onlineitem o, account a, theme t, category c " + 
 			"WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId " + 
-			"AND i.itemId = #{itemId} AND i.isForSale = 1")
+			"AND i.itemId = #{itemId}")
 	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
 
 

@@ -1,7 +1,6 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

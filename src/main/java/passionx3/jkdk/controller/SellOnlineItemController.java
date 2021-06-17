@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import passionx3.jkdk.service.SellOnlineItemFormValidator;
@@ -27,7 +26,6 @@ import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
-@SessionAttributes("userSession")
 public class SellOnlineItemController {
 	@Value("thyme/item/SellOnlineItemForm")
 	private String formViewName;
@@ -81,16 +79,17 @@ public class SellOnlineItemController {
 			@RequestParam("thumbnail1") MultipartFile[] thumbnail, 
 			@RequestParam("pcFile") MultipartFile pcFile, 
 			@RequestParam("phoneFile") MultipartFile phoneFile, 
-			@RequestParam("tabletFile") MultipartFile tabletFile) throws Exception {
-		//validator.validate(sellOnlineForm, result);
+			@RequestParam("tabletFile") MultipartFile tabletFile,
+			@RequestParam("new") boolean newOnline) throws Exception {
+		validator.validate(sellOnlineForm, result);
 		
-		//if (result.hasErrors()) return formViewName;
+		if (result.hasErrors()) return formViewName;
+		
+
 		try {
-			
-			if (sellOnlineForm.isNewOnline()) {
+			if (newOnline) {
 				Online online = sellOnlineForm.getOnline();
 				Account account = (Account)session.getAttribute("userSession");
-//				Account account = jkdk.getAccount("hyojin", "1234"); //테스트용
 				online.setProducerId(account.getUserId());
 				
 				online = fileUtils.uploadFiles(thumbnail, online);
@@ -101,7 +100,14 @@ public class SellOnlineItemController {
 				jkdk.registerOnlineItem(online);
 			}
 			else {
-				jkdk.updateOnlineItem(sellOnlineForm.getOnline()); 
+				Online online = sellOnlineForm.getOnline();
+				System.out.println("else문: " + online.getItemId() + ", " + online.getDescription() + ", " + online.getIsForSale());
+				online = fileUtils.uploadFiles(thumbnail, online);
+				online = fileUtils.uploadFiles(pcFile, online);
+				online = fileUtils.uploadFiles(phoneFile, online);
+				online = fileUtils.uploadFiles(tabletFile, online);
+				if (jkdk.updateOnlineItem(online) != 1)
+					throw new Exception(); 
 			}
 		} catch (Exception ex) { //추후에 수정
 			System.out.println(ex.getMessage());
@@ -111,6 +117,7 @@ public class SellOnlineItemController {
 		}
 				
 		return "redirect:/user/myPage/sell.do"; 
+	
 		
 
 		

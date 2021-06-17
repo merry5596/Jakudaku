@@ -165,16 +165,12 @@
 		<span>미리보기 이미지 </span>
 		<span>(0/3)</span>
 		<br>
-<!-- 			<input type="file" name="thumbnail1" th:field="*{thumbnail1}" multiple="multiple"/>  -->
+			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/> 
 		
-			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple"/> 
+<!-- 			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/>  -->
 <!-- 			<input type="file" th:field="*{thumbnail2}" multiple="multiple"/>  -->
 <!-- 			<input type="file" th:field="*{thumbnail3}" multiple="multiple"/> -->
 		<p>
-<!-- 			<span th:text="#{precautions.image}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.1}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.2}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.3}"></span><br> -->
 			<span>상품 이미지는 640x640에 최적화되어있습니다.</span><br>
 			<span>~~~</span><br>
 			<span>~~~</span><br>
@@ -228,23 +224,25 @@
 	    
 
 	    	<span>기기 종류</span><br>
-	    	pc <input type="file" name="pcFile" th:value="*{pcFile}"/> phone <input type="file" name="phoneFile" th:value="*{phoneFile}"/> tablet <input type="file" name="tabletFile" th:value="*{tabletFile}"/> <!-- 추후구현 -->
+	    	pc <input type="file" name="pcFile" th:value="*{pcFile}"/> 
+	    	phone <input type="file" name="phoneFile" th:value="*{phoneFile}"/> 
+	    	tablet <input type="file" name="tabletFile" th:value="*{tabletFile}"/> 
+	    	
 	    </p>
 	    
 	    <p>
 	    	<div class="inline fields">
 	    		
-			    <span>판매 여부</span> <!-- 반복문으로 할 수 있지 않을까? -->
+			    <span>판매 여부</span>
 			    <div class="field">
 			      <div class="ui radio checkbox">
-			        <input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="1" disabled="disabled" checked="checked"/>
-	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="1" checked="checked"/>
+			        <input type="radio" th:name="*{isForSale}" th:value="1" th:disabled="${sellOnlineForm.newOnline}" checked="checked"/>
 	    			<label for="${#ids.prev('isForSale')}">판매 중</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui radio checkbox">
-			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" />
+			      	<input type="radio" th:name="*{isForSale}" th:value="0" th:disabled="${sellOnlineForm.newOnline}" />
 			      
 <!-- 			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" /> -->
 <!-- 	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" /> -->
@@ -255,7 +253,10 @@
 	    
 	   
 	    <br>
-	    <input class="ui blue button" type="submit" value="등록하기">
+	    <input th:if="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="등록하기">
+	    
+	    <input type="hidden" name="new" th:value="${sellOnlineForm.newOnline}"/>
+	    <input th:unless="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="수정하기">
     </form>
 	
 <!-- 	<div th:include="footer::linkToMain"></div> -->
