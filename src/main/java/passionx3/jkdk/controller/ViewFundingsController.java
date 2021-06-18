@@ -30,7 +30,7 @@ public class ViewFundingsController {
 
 		if (keyword == null) keyword = "";
 		
-		int itemPerPage = 20;
+		int itemPerPage = 16;
 		int end = page * itemPerPage;
 		int start = end - itemPerPage + 1;
 		
