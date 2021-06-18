@@ -12,8 +12,10 @@
         <!-- 여기서부터 content -->
         
         	<div align="center">
-				<div th:unless="${item}" class="container evnet-page">
-					<p class="event-des">no sale</p>
+				<div th:unless="${item}" class="container">
+					<p class="event-title">No Sale</p>
+					<p class="event-des">아직 진행 중인 타임 세일이 없습니다</p>
+					<p> 타임 세일은 평일 12시부터 15시까지 진행됩니다.</p>
 				</div>
 		
 				<div th:if="${item}" class="container evnet-page">
@@ -25,13 +27,13 @@
 								data-bs-ride="carousel">
 								<div class="carousel-inner " >
 									<div class="carousel-item active">
-										<img th:src="@{${item.thumbnail1}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일1">
+										<img th:src="@{${item.thumbnail1Path}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일1">
 									</div>
 									<div th:if="${item.thumbnail2}" class="carousel-item">
-										<img th:src="@{${item.thumbnail2}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일2">
+										<img th:src="@{${item.thumbnail2Path}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일2">
 									</div>
 									<div th:if="${item.thumbnail3}" class="carousel-item">
-										<img th:src="@{${item.thumbnail3}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일3">
+										<img th:src="@{${item.thumbnail3Path}}" style="width: 280px; height: 500px;" class="d-block w-100" alt="썸네일3">
 									</div>
 								</div>
 								<button class="carousel-control-prev" type="button"
@@ -58,8 +60,8 @@
 		                        </div>
 		                        <p class="lead" th:text="${item.description}">description</p> 
 		                        <div class="position-absolute bottom-0 start-50 translate-middle-x" align = "center">
-		                        	<p th:if = ${isSale.equals(1)} class="text-success mb-0"><span id="remaining_time"> </span></p>
-		                        	<p th:if = ${isSale.equals(-1)}> 세일 중이 아닙니다.</p>
+		                        	<p class="text-success mb-0"><span id="remaining_time"> </span></p>
+		                        	
 		            	        	<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 			                       	 	<button type="button" class="btn btn-success ">바로가기!</button>
 		                      		</a>
@@ -77,7 +79,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js" integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js" integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script th:inline="javascript">
+	<script th:if="${timeSale}" th:inline="javascript">
 		// 남은 시간 타이머
 		const countDownTimer = function (id, date) { 
 			var _vDate = new Date(date); // 전달 받은 일자 

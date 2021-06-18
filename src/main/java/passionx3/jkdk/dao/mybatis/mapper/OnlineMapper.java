@@ -78,12 +78,12 @@ public interface OnlineMapper {
 
 
 	@Select("SELECT itemID, name, uploaddate, price, totalrate, likenum, thumbnail1, categoryname, pcfile, tabletfile, phonefile, themeid, themename, userid FROM " + 
-			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, o.totalrate AS totalrate, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
+			"(SELECT i.itemId AS itemId, i.name AS name, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, price, o.totalrate AS totalrate, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
 			"FROM ONLINEITEM o, item i , category c, theme t WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId AND i.themeId = t.themeId ORDER BY i.likenum DESC) WHERE ROWNUM < 5")
 	List<Online> getBestOnlineItemListforHome();
 	
 	@Select("SELECT itemID, name, uploaddate, price, totalrate, likenum, thumbnail1, categoryname, pcfile, tabletfile, phonefile, themeid, themename, userid FROM " + 
-			"(SELECT i.itemId AS itemId, i.name AS name, uploaddate, price, o.totalrate AS totalrate, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
+			"(SELECT i.itemId AS itemId, i.name AS name, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, price, o.totalrate AS totalrate, likenum, thumbnail1, isforsale, c.name AS categoryName, pcfile, tabletfile, phonefile, i.themeid as themeid, t.name as themename, userid " + 
 			"FROM ONLINEITEM o, item i , category c, theme t WHERE o.itemid = i.itemid AND i.approval = 1 AND i.isforsale = 1 AND c.categoryId = o.categoryId AND i.themeId = t.themeId ORDER BY i.uploaddate DESC) WHERE ROWNUM < 5")
 	List<Online> getNewOnlineItemListforHome();
 

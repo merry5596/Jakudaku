@@ -32,29 +32,26 @@ public class ViewTimeSaleController {
 			TimeSale timeSale = jkdkStore.getTimeSale();
 			Online item = jkdkStore.getOnlineItemById(timeSale.getItemId());
 			
-			SimpleDateFormat sDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			cal.setTime(new Date());
 
 			String now = sDate.format(cal.getTime());
-			if(timeSale.getOpenTime().compareTo(now) > 0 ) {
-				model.put("isSale", -1);
-			}
-			else if(timeSale.getOpenTime().compareTo(now) < 0 ) {
-				if(timeSale.getCloseTime().compareTo(now) < 0 ) {
-					model.put("isSale", 1);
-				}
-				else if(timeSale.getCloseTime().compareTo(now) > 0 ) {
-					model.put("isSale", -1);
-				}
-			}
 			
-			model.put("timeSale", timeSale);
-			model.put("item", item);
+			Date openTime = sDate.parse(timeSale.getOpenTime());
+	        Date closeTime = sDate.parse(timeSale.getCloseTime());
+	        Date nowTime = sDate.parse(now);
 			
+	        if(openTime.before(nowTime)) {
+	        	if(closeTime.after(nowTime)) {
+	        		model.put("timeSale", timeSale);
+	        		model.put("item", item);
+	        	}
+	        }
 			
 			return "thyme/sale/TimeSale";
 		}
-		else
+		else {
 			return "thyme/sale/TimeSale";
+		}
 	}
 }
