@@ -11,25 +11,29 @@
         <div class="col-7 base">
         <!-- 여기서부터 content -->
         <div align="center">
-			<div th:unless="${item1}" class="container evnet-page">
-				<p class="event-des"> no sale </p>
-			</div>
+			<div th:unless="${item1}" class="container">
+					<p class="event-title">No Sale</p>
+					<p class="event-des">진행 중인 배틀 세일이 없습니다</p>
+					<p>매주 토요일 배틀 세일 투표가 진행됩니다</p>
+					<p>매주 일요일 배틀세일의 승자가 공개 됩니다</p>
+				</div>
 			
 			<div th:if="${item1}" class="container evnet-page pb-5">
 				<p class="event-title"> Battle Sale </p>
-				<p class="event-des"> battle sale description</p>
+				<p class="event-des"> 배틀 세일은 랜덤 카테고리 안의 2가지 아이템이 대결을 하는 방식으로 세일이 진행됩니다. 
+				<br/> 매주 토요일에 베틀 아이템 투표를 하며, 일요일에는 투표 결과에 기반해 승자를 뽑고 10%할인을 진행합니다</p>
 				<div class="row">
 					<div class="col battle-image-banner">
 						<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 						  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						      <img th:src="@{${item1.thumbnail1}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
+						      <img th:src="@{${item1.thumbnail1Path}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
 						    </div>
 						    <div th:if="${item1.thumbnail2}" class="carousel-item">
-						      <img th:src="@{${item1.thumbnail2}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
+						      <img th:src="@{${item1.thumbnail1Path}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
 						    </div>
 						    <div th:if="${item1.thumbnail3}" class="carousel-item">
-						      <img th:src="@{${item1.thumbnail3}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
+						      <img th:src="@{${item1.thumbnail1Path}}" style="width: 280px; height: 400px;" class="d-block w-100" alt="썸네일1">
 						    </div>
 						  </div>
 						  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -49,13 +53,13 @@
 						<div id="carouselExampleFade2" class="carousel slide carousel-fade" data-bs-ride="carousel">
 						  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						      <img th:src="@{${item2.thumbnail1}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일1">
+						      <img th:src="@{${item2.thumbnail1Path}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일1">
 						    </div>
 						    <div th:if="${item2.thumbnail2}" class="carousel-item">
-						      <img th:src="@{${item2.thumbnail2}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일2">
+						      <img th:src="@{${item2.thumbnail2Path}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일2">
 						    </div>
 						    <div th:if="${item2.thumbnail3}" class="carousel-item">
-						      <img th:src="@{${item2.thumbnail3}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일3">
+						      <img th:src="@{${item2.thumbnail3Path}}" class="d-block w-100" style="width: 280px; height: 400px;" alt="썸네일3">
 						    </div>
 						  </div>
 						  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="prev">

@@ -17,12 +17,12 @@
 					
 					<div th:if="${item}"  class="container evnet-page">
 					<p class="event-title mt-3" align = "center"><b> Battle Winner </b> </p>
-					<p class="lead text-center" > 배틀 세일 우승을 축하합니다. 승자는 20% 세일을 진행합니다. </p>
+					<p class="lead text-center" > 배틀 세일 우승을 축하합니다. 승자는 10% 세일을 진행합니다. </p>
 					<section class="pb-5 px-5 mx-5">
 				            <div class="container px-4 px-lg-5 my-5">
 				                <div class="row gx-4 gx-lg-5 align-items-center">
 				                    <div class="col-md-6">
-				                    	<img th:src="@{${item.thumbnail1}}" style="width: 300px; height: 500px;" class="card-img-top mb-5 mb-md-0" alt="썸네일1">
+				                    	<img th:src="@{${item.thumbnail1Path}}" style="width: 300px; height: 500px;" class="card-img-top mb-5 mb-md-0" alt="썸네일1">
 				                    </div>
 				                    <div class="col-md-6">
 				                        <span class="small mb-1" th:text="${item.categoryName}" >ItemCategory</span> / 

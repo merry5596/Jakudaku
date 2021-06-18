@@ -51,7 +51,7 @@ public interface FundingMapper {
 			+ " WHERE I.USERID = #{userId} AND I.ITEMID = F.ITEMID ORDER BY UPLOADDATE")
 	List<Funding> getFundingItemListByProducerId(@Param("userId") String userId);
 
-	@Select("SELECT * FROM (SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, " + 
+	@Select("SELECT * FROM (SELECT i.itemId AS itemId, i.name, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, price, likenum, thumbnail1, isforsale, " + 
 			"description, i.themeid, t.name as themename, userid, TO_CHAR(F.FINISHDATE, 'YYYY/MM/DD HH24:MI:SS') AS FINISHDATE, " + 
 			"purchasequantity, targetquantity FROM fundingitem f, item i, theme t " + 
 			"WHERE f.itemid = i.itemid AND i.themeid = t.themeid AND i.approval = 1 " + 
