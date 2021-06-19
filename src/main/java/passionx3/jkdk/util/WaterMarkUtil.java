@@ -32,6 +32,9 @@ public class WaterMarkUtil {
 
 		try {
 			File sourceImageFile = new File(uploadPath, orgFileName); // 원래 썸네일
+			String org = sourceImageFile.getName();
+			String ext = org.substring(org.lastIndexOf(".") + 1);
+			
 			String fileName = "water_" + orgFileName;
 			File destImageFile = new File(uploadPath, fileName); // 바뀐 썸네일
 			BufferedImage sourceImage = ImageIO.read(sourceImageFile);
@@ -86,7 +89,7 @@ public class WaterMarkUtil {
 				g2d.translate(textHeight * 3, -(y + yStep));
 			}
 
-			ImageIO.write(sourceImage, "jpg", destImageFile);
+			ImageIO.write(sourceImage, ext, destImageFile);
 			g2d.dispose();
 
 			System.out.println("The tex watermark is added to the image.");
