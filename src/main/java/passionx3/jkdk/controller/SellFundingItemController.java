@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import passionx3.jkdk.service.SellFundingItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
+import passionx3.jkdk.util.FileUtils;
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Funding;
@@ -32,6 +36,9 @@ public class SellFundingItemController {
 	public void setJkdk(jkdkFacade jkdk) {
 		this.jkdk = jkdk;
 	}
+
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@Autowired
 	private SellFundingItemFormValidator validator;
@@ -55,11 +62,6 @@ public class SellFundingItemController {
 		return jkdk.getAllThemes(); // view에 전달됨
 	}
 	
-	@ModelAttribute("categoryList")
-	public List<Category> getCategoryList() { // accessor method
-		return jkdk.getAllCategories(); // view에 전달됨
-	}
-	
 	@GetMapping("/item/sellFundingItem.do")
 	public String showForm() {
 		return formViewName;
@@ -68,9 +70,10 @@ public class SellFundingItemController {
 	@PostMapping("/item/sellFundingItem.do") 
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
-			@ModelAttribute("sellFundingForm") SellFundingForm sellFundingForm,
-			BindingResult result) throws Exception {
-		validator.validate(sellFundingForm, result);
+			@Valid @ModelAttribute("sellFundingForm") SellFundingForm sellFundingForm,
+			BindingResult result,
+			@RequestParam("thumbnail1") MultipartFile[] thumbnail) throws Exception {
+//		validator.validate(sellFundingForm, result);
 		
 		if (result.hasErrors()) return formViewName;
 		try {
@@ -78,6 +81,12 @@ public class SellFundingItemController {
 				Funding funding = sellFundingForm.getFunding();
 				Account account = (Account)session.getAttribute("userSession");
 				funding.setProducerId(account.getUserId());
+				funding.setProducerName(account.getAlias());
+				
+				funding = (Funding) fileUtils.uploadFiles(thumbnail, funding);
+				
+				jkdk.setWaterMark(funding);
+
 				jkdk.registerFundingItem(sellFundingForm.getFunding());
 			}
 		}

@@ -23,9 +23,8 @@ public class SearchItemsController {
 	public String handleRequest(ModelMap model, @RequestParam("keyword") String keyword) throws Exception {
 		model.put("onlineList", jkdk.getOnlineItemsByKeyword(keyword));
 		model.put("fundingList", jkdk.getFundingItemsByKeyword(keyword));
-		
-//		System.out.println("/item/searchItems.do의 onlineList: " + jkdk.getOnlineItemsByKeyword(keyword).get(0).getItemId());		
-		
+		model.put("keyword", keyword);
+				
 		return "thyme/item/SearchItems";
 	} 
 }

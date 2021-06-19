@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
     <title>Home</title>
-    <link />
+    <link>
     <style></style>
     <script></script>
 </head>
@@ -59,7 +59,7 @@
                 <div class="album bg-light">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                            <div th:each="item: ${bestOnlineList}" class="col">
+                            <div th:each="item,status: ${bestOnlineList}" class="col">
 	                            <div class="card shadow-sm">
 									<div class="card-body d-block mx-auto">
 										<div>
@@ -96,7 +96,11 @@
 										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
 									</div>
 									<div class="text-muted" style="text-align:right">
-										<small th:text="${item.totalRate}">4</small>
+											<div class="starRatingContainer" style="float:right">
+												<div class="#" th:class="'ratingStar' + ${status.index}"></div>
+											</div>
+											<br>
+											<small th:text="'(' + ${item.totalRate} + ')'">(4.08)</small> 
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>
@@ -115,7 +119,7 @@
                 <div class="album bg-light">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                            <div th:each="item: ${newOnlineList}" class="col">
+                            <div th:each="item,status: ${newOnlineList}" class="col">
                             <div class="card shadow-sm">
 									<div class="card-body d-block mx-auto">
 										<div>
@@ -152,7 +156,11 @@
 										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
 									</div>
 									<div class="text-muted" style="text-align:right">
-										<small th:text="${item.totalRate}">4</small>
+											<div class="starRatingContainer" style="float:right">
+												<div class="#" th:class="'ratingStar2' + ${status.index}"></div>
+											</div>
+											<br>
+											<small th:text="'(' + ${item.totalRate} + ')'">(4.08)</small> 
 									</div>
 									<div class="mx-2 text-danger" style="text-align:right">
 										<small th:text="${item.likeNum}">12</small>
@@ -227,5 +235,24 @@
 
    </div>
    <div th:replace="thyme/Bottom :: footer"></div>
+   
+   
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://starratingjs.netlify.app/index.js"></script>
+	
+	<script th:inline="javascript">
+    var newOnlineList = /*[[${newOnlineList}]]*/ null;
+    $.each( newOnlineList, function(index, item) {
+	    var property=[{"rating": item.totalRate, "maxRating":"5", "minRating":"0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
+		rateSystem("ratingStar" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
+    });
+    
+    var bestOnlineList = /*[[${bestOnlineList}]]*/ null;
+    $.each( bestOnlineList, function(index, item) {
+	    var property=[{"rating": item.totalRate, "maxRating":"5", "minRating":"0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
+		rateSystem("ratingStar2" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
+    });
+    </script>
 </body>
 </html>

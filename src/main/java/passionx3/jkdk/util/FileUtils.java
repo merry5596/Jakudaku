@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import passionx3.jkdk.exception.AttachFileException;
+import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
 
 @Component
@@ -85,7 +86,7 @@ public class FileUtils {
 		return online;
 	}
 
-	public Online uploadFiles(MultipartFile[] files, Online online) {
+	public Item uploadFiles(MultipartFile[] files, Item item) {
 		/* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
 		File dir = new File(uploadPath);
 		if (dir.exists() == false) {
@@ -112,11 +113,11 @@ public class FileUtils {
 
 				/* 파일 정보 저장 */
 				if (cnt == 0) {
-					online.setThumbnail1(saveName);
+					item.setThumbnail1(saveName);
 				} else if (cnt == 1) {
-					online.setThumbnail2(saveName);
+					item.setThumbnail2(saveName);
 				} else if (cnt == 2) {
-					online.setThumbnail3(saveName);
+					item.setThumbnail3(saveName);
 				}
 
 				cnt++;
@@ -128,6 +129,6 @@ public class FileUtils {
 			}
 		} // end of for
 
-		return online;
+		return item;
 	}
 }

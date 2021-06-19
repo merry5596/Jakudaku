@@ -29,7 +29,7 @@ import passionx3.jkdk.domain.Funding;
 @Mapper
 public interface FundingMapper {
 	@Select("SELECT i.itemId AS itemId, t.name AS themeName, i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
-			+ "TO_CHAR(f.finishDate, 'YYYY/MM/DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
+			+ "TO_CHAR(f.finishDate, 'YYYY/MM/DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity, TO_CHAR(i.uploadDate, 'YYYY/MM/DD HH24:MI:SS') AS uploadDate "
 			+ "FROM item i, fundingitem f, theme t "
 			+ "WHERE i.itemId = f.itemId AND i.themeId = t.themeId "
 			+ "AND i.name LIKE '%' || #{keyword} || '%' "

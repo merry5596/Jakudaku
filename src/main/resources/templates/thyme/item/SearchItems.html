@@ -9,15 +9,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.css" integrity="sha512-NxWghIwNoV7V1IAHt4HwVnmsG/FuuViHaXFP0tsZS0D9snWm4SLGSdfB5XogpAWYXabp2t+XY9L184PQg2IuEA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<style>
-.container {
-	display: grid;
-	grid-gap: 20px;
-	grid-auto-rows: minmax(300px, auto);
-	grid-template-columns: repeat(4, 1fr);
-}
-
-</style>
+<style></style>
 <script></script>
 </head>
 <body>
@@ -27,7 +19,11 @@
 	<div class="row row-margin">
 		<div th:replace="thyme/Sidebar :: sidebar"></div>
 		<div class="col-7 base">
-			<!-- 여기서부터 content -->			
+			<!-- 여기서부터 content -->		
+			<br><br>
+			<p th:if="${#lists.isEmpty(onlineList)}" th:text="'\'' + ${keyword} + '\'에 대한 검색 결과가 없습니다.'">
+			<p th:unless="${#lists.isEmpty(onlineList)}" th:text="'\'' + ${keyword} + '\'에 대한 검색 결과입니다.'">
+											
 		
 				<!-- 상품 목록-->
 				<!-- 온라인/펀딩 탭 -->
@@ -40,43 +36,61 @@
 					</div>
 			
 					<div class="ui active tab" data-tab="online_tab">
-					    <p>온라인</p>
 						    <div class="mt-4 album bg-light">
 								<div class="container">
 									<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-										<div id="onlineListDiv" th:each="item : ${onlineList}" class="col">
+										
+										<div th:unless="${#lists.isEmpty(onlineList)}" id="onlineListDiv" th:each="item,status : ${onlineList}" class="col">
+											
 											<div class="card shadow-sm">
-												<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-													<img th:src="@{${item.thumbnail1}}" style="width:200px; height:200px;"/>
-												</a>
-												<div class="card-body ">
-													<div>
-														<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-					                                        <span class="itemName" th:text="${item.name}" >
-					                                            name
-					                                        </span>
-				                                        </a>
-				                                    </div>
-				                                    <div>
-				                                    	<small class="text-muted">#</small><small class="text-muted" th:text="${item.themeName}">
-				                                    		themeName
-				                                    	</small>
-			                                        </div>
-			
-			                                       <span th:text="${item.price}" >price</span>원
-												</div>
-												<div class= "mx-1" style="text-align:right" >
-													<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
-													<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
-													<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
-												</div>
-												<div class="mx-2 text-danger" style="text-align:right">
-													<small th:text="${item.likeNum}">12</small>
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-													  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-													</svg>
-												</div>
+									<div class="card-body d-block mx-auto">
+										<div>
+										<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+											<img class="img-fluid img-thumbnail" th:src="@{${item.thumbnail1Path}}" style="width: 150px; height: 150px;"/>
+										</a>
+											<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
+		                                        <p class= "mt-1 mb-0" th:text="${item.name}" >
+		                                            name
+		                                        </p>
+	                                        </a>
+	                                    </div>
+	                                    <div>
+	                                    	<small class="text-muted" th:text="${item.categoryName}">
+	                                    		categoryName
+	                                    	</small>
+                                        </div>
+	                                    <div>
+	                                    	<small class="text-muted">#</small><small class="text-muted" th:text="${item.themeName}">
+	                                    		themeName
+	                                    	</small>
+                                        </div>
+                                        <div th:unless="${item.saleState}">
+											<span th:text="${item.price} + '원'">정가</span>
+										</div>
+										<div th:if="${item.saleState}">
+											<span th:text="${item.price} + '원'" style="text-decoration:line-through;">정가</span>
+											<span th:text="${item.salePrice} + '원'">할인가</span>
+										</div>
+									</div>
+									<div class= "mx-1" style="text-align:right" >
+										<small class ="text-primary" th:if="${item.pcFile}"> PC </small>
+										<small class ="text-warning" th:if="${item.tabletFile}"> TABLET </small>
+										<small class ="text-info" th:if="${item.phoneFile}"> PHONE </small>
+									</div>
+									<div class="text-muted" style="text-align:right">
+											<div class="starRatingContainer" style="float:right">
+												<div class="#" th:class="'ratingStar' + ${status.index}"></div>
 											</div>
+											<br>
+											<small th:text="'(' + ${item.totalRate} + ')'">(4.08)</small> 
+									</div>
+									<div class="mx-2 text-danger" style="text-align:right">
+										<small th:text="${item.likeNum}">12</small>
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+										  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+										</svg>
+									</div>
+								</div>
 										</div>
 									</div>
 								</div>
@@ -84,7 +98,6 @@
 					</div>
 						
 					<div class="ui tab" data-tab="funding_tab">
-					    <p>펀딩</p>
 					    <div class="mt-4 album bg-light">
 							<div class="container">
 								<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
@@ -152,13 +165,22 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js" integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js" integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://starratingjs.netlify.app/index.js"></script>
 	
-	<script>
-	$('.ui.sticky')
+	<script th:inline="javascript">
+  //리뷰 각각의 별점
+    var onlineList = /*[[${onlineList}]]*/ null;
+    $.each( onlineList, function(index, item) {
+	    var property=[{"rating": item.totalRate, "maxRating":"5", "minRating":"0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
+		rateSystem("ratingStar" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
+    });
+    
+    $('.ui.sticky')
 	  .sticky()
 	;
 	
 	$('.menu .item').tab();
-	</script>
+    </script>
 </body>
 </html>

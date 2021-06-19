@@ -2,11 +2,13 @@ package passionx3.jkdk.controller;
 
 import java.io.Serializable;
 
+import javax.validation.Valid;
+
 import passionx3.jkdk.domain.Funding;
 
 @SuppressWarnings("serial")
 public class SellFundingForm implements Serializable {
-
+	@Valid
 	private Funding funding;
 
 	private boolean newFunding;
