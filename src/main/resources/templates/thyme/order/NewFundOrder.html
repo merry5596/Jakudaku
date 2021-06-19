@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
-    <title>New Fund Order</title>
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+    <title>펀딩 결제</title>
+    <link>
+    <style></style>
+    <script></script>
 </head>
 <script>
 	 window.onload = function() {

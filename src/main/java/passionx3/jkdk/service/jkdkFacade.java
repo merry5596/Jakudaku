@@ -131,9 +131,11 @@ public interface jkdkFacade {
 	
 	void updateNotSale(String date);
 	
-	public UserLike plusLike(UserLike userLike);
+	UserLike plusLike(UserLike userLike);
 	
-	public UserLike minusLike(UserLike userLike);
+	UserLike minusLike(UserLike userLike);
 	
-	public UserLike getUserLike(int itemId, String userId);
+	UserLike getUserLike(int itemId, String userId);
+	
+	void setWaterMark(Item item);
 }

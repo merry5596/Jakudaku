@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
-    <title>New Order</title>
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+    <title>온라인 상품 결제</title>
+    <link>
+    <style></style>
+    <script></script>
 </head>
 <script>
 	window.onclick = function() {

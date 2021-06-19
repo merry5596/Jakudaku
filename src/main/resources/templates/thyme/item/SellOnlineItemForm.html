@@ -1,311 +1,541 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">  
-	<title>온라인 상품 등록</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css" integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css" integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css" integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.css" integrity="sha512-binQUn0abXktVdo5lUPzJyj9ZRouAxqFlchlD22+y2IAivfojjNLPuC6HCZiHT5bx+cM7ZzJstL+jHhwOUtcyg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-	<script>
-	
+<head
+	th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+<meta charset="UTF-8">
+<title>온라인 상품 등록</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+	integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css"
+	integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css"
+	integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css"
+	integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css"
+	integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.css"
+	integrity="sha512-binQUn0abXktVdo5lUPzJyj9ZRouAxqFlchlD22+y2IAivfojjNLPuC6HCZiHT5bx+cM7ZzJstL+jHhwOUtcyg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/message.min.css"
+	integrity="sha512-y8REcSkaqTny0hsg2cT9v0/GG14v0XGNWEbEYeFtxeimWgcQXs6sJ6CJc55MM2MAbdri1f0DiDmVkFJvcAtVnQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/grid.min.css"
+	integrity="sha512-RtktBL0Hhw9K2e2rGLZGadK8cF6Q0wKxRUkfh4pJszwnarmh3GbqHCiLm3UZFA1dRiFqtPkVrcby0hXWsqoDNA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/input.min.css" integrity="sha512-5i24U/IyvjscOlHec06pTtT16Oq70uKtnjhrZ2oez7k/qBVOdpNHPK2+SVkuxni95v1x5VGOfXYQZxm4oZcHdQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/divider.min.css" integrity="sha512-UfIon3gqrWjI1KDj6T2BmFN2vdmsr4dyUBFUxTVLPYHEeWIoNvH0JzZ4EHBa4CWoNhdcyYIpR2Kri7Ys835rrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
 	//https://chung-develop.tistory.com/14
-// 	var fileArr;
-// 	var fileInfoArr=[];
+	// 	var fileArr;
+	// 	var fileInfoArr=[];
 
-// 	//썸네일 클릭시 삭제.
-// 	function fileRemove(index) {
-// 	    console.log("index: "+index);
-// 	    fileInfoArr.splice(index,1);
-	 
-// 	    var imgId="#img_id_"+index;
-// 	    $(imgId).remove();
-// 	    console.log(fileInfoArr);
-// 	}
+	// 	//썸네일 클릭시 삭제.
+	// 	function fileRemove(index) {
+	// 	    console.log("index: "+index);
+	// 	    fileInfoArr.splice(index,1);
 
-// 	//썸네일 미리보기.
-// 	function previewImage(targetObj, View_area) {
-// 	    var files=targetObj.files;
-// 	    fileArr=Array.prototype.slice.call(files);
-	    
-// 	    var preview = document.getElementById(View_area); //div id
-// 	    var ua = window.navigator.userAgent;
-	 
-// 	    //ie일때(IE8 이하에서만 작동)
-// 	    if (ua.indexOf("MSIE") > -1) {
-// 	        targetObj.select();
-// 	        try {
-// 	            var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
-// 	            var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
-	 
-	 
-// 	            if (ie_preview_error) {
-// 	                preview.removeChild(ie_preview_error); //error가 있으면 delete
-// 	            }
-	 
-// 	            var img = document.getElementById(View_area); //이미지가 뿌려질 곳
-	 
-// 	            //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
-// 	            img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
-// 	        } catch (e) {
-// 	            if (!document.getElementById("ie_preview_error_" + View_area)) {
-// 	                var info = document.createElement("<p>");
-// 	                info.id = "ie_preview_error_" + View_area;
-// 	                info.innerHTML = e.name;
-// 	                preview.insertBefore(info, null);
-// 	            }
-// 	        }
-// 	        //ie가 아닐때(크롬, 사파리, FF)
-// 	    } else {
-// 	        var files = targetObj.files;
-// 	        for ( var i = 0; i < files.length; i++) {
-// 	            var file = files[i];
-// 	            fileInfoArr.push(file);
-	 
-// 	            var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
-// 	            if (!file.type.match(imageType))
-// 	                continue;
-// 	            // var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
-// 	            // if (prevImg) {
-// 	            //     preview.removeChild(prevImg);
-// 	            // }
-	 
-// 	            var span=document.createElement('span');
-// 	            span.id="img_id_" +i;
-// 	            span.style.width = '100px';
-// 	            span.style.height = '100px';
-// 	            preview.appendChild(span);
-	 
-// 	            var img = document.createElement("img");
-// 	            img.className="addImg";
-// 	            img.classList.add("obj");
-// 	            img.file = file;
-// 	            img.style.width='inherit';
-// 	            img.style.height='inherit';
-// 	            img.style.cursor='pointer';
-// 	            const idx=i;
-// 	            img.onclick=()=>fileRemove(idx);   //이미지를 클릭했을 때.
-// 	            span.appendChild(img);
-	 
-// 	            if (window.FileReader) { // FireFox, Chrome, Opera 확인.
-// 	                var reader = new FileReader();
-// 	                reader.onloadend = (function(aImg) {
-// 	                    return function(e) {
-// 	                        aImg.src = e.target.result;
-// 	                    };
-// 	                })(img);
-// 	                reader.readAsDataURL(file);
-// 	            } else { // safari is not supported FileReader
-// 	                //alert('not supported FileReader');
-// 	                if (!document.getElementById("sfr_preview_error_"
-// 	                    + View_area)) {
-// 	                    var info = document.createElement("p");
-// 	                    info.id = "sfr_preview_error_" + View_area;
-// 	                    info.innerHTML = "not supported FileReader";
-// 	                    preview.insertBefore(info, null);
-// 	                }
-// 	            }
-// 	        }
-// 	    }
-// 	}
+	// 	    var imgId="#img_id_"+index;
+	// 	    $(imgId).remove();
+	// 	    console.log(fileInfoArr);
+	// 	}
+
+	// 	//썸네일 미리보기.
+	// 	function previewImage(targetObj, View_area) {
+	// 	    var files=targetObj.files;
+	// 	    fileArr=Array.prototype.slice.call(files);
+
+	// 	    var preview = document.getElementById(View_area); //div id
+	// 	    var ua = window.navigator.userAgent;
+
+	// 	    //ie일때(IE8 이하에서만 작동)
+	// 	    if (ua.indexOf("MSIE") > -1) {
+	// 	        targetObj.select();
+	// 	        try {
+	// 	            var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+	// 	            var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
+
+	// 	            if (ie_preview_error) {
+	// 	                preview.removeChild(ie_preview_error); //error가 있으면 delete
+	// 	            }
+
+	// 	            var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+
+	// 	            //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+	// 	            img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
+	// 	        } catch (e) {
+	// 	            if (!document.getElementById("ie_preview_error_" + View_area)) {
+	// 	                var info = document.createElement("<p>");
+	// 	                info.id = "ie_preview_error_" + View_area;
+	// 	                info.innerHTML = e.name;
+	// 	                preview.insertBefore(info, null);
+	// 	            }
+	// 	        }
+	// 	        //ie가 아닐때(크롬, 사파리, FF)
+	// 	    } else {
+	// 	        var files = targetObj.files;
+	// 	        for ( var i = 0; i < files.length; i++) {
+	// 	            var file = files[i];
+	// 	            fileInfoArr.push(file);
+
+	// 	            var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+	// 	            if (!file.type.match(imageType))
+	// 	                continue;
+	// 	            // var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
+	// 	            // if (prevImg) {
+	// 	            //     preview.removeChild(prevImg);
+	// 	            // }
+
+	// 	            var span=document.createElement('span');
+	// 	            span.id="img_id_" +i;
+	// 	            span.style.width = '100px';
+	// 	            span.style.height = '100px';
+	// 	            preview.appendChild(span);
+
+	// 	            var img = document.createElement("img");
+	// 	            img.className="addImg";
+	// 	            img.classList.add("obj");
+	// 	            img.file = file;
+	// 	            img.style.width='inherit';
+	// 	            img.style.height='inherit';
+	// 	            img.style.cursor='pointer';
+	// 	            const idx=i;
+	// 	            img.onclick=()=>fileRemove(idx);   //이미지를 클릭했을 때.
+	// 	            span.appendChild(img);
+
+	// 	            if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+	// 	                var reader = new FileReader();
+	// 	                reader.onloadend = (function(aImg) {
+	// 	                    return function(e) {
+	// 	                        aImg.src = e.target.result;
+	// 	                    };
+	// 	                })(img);
+	// 	                reader.readAsDataURL(file);
+	// 	            } else { // safari is not supported FileReader
+	// 	                //alert('not supported FileReader');
+	// 	                if (!document.getElementById("sfr_preview_error_"
+	// 	                    + View_area)) {
+	// 	                    var info = document.createElement("p");
+	// 	                    info.id = "sfr_preview_error_" + View_area;
+	// 	                    info.innerHTML = "not supported FileReader";
+	// 	                    preview.insertBefore(info, null);
+	// 	                }
+	// 	            }
+	// 	        }
+	// 	    }
+	// 	}
+
+	// 	//form데이터 전송
+	// 	function dataSubmit() {
+	// 	    //var token = $("meta[name='_csrf']").attr("content");
+	// 	    var header = $("meta[name='_csrf_header']").attr("content");
+
+	// 	    var data=new FormData($("#addForm")[0]);
+
+	// 	    $.ajax({
+	// 	        beforeSend: function(xhr){
+	// 	            xhr.setRequestHeader(header);
+	// 	        },
+	// 	        url: "item/sellOnlineItem.do",
+	// 	        data: data,
+	// 	        processData:false,
+	// 	        contentType:false,
+	// 	        enctype:'multipart/form-data',
+	// 	        type:"POST",
+	// 	    }).done(function (fragment) {
+	// 	        $("#resultDiv").replaceWith(fragment);
+	// 	    });
+	// 	}
+</script>
+<style>
+#h1_text {
+	display: inline;
+	padding-right: 20px;
+}
+
+#required_text, .required {
+	color: red;
+}
+
+#first_hr {
+	border: 0;
+	height: 2px;
+	background-color: black;
+	color: black;
+}
+
+* {
+/* 	 	border: 1px solid black; */
 	
-// 	//form데이터 전송
-// 	function dataSubmit() {
-// 	    //var token = $("meta[name='_csrf']").attr("content");
-// 	    var header = $("meta[name='_csrf_header']").attr("content");
-	 
-// 	    var data=new FormData($("#addForm")[0]);
-	 
-// 	    $.ajax({
-// 	        beforeSend: function(xhr){
-// 	            xhr.setRequestHeader(header);
-// 	        },
-// 	        url: "item/sellOnlineItem.do",
-// 	        data: data,
-// 	        processData:false,
-// 	        contentType:false,
-// 	        enctype:'multipart/form-data',
-// 	        type:"POST",
-// 	    }).done(function (fragment) {
-// 	        $("#resultDiv").replaceWith(fragment);
-// 	    });
-// 	}
-	</script> 
+}
+
+div {
+/* 	border: 1px solid black;   */
+}
+
+.five.wide.column span, .five.wide.column label {
+	font-size: 1.3rem;
+}
+
+.five.wide.column span {
+	display:inline-block; 
+	padding-top: 10px;
+}
+
+#thumbnail, #pcFile, #phoneFile, #tabletFile {
+	display: none;
+}
+
+#thumb_caution {
+	font-size: 0.8rem;
+}
+
+#textarea_cnt, #name_cnt{
+	text-align: right;
+}
+
+#isForSale_span {
+	padding-top: 0px;
+}
+
+#price {
+    width: 200px;
+}
+
+#price_span {
+	display: inline-block;
+	padding-top: 8px;
+}
+
+
+</style>
 </head>
 <body>
-<!-- 	<form id="addForm"> -->
-<!--         <div style="display: inline;"> -->
-<!--             <label for="img_upload"> -->
-<!--                 <img src="/img/photo_add.png" style="width:100px; height:100px; cursor: pointer;"> -->
-<!--             </label> -->
-<!--             <input type="file" name="img_upload" id="img_upload" -->
-<!--                    onchange="previewImage(this,'View_area')" -->
-<!--                    style="display: none;" multiple> -->
- 
-<!--             <span id='View_area' -->
-<!--                   style='position:relative; color: black; border: 0px solid black;'> -->
-<!--         </span> -->
-<!--         </div> -->
- 
-<!--         <div style="align-content: center; width: 100%; text-align: center;"> -->
-<!--             <input type="button" class="btn" style="background: #FF6491; color: #FFF2F6;" onclick="dataSubmit();" -->
-<!--                    value="전송하기"> -->
-<!--         </div> -->
- 
-<!--         <div id="resultDiv"> -->
-<!--             <p th:text="${log}"></p> -->
-<!--         </div> -->
-<!--     </form> -->
+	<!-- 	<form id="addForm"> -->
+	<!--         <div style="display: inline;"> -->
+	<!--             <label for="img_upload"> -->
+	<!--                 <img src="/img/photo_add.png" style="width:100px; height:100px; cursor: pointer;"> -->
+	<!--             </label> -->
+	<!--             <input type="file" name="img_upload" id="img_upload" -->
+	<!--                    onchange="previewImage(this,'View_area')" -->
+	<!--                    style="display: none;" multiple> -->
+
+	<!--             <span id='View_area' -->
+	<!--                   style='position:relative; color: black; border: 0px solid black;'> -->
+	<!--         </span> -->
+	<!--         </div> -->
+
+	<!--         <div style="align-content: center; width: 100%; text-align: center;"> -->
+	<!--             <input type="button" class="btn" style="background: #FF6491; color: #FFF2F6;" onclick="dataSubmit();" -->
+	<!--                    value="전송하기"> -->
+	<!--         </div> -->
+
+	<!--         <div id="resultDiv"> -->
+	<!--             <p th:text="${log}"></p> -->
+	<!--         </div> -->
+	<!--     </form> -->
+	<div class="wrap">
+		<div th:replace="thyme/Header :: header"></div>
+		<div class="row row-margin">
+			<div th:replace="thyme/Sidebar :: sidebar"></div>
+			<div class="col-7 base">
+
+				<!-- 여기서부터 content -->
+
+				<h1 id="h1_text">기본 정보</h1>
+				<span id="required_text">*필수 항목</span><br>
+
+				<hr id="first_hr" />
+
+				<br />
+
+				<form action="#" th:action="@{/item/sellOnlineItem.do}"
+					th:object="${sellOnlineForm.online}" method="post" class="ui form error"
+					enctype="multipart/form-data">
+
+					<div class="ui vertical aligned two column grid">
+						<div class="row">
+							<div class="five wide column">
+								<span>미리보기 이미지 </span><span class="required"> *</span>
+								<br>
+								<span id="thumb_caution">※최대 3개의 이미지를 한번에 선택하세요.</span>
+							</div>
+							<br>
+							<div class="eleven wide column middle aligned">
+								<label class="input-file-button" for="thumbnail"><div class="ui red inverted button">업로드</div></label>
+								<input type="file" id="thumbnail" 
+								name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*" /><!-- 기존의 input file 태그 숨김 -->
+							
+								<div th:if="${#fields.hasErrors('thumbnail1')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('thumbnail1')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="ui section divider"></div>
+
+						<!-- 			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/>  -->
+						<!-- 			<input type="file" th:field="*{thumbnail2}" multiple="multiple"/>  -->
+						<!-- 			<input type="file" th:field="*{thumbnail3}" multiple="multiple"/> -->
+						
+							<!-- 						<span>상품 이미지는 640x640에 최적화되어있습니다.</span><br> <span>~~~</span><br> -->
+							<!-- 						<span>~~~</span><br> <span>~~~</span><br> -->
+						
+
+					
+						<div class="row">
+							<div class="five wide column">
+								<label for="name">상품명 </label><span class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column">
+								<input type="text" id="name" th:field="*{name}" placeholder="상품명을 입력하세요."/>
+								<div id="name_cnt">(0 / 100)</div>
+								
+								<div th:if="${#fields.hasErrors('name')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('name')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="ui section divider"></div>
+						
+						
+						<div class="row">
+							<div class="five wide column">
+								<label for="price"><span>판매가격</span></label><span
+									class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column middle aligned" >
+								<input class="ui input" type="text" id="price" th:field="*{price}" /> <span id="price_span">원</span>
+								
+								<div th:if="${#fields.hasErrors('price')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('price')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="ui section divider"></div>
+						
+						
+						<div class="row">
+							<div class="five wide column">
+								<span>설명</span>
+							</div>
+
+							<div class="eleven wide column">
+								<textarea id="description" name="description" cols="30"
+									rows="10" th:field="*{description}" th:value="*{description}"
+									placeholder="상품 설명을 입력하세요."></textarea>
+
+								<div id="textarea_cnt" >(0 / 500)</div>
+							</div>
+						</div>
+
+						
+						<div class="ui section divider"></div>
+						
+						
+						<div class="row">
+							<div class="five wide column">
+								<span>테마</span><span class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column">
+								<select class="ui search dropdown" id="select1"
+									th:field="*{themeId}">
+									<option value="">테마를 선택하세요.</option>
+									<option th:each="theme : ${themeList}"
+										th:value="${theme.themeId}" th:text="'#' + ${theme.name}"
+										value="#">theme name</option>
+								</select>
+								
+								<div th:if="${#fields.hasErrors('themeId')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('themeId')}" th:text="${err}"></p>
+								</div>
+							</div>
+
+						</div>
 
 
-	<form action="#" th:action="@{/item/sellOnlineItem.do}" th:object="${sellOnlineForm.online}" method="post" class="ui form" enctype="multipart/form-data">
-		<span>미리보기 이미지 </span>
-		<span>(0/3)</span>
-		<br>
-			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/> 
-		
-<!-- 			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/>  -->
-<!-- 			<input type="file" th:field="*{thumbnail2}" multiple="multiple"/>  -->
-<!-- 			<input type="file" th:field="*{thumbnail3}" multiple="multiple"/> -->
-		<p>
-			<span>상품 이미지는 640x640에 최적화되어있습니다.</span><br>
-			<span>~~~</span><br>
-			<span>~~~</span><br>
-			<span>~~~</span><br>
-		</p>
-		
-		<p>
-	    <label for="name">상품명 </label>
-	    <input type="text" id="name" th:field="*{name}" />
-	    <div id="name_cnt">(0 / 100)</div>
-	    <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
-	    <p>
-	    
-	    <p>
-		    <label for="price"><span>판매가격</span></label>
-		    <input type="text" id="price" th:field="*{price}" /> 
-		    <span>원 </span>
-		    <span th:each="err : ${#fields.errors('price')}" th:text="${err}"></span>
-	    
-	    <p>
-	    	<span>설명</span>
-	    	<textarea id="description" name="description" cols="30" rows="10" 
-	    			th:field="*{description}"
-	    			th:value="*{description}" 
-	    			placeholder="상품 설명을 입력하세요." ></textarea>
-			<div id="textarea_cnt">(0 / 500)</div>
-	    
-	    <p>
-		    <span>테마</span>
-		    <select class="ui search dropdown" id="select1" th:field="*{themeId}"> 
-<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
-				<option value="">테마를 선택하세요.</option>
-				<option th:each="theme : ${themeList}"
-						th:value="${theme.themeId}" 
-						th:text="'#' + ${theme.name}"
-						value="#">theme name</option>
-			</select>
-			<span th:each="err : ${#fields.errors('themeId')}" th:text="${err}"></span>
-			
-	    </p>
-	   
-	    <p>
-		    <span>카테고리</span>
-		    <select class="ui search dropdown" id="select2" th:field="*{categoryId}"> 
-				<option value="" th:text="#{select.theme.message}">message</option>
-				<option value="">카테고리를 선택하세요.</option>
-				<option th:each="category : ${categoryList}" 
-						th:value="${category.categoryId}" 
-						th:text="${category.name}"
-						value="#">category name</option>
-			</select>
-			<span th:each="err : ${#fields.errors('categoryId')}" th:text="${err}"></span>
-			
-	    </p>
-	    
+						<div class="ui section divider"></div>
+						
+						
+						<div class="row">
+							<div class="five wide column">
+								<span>카테고리</span><span class="required"> *</span>
+							</div>
 
-	    	<span>기기 종류</span><br>
-	    	pc <input type="file" name="pcFile" th:value="*{pcFile}"/> 
-	    	phone <input type="file" name="phoneFile" th:value="*{phoneFile}"/> 
-	    	tablet <input type="file" name="tabletFile" th:value="*{tabletFile}"/> 
-	    	
-	    
-	    <p>
-	    	<div class="inline fields">
-	    		
-			    <span>판매 여부</span>
-			    <div class="field">
-			      <div class="ui radio checkbox">
-			        <input type="radio" th:name="*{isForSale}" th:value="1" th:disabled="${sellOnlineForm.newOnline}" checked="checked"/>
-	    			<label for="${#ids.prev('isForSale')}">판매 중</label>
-			      </div>
-			    </div>
-			    <div class="field">
-			      <div class="ui radio checkbox">
-			      	<input type="radio" th:name="*{isForSale}" th:value="0" th:disabled="${sellOnlineForm.newOnline}" />
-			      
-<!-- 			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" /> -->
-<!-- 	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" /> -->
-	    			<label for="${#ids.prev('isForSale')}">판매 중단</label>
-			      </div>
-			    </div>
-			  </div>
-	    
-	   
-	    <br>
-	    <input th:if="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="등록하기">
-	    
-	    <input th:unless="${sellOnlineForm.newOnline}" type="hidden" name="itemId" th:value="*{itemId}"/>
-	    <input th:unless="${sellOnlineForm.newOnline}" class="ui blue button" type="submit" value="수정하기">
-    </form>
-	
-<!-- 	<div th:include="footer::linkToMain"></div> -->
-	
-	
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js" integrity="sha512-8F/2JIwyPohlMVdqCmXt6A6YQ9X7MK1jHlwBJv2YeZndPs021083S2Z/mu7WZ5g0iTlGDYqelA9gQXGh1F0tUw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js" integrity="sha512-cYY5gAyJxIK4sLwDYueWWJH9rEdgBNvRaEIGJ6+dQ5vzfoTqHAtUDYrG2rdZTGqACvPS9QRrnzqqRGfrgxO7ug==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js" integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.js" integrity="sha512-xHPfIQ31nhgadqKFR79QIE1P+8QkEJRKYhbO+tNThUtBU1sOC55A29sLgjFxyekM7DUVJqapmIOx0J+G2VH8RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+							<div class="eleven wide column">
+								<select class="ui search dropdown" id="select2"
+									th:field="*{categoryId}">
+									<option value="">카테고리를 선택하세요.</option>
+									<option th:each="category : ${categoryList}"
+										th:value="${category.categoryId}" th:text="${category.name}"
+										value="#">category name</option>
+								</select>
+								
+								<div th:if="${#fields.hasErrors('categoryId')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('categoryId')}" th:text="${err}"></p>
+								</div>
+							</div>
+
+							
+						</div>
+						
+						
+						<div class="ui section divider"></div>
+
+
+						<div class="row">
+							<div class="five wide column">
+								<span>기기 별 파일</span><span class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column">
+							<label class="input-file-button" for="pcFile"><div class="ui red inverted button">PC용</div></label>
+								<input type="file" id="pcFile" name="pcFile" th:value="*{pcFile}" /><!-- 기존의 input file 태그 숨김 -->
+							<label class="input-file-button" for="phoneFile"><div class="ui red inverted button">PHONE용</div></label>
+								<input type="file" id="phoneFile" name="phoneFile" th:value="*{phoneFile}" /><!-- 기존의 input file 태그 숨김 --> 
+							<label class="input-file-button" for="tabletFile"><div class="ui red inverted button">TABLET용</div></label>
+								<input type="file" id="tabletFile" name="tabletFile" th:value="*{tabletFile}" /><!-- 기존의 input file 태그 숨김 -->
+							</div>
+						</div>
+
+						
+						<div class="ui section divider"></div>
+						
+						
+						<div class="row">
+							<div class="five wide column">
+								<span id="isForSale_span">판매 여부</span>
+							</div>
+
+							<div class="eleven wide column middle aligned">
+								<div class="ui radio checkbox inline">
+									<input type="radio" th:name="*{isForSale}" th:value="1"
+										th:disabled="${sellOnlineForm.newOnline}"
+										th:checked="${sellOnlineForm.newOnline == true || sellOnlineForm.online.isForSale == 1}" />
+									<label for="${#ids.prev('isForSale')}">판매 중</label>
+								</div>
+								
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+								<div class="ui radio checkbox inline">
+									<input type="radio" th:name="*{isForSale}" th:value="0"
+										th:checked="${sellOnlineForm.newOnline == false && sellOnlineForm.online.isForSale == 0}"
+										th:disabled="${sellOnlineForm.newOnline}" />
+
+									<!-- 			      	<input type="radio" th:if="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" th:disabled="disabled" /> -->
+									<!-- 	    			<input type="radio" th:unless="${sellOnlineForm.newOnline}" th:name="*{isForSale}" th:value="0" /> -->
+									<label for="${#ids.prev('isForSale')}">판매 중단</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<br> 
+					
+					<input th:if="${sellOnlineForm.newOnline}"
+						class="ui red huge button right floated" type="submit" value="등록하기"> 
+						
+					<input
+						th:unless="${sellOnlineForm.newOnline}" type="hidden"
+						name="itemId" th:value="*{itemId}" /> 
+						
+					<input 
+						th:unless="${sellOnlineForm.newOnline}" class="ui red huge button right floated"
+						type="submit" value="수정하기">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="thyme/Bottom :: footer"></div>
+
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+		integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"
+		integrity="sha512-8F/2JIwyPohlMVdqCmXt6A6YQ9X7MK1jHlwBJv2YeZndPs021083S2Z/mu7WZ5g0iTlGDYqelA9gQXGh1F0tUw=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js"
+		integrity="sha512-cYY5gAyJxIK4sLwDYueWWJH9rEdgBNvRaEIGJ6+dQ5vzfoTqHAtUDYrG2rdZTGqACvPS9QRrnzqqRGfrgxO7ug=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js"
+		integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/checkbox.min.js"
+		integrity="sha512-xHPfIQ31nhgadqKFR79QIE1P+8QkEJRKYhbO+tNThUtBU1sOC55A29sLgjFxyekM7DUVJqapmIOx0J+G2VH8RQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-	$('#select1')
-	  .dropdown({ fullTextSearch: true })
-	;
-	
-	$('#select2')
-	  .dropdown()
-	;
-	
-	$(document).ready(function() {
-        $('#name').on('keyup', function() {
-            $('#name_cnt').html("("+$(this).val().length+" / 100)");
- 
-            if($(this).val().length > 100) {
-                $(this).val($(this).val().substring(0, 100));
-                $('#name_cnt').html("(100 / 100)");
-            }
-        });
-    });
-	
-	$(document).ready(function() {
-        $('#description').on('keyup', function() {
-            $('#textarea_cnt').html("("+$(this).val().length+" / 500)");
- 
-            if($(this).val().length > 500) {
-                $(this).val($(this).val().substring(0, 500));
-                $('#textarea_cnt').html("(500 / 500)");
-            }
-        });
-    });
-	
-	$('.ui.checkbox')
-	  .checkbox()
-	;
+		$('#select1').dropdown({
+			fullTextSearch : true
+		});
+
+		$('#select2').dropdown();
+
+		$(document).ready(function() {
+			$('#name').on('keyup', function() {
+				$('#name_cnt').html("(" + $(this).val().length + " / 100)");
+
+				if ($(this).val().length > 100) {
+					$(this).val($(this).val().substring(0, 100));
+					$('#name_cnt').html("(100 / 100)");
+				}
+			});
+		});
+
+		$(document).ready(
+				function() {
+					$('#description')
+							.on(
+									'keyup',
+									function() {
+										$('#textarea_cnt').html(
+												"(" + $(this).val().length
+														+ " / 500)");
+
+										if ($(this).val().length > 500) {
+											$(this).val(
+													$(this).val().substring(0,
+															500));
+											$('#textarea_cnt').html(
+													"(500 / 500)");
+										}
+									});
+				});
+
+		$('.ui.checkbox').checkbox();
 	</script>
 </body>
 </html>

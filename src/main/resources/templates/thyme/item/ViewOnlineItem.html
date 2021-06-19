@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head
+	th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
 <meta charset="UTF-8">
 <title>온라인 상품 상세페이지</title>
 
@@ -32,12 +33,29 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.css"
 	integrity="sha512-NxWghIwNoV7V1IAHt4HwVnmsG/FuuViHaXFP0tsZS0D9snWm4SLGSdfB5XogpAWYXabp2t+XY9L184PQg2IuEA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css" integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css" integrity="sha512-8Tb+T7SKUFQWOPIQCaLDWWe1K/SY8hvHl7brOH8Nz5z1VT8fnf8B+9neoUzmFY3OzkWMMs3OjrwZALgB1oXFBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css"
+	integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css"
+	integrity="sha512-8Tb+T7SKUFQWOPIQCaLDWWe1K/SY8hvHl7brOH8Nz5z1VT8fnf8B+9neoUzmFY3OzkWMMs3OjrwZALgB1oXFBg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/grid.min.css"
+	integrity="sha512-RtktBL0Hhw9K2e2rGLZGadK8cF6Q0wKxRUkfh4pJszwnarmh3GbqHCiLm3UZFA1dRiFqtPkVrcby0hXWsqoDNA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.css">
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.js"></script>
+
 
 <!-- jQuery 1.8 or later, 33 KB -->
 <script
@@ -138,6 +156,31 @@ function addToCart() {
 }
 /*]]>*/
 
+
+// $(document).ready(function(e) {
+//     $(".fotorama").on("click",function(){
+         
+//     var href = $(this).find("a").attr('href');
+//     location.href=href;
+         
+//     });
+// });
+
+
+$(function () {
+    // 1. Initialize fotorama manually.
+    var $fotoramaDiv = $('#fotorama').fotorama();
+
+    // 2. Get the API object.
+    var fotorama = $fotoramaDiv.data('fotorama');
+
+    // 3. Inspect it in console.
+    console.log(fotorama);
+    
+    console.log(fotorama.activeFrame.thumb); 
+  });
+
+
 </script>
 <style>
 .ui.fixed.sticky+p {
@@ -160,8 +203,7 @@ function addToCart() {
 }
 
 div {
-/*  	border: 1px solid black;  */
-	
+/*  	border: 1px solid black; */
 }
 
 .order {
@@ -178,187 +220,286 @@ div {
 
 #total_review {
 	cursor: pointer;
+	text-decoration: underline;
+}
+
+#total_review:hover {
+	color: gray;
 }
 
 .close.inside.icon {
-     color: light-gray; 
-} 
+	color: light-gray;
+}
 
 /* .actions button { */
 /* 	margin: auto; */
 /* } */
-
 .description p {
 	padding: 30px 0px 30px 0px;
 	text-align: center;
 }
 
-.notForSale {
- 	pointer-events: none; 
+.notForSale, .file_ok, .file_fail {
+	pointer-events: none;
 }
 
-#not_sale{
+.file_ok, .file_fail {
+	font-weight: bolder;
+	font-size: 1.1rem;
+}
+
+#not_sale {
 	color: red;
 	font-weight: bold;
+}
+
+.review_rate {
+	font-size: 1.3rem;
+}
+
+.review_userName {
+	font-weight: bold;
+}
+
+#online_name {
+	font-size: 1.5em;
+}
+
+.online_price {
+	font-size: 2rem;
+ 	font-weight: bolder;
+
+}
+
+#online_orgPrice {
+	font-size:1.5rem;
+	color: lightgray;
 }
 </style>
 </head>
 <body>
-	<!-- 상품 미리보기 -->
-	<div th:object="${online}">
-	<div th:fragment="online_1">
-		<div class="fotorama" data-width="300" data-ratio="3/2"
-			data-nav="thumbs" data-thumbheight="48">
-			<a href="http://s.fotorama.io/okonechnikov/1-lo.jpg"><img src=""
-				width="144" height="96" alt=""></a> <a
-				href="http://s.fotorama.io/okonechnikov/2-lo.jpg"><img src=""
-				width="144" height="96" alt=""></a> <a
-				href="http://s.fotorama.io/okonechnikov/4-lo.jpg"><img src=""
-				height="96" alt=""></a>
-		</div>
+	<div class="wrap">
+		<div th:replace="thyme/Header :: header"></div>
+		<div class="row row-margin">
+			<div th:replace="thyme/Sidebar :: sidebar"></div>
+			<div class="col-7 base">
 
-		<p>
-			<span th:text="*{name}">솜솜</span>
-		</p>
-		<div th:unless="*{saleState}">
-			<p>
-				<span th:text="*{price} + '원'">정가</span>
-			</p>
-		</div>
-		<div th:if="*{saleState}">
-			<p>
-				<span th:text="*{price} + '원'"
-					style="text-decoration: line-through;">정가</span> <span
-					th:text="*{salePrice} + '원'">할인가</span>
-			</p>
-		</div>
-	</div>
-		<p>
-		<div class="starRatingContainer">
-			<div class="ratingStar"></div>
-		</div>
-		<div class="ratingHolder"></div>
-		<span th:text="'(' + *{totalRate} + ')'">(4.08)</span> <a
-			onClick="goToReview()" id="total_review"><span
-			th:text="'총 ' + ${reviewList.size()} + '건의 후기'">총 o건의 후기</span></a>
-
-		<div
-			th:if="${session.userSession == null or 
-					(session.userSession != null and userLike == null) or 
-					(session.userSession != null and userLike != null and userLike.clicked == false)}"
-			class="ui labeled button" tabindex="0">
-			<div class="ui basic red button" id="plus"
-				onClick="toggleLike(this.id)">
-				<i class="heart icon"></i> Like
-			</div>
-			<a class="ui basic red left pointing label"><span id="likeNum"
-				th:text="*{likeNum}">추천수</span></a>
-		</div>
-
-		<div
-			th:if="${session.userSession != null and userLike != null and userLike.clicked == true and online.isForSale == 1}"
-			class="ui labeled button" tabindex="0">
-			<div class="ui red button" id="minus" onClick="toggleLike(this.id)">
-				<i class="heart icon"></i> Like
-			</div>
-			<a class="ui basic red left pointing label"><span id="likeNum"
-				th:text="*{likeNum}">추천수</span></a>
-		</div>
-		
-		<div
-			th:if="${session.userSession != null and userLike != null and userLike.clicked == true}"
-			class="ui labeled button" tabindex="0">
-			<div class="ui red button" id="minus" onClick="toggleLike(this.id)">
-				<i class="heart icon"></i> Like
-			</div>
-			<a class="ui basic red left pointing label"><span id="likeNum"
-				th:text="*{likeNum}">추천수</span></a>
-		</div>
-		
-		<br>
-
-		<div th:if="*{pcFile}" class="file_ok">PC</div>
-		<div th:unless="*{pcFile}" class="file_fail">PC</div>
-		<div th:if="*{phoneFile}" class="file_ok">PHONE</div>
-		<div th:unless="*{phoneFile}" class="file_fail">PHONE</div>
-		<div th:if="*{tabletFile}" class="file_ok">TABLET</div>
-		<div th:unless="*{tabletFile}" class="file_fail">TABLET</div>
-		
-		<p th:unless="*{isForSale}" id="not_sale">※판매가 중지된 상품입니다.</p>
-
-		<p>
-		<div th:if="*{isForSale}" id="cart" class="ui large red button" onClick="addToCart()">장바구니</div>
-		<div th:unless="*{isForSale}" class="ui large grey button notForSale" onClick="addToCart()" >장바구니</div>
-		
-		
-		<div class="ui mini modal">
-			<i class="close inside icon"></i>
-			<div class="header">장바구니 담기</div>
-			<div class="content">
-				<div class="description">
-					<p></p>
-				</div>
-			</div>
-			<div class="actions">
-				<div class="ui center aligned grid">
-					<div class="seven wide column"><div class="ui segment red deny button">계속 쇼핑하기</div></div>
-					<div class="seven wide column"><div class="ui segment red button" 
-						th:onclick="|location.href='@{/shop/goToCart.do(itemId=${online.itemId})}'|">장바구니 이동</div></div>
-				</div>
-			</div>
-		</div>
-		
-		<div th:if="*{isForSale}" class="ui large red button"
-			th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
-		<div th:unless="*{isForSale}" class="ui large grey button notForSale"
-			th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
+				<!-- 여기서부터 content -->
+				<!-- 상품 미리보기 -->
+				<div th:object="${online}">
+					<div th:fragment="online_1">
+						<div class="ui aligned grid">
+							<div class="two column row">
+								<div class="eight wide column">
+									<div id="fotorama" class="fotorama" data-width="300"
+										data-ratio="1" data-nav="thumbs" data-thumbheight="48"
+										data-allowfullscreen="true" data-loop="true">
+										<a href="#" th:href="@{*{waterThumbnail1Path}}"><img
+											src="#" th:src="@{*{waterThumbnail1Path}}" width="100"
+											height="100" alt=""></a> 
+										<a href="#"
+											th:href="*{waterThumbnail2Path}"><img src=""
+											width="144" height="96" alt=""></a> 
+										<a href="#"
+											th:href="*{waterThumbnail3Path}"><img src=""
+											height="96" alt=""></a>
+									</div>
+								</div>
 
 
-		<div class="ui segment">
-			<div class="ui sticky"
-				style="width: 670px !important; height: 42.6px !important; left: 417.8px;">
-				<div class="ui fluid three item tabular menu">
-					<a class="active item" data-tab="description_tab">상세설명</a> <a
-						class="item" id="review_tab" data-tab="review_tab"
-						th:text="'리뷰(' + ${reviewList.size()} + ')'">리뷰(337)</a> <a
-						class="item" data-tab="refund_tab">환불 안내</a>
-				</div>
-			</div>
+								<div class="eight wide column">
+								<div class="ui grid">
+  									<div class="two column row">
+										<div class="left floated twelve wide column">
+											<span th:text="*{name}" id="online_name">솜솜</span>
+										</div>
+										
+										<div class="right floated four wide column">
+											<div
+												th:if="${session.userSession == null or 
+														(session.userSession != null and userLike == null) or 
+														(session.userSession != null and userLike != null and userLike.clicked == false)}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui basic red button" id="plus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+	
+											<div
+												th:if="${session.userSession != null and userLike != null and userLike.clicked == true and online.isForSale == 1}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui red button" id="minus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+	
+											<div
+												th:if="${session.userSession != null and userLike != null and userLike.clicked == true}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui red button" id="minus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+										</div>
+									</div>
+									</div>
 
-			<div class="ui active tab" data-tab="description_tab">
-				<p>
-					<a id="description">상세 설명 시작</a>
-				</p>
-				<p>
-					<span th:text="*{description}"></span>
-				</p>
 
-			</div>
-			<div class="ui tab" data-tab="review_tab">
-				<p>
-					<a id="review">리뷰 시작</a>
-				</p>
-				<div th:each="review,status : ${reviewList}">
-					<span th:text="${review.userName}">userName</span><br>
-					<div class="starRatingContainer">
-						<div class="#" th:class="'ratingStar' + ${status.index}"></div>
+
+
+									<div class="column">
+										<div th:unless="*{saleState}">
+											<span class="online_price" th:text="*{price} + '원'">정가</span>
+										</div>
+
+
+										<div th:if="*{saleState}">
+											<p>
+												<span th:text="*{price} + '원'"
+													style="text-decoration: line-through;" id="online_orgPrice">정가</span> 
+												<span class="online_price"
+													th:text="*{salePrice} + '원'">할인가</span>
+											</p>
+										</div>
+									</div>
+
+									<div class="column">
+										<div class="starRatingContainer">
+											<div class="ratingStar"></div>
+										</div>
+
+										<span th:text="'(' + *{totalRate} + ')'">(4.08)</span> <a
+											onClick="goToReview()" id="total_review"><span
+											th:text="'총 ' + ${reviewList.size()} + '건의 후기'">총 o건의
+												후기</span></a>
+									</div>
+
+
+
+									<br>
+
+									<div class="column">
+										<div th:if="*{pcFile}" class="file_ok ui circular red basic mini button">PC</div>
+										<div th:unless="*{pcFile}" class="file_fail ui circular basic mini button">PC</div>
+										<div th:if="*{phoneFile}" class="file_ok ui red circular basic mini button">PHONE</div>
+										<div th:unless="*{phoneFile}" class="file_fail ui circular basic mini button">PHONE</div>
+										<div th:if="*{tabletFile}" class="file_ok ui circular red basic mini button">TABLET</div>
+										<div th:unless="*{tabletFile}" class="file_fail ui circular basic mini button">TABLET</div>
+									</div>
+
+										<p th:unless="*{isForSale}" id="not_sale">※판매가 중지된 상품입니다.</p>
+
+										<p>
+										<div th:if="*{isForSale}" id="cart"
+											class="ui large red button" onClick="addToCart()">장바구니</div>
+										<div th:unless="*{isForSale}"
+											class="ui large grey button notForSale" onClick="addToCart()">장바구니</div>
+
+
+										<div class="ui mini modal">
+											<i class="close inside icon"></i>
+											<div class="header">장바구니 담기</div>
+											<div class="content">
+												<div class="description">
+													<p></p>
+												</div>
+											</div>
+											<div class="actions">
+												<div class="ui center aligned grid">
+													<div class="seven wide column">
+														<div class="ui segment red deny button">계속 쇼핑하기</div>
+													</div>
+													<div class="seven wide column">
+														<div class="ui segment red button"
+															th:onclick="|location.href='@{/shop/goToCart.do(itemId=${online.itemId})}'|">장바구니
+															이동</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div th:if="*{isForSale}" class="ui large red button"
+											th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
+										<div th:unless="*{isForSale}"
+											class="ui large grey button notForSale"
+											th:onclick="|location.href='@{/order/newOrder.do(itemId=${online.itemId})}'|">구매하기</div>
+									
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="ratingHolder"></div>
-					<span class="review_rate" th:text="${review.rate}">rate</span> | <span
-						th:text="${review.writtenDate}">writtenDate</span><br> <span
-						th:text="${review.content}">content</span> <br>
-					<br>
-					<br>
-				</div>
-			</div>
 
-			<div class="ui tab" data-tab="refund_tab">
-				<p>
-					<a id="refund">환불 안내 시작</a>
-				</p>
+
+
+					<div class="ui segment">
+						<div class="ui sticky"
+							style="width: 670px !important; height: 42.6px !important; left: 417.8px;">
+							<div class="ui fluid three item tabular menu">
+								<a class="active item" data-tab="description_tab">상세설명</a> <a
+									class="item" id="review_tab" data-tab="review_tab"
+									th:text="'리뷰(' + ${reviewList.size()} + ')'">리뷰(337)</a> <a
+									class="item" data-tab="refund_tab">환불 안내</a>
+							</div>
+						</div>
+
+						<div class="ui active tab" data-tab="description_tab">
+						<br><br><br>
+							<p>
+								<span th:text="*{description}"></span>
+							</p>
+						<br><br>
+						</div>
+						
+						<div class="ui tab" data-tab="review_tab">
+							<br>
+							<div th:each="review,status : ${reviewList}">
+								<p th:text="${review.userName}" class="review_userName">userName</p>
+								<div class="starRatingContainer">
+									<div class="#" th:class="'ratingStar' + ${status.index}"></div>
+								</div>
+								&nbsp; <span class="review_rate" th:text="${review.rate}">rate</span>
+								&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;<span
+									th:text="${review.writtenDate}">writtenDate</span>
+
+								<p th:text="${review.content}">content</p>
+								<br> <br>
+
+							</div>
+						</div>
+
+						<div class="ui tab" data-tab="refund_tab">
+						<br><br>
+							<p>
+								1. 온라인 창작물의 특성 상 한 번 다운로드 받은 이후에는 환불이 불가능함. <br>
+2. 재화 등의 내용이 표시∙광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 그 재화 등을 공급받은 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에 청약철회 등을 할 수 있으며 반품 비용은 판매자가 부담함. <br>
+3. 단, 상품의 특성과 거래조건에 따라 청약철회가 일부 제한될 수 있으며 청약철회에 소요되는 비용이 다르게 책정될 수 있음 (상품 상세페이지 참조)<br>
+4. 단순변심, 착오구매 등에 따른 청약철회가 불가능한 경우<br>
+시간의 경과에 의하여 재판매가 곤란할 정도로 ‘재화 등’의 가치가 현저히 감소한 경우<br>
+같은 성능을 지닌 ‘재화 등’으로 복제가 가능한 경우 그 원본인 ‘재화 등’의 포장을 훼손한 경우<br>
+기타 개별 상품과 관련한 청약철회 기준은 상품 상세페이지 참조<br>
+5. 미성년자가 구매계약을 체결하는 경우에는 법정대리인이 동의하지 않으면 미성년자 본인 또는 법정대리인이 계약을 취소할 수 있습니다.<br>
+							</p>
+							<br>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
+
+	<div th:replace="thyme/Bottom :: footer"></div>
+
+
 
 
 
@@ -381,7 +522,10 @@ div {
 		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js"
 		integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js" integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js"
+		integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script th:inline="javascript">
 	$('.ui.sticky')
 	  .sticky()
@@ -406,8 +550,12 @@ div {
     }
     
     //장바구니 모달 띄우기
-    $('.ui.modal')
+    $('.ui.mini.modal')
     .modal({inverted: true})
+    .modal('attach events', '#cart', 'show');
+    
+    //미리보기 이미지 모달 띄우기
+    $('.ui.modal.thumbnail')
     .modal('attach events', '#cart', 'show');
     
     

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
     <title>Manager</title>
+    <link>
+    <style></style>
+    <script></script>
 </head>
 <body>
 <div class="wrap">

@@ -40,6 +40,7 @@ public class SellOnlineItemController {
 	@Autowired
 	private FileUtils fileUtils;
 	
+	
 	@Autowired
 	private SellOnlineItemFormValidator validator;
 	public void setValidator(SellOnlineItemFormValidator validator) {
@@ -90,12 +91,15 @@ public class SellOnlineItemController {
 				Online online = sellOnlineForm.getOnline();
 				Account account = (Account)session.getAttribute("userSession");
 				online.setProducerId(account.getUserId());
-				
+				online.setProducerName(account.getAlias());
+
 				online = fileUtils.uploadFiles(thumbnail, online);
 				online = fileUtils.uploadFiles(pcFile, online);
 				online = fileUtils.uploadFiles(phoneFile, online);
 				online = fileUtils.uploadFiles(tabletFile, online);
-
+				
+				jkdk.setWaterMark(online);
+			
 				jkdk.registerOnlineItem(online);
 			}
 			else {
@@ -104,13 +108,16 @@ public class SellOnlineItemController {
 				online = fileUtils.uploadFiles(pcFile, online);
 				online = fileUtils.uploadFiles(phoneFile, online);
 				online = fileUtils.uploadFiles(tabletFile, online);
+				
+				jkdk.setWaterMark(online);
+				
 				if (jkdk.updateOnlineItem(online) != 1)
 					throw new Exception(); 
 			}
-		} catch (Exception ex) { //추후에 수정
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-//			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
-//					"처리하지 못했습니다. 다시 시도해주세요.");
+			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
+					"처리하지 못했습니다. 다시 시도해주세요.");
 			return formViewName; 
 		}
 				

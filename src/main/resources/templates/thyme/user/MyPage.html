@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<link>
 <style>
 table {
 	border: 1px solid #444444;
@@ -14,6 +15,7 @@ th, td {
 	padding: 30px;
 }
 </style>
+<script></script>
 </head>
 <body>
 <div class="wrap">

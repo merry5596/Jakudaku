@@ -32,10 +32,12 @@ public abstract class Item implements Serializable {
 	
 	private int likeNum;
 	
+//	@NotNull(message="미리보기 이미지를 선택하세요.")
 	private String thumbnail1;
 	private String thumbnail2;
 	private String thumbnail3;
 	
+//	@NotNull(message="미리보기 이미지를 선택하세요.")
 	private MultipartFile[] mulThumbnail1;
 //	private MultipartFile mulThumbnail2;
 //	private MultipartFile mulThumbnail3;
@@ -194,5 +196,17 @@ public abstract class Item implements Serializable {
 	
 	public String getThumbnail3Path() {
 	     return getPath() + thumbnail3;
+	}
+	
+	public String getWaterThumbnail1Path() {
+	     return getPath() + "water_" + thumbnail1;
+	}
+	
+	public String getWaterThumbnail2Path() {
+	     return getPath() + "water_" + thumbnail2;
+	}
+	
+	public String getWaterThumbnail3Path() {
+	     return getPath() + "water_" + thumbnail3;
 	}
 }

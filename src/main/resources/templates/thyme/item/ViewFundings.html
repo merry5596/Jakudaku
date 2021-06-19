@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
 <title th:text="${categoryName}">categoryName</title>
 <style>
 .container {
@@ -11,6 +11,8 @@
 }
 
 </style>
+<link>
+<script></script>
 </head>
 <body>
 <div class="wrap">
