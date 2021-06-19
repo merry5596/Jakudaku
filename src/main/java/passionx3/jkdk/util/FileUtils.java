@@ -20,7 +20,7 @@ public class FileUtils {
 //	https://congsong.tistory.com/39?category=749196
 
 	/** 오늘 날짜 */
-	private final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
+	public static final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
 
 	/** 업로드 경로 */
 	private final String uploadPath = Paths.get("C:", "jkdk", "upload", today).toString();

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title})">
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
     <title>Home</title>
+    <link />
+    <style></style>
+    <script></script>
 </head>
 <body>
 <div class="wrap">
@@ -21,6 +24,7 @@
                         aria-label="Slide 2"></button>
                 </div>
                 <div class="carousel-inner">
+                
                     <div class="carousel-item active">
                         <img src="/image/mainBanner.jpg" class="d-block w-100 event" alt="...">
                         <div class="carousel-caption d-none d-md-block">

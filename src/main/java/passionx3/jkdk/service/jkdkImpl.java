@@ -27,6 +27,7 @@ import passionx3.jkdk.dao.FundingDao;
 import passionx3.jkdk.dao.ItemDao;
 import passionx3.jkdk.domain.*;
 import passionx3.jkdk.repository.LikeRepository;
+import passionx3.jkdk.util.WaterMarkUtil;
 
 @Service
 @Transactional
@@ -70,6 +71,9 @@ public class jkdkImpl implements jkdkFacade {
   
 	@Autowired    // task scheduler 객체를 주입 받음
 	private ThreadPoolTaskScheduler scheduler;
+	
+	@Autowired
+	private WaterMarkUtil waterMarkUtil;
 	
 	public void closeFunding(int itemId, Date closingTime) {
 		Runnable updateTableRunner = new Runnable() { 
@@ -720,6 +724,19 @@ public class jkdkImpl implements jkdkFacade {
 			return result.get();
 		} else {
 			return null;
+		}
+	}
+
+	@Override
+	public void setWaterMark(Item item) {
+		waterMarkUtil.setWaterMarkFile(item.getProducerName(), item.getThumbnail1());
+		
+		if (item.getThumbnail2() != null) {
+			waterMarkUtil.setWaterMarkFile(item.getProducerName(), item.getThumbnail2());
+		}
+		
+		if (item.getThumbnail3() != null) {
+			waterMarkUtil.setWaterMarkFile(item.getProducerName(), item.getThumbnail3());
 		}
 	}
 }
