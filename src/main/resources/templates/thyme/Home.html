@@ -2,58 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
     <title>Home</title>
-    <link />
-    <style></style>
-    <script></script>
+	<link></link>
+	<style></style>
+	<script></script>
 </head>
 <body>
+
 <div class="wrap">
 <div th:replace="thyme/Header :: header"></div>
     <div class="row row-margin">
     	<div th:replace="thyme/Sidebar :: sidebar"></div>
         <div class="col-7 base">
         <!-- 여기서부터 content -->  
-            <!-- event banner -->
-            <div id="carouselExampleCaptions" class="banner carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                        aria-label="Slide 0"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                        aria-label="Slide 2"></button>
-                </div>
-                <div class="carousel-inner">
-                
-                    <div class="carousel-item active">
-                        <img src="/image/mainBanner.jpg" class="d-block w-100 event" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                    	<a th:href="@{/timesale/viewtimeSale.do}">
-                        <img src="/image/timeBanner.jpg" class="d-block w-100 event" alt="...">
-                        </a>
-                    </div>
-	                <div class="carousel-item">
-	                    <a th:href="@{/battlesale/viewBattleSale.do}">
-	                        <img src="/image/battleBanner.jpg" class="d-bloc w-100 event" alt="...">
-	                        
-	                     </a>
-	                </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
+	         <!-- event banner -->
+	        <div id="slider-wrapper">
+			  <div class="inner-wrapper">
+			    <input checked type="radio" name="slide" class="control" id="Slide1" />
+			    <label for="Slide1" id="s1"></label>
+			    <input type="radio" name="slide" class="control" id="Slide2" />
+			    <label for="Slide2" id="s2"></label>
+			    <input type="radio" name="slide" class="control" id="Slide3" />
+			    <label for="Slide3" id="s3"></label>
+			    <div class="overflow-wrapper">
+			      <a class="slide" href=""><img src="/image/mainBanner.jpg" /></a>
+			      <a class="slide" th:href="@{/timesale/viewtimeSale.do}"><img src="/image/timeBanner.jpg" /></a>
+			      <a class="slide"th:href="@{/battlesale/viewBattleSale.do}"><img src="/image/battleBanner.jpg" /></a>
+			    </div>
+			  </div>
+			</div>
+	        
             <!-- Best 상품-->
             <h3 class="text-primary pt-5 container fw-bolder">Best</h3>
                 <div class="album bg-light">
