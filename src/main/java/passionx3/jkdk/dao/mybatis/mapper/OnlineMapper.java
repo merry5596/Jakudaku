@@ -47,7 +47,7 @@ public interface OnlineMapper {
 			"c.name AS categoryName, o.totalRate AS totalRate, o.pcfile AS pcFile, o.tabletfile AS tabletFile, o.phonefile AS phoneFile, o.saleState AS saleState " + 
 			"FROM item i, onlineitem o, account a, theme t, category c " + 
 			"WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId " + 
-			"AND i.approval = 0 AND i.isForSale = 1")
+			"AND i.approval = 0 AND i.isForSale = 1 ORDER BY i.UPLOADDATE DESC")
 	List<Online> getNotApprovedOnlineItems();
 
 	@Update("UPDATE ITEM SET APPROVAL = -1 WHERE ITEMID = #{itemId}")
