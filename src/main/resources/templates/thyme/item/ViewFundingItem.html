@@ -131,6 +131,10 @@
 	position: relative;
 	left: -5px;
 }
+
+input[type=submit] {
+	width: 100%;
+}
 </style>
 
 
@@ -432,6 +436,9 @@ function toggleLike(id) {
 			</div>
 		</div>
 	</div>
+	
+	<div th:replace="thyme/Bottom :: footer"></div>
+	
 
 
 	<script

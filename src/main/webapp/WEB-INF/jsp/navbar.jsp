@@ -7,7 +7,7 @@
   <div align="center">
   <nav class="mainnav navbar navbar-expand-lg navbar-light sticky-top bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><b>자꾸다꾸</b></a>
+      <a class="navbar-brand" href="/"><img th:src="@{/image/logo_rectangle.png}" height="35px"/></a>
 
       <div class="row">
       	<!--검색 창-->
