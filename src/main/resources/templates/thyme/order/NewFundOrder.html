@@ -7,220 +7,250 @@
     <script></script>
 </head>
 <script>
-	 window.onload = function() {
-		 var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
-		 var another = document.getElementById('another');
-		 
-		 if (isNewAddress == 'true') {
-			another.checked = true;
-			
-			receiverName.readOnly = false;
-			zip.readOnly = false;
-			address1.readOnly = false;
-			address2.readOnly = false;
-			phone.readOnly = false;
-		 }
-	 }
-	
-	// radio button change
-	function changeType() {
-		var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
+    window.onload = function() {
+       var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
+       var another = document.getElementById('another');
+       
+       if (isNewAddress == 'true') {
+         another.checked = true;
+         
+         receiverName.readOnly = false;
+         zip.readOnly = false;
+         address1.readOnly = false;
+         address2.readOnly = false;
+         phone.readOnly = false;
+       }
+    }
+   
+   // radio button change
+   function changeType() {
+      var isNewAddress = '[[${fundOrderForm.isNewAddress}]]';
 
-		var same = document.getElementById('same');
-		var another = document.getElementById('another');
-		var receiverName = document.getElementById('receiverName');
-		var zip = document.getElementById('zip');
-		var address1 = document.getElementById('address1');
-		var address2 = document.getElementById('address2');
-		var phone = document.getElementById('phone');
-		
-		
-		if (isNewAddress == 'false') {	// 1. 기존 주소로 주문한 뒤 validation에 걸렸거나, 아예 새로운 주문서인 경우
-			if (same.checked == true) {	// a. 이때 기존 주소 버튼 클릭 시
-				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
-				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
-				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
-				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
-				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
-				
-				receiverName.readOnly = true;
-				zip.readOnly = true;
-				address1.readOnly = true;
-				address2.readOnly = true;
-				phone.readOnly = true;
-			} else if (another.checked == true) {	// b. 이때 새로운 주소 버튼 클릭 시
-				receiverName.value = '';
-				zip.value = '';
-				address1.value = '';
-				address2.value = '';
-				phone.value = '';
-				
-				receiverName.readOnly = false;
-				zip.readOnly = false;
-				address1.readOnly = false;
-				address2.readOnly = false;
-				phone.readOnly = false;
-			}
-		} else if (isNewAddress == 'true') {	// 2. 새로운 주소로 주문한 뒤 validation에 걸린 경우
-			if (same.checked == true) {	// a. 이때 기존 주소 버튼 클릭 
-				var messages = document.getElementsByClassName('validationMessage');
-				for (var i = 0; i < messages.length; i++) {
-					messages[i].style.visibility="hidden";
-				}
-				receiverName.value = '[[${account.name}]]';
-				zip.value = '[[${account.zip}]]';
-				address1.value = '[[${account.address1}]]';
-				address2.value = '[[${account.address2}]]';
-				phone.value = '[[${account.phone}]]';
-				
-				receiverName.readOnly = true;
-				zip.readOnly = true;
-				address1.readOnly = true;
-				address2.readOnly = true;
-				phone.readOnly = true;
-			} else if (another.checked == true) {	// b. 이때 새로운 주소 버튼 클릭 시
-				receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
-				zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
-				address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
-				address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
-				phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
-				
-				var messages = document.getElementsByClassName('validationMessage');
-				for (var i = 0; i < messages.length; i++) {
-					messages[i].style.visibility="visible";
-				}
-				
-				receiverName.readOnly = false;
-				zip.readOnly = false;
-				address1.readOnly = false;
-				address2.readOnly = false;
-				phone.readOnly = false;
-			}
-		}
-		
-		
-	}
-	
+      var same = document.getElementById('same');
+      var another = document.getElementById('another');
+      var receiverName = document.getElementById('receiverName');
+      var zip = document.getElementById('zip');
+      var address1 = document.getElementById('address1');
+      var address2 = document.getElementById('address2');
+      var phone = document.getElementById('phone');
+      
+      
+      if (isNewAddress == 'false') {   // 1. 기존 주소로 주문한 뒤 validation에 걸렸거나, 아예 새로운 주문서인 경우
+         if (same.checked == true) {   // a. 이때 기존 주소 버튼 클릭 시
+            receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
+            zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
+            address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
+            address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
+            phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
+            
+            receiverName.readOnly = true;
+            zip.readOnly = true;
+            address1.readOnly = true;
+            address2.readOnly = true;
+            phone.readOnly = true;
+         } else if (another.checked == true) {   // b. 이때 새로운 주소 버튼 클릭 시
+            receiverName.value = '';
+            zip.value = '';
+            address1.value = '';
+            address2.value = '';
+            phone.value = '';
+            
+            receiverName.readOnly = false;
+            zip.readOnly = false;
+            address1.readOnly = false;
+            address2.readOnly = false;
+            phone.readOnly = false;
+         }
+      } else if (isNewAddress == 'true') {   // 2. 새로운 주소로 주문한 뒤 validation에 걸린 경우
+         if (same.checked == true) {   // a. 이때 기존 주소 버튼 클릭 
+            var messages = document.getElementsByClassName('validationMessage');
+            for (var i = 0; i < messages.length; i++) {
+               messages[i].style.visibility="hidden";
+            }
+            receiverName.value = '[[${account.name}]]';
+            zip.value = '[[${account.zip}]]';
+            address1.value = '[[${account.address1}]]';
+            address2.value = '[[${account.address2}]]';
+            phone.value = '[[${account.phone}]]';
+            
+            receiverName.readOnly = true;
+            zip.readOnly = true;
+            address1.readOnly = true;
+            address2.readOnly = true;
+            phone.readOnly = true;
+         } else if (another.checked == true) {   // b. 이때 새로운 주소 버튼 클릭 시
+            receiverName.value = '[[${fundOrderForm.fundOrder.receiverName}]]';
+            zip.value = '[[${fundOrderForm.fundOrder.zip}]]';
+            address1.value = '[[${fundOrderForm.fundOrder.address1}]]';
+            address2.value = '[[${fundOrderForm.fundOrder.address2}]]';
+            phone.value = '[[${fundOrderForm.fundOrder.phone}]]';
+            
+            var messages = document.getElementsByClassName('validationMessage');
+            for (var i = 0; i < messages.length; i++) {
+               messages[i].style.visibility="visible";
+            }
+            
+            receiverName.readOnly = false;
+            zip.readOnly = false;
+            address1.readOnly = false;
+            address2.readOnly = false;
+            phone.readOnly = false;
+         }
+      }
+      
+      
+   }
+   
 </script>
 <body>
 <div class="wrap">
-<div th:replace="thyme/Header :: header"></div>
-<div class="row row-margin">
-	<div th:replace="thyme/Sidebar :: sidebar"></div>
-	<div class="col-7 base">
-		<div class="row">
-			<div class="col-md-12">
-			  <h2>펀딩 상품 결제</h2>
-
-			  	<table style="width:100%; align:center;">
-				    <tr>
-				      	<td colspan="5"><b>상품 정보</b></td>
-				    </tr>
-				    <tr bgcolor="#CCCCCC">
-				      	<td style="text-align:center"><b>이미지</b></td>
-				 	  	<td style="text-align:center"><b>상품</b></td>
-					  	<td style="text-align:center"><b>판매가</b></td>
-					  	<td style="text-align:center"><b>수량</b></td>
-					  	<td style="text-align:center"><b>결제 금액</b></td>
-				    </tr>
-				    <tr th:each="lineItem : ${fundOrderForm.fundOrder.lineItem}" bgcolor="#EEEEEE">
-						<td style="width: 120px; height:120px"><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1Path}}"/></a></td>
-				        <td><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
-				            <span th:text="${lineItem.funding.name}">상품명</span></a>
-				        <td style="text-align:center" th:text="${lineItem.funding.price}">0</td>
-				        <td style="text-align:center" th:text="${lineItem.quantity}">1</td>
-				        <td style="text-align:center" th:text="${lineItem.funding.price} * ${lineItem.quantity}">0</td>
-				    </tr>
-				    <tr bgcolor="#CCCCCC">
-				      <td style="text-align:right" colspan="5" th:text="'총 ' + ${fundOrderForm.fundOrder.totalPrice} + '원'"><b>총 0원</b></td>
-				    </tr>
-			  </table>
-			  <br><br>
-			  
-			  <form action="#" th:action="@{newFundOrderSubmitted.do}" th:object="${fundOrderForm}" method="POST">
-				  <table style="width:100%; align:center;">
-			  	  	<tr>
-			  	  		<td colspan="2" width="30%"><b>배송 정보</b></td>
-			  	  		<td><input type="radio" name="group" id="same" th:field=*{isNewAddress} th:value="false" th:onclick="changeType();" checked="true"/>
-			  	  			<label for="same">회원 정보와 동일</label>
-							<input type="radio" name="group" id="another" th:field=*{isNewAddress} th:value="true" th:onclick="changeType();"/>
-							<label for="another">새로운 수령인</label>
-						</td>
-			  	  	</tr>
-			  	  	<tr>
-			  	  		<td colspan="2" bgcolor="#CCCCCC">수령인</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" readOnly />
-			  	  		<span class="validationMessage" th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
-			  	  	</tr>
-			  	  	<tr>
-			  	  		<td rowspan="3" bgcolor="#CCCCCC"><br>수령 주소</td>
-			  	  		<td bgcolor="#CCCCCC">우편 번호</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
-			  	  	</tr>
-			  	  	<tr>
-			  	  		<td bgcolor="#CCCCCC">주소</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
-			  	  	</tr>
-			  	  	<tr>
-			  	  		<td bgcolor="#CCCCCC">상세 주소</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
-			  	  	</tr>
-			  	  	<tr>
-			  	  		<td colspan="2" bgcolor="#CCCCCC">휴대폰 번호</td>
-			  	  		<td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" readOnly />
-			  	  		<span class="validationMessage" th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
-			  	  	</tr>
-			  	  </table>
-			  	  <br>
-				  <table style="width:100%; align:center;">
-				  	<tr>
-				      <td colspan="2"><b>결제 상세 <span style="font-size:10pt">※펀딩 상품 구매시에는 적립금 사용이 불가합니다.</span></b></td>
-				    </tr>
-				    <tr style="vertical-align:top">
-				      <td width="65%" height="100px">
-				      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-				      		<tr>
-				      			<td bgcolor="#CCCCCC">결제 수단</td>
-				      			<td>카드사
-				      				<select th:field="*{fundOrder.cardType}">
-				      					<option value="notSelected" selected>선택</option>
-				      					<option value="국민">국민</option>
-				      					<option value="신한">신한</option>
-				      					<option value="우리">우리</option>
-						      			<option value="하나">하나</option></select>
-				      				<br>
-						      		<p th:errors="*{fundOrder.cardType}">Invalid cardType~</p>
-				      				카드 번호 <input type="text" th:field="*{fundOrder.creditCard}" />
-				      				<br>
-				      				<p th:errors="*{fundOrder.creditCard}">Invalid creditCard~</p>
-				      				만료일(MM/YY) <input type="text" placeholder="MM/YY" th:field="*{fundOrder.expireDate}" />
-				      				<p th:errors="*{fundOrder.expireDate}">Invalid expireDate~</p></td>
-				      		</tr>
-				      	</table>
-				      </td>
-				      <td height="100px">
-				      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-						    <tr>
-						      	<td>최종 결제 금액</td>
-						      	<td>&nbsp;</td>
-						      	<td style="text-align:center"><span th:text="*{fundOrder.totalPrice}">0</span>원</td>
-						    </tr>
-						    <tr>
-						    	<td colspan=3 style="text-align:right"><span style="font-size:10pt">※펀딩 상품은 적립금이 적립되지 않습니다.</span></td>
-				      		</tr>
-				      	</table>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td style="text-align:center" colspan="2" ><input type="submit" value="결제하기" /></td>
-				    </tr>
-				  </table>
-			  </form>
-			</div>
-		</div>
-	</div>
-</div>
+   <div th:replace="thyme/Header :: header"></div>
+   <div class="row row-margin">
+      <div th:replace="thyme/Sidebar :: sidebar"></div>
+      <div class="col-7 base">
+         <div class="row">
+            <div class="col-md-12">
+            <div class="mt-3" align="center">
+              <h2 class="fw-bold" align="left" style = "color:#DB2828;">펀딩 상품 결제</h2>
+              
+              <table class="table">
+           <thead>
+           <tr>
+           <th colspan="5">상품 정보</th>
+           </tr>
+            <tr>
+                  <th scope="col"></th>
+                  <th scope="col">상품</th>
+                 <th scope="col">판매가</th>
+                 <th scope="col">수량</th>
+                 <th scope="col">결제 금액</th>
+             </tr>
+           </thead>
+           <tbody>
+              <tr th:each="lineItem : ${fundOrderForm.fundOrder.lineItem}">
+                  <td style="width: 120px; height:120px"><a href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+                     <img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.funding.thumbnail1Path}}"/></a></td>
+                    <td><a class="link-unstyled text-danger fw-border" href="#" th:href="@{/item/viewFundingItem.do(itemId=${lineItem.funding.itemId})}">
+                        <span th:text="${lineItem.funding.name}">상품명</span></a>
+                    <td  th:text="${lineItem.funding.price}">0</td>
+                    <td th:text="${lineItem.quantity}">1</td>
+                    <td th:text="${lineItem.funding.price} * ${lineItem.quantity}">0</td>
+                </tr>
+             <tr bgcolor="#DB2828" class= "text-white">
+               <td class="fs-5 fw-bold" style="text-align:right" colspan="5" th:text="'총 ' + ${fundOrderForm.fundOrder.totalPrice} + '원'">총 0원</td>
+             </tr>
+           </tbody>
+         </table>
+         
+        <br><br>
+        
+        <form action="#" th:action="@{newFundOrderSubmitted.do}" th:object="${fundOrderForm}" method="POST">
+          <table class="table">
+             <thead>
+                 <tr>
+                     <th scope="col" colspan="2">배송정보</th>
+                    <th style="text-align:right;" scope="col">
+                    <input type="radio" name="group" id="same" th:field=*{isNewAddress} th:value="false" th:onclick="changeType();" checked="true"/>
+                      <label for="same">회원 정보와 동일</label>
+                  <input type="radio" name="group" id="another" th:field=*{isNewAddress} th:value="true" th:onclick="changeType();"/>
+                  <label for="another">새로운 수령인</label>
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+                   <tr>
+                      <td colspan="2" bgcolor="#CCCCCC">수령인</td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" readOnly />
+                      <span class="validationMessage" th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
+                   </tr>
+                   <tr>
+                      <td rowspan="3" bgcolor="#CCCCCC"><br>수령 주소</td>
+                      <td bgcolor="#CCCCCC">우편 번호</td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
+                   </tr>
+                   <tr>
+                      <td bgcolor="#CCCCCC">주소</td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
+                   </tr>
+                   <tr>
+                      <td bgcolor="#CCCCCC">상세 주소</td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
+                   </tr>
+                   <tr>
+                      <td colspan="2" bgcolor="#CCCCCC">휴대폰 번호</td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" readOnly />
+                      <span class="validationMessage" th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
+                   </tr>
+                </tbody>
+          </table>
+                  
+         <br>
+         <br>
+         
+          <table class="table">
+             <thead>
+                 <tr>
+                     <th scope="col" colspan="2">결제상세 <span style="font-size:10pt">※펀딩 상품 구매시에는 적립금 사용이 불가합니다.</span></b></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>결제수단</td>
+                     <td>
+                        <div class="container">
+                           <div class="row">
+                              <div class="col"><p>카드사</p></div>
+                              <div class="col">
+                                 <select class="form-select form-select-sm" th:field="*{fundOrder.cardType}">
+                                 <option value="notSelected" selected>선택</option>
+                                 <option value="국민">국민</option>
+                                 <option value="신한">신한</option>
+                                 <option value="우리">우리</option>
+                                 <option value="하나">하나</option></select>
+                                 <small class="text-danger" th:errors="*{fundOrder.cardType}">Invalid cardType~</small>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col"><p>카드 번호</p></div>
+                              <div class="col" >
+                                 <input type="text" class="form-control form-control-sm"  th:field="*{fundOrder.creditCard}" />
+                                 <small class="text-danger" th:errors="*{fundOrder.creditCard}">Invalid creditCard~</small>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col">만료일(MM/YY)</div>
+                              <div class="col" >
+                                 <input type="text" class="form-control form-control-sm" placeholder="MM/YY" th:field="*{fundOrder.expireDate}" />
+                                 <small class="text-danger" th:errors="*{fundOrder.expireDate}">Invalid expireDate~</small>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr class="table-light">
+                     <th scope="row">최종 결제 금액</th>
+                     <td >
+                        <div class="container">
+                           <div class="row">
+                              <div class="col">&nbsp;</div>
+                              <div class="col" >
+                              <span ></span>
+                              <span th:text="*{fundOrder.totalPrice}">0</span>원
+                              <span style="font-size:10pt">※펀딩 상품은 적립금이 적립되지 않습니다.</span>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                </tr>
+               </tbody>
+            </table>
+         <button type="submit" class="btn btn-danger">결제하기</button>
+            </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
 </div>
 <div th:replace="thyme/Bottom :: footer"></div>
 </body>
