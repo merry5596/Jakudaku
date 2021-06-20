@@ -103,15 +103,16 @@
 								<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 									<div th:each="item : ${fundingList}" class="col">
 										<div class="card shadow-sm">
-											<a class="link-unstyled " href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
-												<img th:src="@{${item.thumbnail1}}"/>
-											</a>
-											<div class="card-body ">
+											
+											<div class="card-body d-block mx-auto">
 												<div>
-													<a class="link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
-				                                        <span class="itemName" th:text="${item.name}" >
+													<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
+														<img class="img-fluid img-thumbnail" th:src="@{${item.thumbnail1Path}}" style="width: 150px; height: 150px;"/>
+													</a>
+													<a class="link-unstyled text-dark" href="#" th:href="@{/item/viewFundingItem.do(itemId=${item.itemId})}">
+				                                        <p class= "mt-1 mb-0" th:text="${item.name}" >
 				                                            name
-				                                        </span>
+				                                        </p>
 			                                        </a>
 			                                    </div>
 			                                    <div>
