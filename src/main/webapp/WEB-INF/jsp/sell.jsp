@@ -66,7 +66,7 @@
    <c:forEach var="o" items="${onlineList}" varStatus="status" >
       <tr style="border-bottom: 1px solid #444444;
     padding: 10px;">
-      <td>${status.index}</td>
+      <td>${status.index + 1}</td>
       <td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${o.thumbnail1Path}" style="width:100px; height:100px;"/></td>
       <td onclick="location.href='<c:url value="/item/viewOnlineItem.do"><c:param name="itemId" value="${o.itemId}"/></c:url>'"; style="cursor:pointer;" >${o.name}</td>
       <td>${o.uploadDate}</td>
