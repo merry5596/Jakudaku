@@ -60,7 +60,7 @@
 						</c:if> <c:if test="${!reviewForm.newReview}">
 							<div class="ui center aligned grid">
 								<div class="eight wide column">
-									<input type="button" class="ui red button" style="width: 100%;"
+									<input type="submit" class="ui red button" style="width: 100%;"
 										name="submit" value="리뷰수정" />
 								</div>
 
