@@ -5,9 +5,9 @@
 <div class="wrap">
   <!--navbar-->
   <div align="center">
-  <nav class="mainnav navbar navbar-expand-lg navbar-light sticky-top bg-light">
+  <nav class="mainnav navbar navbar-expand-lg navbar-light fixed-top bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img th:src="@{/image/logo_rectangle.png}" height="35px"/></a>
+      <a class="navbar-brand" href="/"><img src="/image/logo_rectangle.png" height="35px"/></a>
 
       <div class="row">
       	<!--검색 창-->
