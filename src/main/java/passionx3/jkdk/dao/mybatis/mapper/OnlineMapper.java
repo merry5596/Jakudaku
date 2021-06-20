@@ -32,7 +32,7 @@ import passionx3.jkdk.domain.Online;
 @Mapper
 public interface OnlineMapper {
 	@Select("SELECT i.itemId AS itemId, t.name AS themeName,i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
-			+ "o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile, o.saleState AS saleState "
+			+ "o.totalRate AS totalRate, o.pcFile AS pcFile, o.tabletFile AS tabletFile, o.phoneFile AS phoneFile, o.saleState AS saleState, TO_CHAR(i.uploadDate, 'YYYY/MM/DD HH24:MI:SS') AS uploadDate "
 			+ "FROM item i, onlineitem o, theme t "
 			+ "WHERE i.itemId = o.itemId AND i.themeId = t.themeId "
 			+ "AND i.name LIKE '%' || #{keyword} || '%' "

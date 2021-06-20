@@ -162,6 +162,8 @@
 	// 	        $("#resultDiv").replaceWith(fragment);
 	// 	    });
 	// 	}
+	
+	
 </script>
 <style>
 #h1_text {
@@ -268,8 +270,9 @@ div {
 				<form action="#" th:action="@{/item/sellOnlineItem.do}"
 					th:object="${sellOnlineForm.online}" method="post" class="ui form error"
 					enctype="multipart/form-data">
-
+					
 					<div class="ui vertical aligned two column grid">
+						<th:block th:fragment="default_form">
 						<div class="row">
 							<div class="five wide column">
 								<span>미리보기 이미지 </span><span class="required"> *</span>
@@ -357,7 +360,7 @@ div {
 						
 						<div class="row">
 							<div class="five wide column">
-								<span>테마</span><span class="required"> *</span>
+								<span>테마</span> <span class="required"> *</span>
 							</div>
 
 							<div class="eleven wide column">
@@ -375,6 +378,8 @@ div {
 							</div>
 
 						</div>
+						
+						</th:block>
 
 
 						<div class="ui section divider"></div>
@@ -398,8 +403,6 @@ div {
 									<p th:each="err : ${#fields.errors('categoryId')}" th:text="${err}"></p>
 								</div>
 							</div>
-
-							
 						</div>
 						
 						

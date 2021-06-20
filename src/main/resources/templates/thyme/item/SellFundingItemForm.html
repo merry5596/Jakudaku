@@ -1,151 +1,221 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
-	<meta charset="UTF-8">  
-	<title>펀딩 상품 등록</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css" integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css" integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A==" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css" integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-	<style></style>
-	<script></script>
+<head
+	th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+<meta charset="UTF-8">
+<title>펀딩 상품 등록</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+	integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css"
+	integrity="sha512-YYS7fyqDxVE/yJ1280i8KjA+nC7wAtv2u/qkulKbdMpmp8DBWX0Wj+HtILsFyvq+fouCwCyr0hasPAz1eBlvwA=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css"
+	integrity="sha512-tHoIJz9M5ePPB6uuGC4AKP1U6KgjF1V2UK9jR/DKH2eEKVhIV0N6KpsAMOIMLZVvOWuby25zd339CQLcVRev2g=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css"
+	integrity="sha512-GqdyivmcmveCy9pRf2yTD/TPYXVmbPFDojvy15i3xuLLy9nkgNhDRMk6+Dt/uYDdnItFUFF7WqW7GoGv+gPX+A=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css"
+	integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/message.min.css"
+	integrity="sha512-y8REcSkaqTny0hsg2cT9v0/GG14v0XGNWEbEYeFtxeimWgcQXs6sJ6CJc55MM2MAbdri1f0DiDmVkFJvcAtVnQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/grid.min.css"
+	integrity="sha512-RtktBL0Hhw9K2e2rGLZGadK8cF6Q0wKxRUkfh4pJszwnarmh3GbqHCiLm3UZFA1dRiFqtPkVrcby0hXWsqoDNA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/input.min.css" integrity="sha512-5i24U/IyvjscOlHec06pTtT16Oq70uKtnjhrZ2oez7k/qBVOdpNHPK2+SVkuxni95v1x5VGOfXYQZxm4oZcHdQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/divider.min.css" integrity="sha512-UfIon3gqrWjI1KDj6T2BmFN2vdmsr4dyUBFUxTVLPYHEeWIoNvH0JzZ4EHBa4CWoNhdcyYIpR2Kri7Ys835rrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style th:replace="~{thyme/item/SellOnlineItemForm :: style}"></style>
+<style type="text/css">
+#targetQuantity {
+    width: 200px;
+}
+
+#targetQuantity_span {
+	display: inline-block;
+	padding-top: 10px;
+}
+</style>
+<script></script>
 </head>
 <body>
-	<form action="#" th:action="@{/item/sellFundingItem.do}" th:object="${sellFundingForm.funding}" method="post" class="ui form">
-		<span>미리보기 이미지 </span>
-		<span>(0/3)</span>
-		<br>
-		<input type="file" th:field="*{thumbnail1}"/> <input type="file" th:field="*{thumbnail2}" /> <input type="file" th:field="*{thumbnail3}"/>
-		<p>
-<!-- 			<span th:text="#{precautions.image}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.1}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.2}"></span><br> -->
-<!-- 			<span th:text="#{precautions.image.3}"></span><br> -->
-			<span>상품 이미지는 640x640에 최적화되어있습니다.</span><br>
-			<span>~~~</span><br>
-			<span>~~~</span><br>
-			<span>~~~</span><br>
-		</p>
-		
-		<p>
-	    <label for="name">상품명 </label>
-	    <input type="text" id="name" th:field="*{name}" />
-	    <div id="name_cnt">(0 / 100)</div>
-	    <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
-	    <p>
-	    
-	    <p>
-		    <label for="price"><span>판매가격</span></label>
-		    <input type="text" id="price" th:field="*{price}" /> 
-		    <span>원 </span>
-		    <span th:each="err : ${#fields.errors('price')}" th:text="${err}"></span>
-	    
-	    <p>
-	    	<span>설명</span>
-	    	<textarea id="description" name="description" cols="30" rows="10" 
-	    			th:field="*{description}"
-	    			th:value="*{description}" 
-	    			placeholder="상품 설명을 입력하세요." ></textarea>
-			<div id="textarea_cnt">(0 / 500)</div>
-	    
-	    <p>
-		    <span>테마</span>
-		    <select class="ui search dropdown" id="select1" th:field="*{themeId}"> 
-<!-- 				<option value="" th:text="#{select.theme.message}">message</option> -->
-				<option value="">테마를 선택하세요.</option>
-				<option th:each="theme : ${themeList}"
-						th:value="${theme.themeId}" 
-						th:text="'#' + ${theme.name}"
-						value="#">theme name</option>
-			</select>
-			<span th:each="err : ${#fields.errors('themeId')}" th:text="${err}"></span>
-			
-	    </p>
-	    
-	    <p>
-	    	<span>펀딩종료 날짜/시간</span>
-	    	<div class="ui calendar" id="date">
-				<div class="ui input right icon">
-			      <i class="calendar icon"></i>
-			      <input type="text" placeholder="날짜/시간" th:field="*{finishDate}" readonly>
-			    </div>
+	<div class="wrap">
+		<div th:replace="thyme/Header :: header"></div>
+		<div class="row row-margin">
+			<div th:replace="thyme/Sidebar :: sidebar"></div>
+			<div class="col-7 base">
+
+				<!-- 여기서부터 content -->
+				
+				<h1 id="h1_text">기본 정보</h1>
+				<span id="required_text">*필수 항목</span><br>
+
+				<hr id="first_hr" />
+
+				<br />
+				
+				<form action="#" th:action="@{/item/sellFundingItem.do}"
+					th:object="${sellFundingForm.funding}" method="post"
+					class="ui form error" enctype="multipart/form-data">
+				
+					<div class="ui vertical aligned two column grid">
+						<div th:replace="~{thyme/item/SellOnlineItemForm :: default_form}"></div>
+	
+	
+						<div class="ui section divider"></div>
+	
+						
+						<div class="row">
+							<div class="five wide column">
+								<span>펀딩종료 날짜/시간</span> <span class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column">
+								<div class="ui calendar" id="date">
+									<div class="ui input right icon">
+										<i class="calendar icon"></i> <input type="text" placeholder="날짜/시간" th:field="*{finishDate}" readonly>
+									</div>
+								</div>
+								<span>※펀딩 시작시간은 관리자의 승인 직후부터입니다.</span>
+								
+								<div th:if="${#fields.hasErrors('finishDate')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('finishDate')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="ui section divider"></div>
+	
+				
+						<div class="row">
+							<div class="five wide column">
+								<span>목표 수량</span> <span class="required"> *</span>
+							</div>
+
+							<div class="eleven wide column">
+								<input type="text" id="targetQuantity" th:field="*{targetQuantity}" /> <span id="targetQuantity_span"> 개</span> 
+						
+								
+								<div th:if="${#fields.hasErrors('targetQuantity')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('targetQuantity')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+					</div>	
+					
+					<br> 
+					
+					<input th:if="${sellFundingForm.newFunding}"
+						class="ui red huge button right floated" type="submit" value="등록하기"> 
+				</form>
+				
 			</div>
-			<span th:each="err : ${#fields.errors('finishDate')}" th:text="${err}"></span>
-			
-			<span>※펀딩 시작시간은 관리자의 승인 직후부터입니다.</span>
-	    
-	    <p>
-	    	<span>목표 수량</span>
-	    	<input type="text" id="targetQuantity" th:field="*{targetQuantity}" />개 
-	    	<span th:each="err : ${#fields.errors('targetQuantity')}" th:text="${err}"></span>
-	    </p>
-	   
-	    <br>
-	    <input type="submit" value="등록하기">
-    </form>
+		</div>
+	</div>
 	
-	
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js" integrity="sha512-8F/2JIwyPohlMVdqCmXt6A6YQ9X7MK1jHlwBJv2YeZndPs021083S2Z/mu7WZ5g0iTlGDYqelA9gQXGh1F0tUw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js" integrity="sha512-cYY5gAyJxIK4sLwDYueWWJH9rEdgBNvRaEIGJ6+dQ5vzfoTqHAtUDYrG2rdZTGqACvPS9QRrnzqqRGfrgxO7ug==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js" integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg==" crossorigin="anonymous"></script>
-	<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+	<div th:replace="thyme/Bottom :: footer"></div>
+
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+		integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"
+		integrity="sha512-8F/2JIwyPohlMVdqCmXt6A6YQ9X7MK1jHlwBJv2YeZndPs021083S2Z/mu7WZ5g0iTlGDYqelA9gQXGh1F0tUw=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js"
+		integrity="sha512-cYY5gAyJxIK4sLwDYueWWJH9rEdgBNvRaEIGJ6+dQ5vzfoTqHAtUDYrG2rdZTGqACvPS9QRrnzqqRGfrgxO7ug=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.js"
+		integrity="sha512-VM6WNFlVLFwKXphssthAXJpG3cKWUK3G4edfsydLITA4iSeZmvJ+2gKBrR6qYkt/3A/I8hDHnAuIBz7xtfVtOg=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 	<script>
-	$('#select1')
-	  .dropdown({ fullTextSearch: true })
-	;
-	
-	$('#select2')
-	  .dropdown()
-	;
-	
-	$(document).ready(function() {
-        $('#name').on('keyup', function() {
-            $('#name_cnt').html("("+$(this).val().length+" / 100)");
- 
-            if($(this).val().length > 100) {
-                $(this).val($(this).val().substring(0, 100));
-                $('#name_cnt').html("(100 / 100)");
-            }
-        });
-    });
-	
-	$(document).ready(function() {
-        $('#description').on('keyup', function() {
-            $('#textarea_cnt').html("("+$(this).val().length+" / 500)");
- 
-            if($(this).val().length > 500) {
-                $(this).val($(this).val().substring(0, 500));
-                $('#textarea_cnt').html("(500 / 500)");
-            }
-        });
-    });
-	
-	$('.ui.checkbox')
-	  .checkbox()
-	;
-	
-	var today = new Date();
-	$('#date').calendar({
-		minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours(), today.getMinutes() + 5),
-		monthFirst: false,
-		formatter: {
-		    date: function (date, settings) {
-				if (!date) return '';
-			      var day = date.getDate();
-			      var month = date.getMonth() + 1;
-			      var year = date.getFullYear();
-			      
-			      return year + '/' + month + '/' + day;
-		  	}
-		},
-		ampm: false
-	});
+		$('#select1').dropdown({
+			fullTextSearch : true
+		});
+
+		$('#select2').dropdown();
+
+		$(document).ready(function() {
+			$('#name').on('keyup', function() {
+				$('#name_cnt').html("(" + $(this).val().length + " / 100)");
+
+				if ($(this).val().length > 100) {
+					$(this).val($(this).val().substring(0, 100));
+					$('#name_cnt').html("(100 / 100)");
+				}
+			});
+		});
+
+		$(document).ready(
+				function() {
+					$('#description')
+							.on(
+									'keyup',
+									function() {
+										$('#textarea_cnt').html(
+												"(" + $(this).val().length
+														+ " / 500)");
+
+										if ($(this).val().length > 500) {
+											$(this).val(
+													$(this).val().substring(0,
+															500));
+											$('#textarea_cnt').html(
+													"(500 / 500)");
+										}
+									});
+				});
+
+		$('.ui.checkbox').checkbox();
+
+		var today = new Date();
+		$('#date').calendar(
+				{
+					minDate : new Date(today.getFullYear(), today.getMonth(),
+							today.getDate(), today.getHours(), today
+									.getMinutes() + 5),
+					monthFirst : false,
+					formatter : {
+						date : function(date, settings) {
+							if (!date)
+								return '';
+							var day = date.getDate();
+							var month = date.getMonth() + 1;
+							var year = date.getFullYear();
+
+							return year + '/' + month + '/' + day;
+						}
+					},
+					ampm : false
+				});
 	</script>
 </body>
 </html>

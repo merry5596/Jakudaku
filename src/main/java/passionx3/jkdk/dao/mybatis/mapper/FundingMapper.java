@@ -29,7 +29,7 @@ import passionx3.jkdk.domain.Funding;
 @Mapper
 public interface FundingMapper {
 	@Select("SELECT i.itemId AS itemId, t.name AS themeName, i.name AS name, i.price AS price, i.likeNum AS likeNum, i.thumbnail1 AS thumbnail1, "
-			+ "TO_CHAR(f.finishDate, 'YYYY/MM/DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity "
+			+ "TO_CHAR(f.finishDate, 'YYYY/MM/DD HH24:MI:SS') AS finishDate, f.purchaseQuantity AS purchaseQuantity, f.targetQuantity AS targetQuantity, TO_CHAR(i.uploadDate, 'YYYY/MM/DD HH24:MI:SS') AS uploadDate "
 			+ "FROM item i, fundingitem f, theme t "
 			+ "WHERE i.itemId = f.itemId AND i.themeId = t.themeId "
 			+ "AND i.name LIKE '%' || #{keyword} || '%' "
@@ -37,7 +37,7 @@ public interface FundingMapper {
 			+ "AND i.approval = 1")
 	List<Funding> getFundingItemsByKeyword(@Param("keyword") String keyword);
 	
-	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, I.NAME AS NAME, I.UPLOADDATE AS UPLOADDATE, " + 
+	@Select("SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID AS THEMEID, I.NAME AS NAME, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, " + 
 			"I.PRICE AS PRICE, I.LIKENUM AS LIKENUM, I.THUMBNAIL1 AS THUMBNAIL1, I.THUMBNAIL2 AS THUMBNAIL2, I.THUMBNAIL3 AS THUMBNAIL3, " + 
 			"I.ISFORSALE AS ISFORSALE, I.DESCRIPTION AS DESCRIPTION, I.APPROVAL AS APPROVAL, T.name as themename," + 
 			"TO_CHAR(F.FINISHDATE, 'YYYY/MM/DD HH24:MI:SS') AS FINISHDATE, F.PURCHASEQUANTITY AS PURCHASEQUANTITY, F.TARGETQUANTITY AS TARGETQUANTITY " + 

@@ -93,7 +93,7 @@ public class SellOnlineItemController {
 				online.setProducerId(account.getUserId());
 				online.setProducerName(account.getAlias());
 
-				online = fileUtils.uploadFiles(thumbnail, online);
+				online = (Online) fileUtils.uploadFiles(thumbnail, online);
 				online = fileUtils.uploadFiles(pcFile, online);
 				online = fileUtils.uploadFiles(phoneFile, online);
 				online = fileUtils.uploadFiles(tabletFile, online);
@@ -104,7 +104,7 @@ public class SellOnlineItemController {
 			}
 			else {
 				Online online = sellOnlineForm.getOnline();
-				online = fileUtils.uploadFiles(thumbnail, online);
+				online = (Online) fileUtils.uploadFiles(thumbnail, online);
 				online = fileUtils.uploadFiles(pcFile, online);
 				online = fileUtils.uploadFiles(phoneFile, online);
 				online = fileUtils.uploadFiles(tabletFile, online);

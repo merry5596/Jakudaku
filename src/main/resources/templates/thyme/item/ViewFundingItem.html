@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+<head
+	th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::scripts})">
 <meta charset="UTF-8">
 <title>펀딩 상품 상세페이지</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css" integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.css" integrity="sha512-zF2HEUhQSw0Cb7RtcIc9qx8SKuAvNl8wzA542h55r+COkQ/xBkkcMvqdzQ9NApKQxiluCRmmjFAs5oDlTPsOOw==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/item.min.css" integrity="sha512-FegoQ4GicaEtaxCERXNNFN0eloN0wsebNJ8E0kwIJSKBGgfNWFhO0oQhzVPywJt19SwiF4eN/CvDvIKhgIyuhw==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.css" integrity="sha512-NxWghIwNoV7V1IAHt4HwVnmsG/FuuViHaXFP0tsZS0D9snWm4SLGSdfB5XogpAWYXabp2t+XY9L184PQg2IuEA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<!-- jQuery 1.8 or later, 33 KB -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
-	type="text/javascript"></script>
-<!-- Fotorama from CDNJS, 19 KB -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+	integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/button.min.css"
+	integrity="sha512-OD0ScwZAE5PCg4nATXnm8pdWi0Uk0Pp2XFsFz1xbZ7xcXvapzjvcxxHPeTZKfMjvlwwl4sGOvgJghWF2GRZZDw=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.css"
+	integrity="sha512-zF2HEUhQSw0Cb7RtcIc9qx8SKuAvNl8wzA542h55r+COkQ/xBkkcMvqdzQ9NApKQxiluCRmmjFAs5oDlTPsOOw=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css"
+	integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/item.min.css"
+	integrity="sha512-FegoQ4GicaEtaxCERXNNFN0eloN0wsebNJ8E0kwIJSKBGgfNWFhO0oQhzVPywJt19SwiF4eN/CvDvIKhgIyuhw=="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.css"
+	integrity="sha512-NxWghIwNoV7V1IAHt4HwVnmsG/FuuViHaXFP0tsZS0D9snWm4SLGSdfB5XogpAWYXabp2t+XY9L184PQg2IuEA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css"
+	integrity="sha512-8Tb+T7SKUFQWOPIQCaLDWWe1K/SY8hvHl7brOH8Nz5z1VT8fnf8B+9neoUzmFY3OzkWMMs3OjrwZALgB1oXFBg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/progress.min.css" integrity="sha512-6I1aA3gZvj26Zhs+6AodMBFBQlQzixuqGIt3FS+LrV/+E5mepzifvf1w7skWCYoJm1uuK0lpZwH/8tp6FpflTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/label.min.css" integrity="sha512-bLGTFSFKewLG/ltHL52mMtuviUCuHlohn0410iUawDPbjvAONDt0yZ6vLkXfiFOIS9LxPqknEp2K76gBaMq9Bg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.css">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css"
-	rel="stylesheet" />
-	
+	rel="stylesheet">
 
 
+
+<!-- <style th:replace="~{thyme/item/ViewOnlineItem :: style}"> -->
+<!-- </style> -->
 <style type="text/css">
-.ui.fixed.sticky + p {
-  margin-top: 39px;
+.ui.fixed.sticky+p {
+	margin-top: 39px;
 }
 
 .order {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
+	color: white;
+	background-color: transparent;
+	text-decoration: none;
 }
 
 .order:hover {
 	color: white;
-  	background-color: transparent;
-  	text-decoration: none;
+	background-color: transparent;
+	text-decoration: none;
 }
 
 .ui.attached.button {
@@ -46,37 +69,91 @@
 .ui.attached.left.button {
 	padding-left: 0px;
 	padding-right: 0px;
- 	text-align: center;
- 	width: 30px;
- 	vertical-align: middle;	
+	text-align: center;
+	width: 30px;
+	vertical-align: middle;
 }
 
 .ui.attached.right.button {
 	padding-left: 0px;
 	padding-right: 0px;
- 	text-align: center;
- 	width: 30px;
- 	vertical-align: middle;
+	text-align: center;
+	width: 30px;
+	vertical-align: middle;
 }
 
 #option {
-  	display: inline-flex;  
+	display: inline-flex;
 	vertical-align: middle;
- 	border: 0px; 
-  	line-height:35px;  
+	border: 0px;
+	line-height: 35px;
 	align-items: center;
 	text-align: center;
- 	width: 50px; 
+	width: 50px;
 }
 
 #option:focus {
 	outline: none;
-	box-shadow: 0 0 0 1px gray inset; 
+	box-shadow: 0 0 0 1px gray inset;
 	border-radius: 3px;
 }
 
+* {
+	/* 	border: 1px solid black; */
+	
+}
+
+.description p {
+	padding: 30px 0px 30px 0px;
+	text-align: center;
+}
+
+#online_name {
+	font-size: 1.5em;
+	padding-left: 10px;
+}
+
+.online_price {
+	font-size: 2rem;
+	font-weight: bolder;
+}
+
+#online_orgPrice {
+	font-size: 1.5rem;
+	color: lightgray;
+}
+
+.ui.labeled.button, #plus, #minus {
+	width: 40px;
+}
+
+.thumbs.up.outline {
+	position: relative;
+	left: -5px;
+}
+
+input[type=submit] {
+	width: 100%;
+}
 </style>
 
+
+<th:block th:fragment="scripts">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.js"></script>
+
+
+<!-- jQuery 1.8 or later, 33 KB -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+	type="text/javascript"></script>
+<!-- Fotorama from CDNJS, 19 KB -->
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	//옵션 수량 변경
 	function calc(btn) {
@@ -91,94 +168,293 @@
 		}
 	};
 </script>
+
+<script th:inline="javascript">
+var likeId;
+
+/*[# th:if="${userLike}"]*/
+	likeId = /*[[${userLike.likeId}]]*/ null;
+/*[/]*/
+/*[# th:unless="${userLike}"]*/
+	likeId = null;
+/*[/]*/
+
+function toggleLike(id) {
+	 /*<![CDATA[*/
+	if ([[${session.userSession}]] == null) {
+		alert("로그인 후 이용해주세요.");
+		return;
+	}
+		
+	var clicked;
+	if (id == 'plus') {
+		clicked = true;
+	} 
+	if (id == 'minus') {
+		clicked = false;
+	}
+	
+	var userLike = {
+			"likeId" : likeId,
+			"itemId" : /*[[${funding.itemId}]]*/ null, 
+			/*[# th:if="${session.userSession}"]*/
+			"userId" : /*[[${session.userSession.userId}]]*/ "", 
+			/*[/]*/
+			/*[# th:unless="${session.userSession}"]*/
+				"userId" : null, 
+			/*[/]*/
+			"clicked" : clicked
+		};
+
+	$.ajax({
+		url: "/item/toggleLike.json",
+	    type:"post",
+	    data: JSON.stringify(userLike),
+	    contentType: "application/json",
+	    success: function(data) {
+	        if (data == null) {
+    	        alert("다시 시도하세요.");
+	        } else {	
+	        	var likeNum = $('#likeNum').text();
+	        	likeId = data.likeId;
+	        	if(clicked == true) {
+	        		$('#plus').attr('class', 'ui red button');
+	        		$('#plus').attr('id', 'minus');
+	        		$('#likeNum').text(likeNum * 1 + 1);
+	        	} else {
+	        		$('#minus').attr('class', 'ui basic red button');
+	        		$('#minus').attr('id', 'plus');
+	        		$('#likeNum').text(likeNum * 1 - 1);
+	        	}
+	        }    	        
+	    },
+	    error: function() {
+	        alert("다시 시도하세요.");
+	    }
+	})
+}
+/*]]>*/
+</script>
+</th:block>
 <style>
 .notForSale {
- 	pointer-events: none; 
+	pointer-events: none;
+}
+
+#achieve {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+#remaining_time {
+	font-weight: bold;
 }
 </style>
 </head>
 <body>
+	<div class="wrap">
+		<div th:replace="thyme/Header :: header"></div>
+		<div class="row row-margin">
+			<div th:replace="thyme/Sidebar :: sidebar"></div>
+			<div class="col-7 base">
+				<!-- 상품 미리보기 -->
+				<div th:object="${funding}">
+					<div class="ui middle aligned grid">
+						<div class="two column row">
+							<div class="eight wide column">
+								<div id="fotorama" class="fotorama" data-width="300"
+									data-ratio="1" data-nav="thumbs" data-thumbheight="48"
+									data-allowfullscreen="true" data-loop="true">
+									<a href="#" th:href="@{*{thumbnail1Path}}"> <img src="#"
+										width="100" height="100" alt=""></a> <a
+										th:if="*{thumbnail2}" href="#" th:href="@{*{thumbnail2Path}}">
+										<img src="" width="144" height="96" alt="">
+									</a> <a th:if="*{thumbnail3}" href="#"
+										th:href="@{*{thumbnail3Path}}"> <img src="" height="96"
+										alt=""></a>
+								</div>
+							</div>
+							<div class="eight wide column">
+								<div class="ui middle aligned grid">
+									<div class="two column row">
+										<div class="left floated twelve wide column">
+											<div th:text="*{name}" id="online_name">솜솜</div>
+										</div>
 
-	<!-- 상품 미리보기 -->
-	<div th:object="${funding}">
-		<div th:replace="~{/thyme/item/ViewOnlineItem :: .fotorama}"></div>
-		<p><span th:text="*{name}">솜솜 쿠션!</span></p>
-		<p><span th:text="*{price} + '원'">30000원</span></p>
-		
-		<div class="ui labeled button" tabindex="0">
- 			<div class="ui basic red button">
-    		<i class="heart icon"></i> Like
-  			</div>
-  			<a class="ui basic red left pointing label"><span th:text="*{likeNum}">1048</span></a> <!-- 눌렀을 때 toggle 처리는 js로 & db에 어떻게 들어가게 할건지..? 누를 때마다 페이지가 새로고침될 순 없으니까 -->
-		</div>
-		
-		<div class="ui labeled button" tabindex="0">
- 			<div class="ui red button">
-    		<i class="heart icon"></i> Like
-  			</div>
-  			<a class="ui basic red left pointing label"><span th:text="*{likeNum}">1048</span></a> <!-- 눌렀을 때 toggle 처리는 js로 & db에 어떻게 들어가게 할건지..? 누를 때마다 페이지가 새로고침될 순 없으니까 -->
-		</div>
-		
-		<p>펀딩 종료 시간 <span th:text="*{finishDate}"></span></p>
-		<p><span id="remaining_time"> </span></p>
-		
-		<div class="ui indicating progress" data-value="60" th:attr="data-value=*{quantityPercentage}" data-total="100" id="example5">
-  			<div class="bar">
-  				<div class="progress"></div>
-  			</div>
-  			<div class="label"><span th:text="*{quantityPercentage} + '% 달성!'"></span></div>
-		</div>
-		
-		<p>
-			<span>목표 달성률 </span>
-			<span th:text="*{purchaseQuantity} + ' / ' + *{targetQuantity} + ' 개'">구매 수량 / 목표수량 개</span>
-		</p>
-	
-		<form action="#" th:action="@{/order/newFundOrder.do}" method="get">			
-			<input type="hidden" th:field="${funding.itemId}"/>
-			<p>
-			수량 
-			<div id="wrap_option">
-				<button type="button" class="left attached ui button" id="option_minus" onClick="calc(this)">-</button>
-				<input type="text" value="1" id="option" name="quantity" pattern="[0-9]+"/>
-				<button type="button" class="right attached ui button" id="option_plus" onClick="calc(this)">+</button>
-			</div>
-			<br>
-			<input th:if="*{isForSale}" class="ui large red button" type="submit" value="펀딩하기">
-			<input th:unless="*{isForSale}" class="ui large grey button notForSale" type="submit" value="펀딩하기">
-		</form>
-		
-		
-		<div class="ui segment">
-	  		<div class="ui sticky" style="width: 670px !important; height: 42.6px !important; left: 417.8px;">
-	    		<div class="ui fluid two item tabular menu">
-	      		<a class="active item" data-tab="description_tab">상세설명</a>
-	      		<a class="item" data-tab="refund_tab">환불 안내</a>
-	    		</div>
-			</div>
-			<div class="ui active tab">
-			    <div class="ui active tab" data-tab="description_tab">
-				    <p><a id="description">상세 설명 시작</a></p>
-				    <p><span th:text="*{description}"></span></p>
-				    
-				</div>
-				
-				<div class="ui tab" data-tab="refund_tab">
-				    <p><a id="refund">환불 안내 시작</a></p>
+										<div class="right floated four wide column">
+											<div
+												th:if="${session.userSession == null or 
+														(session.userSession != null and userLike == null) or 
+														(session.userSession != null and userLike != null and userLike.clicked == false)}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui basic red button" id="plus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													class="center aligned" id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+
+											<div
+												th:if="${session.userSession != null and userLike != null and userLike.clicked == true and funding.isForSale == 1}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui red button" id="minus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+
+											<div
+												th:if="${session.userSession != null and userLike != null and userLike.clicked == true}"
+												class="ui labeled button" tabindex="0">
+												<div class="ui red button" id="minus"
+													onClick="toggleLike(this.id)">
+													<i class="thumbs up outline icon"></i>
+												</div>
+												<a class="ui basic red left pointing label"><span
+													id="likeNum" th:text="*{likeNum}">추천수</span></a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="ui divider"></div>
+
+
+								<div class="column">
+									<span class="online_price" th:text="*{price} + '원'">정가</span>
+								</div>
+
+
+								<div class="ui divider"></div>
+
+
+								<div class="column">
+									펀딩 종료 시간 <span th:text="*{finishDate}"></span>
+								</div>
+
+								<br>
+
+								<div class="column">
+									<span id="remaining_time"> </span> <span id="time_next"></span>
+								</div>
+
+
+								<div class="ui divider"></div>
+
+
+								<div class="column">
+									<div class="progress mx-2">
+									  <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="*{quantityPercentage}" 
+									  	aria-valuemin="0" aria-valuemax="100" th:style="'width:' + *{quantityPercentage} + '%;'"></div>
+									</div>
+									<div class="d-flex justify-content-between align-items-center">
+										<span class= "mx-2 text-danger" style="text-align:left"  th:text="*{quantityPercentage} + '%'">목표 퍼센티지 </span>
+									</div>
+								</div>
+
+								<div class="column">
+									<span>목표 달성률 </span> <span id="achieve"
+										th:text="*{purchaseQuantity} + ' / ' + *{targetQuantity} + ' 개'">구매
+										수량 / 목표수량 개</span>
+								</div>
+
+
+								<div class="ui divider"></div>
+
+
+
+								<form action="#" th:action="@{/order/newFundOrder.do}"
+									method="get">
+									<input type="hidden" th:field="${funding.itemId}" />
+									<div class="column">
+										<p>수량
+										<div id="wrap_option">
+											<button type="button" class="left attached ui button"
+												id="option_minus" onClick="calc(this)">-</button>
+											<input type="text" value="1" id="option" name="quantity"
+												pattern="[0-9]+" />
+											<button type="button" class="right attached ui button"
+												id="option_plus" onClick="calc(this)">+</button>
+										</div>
+									</div>
+
+									<br>
+
+									<div class="column btn_funding">
+										<input th:if="*{isForSale}" class="ui huge red button"
+											type="submit" value="펀딩하기"> <input
+											th:unless="*{isForSale}"
+											class="ui huge grey button notForSale" type="submit"
+											value="펀딩하기">
+									</div>
+								</form>
+
+							</div>
+
+
+							<div class="ui segment">
+								<div class="ui sticky"
+									style="width: 100%; height: 42.6px !important; left: 417.8px;">
+									<div class="ui fluid two item tabular menu">
+										<a class="active item" data-tab="description_tab">상세설명</a> <a
+											class="item" data-tab="refund_tab">환불 안내</a>
+									</div>
+								</div>
+
+								<div class="ui active tab" data-tab="description_tab">
+									<br> <br> <br>
+									<p>
+										<span th:text="*{description}"></span>
+									</p>
+									<br> <br>
+								</div>
+
+								<div class="ui tab" data-tab="refund_tab">
+									<br> <br>
+									<p>
+										1. 온라인 창작물의 특성 상 한 번 다운로드 받은 이후에는 환불이 불가능함. <br><br> 2. 재화 등의
+										내용이 표시∙광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 그 재화 등을 공급받은 날부터 3개월
+										이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에 청약철회 등을 할 수 있으며 반품 비용은
+										판매자가 부담함. <br><br> 3. 단, 상품의 특성과 거래조건에 따라 청약철회가 일부 제한될 수 있으며
+										청약철회에 소요되는 비용이 다르게 책정될 수 있음 (상품 상세페이지 참조)<br><br> 4. 단순변심,
+										착오구매 등에 따른 청약철회가 불가능한 경우<br><br> 시간의 경과에 의하여 재판매가 곤란할 정도로 ‘재화
+										등’의 가치가 현저히 감소한 경우<br><br> 같은 성능을 지닌 ‘재화 등’으로 복제가 가능한 경우 그
+										원본인 ‘재화 등’의 포장을 훼손한 경우<br><br> 기타 개별 상품과 관련한 청약철회 기준은 상품
+										상세페이지 참조<br><br> 5. 미성년자가 구매계약을 체결하는 경우에는 법정대리인이 동의하지 않으면
+										미성년자 본인 또는 법정대리인이 계약을 취소할 수 있습니다.<br><br>
+									</p>
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
+	<div th:replace="thyme/Bottom :: footer"></div>
 	
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js" integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js" integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 	<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"
-	type="text/javascript"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+		integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sticky.min.js"
+		integrity="sha512-sWpXObBFGM42aj1IMnpgU4aUY5K3MYAmvR2QeVAo4zorR/IrNxIW1E9sAp95AKZ9TUGuxItlzCxZdLchz/rkoA=="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.js"
+		integrity="sha512-XKGavlXNr1OAZcYLtNBQA4oyuagTLY6t+bhOtR9PZNxSdFwGN+UX44izGw9+eDOnBHbf9sZJKEZ1OdVxNeXvaA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script th:inline="javascript">
 	$('.ui.sticky')
 	  .sticky()
@@ -211,9 +487,9 @@
 			var distDt = _vDate - now; 
 			
 			if (distDt < 0) { 
+				$('#time_next').text('펀딩이 종료 되었습니다.'); 
 				clearInterval(timer); 
 				$('#text_remain').text('');
-				document.getElementById(id).textContent = '펀딩이 종료 되었습니다.'; 
 				return; 
 			} 
 			
@@ -226,7 +502,8 @@
 			document.getElementById(id).textContent = days + '일 '; 
 			document.getElementById(id).textContent += hours + '시간 '; 
 			document.getElementById(id).textContent += minutes + '분 '; 
-			document.getElementById(id).textContent += seconds + '초 남았습니다.'; 
+			document.getElementById(id).textContent += seconds + '초 '; 
+			$('#time_next').text('남았습니다.'); 
 			
 			if (hours <= 0) {
 				$(id).css("color", "red");
