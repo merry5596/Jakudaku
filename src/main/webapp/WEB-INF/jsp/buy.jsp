@@ -87,7 +87,7 @@
 						</td>
 					</c:when>
 					<c:otherwise>
-						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.funding.thumbnail1}" style="width:100px; height:100px;"/></td>
+						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" ><img src="${l.funding.thumbnail1Path}" style="width:100px; height:100px;"/></td>
 						<td onclick="location.href='<c:url value="/item/viewFundingItem.do"><c:param name="itemId" value="${l.itemId}"/></c:url>'"; style="cursor:pointer;" >${l.funding.name}</td>
 						<td>
 						<c:if test = "${!l.funding.isFundingSuccess()}">
