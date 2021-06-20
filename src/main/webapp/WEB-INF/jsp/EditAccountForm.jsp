@@ -85,8 +85,12 @@
          </table>
          
          <br />
-         <input type="image" src="../images/button_submit.gif" name="submit"
-      value="Save Account Information" />
+         <c:if test="${accountForm.newAccount}">
+         	<button type="submit" class="btn btn-warning">가입</button>
+         </c:if>
+         <c:if test="${!accountForm.newAccount}">
+            <button type="submit" class="btn btn-warning">수정</button>
+         </c:if>
     </form:form>
     </div>
     </div>

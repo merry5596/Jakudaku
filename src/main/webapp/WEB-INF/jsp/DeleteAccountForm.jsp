@@ -25,8 +25,8 @@
          </td></tr></table>
          
          <br />
-         <button  type="submit" >탈퇴하기</button>
-		 <button  type="button" onclick="window.history.back();">취소</button>
+         <button class="btn btn-warning" type="submit" >탈퇴하기</button>
+		 <button class="btn btn-warning" type="button" onclick="window.history.back();">취소</button>
     </form:form>
     </div>
     </div>
