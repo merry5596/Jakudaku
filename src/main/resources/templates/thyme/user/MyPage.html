@@ -27,7 +27,7 @@ th, td {
 				반갑습니다 <span th:text=${userSession.alias}>사용자</span>님<br> 적립금 : <span
 					th:text=${userSession.mileage}>0</span>원<br>
 				<br>
-				<table style="table-layout: fixed; width: 139px; height: 200px">
+				<table style="table-layout: fixed; width: 100%; height: 100px; border:0px; text-align:center;">
 					<colgroup>
 						<col style="width: 200px; height: 200px">
 						<col style="width: 200px; height: 200px">
@@ -35,7 +35,7 @@ th, td {
 						<col style="width: 200px; height: 200px">
 					</colgroup>
 					<thead>
-						<tr>
+						<tr class="myPageTable">
 							<th onclick="location.href='/user/myPage/buy.do'"
 								; style="cursor: pointer;">구매내역조회</th>
 							<th onclick="location.href='/user/myPage/sell.do'"
@@ -49,7 +49,7 @@ th, td {
 				</table>
 				<br><br>
 				<p align="right" style="color: gray;">
-					<a href="/user/deleteAccount.do"><font
+					<a class="link-unstyled text-dark" href="/user/deleteAccount.do"><font
 							color="gray">탈퇴하기</font></a>
 				</p>
 		</div>

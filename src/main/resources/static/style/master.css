@@ -104,9 +104,9 @@ body{
 
 
 .make-me-sticky {
-  position: -webkit-sticky;
+  	position: -webkit-sticky;
 	position: sticky;
-	top: 0;
+	top: 50px;
     
   padding: 0 15px;
 }
@@ -231,4 +231,13 @@ body{
 .slide img {
   width: 25%;
   float: left;
+}
+
+.myPageTable th {
+  box-shadow: 0 5px 5px #EEE inset, 0 -3px 7px #EEE inset;
+  border: 0px;
+  padding: 2px 2px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  min-height: 1em;
 }
