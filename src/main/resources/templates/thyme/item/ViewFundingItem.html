@@ -34,7 +34,7 @@
 	integrity="sha512-8Tb+T7SKUFQWOPIQCaLDWWe1K/SY8hvHl7brOH8Nz5z1VT8fnf8B+9neoUzmFY3OzkWMMs3OjrwZALgB1oXFBg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/progress.min.css" integrity="sha512-6I1aA3gZvj26Zhs+6AodMBFBQlQzixuqGIt3FS+LrV/+E5mepzifvf1w7skWCYoJm1uuK0lpZwH/8tp6FpflTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/label.min.css" integrity="sha512-bLGTFSFKewLG/ltHL52mMtuviUCuHlohn0410iUawDPbjvAONDt0yZ6vLkXfiFOIS9LxPqknEp2K76gBaMq9Bg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/semantic.min.css">
 <link
@@ -43,8 +43,8 @@
 
 
 
-<style th:replace="~{thyme/item/ViewOnlineItem :: style}">
-</style>
+<!-- <style th:replace="~{thyme/item/ViewOnlineItem :: style}"> -->
+<!-- </style> -->
 <style type="text/css">
 .ui.fixed.sticky+p {
 	margin-top: 39px;
@@ -101,6 +101,35 @@
 * {
 	/* 	border: 1px solid black; */
 	
+}
+
+.description p {
+	padding: 30px 0px 30px 0px;
+	text-align: center;
+}
+
+#online_name {
+	font-size: 1.5em;
+	padding-left: 10px;
+}
+
+.online_price {
+	font-size: 2rem;
+	font-weight: bolder;
+}
+
+#online_orgPrice {
+	font-size: 1.5rem;
+	color: lightgray;
+}
+
+.ui.labeled.button, #plus, #minus {
+	width: 40px;
+}
+
+.thumbs.up.outline {
+	position: relative;
+	left: -5px;
 }
 </style>
 
@@ -306,7 +335,7 @@ function toggleLike(id) {
 								<br>
 
 								<div class="column">
-									<span id="remaining_time"> </span> <span>남았습니다.</span>
+									<span id="remaining_time"> </span> <span id="time_next"></span>
 								</div>
 
 
@@ -457,9 +486,9 @@ function toggleLike(id) {
 			var distDt = _vDate - now; 
 			
 			if (distDt < 0) { 
+				$('#time_next').text('펀딩이 종료 되었습니다.'); 
 				clearInterval(timer); 
 				$('#text_remain').text('');
-				document.getElementById(id).textContent = '펀딩이 종료 되었습니다.'; 
 				return; 
 			} 
 			
@@ -473,6 +502,7 @@ function toggleLike(id) {
 			document.getElementById(id).textContent += hours + '시간 '; 
 			document.getElementById(id).textContent += minutes + '분 '; 
 			document.getElementById(id).textContent += seconds + '초 '; 
+			$('#time_next').text('남았습니다.'); 
 			
 			if (hours <= 0) {
 				$(id).css("color", "red");
