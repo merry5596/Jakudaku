@@ -7,118 +7,142 @@
     <script></script>
 </head>
 <script>
-	window.onload = function() {
-		if ('[[${order.paymentCost}]]' == 0) {
-			document.getElementById('paymentMethod').innerText = '전액 적립금 결제';
-		}
-	}
+   window.onload = function() {
+      if ('[[${order.paymentCost}]]' == 0) {
+         document.getElementById('paymentMethod').innerText = '전액 적립금 결제';
+      }
+   }
 </script>
 <body>
 <div class="wrap">
 <div th:replace="thyme/Header :: header"></div>
 <div class="row row-margin">
-	<div th:replace="thyme/Sidebar :: sidebar"></div>
-	<div class="col-7 base">
-		<div class="row">
-			<div class="col-md-12">
-	  			<div align="center">
-				  <b><span th:text="${message}"></span></b>
-				  <br><br>
-				  <h2 align="center">주문서</h2>
-				  
-				  <table style="width:100%; align:center;">
-				  	<tr>
-				  		<td style="text-align:left" colspan="5">
-				 			주문 번호: <span th:text="${order.orderId}">00000</span>
-				  			<br>주문 일자: <span th:text="${order.orderDate}">2020.01.01</span><br><br></td>
-				  	</tr>
-				    <tr>
-				      	<td colspan="5"><b>주문 상품 정보</b></td>
-				    </tr>
-				    <tr bgcolor="#CCCCCC">
-				      	<td style="text-align:center"><b>이미지</b></td>
-				 	  	<td style="text-align:center"><b>상품</b></td>
-					  	<td style="text-align:center"><b>판매가</b></td>
-					  	<td style="text-align:center"><b>할인</b></td>
-					  	<td style="text-align:center"><b>결제 금액</b></td>
-				    </tr>
-				    <tr th:each="lineItem : ${order.lineItems}" bgcolor="#EEEEEE">
-				    	<td style="width: 120px; height:120px"><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
-							<img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1Path}}"/></a>
-							<img th:unless="${message == ''}" style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1Path}}"/></td>
-				        <td><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
-				            <p th:text="${lineItem.online.name}">상품명</p></a>
-				        	<p  th:unless="${message == ''}" th:text="${lineItem.online.name}">상품명</p>
-				            <div>옵션: 
-				            	<span th:if="${lineItem.online.pcFile != null}">PC </span>
-					            <span th:if="${lineItem.online.tabletFile != null}">TABLET </span>
-					            <span th:if="${lineItem.online.phoneFile != null}">PHONE </span></div>
-				        <td style="text-align:center" th:text="${lineItem.online.price}">판매가</td>
-				        <td style="text-align:center" th:switch="${lineItem.saleState}">
-					        <p th:case="1">Time Sale</p>
-					        <p th:case="2">Battle Sale</p>
-					        <span th:text="'-' + ${lineItem.online.discount}">-0</span></td>
-				        <td style="text-align:center" th:text="${lineItem.online.salePrice}"><b>0</b></td>
-				    </tr>
-				    <tr bgcolor="#CCCCCC">
-				      <td style="text-align:right" colspan="5" th:text="'총 ' + ${order.totalPrice} + '원'">총 0원</td>
-				    </tr>
-				  </table>
-				  
-				  <br><br>
-				  
-				  <table style="width:100%; align:center;">
-				  	<tr>
-				      <td colspan="2"><b>결제 상세</b></td>
-				    </tr>
-				    <tr style="vertical-align:top">
-				      <td width="65%" height="200px">
-				      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-				      		<tr>
-				      			<td bgcolor="#CCCCCC">결제 수단</td>
-				      			<td id="paymentMethod">카드사 <span th:text="${order.cardType}">카드사</span>
-				      				<br>카드 번호 <span th:text="${order.creditCard}">00000</span>
-				      				<br>만료일(MM/YY) <span th:text="${order.expireDate}">00/00</span></td>
-				      		</tr>
-				      	</table>
-				      </td>
-				      <td height="200px">
-				      	<table width="100%" height="100%" bgcolor="#EEEEEE">
-				      		<tr>
-					      		<td>상품 금액</td>
-					      		<td>&nbsp;</td>
-					      		<td style="text-align:center" width="20%"><span th:text="${order.totalPrice}">0</span></td></tr>
-					      	<tr>
-								<td>세일</td>
-								<td>-</td>
-								<td style="text-align:center"><span th:text="${order.discountCost}">0</span></td></tr>
-						    <tr>
-						      	<td>적립금 사용</td>
-						      	<td>-</td>
-						    	<td style="text-align:center"><span th:text="${order.usedMileage}">0</span></td></tr>
-						    <tr>
-						    	<td colspan=3><hr></td>
-						    </tr>
-						    <tr>
-						      	<td>최종 결제 금액</td>
-						      	<td>&nbsp;</td>
-						      	<td style="text-align:center"><span th:text="${order.paymentCost}">원</span></td>
-						    </tr>
-						    <tr>
-						    	<td colspan=3 style="text-align:right">(<span th:text="${order.earningMileage}">0</span>원 적립)</td>
-				      		</tr>
-				      	</table>
-				      </td>
-				    </tr>
-				  </table>
-				  <br>
-				</div>
-				<div align="center">
-					<a href="#" th:href="@{/}">홈으로 돌아가기</a>
-				</div>
-			</div>
-		</div>
-	</div>
+   <div th:replace="thyme/Sidebar :: sidebar"></div>
+   <div class="col-7 base">
+      <div class="row">
+         <div class="col-md-12 mb-5 orderPage">
+              <div class="mt-3" align="center">
+<!--               <b><span  th:text="${message}" style = "color:#DB2828;"></span></b> -->
+              <br><br>
+              <h2 class="fw-bold" align="left" style = "color:#DB2828;">주문서</h2>
+              
+              <table class="table table-borderless">
+               <tr>
+                    <td style="text-align:left" colspan="5">
+                      <b>주문 번호</b> <span th:text="${order.orderId}">00000</span>
+                       <br><b>주문 일자</b> <span th:text="${order.orderDate}">2020.01.01</span><br><br></td>
+                 </tr>
+              </table>   
+              
+              <table class="table">
+                 <thead>
+                 <tr>
+                 <th colspan="5">주문 상품 정보</th>
+                 </tr>
+                  <tr>
+                        <th scope="col"></th>
+                        <th scope="col">상품</th>
+                       <th scope="col">판매가</th>
+                       <th scope="col">할인</th>
+                       <th scope="col">결제 금액</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  <tr th:each="lineItem : ${order.lineItems}">
+                      <td style="width: 120px; height:120px"><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+                        <img style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1Path}}"/></a>
+                        <img th:unless="${message == ''}" style="max-width: 100%; max-height: 100%;" th:src="@{${lineItem.online.thumbnail1Path}}"/></td>
+                       <td><a th:if="${message == ''}" href="" th:href="@{/item/viewOnlineItem.do(itemId=${lineItem.online.itemId})}">
+                           <p th:text="${lineItem.online.name}">상품명</p></a>
+                          <p  th:unless="${message == ''}" th:text="${lineItem.online.name}">상품명</p>
+                           <div>옵션: 
+                              <span th:if="${lineItem.online.pcFile != null}">PC </span>
+                              <span th:if="${lineItem.online.tabletFile != null}">TABLET </span>
+                              <span th:if="${lineItem.online.phoneFile != null}">PHONE </span></div>
+                       <td th:text="${lineItem.online.price}">판매가</td>
+                       <td th:switch="${lineItem.saleState}">
+                          <p th:case="1">Time Sale</p>
+                          <p th:case="2">Battle Sale</p>
+                          <span th:text="'-' + ${lineItem.online.discount}">-0</span></td>
+                       <td th:text="${lineItem.online.salePrice}"><b>0</b></td>
+                   </tr>
+                   <tr bgcolor="#DB2828" class= "text-white">
+                     <td class="fs-5 fw-bold" style="text-align:right" colspan="5" th:text="'총 ' + ${order.totalPrice} + '원'">총 0원</td>
+                   </tr>
+                 </tbody>
+               </table>
+              
+              <br><br>
+              <table class="table">
+                 <thead>
+                 <tr>
+                 <th colspan="2">결제 내역</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                    <tr>
+                        <td>결제 수단</td>
+                        <td id="paymentMethod">
+                           <div class="container">
+                                 <div class="row">
+                                    <div class="col">카드사</div>
+                                    <div class="col" th:text="${order.cardType}">카드사</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col">카드 번호</div>
+                                    <div class="col" th:text="${order.creditCard}"> 0 </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col">만료일(MM/YY)</div>
+                                    <div class="col" th:text="${order.expireDate}"> 0 </div>
+                                 </div>
+                              </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#CCCCCC">결제 상세</td>
+                        <td>
+                           <div class="container">
+                              <div class="row">
+                                 <div class="col">결제 금액</div>
+                                 <div class="col" th:text="${order.totalPrice}"> 0 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col">할인 적용</div>
+                                 <div class="col" th:text="${order.discountCost}"> 0 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col">적립금 사용</div>
+                                 <div class="col" th:text="${order.usedMileage}"> 0 </div>
+                              </div>
+                           </div>
+                        </td>
+                    </tr>
+                     <tr class="table-light">
+                           <td>최종 결제 금액</td>
+                           <td >
+                              <div class="container">
+                                 <div class="row">
+                                    <div class="col">&nbsp;</div>
+                                    <div class="col" >
+                                    <span th:text="${order.paymentCost} + '원'"></span>
+                                    (<span th:text="${order.earningMileage}">0</span>원 적립)
+                                    </div>
+                                 </div>
+                              </div>
+                           </td>
+                      </tr>
+                 </tbody>
+               </table>
+               
+              <br>
+            </div>
+            <div align="center">
+               <button type="button" class="btn btn-danger" onclick="location.href='/'"><b>홈으로 돌아가기</b></button>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 </div>
 <div th:replace="thyme/Bottom :: footer"></div>

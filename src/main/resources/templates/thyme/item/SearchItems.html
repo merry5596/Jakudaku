@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::script})">
+<head th:replace="thyme/Header :: head(~{::title}, ~{::link}, ~{::style}, ~{::#head_script})">
 <head>
 	<meta charset="UTF-8">  
 	<title>상품 통합 검색</title>
@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/tab.min.css" integrity="sha512-NxWghIwNoV7V1IAHt4HwVnmsG/FuuViHaXFP0tsZS0D9snWm4SLGSdfB5XogpAWYXabp2t+XY9L184PQg2IuEA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style></style>
-<script></script>
+<script id="head_script">
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -169,6 +170,14 @@
 	<script src="https://starratingjs.netlify.app/index.js"></script>
 	
 	<script th:inline="javascript">
+	
+	$(document).ready(function(){
+	    $('.ui.sticky')
+	 .sticky({
+	   context: '.segment'
+	 });
+	 })
+	 
   //리뷰 각각의 별점
     var onlineList = /*[[${onlineList}]]*/ null;
     $.each( onlineList, function(index, item) {
@@ -176,9 +185,9 @@
 		rateSystem("ratingStar" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
     });
     
-    $('.ui.sticky')
-	  .sticky()
-	;
+//     $('.ui.sticky')
+// 	  .sticky()
+// 	;
 	
 	$('.menu .item').tab();
     </script>

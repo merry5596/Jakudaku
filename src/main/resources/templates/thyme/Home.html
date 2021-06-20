@@ -245,13 +245,13 @@
     var newOnlineList = /*[[${newOnlineList}]]*/ null;
     $.each( newOnlineList, function(index, item) {
 	    var property=[{"rating": item.totalRate, "maxRating":"5", "minRating":"0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
-		rateSystem("ratingStar" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
+		rateSystem("ratingStar2" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
     });
     
     var bestOnlineList = /*[[${bestOnlineList}]]*/ null;
     $.each( bestOnlineList, function(index, item) {
 	    var property=[{"rating": item.totalRate, "maxRating":"5", "minRating":"0", "readOnly":"yes", "starImage":"https://starratingjs.netlify.app/star.png", "backgroundStarImage":"https://starratingjs.netlify.app/backgroundStar.png", "starSize":"16", "step":"0.5"}];
-		rateSystem("ratingStar2" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
+		rateSystem("ratingStar" + index, property, function(rating, ratingTargetElement){  ratingTargetElement.parentElement.parentElement.getElementsByClassName("ratingHolder")[0].innerHTML = rating; });
     });
     </script>
 </body>

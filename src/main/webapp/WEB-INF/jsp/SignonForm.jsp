@@ -51,7 +51,7 @@
 <!-- <div class="ui middle aligned center aligned grid"> -->
 <!--   <div class="column"> -->
 <!--     <h2 class="ui teal image header"> -->
-<!-- <!--       <img src="assets/images/logo.png" class="image"> --> 로고 삽입 -->
+<!-- <!--       <img th:src="@{/image/logo_square.png}" class="image"> --> 
 <!--       <div class="content"> -->
 <!--         자꾸다꾸 Log-in -->
 <!--       </div> -->
