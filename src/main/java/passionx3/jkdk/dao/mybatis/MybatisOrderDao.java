@@ -68,29 +68,25 @@ public class MybatisOrderDao implements OrderDao {
 	@Transactional
 	public int insertOrder(Order order) throws DataAccessException {  
     	order.setOrderId(sequenceDao.getOrderSequenceNextVal());
-    	// order 테이블에 insert
+    	
     	int result = orderMapper.insertOrder(order);
     	if (result == 0)
     		return 0;
 
-    	// lineitem 테이블에 insert
     	for (LineItem lineItem : order.getLineItems()) {
     		lineItem.setOrderId(order.getOrderId());
     		lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());
-    		// lineItem.setLineItemId(-3);
     		result = lineItemMapper.insertLineItem(lineItem);
     		if (result == 0)
     			return 0;
     	}
     	
-    	//적립금 사용했다면
     	if (order.getUsedMileage() > 0) {
     		result = accountMapper.useMileage(order.getUsedMileage(), order.getUserId());
     		if (result == 0)
     			return 0;
     	}
-    	
-    	// 적립금 받기
+    
     	result = accountMapper.getMileage(order.getEarningMileage(), order.getUserId());
     	if (result == 0)
 			return 0;
@@ -126,7 +122,7 @@ public class MybatisOrderDao implements OrderDao {
 					order.setIsOrder(true);
 					
 					List<LineItem> lineItemList = new ArrayList<LineItem>();
-					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
+					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) {						
 						LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 						lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
 						lineItemList.add(lineItem);
@@ -142,7 +138,7 @@ public class MybatisOrderDao implements OrderDao {
 					fundOrder.setIsOrder(false);
 
 					List<LineItem> lineItemList = new ArrayList<LineItem>();
-					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) { // lineItem에 item 객체 넣어주기							
+					for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) {							
 						LineItem lineItem = lineItemMapper.getLineItemsByOrderId(fundOrderId).get(a);
 						lineItem.setFunding(fundingMapper.getFundingItemById(lineItem.getItemId()));
 					
@@ -169,7 +165,7 @@ public class MybatisOrderDao implements OrderDao {
 				order.setIsOrder(true);
 
 				List<LineItem> lineItemList = new ArrayList<LineItem>();
-				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) { // lineItem에 item 객체 넣어주기							
+				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(orderId).size(); a++) {							
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(orderId).get(a);
 					lineItem.setOnline(onlineMapper.getOnlineItemById(lineItem.getItemId()));
 
@@ -191,7 +187,7 @@ public class MybatisOrderDao implements OrderDao {
 				fundOrder.setIsOrder(false);
 
 				List<LineItem> lineItemList = new ArrayList<LineItem>();
-				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) { // lineItem에 item 객체 넣어주기							
+				for(int a = 0; a < lineItemMapper.getLineItemsByOrderId(fundOrderId).size(); a++) {					
 					LineItem lineItem = lineItemMapper.getLineItemsByOrderId(fundOrderId).get(a);
 					lineItem.setFunding(fundingMapper.getFundingItemById(lineItem.getItemId()));
 					

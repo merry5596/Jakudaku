@@ -108,7 +108,6 @@ public class LineItem implements Serializable {
 		this.saleState = saleState;
 	}
 	
-	//method 추가
 	public int getDiscount() {
 		if (saleState == 0)
 			return 0;

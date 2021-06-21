@@ -28,7 +28,7 @@ public class SignonController{
 			Model model) throws Exception {
 		Account userSession = jkdkStore.getAccount(userId, password);
 		
-		if (userSession == null) {	// 로그인 정보 일치하지 않음
+		if (userSession == null) {
 			model.addAttribute("data", new Message(" 가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "/"));
 			return "thyme/utils/MessagePage";
 		}

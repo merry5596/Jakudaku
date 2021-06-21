@@ -20,7 +20,7 @@ public class ManagerViewController {
 	private jkdkFacade jkdk;
 	
 
-	@RequestMapping("/manager/myPage/onlineItem.do") 	//관리자 마이페이지의 default
+	@RequestMapping("/manager/myPage/onlineItem.do")
 	public String viewOnlineItem(ModelMap model) throws Exception {
 		List<Online> items = jkdk.getNotApprovedOnlineItems();
 		model.put("items", items);

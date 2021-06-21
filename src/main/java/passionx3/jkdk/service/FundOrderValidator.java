@@ -29,24 +29,22 @@ public class FundOrderValidator implements Validator {
 		errors.setNestedPath("fundOrder");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receiverName", "RECEIVER_NAME_REQUIRED", "받는 분 성함을 입력해주세요.");
 		
-		// zip
 		String zip = fundOrder.getZip();
-		if (zip == null || zip.trim().isEmpty()) {	// null
+		if (zip == null || zip.trim().isEmpty()) {
 			errors.rejectValue("zip", "ZIP_REQUIRED", "우편번호를 입력해주세요.");
 		}
-		else if (!Pattern.matches("^\\d{5}$", zip)) {	// type error
+		else if (!Pattern.matches("^\\d{5}$", zip)) {
 			errors.rejectValue("zip", "ZIP_INVALID", "우편 번호 형식에 맞지 않습니다.");
 		}
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "ADDRESS1_REQUIRED", "주소를 입력해주세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address2", "ADDRESS2_REQUIRED", "상세 주소를 입력해주세요.");
 		
-		// phone
 		String phone = fundOrder.getPhone();
-		if (phone == null || phone.trim().isEmpty()) {	// null
+		if (phone == null || phone.trim().isEmpty()) {
 			errors.rejectValue("phone", "PHONE_REQUIRED", "휴대폰 번호를 입력해주세요.");
 		}
-		else if (!Pattern.matches("^01[0-1]\\d{3,4}\\d{4}$", phone)) {	// type error
+		else if (!Pattern.matches("^01[0-1]\\d{3,4}\\d{4}$", phone)) {
 			errors.rejectValue("phone", "PHONE_INVALID", "휴대폰 번호 형식에 맞지 않습니다.");
 		}
 		
@@ -59,20 +57,19 @@ public class FundOrderValidator implements Validator {
 		
 		String creditCard = fundOrder.getCreditCard();
 				
-		if (creditCard == null || creditCard.trim().isEmpty()) {	// null
+		if (creditCard == null || creditCard.trim().isEmpty()) {
 			errors.rejectValue("creditCard", "CCN_REQUIRED", "카드 번호를 입력해주세요.");
 		}
-		else if (!Pattern.matches("^\\d{16}$", creditCard)) {	// type error
+		else if (!Pattern.matches("^\\d{16}$", creditCard)) {
 			errors.rejectValue("creditCard", "CCN_INVALID", "카드 번호 형식에 맞지 않습니다.");
 		}
 				
-		// Validate expireDate
 		String expireDate = fundOrder.getExpireDate();
 		
-		if (expireDate == null || expireDate.trim().isEmpty()) {	// null
+		if (expireDate == null || expireDate.trim().isEmpty()) {
 			errors.rejectValue("expireDate", "EXPIRY_DATE_REQUIRED", "카드 만료일을 입력해주세요.");
 		}
-		else if (!Pattern.matches("^(0[1-9]|1[0-2])/[0-9]{2}$", expireDate)) {	// type error
+		else if (!Pattern.matches("^(0[1-9]|1[0-2])/[0-9]{2}$", expireDate)) {
 			errors.rejectValue("expireDate", "EXPIRY_DATE_INVALID", "카드 만료일의 형식에 맞지 않습니다.");
 		} else {
 			StringTokenizer st = new StringTokenizer(expireDate, "/");
@@ -86,12 +83,11 @@ public class FundOrderValidator implements Validator {
 			int todayMonth = Integer.parseInt(st2.nextToken());
 			int todayYear = Integer.parseInt(st2.nextToken());
 			
-			if (expireYear < todayYear || (expireYear == todayYear && expireMonth < todayMonth)) {	// is expired
+			if (expireYear < todayYear || (expireYear == todayYear && expireMonth < todayMonth)) {
 				errors.rejectValue("expireDate", "EXPIRY_DATE_EXPIRED", "카드 만료일은 오늘 날짜보다 빠를 수 없습니다.");
 			}
 		}
 		
-		// Validate cardType
 		if (fundOrder.getCardType().equals("notSelected")) {
 			errors.rejectValue("cardType", "CARD_TYPE_REQUIRED", "카드 종류를 선택해주세요.");
 		}

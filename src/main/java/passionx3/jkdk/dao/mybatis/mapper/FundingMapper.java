@@ -63,7 +63,6 @@ public interface FundingMapper {
 			+ "values (#{funding.itemId}, TO_DATE(#{funding.finishDate}, 'YYYY/MM/DD HH24:MI'), #{funding.purchaseQuantity}, #{funding.targetQuantity})")
 	int registerFundingItem(@Param("funding") Funding funding);
 
-  // 여기부터 조건 검색
 	@Select("SELECT * FROM (SELECT a.*, ROWNUM AS rnum FROM (SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, I.PRICE, I.LIKENUM,"
 			+ " I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, TO_CHAR(F.FINISHDATE, 'YYYY/MM/DD HH24:MI:SS') AS FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"

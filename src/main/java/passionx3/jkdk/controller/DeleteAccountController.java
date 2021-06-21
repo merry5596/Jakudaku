@@ -46,10 +46,10 @@ public class DeleteAccountController {
 				jkdkStore.removeAccount(curAccount.getUserId());
 				session.removeAttribute("userSession");
 				session.invalidate();
-			} else {	// 패스워드가 일치하지 않음
+			} else {
 				return formViewName;
 			}
-		} catch (Exception ex) {	// db 오류
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return formViewName; 
 		}

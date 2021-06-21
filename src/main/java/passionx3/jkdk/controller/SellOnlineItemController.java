@@ -52,12 +52,12 @@ public class SellOnlineItemController {
 	
 	@ModelAttribute("themeList")
 	public List<Theme> getThemeList() { // accessor method
-		return jkdk.getAllThemes(); // view에 전달됨
+		return jkdk.getAllThemes();
 	}
 	
 	@ModelAttribute("categoryList")
 	public List<Category> getCategoryList() { // accessor method
-		return jkdk.getAllCategories(); // view에 전달됨
+		return jkdk.getAllCategories();
 	}
 	
 	@GetMapping("/item/sellOnlineItem.do")

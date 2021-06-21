@@ -313,8 +313,6 @@ public class jkdkImpl implements jkdkFacade {
 		if (r1 * r2 == 0)
 			return 0;
 		
-		
-		//펀딩 마감시 isForSale 자동 변경할 수 있도록 closeFunding 추가
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		Date finish = null;
 		try {

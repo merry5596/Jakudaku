@@ -51,7 +51,7 @@ public class SellFundingItemController {
 	
 	@ModelAttribute("themeList")
 	public List<Theme> getThemeList() { // accessor method
-		return jkdk.getAllThemes(); // view에 전달됨
+		return jkdk.getAllThemes();
 	}
 	
 	@GetMapping("/item/sellFundingItem.do")
@@ -81,7 +81,7 @@ public class SellFundingItemController {
 				jkdk.registerFundingItem(sellFundingForm.getFunding());
 			}
 		}
-		catch (Exception ex) { //추후에 수정
+		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return formViewName; 
 		}

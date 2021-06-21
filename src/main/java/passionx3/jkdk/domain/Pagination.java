@@ -1,9 +1,9 @@
 package passionx3.jkdk.domain;
 
 public class Pagination {
-	private int curPage;         //현재 페이지
-	private int itemPerPage;     //한 페이지에 들어있는 아이템의 수
-	private int totalItemCount;  //총 아이템 수
+	private int curPage;
+	private int itemPerPage;
+	private int totalItemCount;
 	private int pageUnit = 10;
 
 	public Pagination(int curPage, int itemPerPage, int totalItemCount) {

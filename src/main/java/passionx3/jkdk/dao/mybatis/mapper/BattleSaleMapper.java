@@ -13,7 +13,7 @@ import passionx3.jkdk.domain.BattleSale;
 @Mapper
 public interface BattleSaleMapper {
 	@Select("SELECT * FROM BATTLESALE WHERE openTime = #{openTime}")
-	BattleSale getBattleSale(@Param("openTime") String openTime); //가장 최근의 battle sale Get
+	BattleSale getBattleSale(@Param("openTime") String openTime);
 	
 	@Insert("INSERT INTO BattleSale (battlesaleId, itemId1, itemId2, votes1, votes2, openTime, closeTime) " + 
 			"SELECT #{battleSaleId}, #{itemId1}, #{itemId2}, 0, 0,  #{openTime}, #{closeTime} from dual " + 

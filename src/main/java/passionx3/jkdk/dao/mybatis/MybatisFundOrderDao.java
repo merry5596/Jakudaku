@@ -58,17 +58,14 @@ public class MybatisFundOrderDao implements FundOrderDao {
 	public int insertFundOrder(FundOrder fundOrder) throws DataAccessException {
     	fundOrder.setOrderId(sequenceDao.getOrderSequenceNextVal());
     	
-    	// fundOrder 필드 중 order 테이블 속성에 포함되는 것들의 정보를 order 테이블에 insert
     	int result = orderMapper.insertOrder(fundOrder);
     	if (result == 0)
     		return 0;
     	
-    	// 나머지 정보를 fundorder 테이블에 insert
     	result = fundOrderMapper.insertFundOrder(fundOrder);
     	if (result == 0)
     		return 0;
     	
-    	// lineitem 테이블에 insert
     	LineItem lineItem = fundOrder.getLineItem();
     	lineItem.setOrderId(fundOrder.getOrderId());
     	lineItem.setLineItemId(sequenceDao.getLineItemSequenceNextVal());

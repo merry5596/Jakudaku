@@ -21,7 +21,6 @@ public class MybatisOnlineDao implements OnlineDao {
 		return onlineMapper.getBestOnlineItemListforHome();
 	}
 
-	// online by category
 	@Override
 	public int getCountOfOnlineItemListByCategory(int categoryId, String keyword, int start, int end) {
 		return onlineMapper.getCountOfOnlineItemListByCategory(categoryId, keyword, start, end);

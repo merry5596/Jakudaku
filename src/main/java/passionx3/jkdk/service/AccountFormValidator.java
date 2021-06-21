@@ -51,26 +51,26 @@ public class AccountFormValidator implements Validator {
 		}
 		
 		String zip = account.getZip();
-		if (zip == null || zip.trim().isEmpty()) {	// null
+		if (zip == null || zip.trim().isEmpty()) {
 			errors.rejectValue("account.zip", "ZIP_REQUIRED", "우편번호를 입력해주세요.");
 		}
-		else if (!Pattern.matches("^\\d{5}$", zip)) {	// type error
+		else if (!Pattern.matches("^\\d{5}$", zip)) {
 			errors.rejectValue("account.zip", "ZIP_INVALID", "우편 번호 형식에 맞지 않습니다. (00000)");
 		}
 		
 		String phone = account.getPhone();
-		if (phone == null || phone.trim().isEmpty()) {	// null
+		if (phone == null || phone.trim().isEmpty()) {
 			errors.rejectValue("account.phone", "PHONE_REQUIRED", "휴대폰 번호를 입력해주세요.");
 		}
-		else if (!Pattern.matches("^01[0-1]\\d{3,4}\\d{4}$", phone)) {	// type error
+		else if (!Pattern.matches("^01[0-1]\\d{3,4}\\d{4}$", phone)) {
 			errors.rejectValue("account.phone", "PHONE_INVALID", "휴대폰 번호 형식에 맞지 않습니다. (01000000000)");
 		}
 		
 		String email = account.getEmail();
-		if (email == null || email.trim().isEmpty()) {	// null
+		if (email == null || email.trim().isEmpty()) {
 			errors.rejectValue("account.email", "EMAIL_REQUIRED", "이메일을 입력해주세요.");
 		}
-		else if (!Pattern.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$", email)) {	// type error
+		else if (!Pattern.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$", email)) {
 			errors.rejectValue("account.email", "EMAIL_INVALID", "이메일 형식에 맞지 않습니다.");
 		}
 	}

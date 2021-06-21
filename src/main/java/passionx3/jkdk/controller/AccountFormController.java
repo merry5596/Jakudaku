@@ -17,8 +17,6 @@ import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.AccountFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
 
-
-// 등록, 수정 둘 다 이곳에서
 @Controller
 @RequestMapping({"/user/newAccount.do","/user/editAccount.do"})
 public class AccountFormController {
