@@ -37,8 +37,6 @@ public abstract class Item implements Serializable {
 	private String thumbnail3;
 	
 	private MultipartFile[] mulThumbnail1;
-//	private MultipartFile mulThumbnail2;
-//	private MultipartFile mulThumbnail3;
 	
 	private int isForSale;
 	private String description;
@@ -68,9 +66,6 @@ public abstract class Item implements Serializable {
 	public Integer getThemeId() {
 		return themeId;
 	}
-//	public void setThemeId(int themeId) {
-//		this.themeId = themeId;
-//	}
 	public void setThemeId(Integer themeId) {
 		this.themeId = themeId;
 	}
@@ -129,20 +124,6 @@ public abstract class Item implements Serializable {
 	public void setMulThumbnail1(MultipartFile[] mulThumbnail1) {
 		this.mulThumbnail1 = mulThumbnail1;
 	}
-//	public MultipartFile getMulThumbnail2() {
-//		return mulThumbnail2;
-//	}
-//	public void setMulThumbnail2(MultipartFile mulThumbnail2) {
-//		this.mulThumbnail2 = mulThumbnail2;
-//	}
-//	public MultipartFile getMulThumbnail3() {
-//		return mulThumbnail3;
-//	}
-//	public void setMulThumbnail3(MultipartFile mulThumbnail3) {
-//		this.mulThumbnail3 = mulThumbnail3;
-//	}
-	
-	
 	public int getIsForSale() {
 		return isForSale;
 	}

@@ -1,10 +1,5 @@
 package passionx3.jkdk.dao.mybatis;
 
-
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +17,7 @@ public class MybatisFundingDao implements FundingDao {
 	private FundingMapper fundingMapper;
 
 	@Override
-	public List<Funding> getNewFundingItemList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Funding> getFundingItemList(String keyword, int sortBy, int start, int end) throws DataAccessException {
-//		Calendar cal= Calendar.getInstance ( );
-//		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-//		cal.setTime(new Date());
-//		String today = sDate.format(cal.getTime());
-		
 		if (sortBy == 1)
 			return fundingMapper.getFundingItemListOrderByUploadDate(keyword, start, end);
 		else if (sortBy == 2)
@@ -44,11 +28,6 @@ public class MybatisFundingDao implements FundingDao {
 
 	@Override
 	public List<Funding> getFundingItemListByTheme(int themeId, String keyword, int sortBy, int start, int end) throws DataAccessException {
-		Calendar cal= Calendar.getInstance ( );
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
-		cal.setTime(new Date());
-		String today = sDate.format(cal.getTime());
-		
 		if (sortBy == 1)
 			return fundingMapper.getFundingItemListByThemeOrderByUploadDate(themeId, keyword, start, end);
 		else if (sortBy == 2)
@@ -66,7 +45,6 @@ public class MybatisFundingDao implements FundingDao {
 	public int getCountOfFundingItemListByTheme(int themeId, String keyword, int start, int end) throws DataAccessException {
 		return fundingMapper.getCountOfFundingItemListByTheme(themeId, keyword, start, end);
 	}
-
 
 	@Override
 	public List<Funding> getFundingItemsByKeyword(String keyword) throws DataAccessException {

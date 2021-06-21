@@ -48,10 +48,6 @@ public class FundOrder extends Order implements Serializable {
 		lineItem = new LineItem(lineItems.size() + 1, funding, quantity);
 		totalPrice = funding.getPrice() * quantity;
 		
-		//creditCard = "0";
-		//expireDate = "12/03";
-		//cardType = "Visa";
-		
 		addLineItem(lineItem);
 		
 		discountCost = 0;

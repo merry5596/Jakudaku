@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import passionx3.jkdk.dao.ReviewDao;
 import passionx3.jkdk.dao.mybatis.mapper.OnlineMapper;
 import passionx3.jkdk.dao.mybatis.mapper.ReviewMapper;
-import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Review;
 
 @Transactional

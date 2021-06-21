@@ -6,7 +6,7 @@ import passionx3.jkdk.domain.TimeSale;
 
 public interface TimeSaleDao {
 	
-	TimeSale getTimeSale(String openTime) throws DataAccessException; //가장 최근의 Time Sale 가져오기
-	int insertTimeSale(int itemId, String openTime, String closeTime) throws DataAccessException; //TimeSale 설정
+	TimeSale getTimeSale(String openTime) throws DataAccessException;
+	int insertTimeSale(int itemId, String openTime, String closeTime) throws DataAccessException;
 	void updateNotSale(String date);
 }

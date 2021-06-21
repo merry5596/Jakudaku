@@ -28,15 +28,13 @@ public class SignonController{
 			Model model) throws Exception {
 		Account userSession = jkdkStore.getAccount(userId, password);
 		
-		if (userSession == null) {	// 로그인 정보 일치하지 않음
+		if (userSession == null) {
 			model.addAttribute("data", new Message(" 가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "/"));
 			return "thyme/utils/MessagePage";
 		}
 		
 		model.addAttribute("userSession", userSession);
 		
-		// 로그인 하기 직전 페이지로 이동
-		// forwardAction(이전 페이지) 값은 GET 요청 시 interceptor에서 form으로 보낸 뒤 POST 요청 시에 parameter로 받아오는 것
 		if (forwardAction != null)
 			return "redirect:" + forwardAction;
 		else 

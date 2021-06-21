@@ -26,140 +26,6 @@
 
 			<br>
 
-<%-- 			<form action='<c:url value="/order/newOrder.do?"/>' method="post"> --%>
-<!-- 				<table class="ui very basic collapsing celled table center aligned middle aligned" -->
-<!-- 					style="width: 100%;" id="cart"> -->
-<!-- 					<thead> -->
-<!-- 						<tr> -->
-<!-- 							<th>이미지</th> -->
-<!-- 							<th>상품</th> -->
-<!-- 							<th>판매가</th> -->
-<!-- 							<th>할인</th> -->
-<!-- 							<th>결제 금액</th> -->
-<!-- 							<th></th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<%-- 					<c:if test="${cart.numberOfItems == 0}"> --%>
-<!-- 						<tbody> -->
-<!-- 							<tr> -->
-<!-- 								<td style="text-align: center" colspan="6"> -->
-<!-- 									<div class="content"> -->
-<!-- 										<b>Your cart is empty.</b> -->
-<!-- 									</div> -->
-<!-- 								</td> -->
-<!-- 							</tr> -->
-<!-- 						</tbody> -->
-<%-- 					</c:if> --%>
-
-<!-- 					<tbody> -->
-<%-- 						<c:forEach var="cartItem" items="${cart.cartItemList.pageList}"> --%>
-<!-- 							<tr> -->
-<!-- 								<td style="width: 120px; height: 120px"><a -->
-<%-- 									href='<c:url value="/item/viewOnlineItem.do"> --%>
-<%-- 			                                <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'> --%>
-<%-- 										<img src="${cartItem.onlineItem.thumbnail1Path}" --%>
-<!-- 										style="max-width: 100%; max-height: 100%;" /> -->
-<!-- 								</a><span></span></td> -->
-<!-- 								<td><b> <a -->
-<%-- 										href='<c:url value="/item/viewOnlineItem.do"> --%>
-<%-- 			                                 <c:param name="itemId" value="${cartItem.onlineItem.itemId}"/></c:url>'> --%>
-<%-- 											<c:out value="${cartItem.onlineItem.name}" /> --%>
-<!-- 									</a> -->
-<!-- 										<div> -->
-<!-- 											옵션: -->
-<%-- 											<c:if test="${not empty cartItem.onlineItem.pcFile}">PC </c:if> --%>
-<%-- 											<c:if test="${not empty cartItem.onlineItem.tabletFile}">TABLET </c:if> --%>
-<%-- 											<c:if test="${not empty cartItem.onlineItem.phoneFile}">PHONE </c:if> --%>
-<!-- 										</div></td> -->
-<%-- 								<td style="text-align: center"><c:out --%>
-<%-- 										value="${cartItem.onlineItem.price}" /></td> --%>
-<%-- 								<td style="text-align: center"><c:if --%>
-<%-- 										test="${cartItem.onlineItem.saleState eq 1}">  --%>
-<!-- 															Time Sale -->
-<%-- 														<p>Time Sale</p>></c:if> <c:if --%>
-<%-- 										test="${cartItem.onlineItem.saleState eq 2}">  --%>
-<!-- 															Battle Sale -->
-<!-- 															<p>Battle Sale</p> -->
-<%-- 									</c:if> -<c:out value="${cartItem.onlineItem.discount}" /></td> --%>
-<%-- 								<td style="text-align: center"><c:out --%>
-<%-- 										value="${cartItem.onlineItem.salePrice}" /></td> --%>
-<!-- 								<td style="text-align: center"> -->
-<!-- 									<button type="button" class="ui red basic button"  -->
-<%-- 										onclick="location.href='/order/newOrder.do?itemId=' + ${cartItem.onlineItem.itemId}">구매</button> --%>
-									
-<!-- 									<button type="button" class="ui red basic button"  -->
-<%-- 										onclick="location.href='/order/removeItemFromCart.do?workingItemId=' + ${cartItem.onlineItem.itemId}">삭제 --%>
-<!-- 									</button> -->
-<!-- 								</td> -->
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-						
-				
-						
-<!-- 					<tr> -->
-<!-- 						<td colspan="6" style="font-size: 2.0rem;"> -->
-<!-- 						<br> -->
-<!-- 						<br> -->
-<!-- 							결제 예정 금액 &nbsp; &nbsp; &nbsp; -->
-<%-- 							<b><span style="color: red;font-size: 2.5rem"><c:out value="${cart.actualTotal}" />원</span></b> --%>
-							
-<!-- 						<br> -->
-<!-- 						<br> -->
-<!-- 						<br> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-			
-<!-- 			<div class="ui center aligned ten column grid"> -->
-<!-- 				<div class="five wide column"> -->
-<!-- 					<button type="submit" style="width:100%;" class="ui red huge button" >전체 구매</button> -->
-<!-- 				</div> -->
-<!-- 				<div class="five wide column"> -->
-<!-- 					<button type="button" style="width:100%;" class="ui basic huge red button"  -->
-<!-- 							onclick="location.href='/order/removeItemFromCart.do'">전체 삭제 -->
-<!-- 					</button> -->
-<!-- 				</div> -->
-<!-- 			</div>	 -->
-<!-- 			</form> -->
-			
-<!-- 			<br> -->
-<!-- 			<br> -->
-<!-- 				<div style="text-align: center"> -->
-<%-- 					<c:if test="${!cart.cartItemList.firstPage}"> --%>
-<%-- 						<a href='<c:url value="/order/viewCart.do?page=previousCart"/>'> --%>
-<!-- 							<font color="gray"><B>&lt;&lt; Prev</B></font> -->
-<!-- 						</a> -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test="${!cart.cartItemList.lastPage}"> --%>
-<%-- 						<a href='<c:url value="/order/viewCart.do?page=nextCart"/>'> <font --%>
-<!-- 							color="gray"><B>Next &gt;&gt;</B></font> -->
-<!-- 						</a> -->
-<%-- 					</c:if> --%>
-<!-- 				</div> -->
-
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
-
-
-
-
-
-<!-- <style> 
-  table {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  }
-</style>
-</HEAD>
-<BODY> -->
-
 <!-- 추후구현사항
 <table style="undefined;table-layout: fixed; width: 164px">
 <colgroup>
@@ -184,6 +50,7 @@
   </tr>
 </thead>
 </table> -->
+
 <a name = "online" />
 <h3>Online 상품 판매 목록</h3>
 <a href="#funding">Funding 상품 판매 목록 보기</a>
@@ -263,7 +130,6 @@
          <c:otherwise>승인대기</c:otherwise>
          </c:choose>
       </td>
-<%--       <td><button type="button" class="ui button" onClick="location.href='<c:url value="/item/sellFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'">수정</button></td> --%>
 
       </tr>
    </c:forEach>

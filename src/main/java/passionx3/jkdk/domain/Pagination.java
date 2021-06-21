@@ -1,9 +1,9 @@
 package passionx3.jkdk.domain;
 
 public class Pagination {
-	private int curPage;                 //현재 페이지
-	private int itemPerPage;     //한 페이지에 들어있는 아이템의 수
-	private int totalItemCount;         //총 아이템 수
+	private int curPage;
+	private int itemPerPage;
+	private int totalItemCount;
 	private int pageUnit = 10;
 
 	public Pagination(int curPage, int itemPerPage, int totalItemCount) {
@@ -11,22 +11,7 @@ public class Pagination {
 		this.itemPerPage = itemPerPage;
 		this.totalItemCount = totalItemCount;
 	}
-	
-//	public int getCurrentPage() {     //현재 위치한 페이지를 구합니다.
-//		int page = this.page;
-//		
-//		if (page < 1) {
-//			page = 1;
-//		}
-//		
-//		int pageCount = getPageCount();
-//		
-//		if (page > pageCount) {
-//			page = pageCount;
-//		}
-//		
-//		return page;
-//	}
+
 
 	public int getPageCount() {  // 총 몇 페이지
 		return (totalItemCount - 1) / itemPerPage + 1;
@@ -59,17 +44,6 @@ public class Pagination {
 		return getPageCount() / pageUnit + 1;
 	}
 	
-//	public int getPageBegin() {     //페이지 시작 위치를 구합니다.
-//		return ((getCurrentPage() - 1) / nextPage) * nextPage + 1;
-//	}
-//
-//	public int getPageEnd() {      //페이지 끝 위치를 구합니다.
-//		int pageCount = getPageCount();
-//		int num = getPageBegin() + nextPage - 1;
-//	
-//		return Math.min(pageCount, num);
-//	}
-
 	public int getCurPage() {
 		return curPage;
 	}
@@ -98,24 +72,4 @@ public class Pagination {
 		return pageUnit;
 	}
 
-//	public int getNextPage() {
-//		return nextPage;
-//	}
-//	
-//	public void setNextPage(int nextPage) {
-//		this.nextPage = nextPage;
-//	}
-//
-//	 
-//	public int getCurrentItem() {         //현재 몇번째 아이템인지 구합니다 (mysql의 limit에서 사용)
-//		return (page - 1) * itemPerPage ;
-//	}
-//
-//	public int getJumpNextPage() {    //다음으로 점프하는 페이지를 구합니다.
-//		return Math.min(getPageCount(), page + nextPage);
-//	}
-//
-//	public int getJumpPrevPage() {    //이전으로 점프하는 페이지를 구합니다.
-//		return Math.max(1, page - nextPage);
-//	}
 }

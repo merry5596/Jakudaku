@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.FundOrder;
-import passionx3.jkdk.domain.Order;
 import passionx3.jkdk.service.jkdkFacade;
 
 @Controller

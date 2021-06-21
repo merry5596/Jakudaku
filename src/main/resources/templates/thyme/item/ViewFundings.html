@@ -140,8 +140,7 @@
 				</div>
 
 
-				<!-- 페이징네이션-->
-								<!-- 페이징네이션-->
+				<!-- 페이지네이션-->
 				<div class=" text-center mt-4 position-relative">
 					<nav aria-label="Page navigation example pagination">
 						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewFundings.do(themeId=${themeId}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.beforeSectionLastPage})}" th:if="${pagination.curSection != 1}">&laquo;</a>
@@ -153,36 +152,7 @@
 						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewFundings.do(themeId=${themeId}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.nextSectionFirstPage})}" th:if="${pagination.curSection != pagination.lastSection}">&raquo;</a>
 						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == pagination.lastSection}">&raquo;</a>
 					</nav>
-					
-					<!-- 테스트 -->
-					<!-- 
-					<span th:text="'현재페이지:' + ${pagination.curPage}"></span>
-					<span th:text="'한페이지아이템수:' + ${pagination.itemPerPage}"></span>
-					<span th:text="'총아이템수:' + ${pagination.totalItemCount}"></span>
-					<span th:text="'페이지단위:' + ${pagination.pageUnit}"></span>
-					<span th:text="'총페이지수:' + ${pagination.pageCount}"></span>
-					<span th:text="'현재섹션:' + ${pagination.curSection}"></span>
-					<span th:text="'섹션시작페이지:' + ${pagination.sectionStartPage}"></span>
-					<span th:text="'섹션끝페이지:' + ${pagination.sectionEndPage}"></span>
-					<span th:text="'다음섹션시작페이지:' + ${pagination.nextSectionFirstPage}"></span>
-					<span th:text="'이전섹션끝페이지:' + ${pagination.beforeSectionLastPage}"></span>
-					<span th:text="'마지막섹션번호:' + ${pagination.lastSection}"></span> -->
 				</div>
-<!-- 				<div class=" text-center mt-4 position-relative">
-					<nav aria-label="Page navigation example">
-						<ul class="justify-content-center pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav>
-				</div> -->
 			</div>
 		</div>
 	</div>

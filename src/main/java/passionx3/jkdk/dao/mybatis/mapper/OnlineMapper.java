@@ -1,23 +1,5 @@
 package passionx3.jkdk.dao.mybatis.mapper;
 
-/*
- *    Copyright 2010-2013 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -74,7 +56,7 @@ public interface OnlineMapper {
 			"FROM item i, onlineitem o, account a, theme t, category c " + 
 			"WHERE i.itemid = o.itemid AND i.userId = a.userId AND i.themeId = t.themeId AND o.categoryId = c.categoryId " + 
 			"AND i.itemId = #{itemId}")
-	Online getOnlineItemById(@Param("itemId") int itemId); //효진 수정(상품 클릭해서 상품 상세 페이지로 넘어갈 때)
+	Online getOnlineItemById(@Param("itemId") int itemId);
 
 
 	@Select("SELECT itemID, name, uploaddate, price, totalrate, likenum, thumbnail1, categoryname, pcfile, tabletfile, phonefile, themeid, themename, userid FROM " + 
@@ -107,8 +89,6 @@ public interface OnlineMapper {
 	
 	@Update("UPDATE onlineitem SET salestate = 0 WHERE itemid = #{itemId}")
 	int updateOnlineItemSaleState(@Param("itemId") int itemId) throws DataAccessException;
-
-	// 여기부터 조건 검색
 
 	@Select("SELECT count(*) FROM (SELECT i.itemId AS itemId, i.name, uploaddate, price, likenum, thumbnail1, isforsale, o.categoryid, t.name as themeName, description, i.themeid, userid, pcFile, tabletFile, phoneFile, totalrate, salestate"
 			+ " FROM ONLINEITEM o, item i, theme t"

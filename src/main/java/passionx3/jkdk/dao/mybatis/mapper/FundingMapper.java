@@ -1,21 +1,5 @@
 package passionx3.jkdk.dao.mybatis.mapper;
 
-/*
- *    Copyright 2010-2013 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -79,7 +63,6 @@ public interface FundingMapper {
 			+ "values (#{funding.itemId}, TO_DATE(#{funding.finishDate}, 'YYYY/MM/DD HH24:MI'), #{funding.purchaseQuantity}, #{funding.targetQuantity})")
 	int registerFundingItem(@Param("funding") Funding funding);
 
-  // 여기부터 조건 검색
 	@Select("SELECT * FROM (SELECT a.*, ROWNUM AS rnum FROM (SELECT I.ITEMID, I.USERID AS PRODUCERID, A.ALIAS AS PRODUCERNAME, I.THEMEID, T.NAME AS THEMENAME, I.NAME, TO_CHAR(I.UPLOADDATE, 'YYYY/MM/DD HH24:MI:SS') AS UPLOADDATE, I.PRICE, I.LIKENUM,"
 			+ " I.THUMBNAIL1, I.THUMBNAIL2, I.THUMBNAIL3, I.ISFORSALE, I.DESCRIPTION, I.APPROVAL, TO_CHAR(F.FINISHDATE, 'YYYY/MM/DD HH24:MI:SS') AS FINISHDATE, F.PURCHASEQUANTITY, F.TARGETQUANTITY"
 			+ " FROM ITEM I, FUNDINGITEM F, THEME T, ACCOUNT A"

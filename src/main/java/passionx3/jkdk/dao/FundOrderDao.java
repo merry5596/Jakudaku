@@ -5,8 +5,8 @@ import java.util.List;
 import passionx3.jkdk.domain.FundOrder;
 
 public interface FundOrderDao {
-	List<FundOrder> getFundOrdersByUserId(String userId);    	// 사용자별 펀딩 상품 주문 list 반환
-	FundOrder getFundOrderByOrderId(int orderId);	// orderId로 FundOrder 반환
-	int insertFundOrder(FundOrder fundOrder); 	// Fundorder 레코드 추가
+	List<FundOrder> getFundOrdersByUserId(String userId);
+	FundOrder getFundOrderByOrderId(int orderId);
+	int insertFundOrder(FundOrder fundOrder);
 }
 
