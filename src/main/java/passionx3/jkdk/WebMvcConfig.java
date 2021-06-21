@@ -25,7 +25,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		// registry.addViewController("/shop/index.do").setViewName("Home");
 		registry.addViewController("/user/signonForm.do").setViewName("SignonForm");
 	}
 	
@@ -46,7 +45,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/thumbnail/**")
-                .addResourceLocations("file:///C:/jkdk/upload/"); //리눅스 root에서 시작하는 폴더 경로
+                .addResourceLocations("file:///C:/jkdk/upload/");
     }
 	
 	@Bean

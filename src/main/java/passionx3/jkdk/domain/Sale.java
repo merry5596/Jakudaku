@@ -1,7 +1,6 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Sale implements Serializable {

@@ -1,10 +1,7 @@
 package passionx3.jkdk.domain;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class Order implements Serializable {
 	public Order() { }
 
 	public Order(int orderId, String orderDate, int totalPrice, String creditCard, String expireDate, String cardType,
-			int discountCost, int usedMileage, String userId) {
+		int discountCost, int usedMileage, String userId) {
 		lineItems = new ArrayList<LineItem>();
 		
 		this.orderId = orderId;
@@ -44,18 +41,8 @@ public class Order implements Serializable {
 		lineItems = new ArrayList<LineItem>();
 		
 		userId = account.getUserId();
-		
-//		Calendar cal= Calendar.getInstance ( );
-//		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
-//		cal.setTime(new Date());
-//		String today = sDate.format(cal.getTime());
-//		orderDate = today;
 
 		totalPrice = (int) cart.getSubTotal();
-		
-		//creditCard = "0";
-		//expireDate = "12/03";
-		//cardType = "Visa";
 		
 		Iterator<CartItem> i = cart.getAllCartItems();
 		while (i.hasNext()) {

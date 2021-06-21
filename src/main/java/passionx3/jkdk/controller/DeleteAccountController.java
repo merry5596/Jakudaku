@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
 
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.service.jkdkFacade;
@@ -30,10 +29,7 @@ public class DeleteAccountController {
 	@ModelAttribute("DeleteAccountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
-		Account userSession = 
-			(Account) WebUtils.getSessionAttribute(request, "userSession");
-		
-			return new AccountForm();
+		return new AccountForm();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

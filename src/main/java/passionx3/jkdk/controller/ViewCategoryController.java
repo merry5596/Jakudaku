@@ -2,10 +2,7 @@ package passionx3.jkdk.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Category;
-import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Item;
 import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Pagination;
 import passionx3.jkdk.domain.Theme;

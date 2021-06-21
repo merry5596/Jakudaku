@@ -77,7 +77,6 @@ public class Online extends Item implements Serializable {
 		this.totalRate = totalRate;
 	}
 	
-	//method 추가
 	public int getDiscount() {
 		if (saleState == 0)
 			return 0;

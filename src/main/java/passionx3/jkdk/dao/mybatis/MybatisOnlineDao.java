@@ -1,6 +1,5 @@
 package passionx3.jkdk.dao.mybatis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,6 @@ public class MybatisOnlineDao implements OnlineDao {
 	@Override
 	public List<Online> getBestOnlineItemListforHome() throws DataAccessException {
 		return onlineMapper.getBestOnlineItemListforHome();
-	}
-
-	@Override
-	public List<Online> getNewOnlineItemList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	// online by category
@@ -119,12 +112,6 @@ public class MybatisOnlineDao implements OnlineDao {
 	}
 
 	@Override
-	public void setWatermark(String fileAddr) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public List<Online> getNotApprovedOnlineItems() throws DataAccessException {
 		return onlineMapper.getNotApprovedOnlineItems();
 	}
@@ -142,12 +129,6 @@ public class MybatisOnlineDao implements OnlineDao {
 	@Override
 	public List<Integer> getOnlineItemIdByCategoryforSale(int categoryId) throws DataAccessException {
 		return onlineMapper.getOnlineItemIdByCategoryforSale(categoryId);
-	}
-
-	@Override
-	public List<Online> getBestOnlineItemList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

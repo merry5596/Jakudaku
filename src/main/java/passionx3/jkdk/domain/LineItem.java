@@ -12,7 +12,6 @@ public class LineItem implements Serializable {
 	int isDownloaded;
 	int unitPrice;
 	String uploadDate;
-	// 지워도?
 	Item item;
 	int saleState;
 	int itemId;
@@ -23,11 +22,11 @@ public class LineItem implements Serializable {
 	}
 		
 	public LineItem(int lineItemId, int orderId, int lineNumber, int quantity, int isDownloaded, 
-			int unitPrice, Item item, int saleState) {
+		int unitPrice, Item item, int saleState) {
   		this.lineItemId = lineItemId;
-		  this.orderId = orderId;
-		  this.lineNumber = lineNumber;
-		  this.quantity = quantity;
+		this.orderId = orderId;
+		this.lineNumber = lineNumber;
+		this.quantity = quantity;
 	  	this.isDownloaded = isDownloaded;
 	  	this.unitPrice = unitPrice;
 	  	this.item = item;
@@ -39,11 +38,9 @@ public class LineItem implements Serializable {
 		this.itemId = cartItem.getOnlineItem().getItemId();
 	    this.lineNumber = lineNumber;
 	    this.online = cartItem.getOnlineItem();
-	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
 		this.isDownloaded = 0;	// 여기서 설정?
 	    this.unitPrice = cartItem.getOnlineItem().getPrice();
 	    
-	    //추가?
 	    this.quantity = 1;
 	    this.saleState = cartItem.getOnlineItem().getSaleState();
 	  }
@@ -53,11 +50,9 @@ public class LineItem implements Serializable {
 		this.itemId = funding.getItemId();
 	    this.lineNumber = lineNumber;
 	    this.funding = funding;
-	    // this.item.setItemId(cartItem.getOnlineItem().getItemId());
-		this.isDownloaded = 0;	// 여기서 설정?
+		this.isDownloaded = 0;
 	    this.unitPrice = funding.getPrice();
 	    
-	    //추가?
 	    this.quantity = quantity;
 	    this.saleState = 0;
 	}

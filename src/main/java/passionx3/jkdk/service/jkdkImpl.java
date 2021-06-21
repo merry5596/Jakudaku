@@ -69,7 +69,7 @@ public class jkdkImpl implements jkdkFacade {
 	@Autowired
 	private LikeRepository likeRepo;
   
-	@Autowired    // task scheduler 객체를 주입 받음
+	@Autowired
 	private ThreadPoolTaskScheduler scheduler;
 	
 	@Autowired
@@ -78,14 +78,13 @@ public class jkdkImpl implements jkdkFacade {
 	public void closeFunding(int itemId, Date closingTime) {
 		Runnable updateTableRunner = new Runnable() { 
 		@Override
-		public void run() {   // 스케줄러에 의해 미래의 특정 시점에 실행될 작업을 정의    
+		public void run() {    
 			Date curTime = new Date();
 			fundingDao.closeFunding(itemId);
 			System.out.println("updateTableRunner is executed at " + curTime);
 			}
 		};
-		  
-		// task schedule 생성: closingTime에 updateTableRunner.run() 메소드가 자동 실행됨
+
 		scheduler.schedule(updateTableRunner, closingTime);   
 	}
 	
@@ -111,13 +110,11 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public int removeAccount(String userId) {
-		// TODO Auto-generated method stub
 		return accountDao.removeAccount(userId);
 	}
 	
 	@Override
 	public int existingUser(String userId) {
-		// TODO Auto-generated method stub
 		return accountDao.existingUser(userId);
 	}
 
@@ -154,12 +151,6 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public List<Review> getReviewsByItemId(int itemId) {
 		return reviewDao.getReviewsByItemId(itemId);
-	}
-
-	@Override
-	public Review getReviewById(int reviewId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -223,18 +214,6 @@ public class jkdkImpl implements jkdkFacade {
 	@Override
 	public List<Online> getBestOnlineItemListforHome() {
 		return onlineDao.getBestOnlineItemListforHome();
-	}
-
-	@Override
-	public List<Online> getNewOnlineItemList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Funding> getNewFundingItemList() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -546,4 +525,5 @@ public class jkdkImpl implements jkdkFacade {
 			waterMarkUtil.setWaterMarkFile(item.getProducerName(), item.getThumbnail3());
 		}
 	}
+
 }

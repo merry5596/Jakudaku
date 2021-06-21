@@ -76,7 +76,6 @@ public class MybatisFundOrderDao implements FundOrderDao {
     	if (result == 0)
     		return 0;
     	
-    	// funding 상품 purchaseQuantity +1
     	fundingMapper.updatePurchaseQuantity(fundOrder.getLineItem().getItemId(), fundOrder.getLineItem().getQuantity());
     	
     	return 1;

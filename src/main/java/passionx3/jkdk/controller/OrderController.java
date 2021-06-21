@@ -50,7 +50,7 @@ public class OrderController {
 			) throws ModelAndViewDefiningException {
 		Account userSession = (Account) request.getSession().getAttribute("userSession");
 		// Re-read account from DB at team's request.
-		Account account = jkdkStore.getAccount(userSession.getUserId());	//변경함
+		Account account = jkdkStore.getAccount(userSession.getUserId());
 		
 		if (itemId != null) {	// 개별 구매
 			Online item = (Online) jkdkStore.getOnlineItemById(Integer.parseInt(itemId));
@@ -89,7 +89,7 @@ public class OrderController {
 			int dbResult = jkdkStore.insertOrder(orderForm.getOrder());
 			
 			if (dbResult < 1) {
-				return new ModelAndView("thyme/order/NewOrder");	// message는 아직은...
+				return new ModelAndView("thyme/order/NewOrder");
 			}
 			
 			Order order = jkdkStore.getOrderByOrderId(orderForm.getOrder().getOrderId());
@@ -104,25 +104,5 @@ public class OrderController {
 			return mav;
 	}
 
-	// test 후 삭제
-	@RequestMapping("/order/test.do")
-	public ModelAndView test(HttpServletRequest request,
-			@ModelAttribute("orderForm") OrderForm orderForm, 
-			BindingResult result, SessionStatus status) {
-		
-			// from NewOrderForm
-			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
-
-			if (result.hasErrors())
-				return new ModelAndView("thyme/order/NewOrder");
-
-			Order o = jkdkStore.getOrderByOrderId(-2);
-						
-			ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");
-			mav.addObject("order", o);
-			mav.addObject("message", "주문이 완료되었습니다.");
-			status.setComplete();  // remove sessionCart and orderForm from session
-			return mav;
-	}
 	
 }

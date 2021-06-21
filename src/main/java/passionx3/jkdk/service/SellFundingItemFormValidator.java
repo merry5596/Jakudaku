@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import passionx3.jkdk.controller.SellFundingForm;
 import passionx3.jkdk.domain.Funding;
 /**
  * @author Juergen Hoeller
@@ -19,9 +18,6 @@ public class SellFundingItemFormValidator implements Validator {
 	}
 
 	public void validate(Object obj, Errors errors) {
-		SellFundingForm sellFundingForm = (SellFundingForm)obj; 
-		Funding funding = sellFundingForm.getFunding();
-
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.themeId", "THEME_REQUIRED", "테마를 선택하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.name", "NAME_REQUIRED", "상품명을 입력하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funding.price", "PRICE_REQUIRED", "판매 가격을 입력하세요.");

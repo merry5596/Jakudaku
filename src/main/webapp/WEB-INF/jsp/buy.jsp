@@ -89,14 +89,12 @@
 								<c:param name="fileName" value="${l.online.pcFile}"/></c:url>'">pc용 &nbsp;&nbsp;<i class="download icon"></i></button>
 							</c:if>
 							<c:if test="${not empty l.online.tabletFile}">
-<%-- 								<a href="${l.online.tabletFile}" download><button>테블릿용 다운로드</button></a> --%>
 								<button class="ui red inverted circular button" onclick="location.href='<c:url value="/item/download.do">
 								<c:param name="itemId" value="${l.itemId}"/>
 								<c:param name="uploadDate" value="${l.uploadDate}"/>
 								<c:param name="fileName" value="${l.online.tabletFile}"/></c:url>'">태블릿용 &nbsp;&nbsp;<i class="download icon"></i></button>
 							</c:if>	
 							<c:if test="${not empty l.online.phoneFile}">
-<%-- 								<a href="${l.online.phoneFile}" download><button>모바일용 다운로드</button></a> --%>
 								<button class="ui red inverted circular button" onclick="location.href='<c:url value="/item/download.do">
 								<c:param name="itemId" value="${l.itemId}"/>
 								<c:param name="uploadDate" value="${l.uploadDate}"/>

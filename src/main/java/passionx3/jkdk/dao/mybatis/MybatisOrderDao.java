@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,6 @@ public class MybatisOrderDao implements OrderDao {
 	@Transactional
 	public int insertOrder(Order order) throws DataAccessException {  
     	order.setOrderId(sequenceDao.getOrderSequenceNextVal());
-    	// order.setOrderId(-3);
     	// order 테이블에 insert
     	int result = orderMapper.insertOrder(order);
     	if (result == 0)
@@ -105,7 +103,6 @@ public class MybatisOrderDao implements OrderDao {
 		return orderMapper.getOrdersByUserId(userId);
 	}
 	
-	// 재아 파트
 	@Override
 	public Map<String, List<Order>> getLineItemsByUserId(String userId) {
 		List<Order> onlineList = orderMapper.getOrdersByUserId(userId);

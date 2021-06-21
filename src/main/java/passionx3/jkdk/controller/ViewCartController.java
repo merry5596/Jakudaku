@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import passionx3.jkdk.domain.Cart;
-import passionx3.jkdk.domain.CartItem;
 
 @Controller
 @SessionAttributes("sessionCart")

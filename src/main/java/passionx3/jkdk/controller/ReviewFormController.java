@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import passionx3.jkdk.service.jkdkFacade;
-import passionx3.jkdk.dao.mybatis.mapper.ItemMapper;
-import passionx3.jkdk.dao.mybatis.mapper.LineItemMapper;
 import passionx3.jkdk.dao.mybatis.mapper.OnlineMapper;
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Item;

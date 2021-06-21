@@ -55,7 +55,7 @@ public class MyPageController {
 		
 		String userId = account.getUserId();
 		
-		Map<String, List<Order>> orderMap = jkdk.getLineItemsByUserId(userId); //dao 인터페이스에 추가해야 할 메소드
+		Map<String, List<Order>> orderMap = jkdk.getLineItemsByUserId(userId);
 
 		model.put("orderMap", orderMap);
 		

@@ -17,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import passionx3.jkdk.service.SellFundingItemFormValidator;
 import passionx3.jkdk.service.jkdkFacade;
 import passionx3.jkdk.util.FileUtils;
 import passionx3.jkdk.domain.Account;
-import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Funding;
-import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
@@ -40,12 +37,6 @@ public class SellFundingItemController {
 
 	@Autowired
 	private FileUtils fileUtils;
-	
-	@Autowired
-	private SellFundingItemFormValidator validator;
-	public void setValidator(SellFundingItemFormValidator validator) {
-		this.validator = validator;
-	}
 	
 	@ModelAttribute("sellFundingForm")
 	public SellFundingForm formBackingObject(HttpServletRequest request) throws Exception {
@@ -74,7 +65,6 @@ public class SellFundingItemController {
 			@Valid @ModelAttribute("sellFundingForm") SellFundingForm sellFundingForm,
 			BindingResult result,
 			@RequestParam(value="thumbnail1", required=false) MultipartFile[] thumbnail) throws Exception {
-//		validator.validate(sellFundingForm, result);
 		
 		if (result.hasErrors()) return formViewName;
 		try {
@@ -93,9 +83,6 @@ public class SellFundingItemController {
 		}
 		catch (Exception ex) { //추후에 수정
 			System.out.println(ex.getMessage());
-
-//			result.rejectValue("account.username", "FUNDINGITEM_SELL_FAIL",
-//					"처리하지 못했습니다. 다시 시도해주세요.");
 			return formViewName; 
 		}
 		

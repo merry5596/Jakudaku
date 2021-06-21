@@ -5,7 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import passionx3.jkdk.controller.ReviewForm;
 import passionx3.jkdk.domain.Review;
 
 @Service
@@ -16,9 +15,6 @@ public class ReviewFormValidator implements Validator {
 	}
 
 	public void validate(Object obj, Errors errors) {
-		ReviewForm reviewForm = (ReviewForm)obj; 
-		Review review = reviewForm.getReview();
-		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "review.rate", 
 		"FIRST_NAME_REQUIRED", "평점을 입력해주세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "review.content", 

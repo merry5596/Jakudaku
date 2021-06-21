@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import passionx3.jkdk.controller.SellOnlineForm;
 import passionx3.jkdk.domain.Online;
 /**
  * @author Juergen Hoeller
@@ -19,9 +18,6 @@ public class SellOnlineItemFormValidator implements Validator {
 	}
 
 	public void validate(Object obj, Errors errors) {
-		SellOnlineForm sellOnlineForm = (SellOnlineForm)obj; 
-		Online online = sellOnlineForm.getOnline();
-
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "online.themeId", "THEME_REQUIRED", "테마를 선택하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "online.categoryId", "CATEGORY_REQUIRED", "카테고리를 선택하세요.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "online.name", "NAME_REQUIRED", "상품명을 입력하세요.");

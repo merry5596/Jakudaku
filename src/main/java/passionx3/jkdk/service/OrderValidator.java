@@ -5,10 +5,8 @@ import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-import org.hibernate.id.IntegralDataTypeHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import passionx3.jkdk.domain.Order;

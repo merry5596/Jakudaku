@@ -56,18 +56,15 @@ public class FundOrderValidator implements Validator {
 	
 	public void validateCreditCard(FundOrder fundOrder, Errors errors) {
 		errors.setNestedPath("fundOrder");
-		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "creditCard", "CCN_REQUIRED", "FAKE (!) credit card number required.");
-		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "expireDate", "EXPIRY_DATE_REQUIRED", "Expiry date is required.");
 		
-		// Validate creditCard(number)
-				String creditCard = fundOrder.getCreditCard();
+		String creditCard = fundOrder.getCreditCard();
 				
-				if (creditCard == null || creditCard.trim().isEmpty()) {	// null
-					errors.rejectValue("creditCard", "CCN_REQUIRED", "카드 번호를 입력해주세요.");
-				}
-				else if (!Pattern.matches("^\\d{16}$", creditCard)) {	// type error
-					errors.rejectValue("creditCard", "CCN_INVALID", "카드 번호 형식에 맞지 않습니다.");
-				}
+		if (creditCard == null || creditCard.trim().isEmpty()) {	// null
+			errors.rejectValue("creditCard", "CCN_REQUIRED", "카드 번호를 입력해주세요.");
+		}
+		else if (!Pattern.matches("^\\d{16}$", creditCard)) {	// type error
+			errors.rejectValue("creditCard", "CCN_INVALID", "카드 번호 형식에 맞지 않습니다.");
+		}
 				
 		// Validate expireDate
 		String expireDate = fundOrder.getExpireDate();
