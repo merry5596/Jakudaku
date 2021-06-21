@@ -26,8 +26,8 @@
 					<nav class="d-flex flex-wrap" aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a class= "text-secondary link-unstyled" th:href="@{/}">Home</a></li>
-							<li class="breadcrumb-item active " aria-current="page">
-								<a th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = '-1', device = '-1', sortBy='1', page='1')}"><span th:text="${category.name}">category</span></a>
+							<li class="breadcrumb-item active" aria-current="page">
+								<a class="text-secondary" th:href="@{/item/viewCategory.do(categoryId = ${category.categoryId}, themeId = '-1', device = '-1', sortBy='1', page='1')}"><span th:text="${category.name}">category</span></a>
 							</li>
 						</ol>
 					</nav>
@@ -166,7 +166,8 @@
 						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.beforeSectionLastPage})}" th:if="${pagination.curSection != 1}">&laquo;</a>
 						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == 1}">&laquo;</a>
 						<div class="btn-group" th:each="i : ${#numbers.sequence(pagination.sectionStartPage, pagination.sectionEndPage)}">
-							<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${i})}" th:text="${i}">pageNum</a>
+							<a th:if="${i == pagination.curPage}" class="btn btn-default btn-outline-secondary active" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${i})}" th:text="${i}">pageNum</a>
+							<a th:unless="${i == pagination.curPage}" class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${i})}" th:text="${i}">pageNum</a>
 						</div>
 						<a class="btn btn-default btn-outline-secondary" href="#" th:href="@{/item/viewCategory.do(categoryId=${category.categoryId}, themeId=${themeId}, device=${device}, keyword=${keyword}, sortBy=${sortBy}, page=${pagination.nextSectionFirstPage})}" th:if="${pagination.curSection != pagination.lastSection}">&raquo;</a>
 						<a class="btn btn-default btn-outline-secondary disabled" href="#" th:if="${pagination.curSection == pagination.lastSection}">&raquo;</a>

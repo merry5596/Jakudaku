@@ -42,7 +42,6 @@ public class MybatisOnlineDao implements OnlineDao {
 	
 	@Override
 	public List<Online> getOnlineItemListByCategory(int categoryId, String keyword, int sortBy, int start, int end) throws DataAccessException {
-		System.out.println("mybatis: " + categoryId + sortBy + start + end);
 		if (sortBy == 1)
 			return onlineMapper.getOnlineItemListByCategoryOrderByUploadDate(categoryId, keyword, start, end);
 		else if (sortBy == 2)

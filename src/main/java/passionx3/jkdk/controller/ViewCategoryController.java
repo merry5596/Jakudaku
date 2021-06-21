@@ -35,9 +35,7 @@ public class ViewCategoryController {
 			@RequestParam("sortBy") int sortBy,
 			@RequestParam("page") int page,
 			@RequestParam(value="keyword", required=false) String keyword) throws Exception {
-		
-		System.out.println(keyword);
-		
+				
 		if (keyword == null) keyword = "";
 	
 		int itemPerPage = 16;

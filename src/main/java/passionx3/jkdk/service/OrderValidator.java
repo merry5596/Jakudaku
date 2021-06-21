@@ -2,8 +2,10 @@ package passionx3.jkdk.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.hibernate.id.IntegralDataTypeHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -46,12 +48,20 @@ public class OrderValidator implements Validator {
 		else if (!Pattern.matches("^(0[1-9]|1[0-2])/[0-9]{2}$", expireDate)) {	// type error
 			errors.rejectValue("expireDate", "EXPIRY_DATE_INVALID", "카드 만료일의 형식에 맞지 않습니다.");
 		} else {
+			StringTokenizer st = new StringTokenizer(expireDate, "/");
+			int expireMonth = Integer.parseInt(st.nextToken());
+			int expireYear = Integer.parseInt(st.nextToken());
+			
 			SimpleDateFormat format = new SimpleDateFormat("MM/yy");
-				String today = format.format(new Date());
-
-				if (expireDate.compareTo(today) < 0) {	// is expired
-					errors.rejectValue("expireDate", "EXPIRY_DATE_EXPIRED", "카드 만료일은 오늘 날짜보다 빠를 수 없습니다.");
-				}
+			String today = format.format(new Date());
+			
+			StringTokenizer st2 = new StringTokenizer(today, "/");
+			int todayMonth = Integer.parseInt(st2.nextToken());
+			int todayYear = Integer.parseInt(st2.nextToken());
+			
+			if (expireYear < todayYear || (expireYear == todayYear && expireMonth < todayMonth)) {	// is expired
+				errors.rejectValue("expireDate", "EXPIRY_DATE_EXPIRED", "카드 만료일은 오늘 날짜보다 빠를 수 없습니다.");
+			}
 		}
 		
 		// Validate cardType

@@ -161,25 +161,28 @@
                    <tr>
                       <td colspan="2" bgcolor="#CCCCCC">수령인</td>
                       <td bgcolor="#EEEEEE"><input type="text" id="receiverName" th:field="*{fundOrder.receiverName}" readOnly />
-                      <span class="validationMessage" th:errors="*{fundOrder.receiverName}">Invalid receiverName~</span></td>
+                      <small class="text-danger validationMessage" th:errors="*{fundOrder.receiverName}">Invalid receiverName~</small></td>
                    </tr>
                    <tr>
                       <td rowspan="3" bgcolor="#CCCCCC"><br>수령 주소</td>
                       <td bgcolor="#CCCCCC">우편 번호</td>
-                      <td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.zip}">Invalid zip~</span></td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="zip" th:field="*{fundOrder.zip}" readOnly />
+                      	<small class="text-danger validationMessage" th:errors="*{fundOrder.zip}">Invalid zip~</small></td>
                    </tr>
                    <tr>
                       <td bgcolor="#CCCCCC">주소</td>
-                      <td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address1}">Invalid address1~</span></td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="address1" th:field="*{fundOrder.address1}" readOnly />
+                      	<small class="text-danger validationMessage" th:errors="*{fundOrder.address1}">Invalid address1~</small></td>
                    </tr>
                    <tr>
                       <td bgcolor="#CCCCCC">상세 주소</td>
-                      <td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" readOnly /> <span class="validationMessage" th:errors="*{fundOrder.address2}">Invalid address2~</span></td>
+                      <td bgcolor="#EEEEEE"><input type="text" id="address2" th:field="*{fundOrder.address2}" readOnly />
+                      	<small class="text-danger validationMessage" th:errors="*{fundOrder.address2}">Invalid address2~</small></td>
                    </tr>
                    <tr>
                       <td colspan="2" bgcolor="#CCCCCC">휴대폰 번호</td>
                       <td bgcolor="#EEEEEE"><input type="text" id="phone" th:field="*{fundOrder.phone}" readOnly />
-                      <span class="validationMessage" th:errors="*{fundOrder.phone}">Invalid phone number~</span></td>
+                      	<small class="text-danger validationMessage" th:errors="*{fundOrder.phone}">Invalid phone number~</small></td>
                    </tr>
                 </tbody>
           </table>

@@ -81,7 +81,6 @@ public class OrderController {
 				orderValidator.validateCreditCard(orderForm.getOrder(), result);
 				
 				if (result.hasErrors()) {
-					System.out.println(result.toString());
 					return new ModelAndView("thyme/order/NewOrder");
 				}
 			}
@@ -118,12 +117,9 @@ public class OrderController {
 				return new ModelAndView("thyme/order/NewOrder");
 
 			Order o = jkdkStore.getOrderByOrderId(-2);
-			
-			System.out.println(o.getLineItems().get(0).getUnitPrice());
-			
+						
 			ModelAndView mav = new ModelAndView("thyme/order/ViewOrder");
 			mav.addObject("order", o);
-			System.out.println(o.getOrderId());
 			mav.addObject("message", "주문이 완료되었습니다.");
 			status.setComplete();  // remove sessionCart and orderForm from session
 			return mav;

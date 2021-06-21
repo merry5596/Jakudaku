@@ -353,17 +353,6 @@ div {
                                        <a class="ui basic red left pointing label"><span
                                           id="likeNum" th:text="*{likeNum}">추천수</span></a>
                                     </div>
-
-                                    <div
-                                       th:if="${session.userSession != null and userLike != null and userLike.clicked == true}"
-                                       class="ui labeled button" tabindex="0">
-                                       <div class="ui red button" id="minus"
-                                          onClick="toggleLike(this.id)">
-                                          <i class="thumbs up outline icon"></i>
-                                       </div>
-                                       <a class="ui basic red left pointing label"><span
-                                          id="likeNum" th:text="*{likeNum}">추천수</span></a>
-                                    </div>
                                  </div>
                               </div>
                            </div>

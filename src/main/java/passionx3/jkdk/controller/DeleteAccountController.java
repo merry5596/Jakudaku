@@ -46,7 +46,6 @@ public class DeleteAccountController {
 			 HttpSession session, Model model) throws Exception {
 		Account curAccount = (Account)session.getAttribute("userSession");
 		try {
-			System.out.println(curAccount.getPassword() + " " + password + " " + curAccount.getName());
 			if (curAccount.getPassword().equals(password)) {
 				jkdkStore.removeAccount(curAccount.getUserId());
 				session.removeAttribute("userSession");

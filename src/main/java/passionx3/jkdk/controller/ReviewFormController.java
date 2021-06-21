@@ -93,7 +93,6 @@ public class ReviewFormController {
 				review.setUserId(userId);
 				review.setLineItemId(lineItemId);
 				
-				System.out.println(review.getContent() + ", " + review.getItemId() + ", " + review.getUserId());
 				jkdkStore.insertReview(review);
 			}
 			else {
