@@ -74,10 +74,8 @@
 										value="${cartItem.onlineItem.price}" /></td>
 								<td style="text-align: center"><c:if
 										test="${cartItem.onlineItem.saleState eq 1}"> 
-															Time Sale
-														<p>Time Sale</p>></c:if> <c:if
-										test="${cartItem.onlineItem.saleState eq 2}"> 
-															Battle Sale
+														<p>Time Sale</p></c:if> <c:if
+										test="${cartItem.onlineItem.saleState eq 2}">
 															<p>Battle Sale</p>
 									</c:if> -<c:out value="${cartItem.onlineItem.discount}" /></td>
 								<td style="text-align: center"><c:out
