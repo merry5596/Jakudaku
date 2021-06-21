@@ -80,8 +80,7 @@ public class jkdkImpl implements jkdkFacade {
 		@Override
 		public void run() {   // 스케줄러에 의해 미래의 특정 시점에 실행될 작업을 정의    
 			Date curTime = new Date();
-			// 실행 시점의 시각을 전달하여 그 시각 이전의 closing time 값을 갖는 event들의 상태를 변경 
-			fundingDao.closeFunding(itemId);    // EVENTS 테이블의 레코드 갱신 
+			fundingDao.closeFunding(itemId);
 			System.out.println("updateTableRunner is executed at " + curTime);
 			}
 		};
@@ -183,67 +182,9 @@ public class jkdkImpl implements jkdkFacade {
 			onlineList = onlineDao.getOnlineItemListByTheme(categoryId, themeId, keyword, sortBy, start, end);
 		} else if (themeId == -1 && device != -1) {	// theme 선택 안됨, device 선택됨
 			onlineList = onlineDao.getOnlineItemListByDevice(categoryId, device, keyword, sortBy, start, end);
-			
-			/*
-			List<Online> ListNotFiltered = onlineDao.getOnlineItemListByCategory(categoryId, keyword, sortBy, start, end);
-		
-			List<Online> listFilteredByDevice = new ArrayList<>();
-			
-			switch(device) {
-				case 1:
-					for (Online online : ListNotFiltered) {
-						if (online.getPcFile() != null) {
-							listFilteredByDevice.add(online);
-						}
-					}
-					break;
-				case 2:
-					for (Online online : ListNotFiltered) {
-						if (online.getTabletFile() != null)
-							listFilteredByDevice.add(online);
-					}
-					break;
-				case 3: 
-					for (Online online : ListNotFiltered) {
-						if (online.getPhoneFile() != null)
-							listFilteredByDevice.add(online);
-					}
-					break;
-			}
-			onlineList = listFilteredByDevice;
-			*/
 		} else {	// theme 선택됨, device 선택됨
 			onlineList = onlineDao.getOnlineItemListByThemeAndDevice(categoryId, themeId, device, keyword, sortBy, start, end);
-			/*
-			List<Online> ListNotFiltered = onlineDao.getOnlineItemListByTheme(categoryId, themeId, keyword, sortBy, start, end);
-			
-			List<Online> listFilteredByDevice = new ArrayList<>();
-			
-			switch(device) {
-				case 1:
-					for (Online online : ListNotFiltered) {
-						if (online.getPcFile() != null) {
-							listFilteredByDevice.add(online);
-						}
-					}
-					break;
-				case 2:
-					for (Online online : ListNotFiltered) {
-						if (online.getTabletFile() != null)
-							listFilteredByDevice.add(online);
-					}
-					break;
-				case 3: 
-					for (Online online : ListNotFiltered) {
-						if (online.getPhoneFile() != null)
-							listFilteredByDevice.add(online);
-					}
-					break;
-			}
-			onlineList = listFilteredByDevice;
-			*/
 		}
-		System.out.println("impl: " + onlineList.size());
 		return onlineList;
 	}
 	
@@ -278,140 +219,6 @@ public class jkdkImpl implements jkdkFacade {
 		}
 	}
 	
-
-//	@Override
-//	public void sortOnlineItemList(List<Online> onlineList, int sortBy) {
-//		switch(sortBy) {
-//			case 1: 	// 신상품순
-//				Comparator<Online> uploadDateComparator = new Comparator<Online>() {
-//				    @Override
-//				    public int compare(Online a, Online b) {
-//				    	return a.getUploadDate().compareTo(b.getUploadDate());
-//				    }
-//				};
-//				
-//				Collections.sort(onlineList, uploadDateComparator);
-//				
-//				for (Online online : onlineList) {
-//					System.out.println(online.getUploadDate());
-//				}
-//				
-//				break;
-//			case 2: 	// 좋아요순
-//				Comparator<Online> likesComparator = new Comparator<Online>() {
-//				    @Override
-//				    public int compare(Online a, Online b) {
-//				    	return b.getLikeNum() - a.getLikeNum();
-//				    }
-//				};
-//				
-//				Collections.sort(onlineList, likesComparator);
-//				
-//				for (Online online : onlineList) {
-//					System.out.println(online.getLike());
-//				}
-//				
-//				break;
-//			case 3:		// 평점순
-//				Comparator<Online> totalRateComparator = new Comparator<Online>() {
-//				    @Override
-//				    public int compare(Online a, Online b) {
-//				    	System.out.println(a.getTotalRate());
-//				    	if (b.getTotalRate() - a.getTotalRate() > 0) {
-//				    		return 1;
-//				    	} else if (b.getTotalRate() - a.getTotalRate() < 0) {
-//				    		return -1;
-//				    	}
-//				    	else {
-//				    		return 0;
-//				    	}
-//				    }
-//				};
-//				
-//				Collections.sort(onlineList, totalRateComparator);
-//				
-//				for (Online online : onlineList) {
-//					System.out.println(online.getTotalRate());
-//				}
-//				
-//				break;
-//			case 4:		// 저가순
-//				Comparator<Online> lowCostComparator = new Comparator<Online>() {
-//				    @Override
-//				    public int compare(Online a, Online b) {
-//				    	return a.getPrice() - b.getPrice();
-//				    }
-//				};
-//				
-//				Collections.sort(onlineList, lowCostComparator);
-//				
-//				for (Online online : onlineList) {
-//					System.out.println(online.getPrice());
-//				}
-//				
-//				break;
-//			case 5:		// 고가순
-//				Comparator<Online> highCostComparator = new Comparator<Online>() {
-//				    @Override
-//				    public int compare(Online a, Online b) {
-//				    	System.out.println(a.getPrice() + " " + b.getPrice());
-//				    	return b.getPrice() - a.getPrice();
-//				    }
-//				};
-//				
-//				for (Online online : onlineList) {
-//					System.out.println(online.getPrice());
-//				}
-//				
-//				Collections.sort(onlineList, highCostComparator);
-//				break;
-//		}
-//		
-//		return;
-//	}
-	
-//	@Override
-//	public void sortFundingItemList(List<Funding> fundingList, int sortBy) {
-//		switch(sortBy) {
-//		case 1: 	// 신상품순
-//			Comparator<Funding> uploadDateComparator = new Comparator<Funding>() {
-//			    @Override
-//			    public int compare(Funding a, Funding b) {
-//			    	return b.getUploadDate().compareTo(a.getUploadDate());
-//			    }
-//			};
-//			
-//			Collections.sort(fundingList, uploadDateComparator);
-//			
-//			break;
-//		case 2: 	// 좋아요순
-//			Comparator<Funding> likesComparator = new Comparator<Funding>() {
-//			    @Override
-//			    public int compare(Funding a, Funding b) {
-//			    	return b.getLikeNum() - a.getLikeNum();
-//			    }
-//			};
-//			
-//			Collections.sort(fundingList, likesComparator);
-//			
-//			break;
-//		case 6:		// 마감임박순
-//			Comparator<Funding> finishDateComparator = new Comparator<Funding>() {
-//			    @Override
-//			    public int compare(Funding a, Funding b) {
-//			    	return a.getFinishDate().compareTo(b.getFinishDate());
-//			    }
-//			};
-//			
-//			Collections.sort(fundingList, finishDateComparator);
-//			
-//			break;
-//		case 7: 	// 마감 기간 긴 순...?
-//			break;
-//	}
-//		
-//		return;
-//	}
 
 	@Override
 	public List<Online> getBestOnlineItemListforHome() {

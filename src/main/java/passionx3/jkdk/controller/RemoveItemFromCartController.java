@@ -23,12 +23,10 @@ public class RemoveItemFromCartController {
 		) throws Exception {
 		// 전체 삭제
 		if (workingItemId == null) {
-			System.out.println("removeItemFromCartController: removeAll");
 			cart.removeAllItems();
 		}
 		// 단일 상품 삭제
 		else {
-			System.out.println("removeItemFromCartController: removeOne");
 			cart.removeItemById(Integer.parseInt(workingItemId));
 		}
 		return new ModelAndView("Cart", "cart", cart);

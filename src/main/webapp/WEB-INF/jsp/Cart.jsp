@@ -91,20 +91,36 @@
 							</tr>
 						</c:forEach>
 						
-				
-						
-					<tr>
-						<td colspan="6" style="font-size: 2.0rem;">
-						<br>
-						<br>
-							결제 예정 금액 &nbsp; &nbsp; &nbsp;
-							<b><span style="color: red;font-size: 2.5rem"><c:out value="${cart.actualTotal}" />원</span></b>
-							
-						<br>
-						<br>
-						<br>
-						</td>
-					</tr>
+						<c:if test="${cart.numberOfItems > 4}">
+						<tr>
+							<td colspan="6" style="text-align: center">
+								<c:if test="${!cart.cartItemList.firstPage}">
+									<a href='<c:url value="/order/viewCart.do?page=previousCart"/>'>
+										<font color="gray"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+								<c:if test="${!cart.cartItemList.lastPage}">
+									<a href='<c:url value="/order/viewCart.do?page=nextCart"/>'> <font
+										color="gray"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
+							</td>
+						</tr>
+						</c:if>
+					<c:if test="${cart.numberOfItems > 0}">
+						<tr>
+							<td colspan="6" style="font-size: 2.0rem;">
+							<br>
+							<br>
+								결제 예정 금액 &nbsp; &nbsp; &nbsp;
+								<b><span style="color: red;font-size: 2.5rem"><c:out value="${cart.actualTotal}" />원</span></b>
+								
+							<br>
+							<br>
+							<br>
+							</td>
+						</tr>
+					</c:if>
 				</tbody>
 			</table>
 			
@@ -122,37 +138,10 @@
 				</div>	
 			</c:if>
 			</form>
-			
-			<br>
-			<br>
-				<div style="text-align: center">
-					<c:if test="${!cart.cartItemList.firstPage}">
-						<a href='<c:url value="/order/viewCart.do?page=previousCart"/>'>
-							<font color="gray"><B>&lt;&lt; Prev</B></font>
-						</a>
-					</c:if>
-					<c:if test="${!cart.cartItemList.lastPage}">
-						<a href='<c:url value="/order/viewCart.do?page=nextCart"/>'> <font
-							color="gray"><B>Next &gt;&gt;</B></font>
-						</a>
-					</c:if>
-				</div>
 
 		</div>
 	</div>
 </div>
-
-
-			
-<%-- 				<c:if test="${cart.numberOfItems > 0}"> --%>
-<!-- 					<br /> -->
-<!-- 					<div style="text-align: center"> -->
-<!-- 						<input type="submit" value="구매하기" /> <input type="image" src="" -->
-<!-- 							name="buy" /> -->
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
-			
-
 
 
 <script

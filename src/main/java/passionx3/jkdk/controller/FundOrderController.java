@@ -34,14 +34,6 @@ public class FundOrderController {
 	public FundOrderForm createFundOrderForm() {
 		return new FundOrderForm(new FundOrder());
 	}
-//	
-//	@ModelAttribute("sessionCart")
-//	public Cart createCart(HttpSession session) {
-//		Cart cart = (Cart)session.getAttribute("sessionCart");
-//		if (cart == null)
-//			cart = new Cart();
-//		return cart;
-//	}
 	
 	@RequestMapping("/order/newFundOrder.do")
 	public ModelAndView initNewFundOrder(HttpServletRequest request,
@@ -55,45 +47,25 @@ public class FundOrderController {
 		
 		Funding funding = jkdkStore.getFundingItemById(Integer.parseInt(itemId));
 		fundOrderForm.getFundOrder().initFundOrder(account, funding, quantity);
-		
-		System.out.println("contr: " + fundOrderForm.getFundOrder().getLineItem().getLineItemId());
-		
+				
 		ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
 		mav.addObject("isValidationOfAddress", false);
 		mav.addObject("account", account);
 		return mav;
-
-//		else {
-//			ModelAndView modelAndView = new ModelAndView("cart");
-//			modelAndView.addObject("message", "An order could not be created because a cart could not be found.");
-//			throw new ModelAndViewDefiningException(modelAndView);
-//		}
 	}
 	
 	@RequestMapping("/order/newFundOrderSubmitted.do")
 	public ModelAndView submitFundOrder(HttpServletRequest request,
 			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
 			BindingResult result, SessionStatus status, HttpSession session) {
-		
-//			boolean isValidationOfAddress = false;
-			
+					
 			// from NewOrderForm
 			fundOrderValidator.validate(fundOrderForm.getFundOrder(), result);
-			
-//			for (ObjectError error : result.getAllErrors()) {
-//				String errorCode = error.getCode();
-//				if (errorCode.equals("RECEIVER_NAME_REQUIRED") || errorCode.equals("ZIP_REQUIRED") || errorCode.equals("ZIP_INVALID") || errorCode.equals("ADDRESS1_REQUIRED") || errorCode.equals("ADDRESS2_REQUIRED") || errorCode.equals("PHONE_REQUIRED") || errorCode.equals("PHONE_INVALID")) {
-//					isValidationOfAddress = true;
-//					System.out.println(isValidationOfAddress);
-//					break;
-//				}
-//			}
 			
 			if (result.hasErrors()) {
 				Account userSession = (Account) request.getSession().getAttribute("userSession");
 				Account account = jkdkStore.getAccount(userSession.getUserId());
 				ModelAndView mav = new ModelAndView("thyme/order/NewFundOrder");
-//				mav.addObject("isValidationOfAddress", isValidationOfAddress);
 				mav.addObject("account", account);
 				return mav;
 			}
@@ -101,7 +73,7 @@ public class FundOrderController {
 			int dbResult = jkdkStore.insertFundOrder(fundOrderForm.getFundOrder());
 			
 			if (dbResult < 1) {
-				return new ModelAndView("thyme/order/NewFundOrder");	// message는 아직은...
+				return new ModelAndView("thyme/order/NewFundOrder");
 			}
 			
 			ModelAndView mav = new ModelAndView("thyme/order/ViewFundOrder");
@@ -109,32 +81,8 @@ public class FundOrderController {
 			mav.addObject("message", "펀딩이 완료되었습니다.");
 			status.setComplete();  // remove sessionCart and orderForm from session
 			
-//			Account userSession = jkdkStore.getAccount(((Account)session.getAttribute("userSession")).getUserId());
-//			session.setAttribute("userSession", userSession);
-			
 			return mav;
 	}
 	
-	// test 후 삭제
-//	@RequestMapping("/order/test2.do")
-//	public ModelAndView test(HttpServletRequest request,
-//			@ModelAttribute("fundOrderForm") FundOrderForm fundOrderForm, 
-//			BindingResult result, SessionStatus status) {
-//		
-//			// from NewOrderForm
-//			// orderValidator.validateCreditCard(orderForm.getOrder(), result);
-//
-//			if (result.hasErrors())
-//				return new ModelAndView("thyme/order/NewFundOrder");
-//
-//			FundOrder fo = jkdkStore.getFundOrderByOrderId(22);
-//			
-//			ModelAndView mav = new ModelAndView("thyme/order/ViewFundOrder");
-//			mav.addObject("fundOrder", fo);
-//			System.out.println(fo.getOrderId());
-//			mav.addObject("message", "펀딩이 완료되었습니다.");
-//			status.setComplete();  // remove sessionCart and orderForm from session
-//			return mav;
-//	}
 	
 }

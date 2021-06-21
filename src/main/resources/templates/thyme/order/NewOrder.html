@@ -152,7 +152,7 @@
                  <div class="container">
                      <div class="row">
                         <div class="col">보유 <p id="havingMileage" style="display:inline" th:text="${session.userSession.mileage}">0</p>원 <button type="button" class="btn btn-secondary" onclick="useAllMileage()">전액 사용</button>
-                        <br><br>사용 <input type="text" id="inputMileage" th:field="*{order.usedMileage}"/>원</div>
+                        <br><br>사용 <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="inputMileage" th:field="*{order.usedMileage}"/>원</div>
                      </div>
                   </div>   
               </td>
