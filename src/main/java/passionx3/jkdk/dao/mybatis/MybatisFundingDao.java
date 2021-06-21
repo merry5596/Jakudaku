@@ -94,8 +94,8 @@ public class MybatisFundingDao implements FundingDao {
 	}
 
 	@Override
-	public List<Funding> getNewFundingItemListforHome(String today) throws DataAccessException {
-		return fundingMapper.getNewFundingItemListforHome(today);
+	public List<Funding> getNewFundingItemListforHome() throws DataAccessException {
+		return fundingMapper.getNewFundingItemListforHome();
 	}
 
 	@Override

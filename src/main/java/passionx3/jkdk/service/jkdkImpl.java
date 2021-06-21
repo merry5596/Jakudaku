@@ -427,18 +427,35 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public TimeSale getTimeSale(String openTime) {
-		return timeSaleDao.getTimeSale(openTime);
+	public TimeSale getTimeSale() {
+		Calendar cal= Calendar.getInstance ( );
+		
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		cal.setTime(new Date());
+		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.MINUTE, 00);
+		cal.set(Calendar.SECOND, 00);
+		
+		String today = sDate.format(cal.getTime());
+		
+		return timeSaleDao.getTimeSale(today);
 	}
 
 	@Override
 	public void insertTimeSale() {
 		Calendar cal= Calendar.getInstance ( );
 		
-		SimpleDateFormat sDate = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		cal.setTime(new Date());
+		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.MINUTE, 00);
+		cal.set(Calendar.SECOND, 00);
+		
 		String today = sDate.format(cal.getTime());
-		cal.add(Calendar.DATE, 1);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 15);
 		String tomorrow = sDate.format(cal.getTime());
 		
 		int categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
@@ -450,9 +467,10 @@ public class jkdkImpl implements jkdkFacade {
 			categoryId = cal.get(Calendar.DAY_OF_MONTH) % 4;
 			itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
 		}
-		
-		timeSaleDao.insertTimeSale(itemList.get(0), today, tomorrow);
-		onlineDao.updateSaleState(1, itemList.get(0));
+		int  num = timeSaleDao.insertTimeSale(itemList.get(0), today, tomorrow);
+		if(num > 0) {
+			onlineDao.updateSaleState(1, itemList.get(0));
+		}	
 	}
 
 	@Override
@@ -534,7 +552,9 @@ public class jkdkImpl implements jkdkFacade {
 
 	@Override
 	public int getWinnerItemId() {
-		return battleSaleDao.getWinnerItemId();
+		int winnerId = battleSaleDao.getWinnerItemId();
+		onlineDao.updateSaleState(2, winnerId);
+		return winnerId;
 	}
 
 	@Override
@@ -557,9 +577,11 @@ public class jkdkImpl implements jkdkFacade {
 			itemList = onlineDao.getOnlineItemIdByCategoryforSale(categoryId);
 		}
 		
-		battleSaleDao.insertBattleSale(itemList.get(0), itemList.get(1), today, tomorrow);
-		onlineDao.updateSaleState(2, itemList.get(0));
-		onlineDao.updateSaleState(2, itemList.get(1));
+		int num = battleSaleDao.insertBattleSale(itemList.get(0), itemList.get(1), today, tomorrow);
+		if(num > 0) {
+			onlineDao.updateSaleState(2, itemList.get(0));
+			onlineDao.updateSaleState(2, itemList.get(1));
+		}	
 	}
   
 	@Override
@@ -631,8 +653,8 @@ public class jkdkImpl implements jkdkFacade {
 	}
 
 	@Override
-	public List<Funding> getNewFundingItemListforHome(String today){
-		return fundingDao.getNewFundingItemListforHome(today);
+	public List<Funding> getNewFundingItemListforHome(){
+		return fundingDao.getNewFundingItemListforHome();
 	}
 
 	@Override
@@ -669,6 +691,8 @@ public class jkdkImpl implements jkdkFacade {
 	public void updateNotSale(String date) {
 		battleSaleDao.updateNotSale(date);
 		timeSaleDao.updateNotSale(date);
+
+	
 	}
 
 

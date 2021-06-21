@@ -17,7 +17,7 @@
 		
 				<div th:if="${item}" class="container evnet-page">
 					<p class="event-title">Time Sale</p>
-					
+					<p> 타임 세일은 PM12 ~ PM3동안 3시간 진행됩니다.</p>
 					<div class="row">
 						<div class="col m-5  timeSale-image-banner">
 							<div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -57,7 +57,8 @@
 		                        </div>
 		                        <p class="lead" th:text="${item.description}">description</p> 
 		                        <div class="position-absolute bottom-0 start-50 translate-middle-x" align = "center">
-		                        	<p class="text-success mb-0"><span id="remaining_time"> </span></p>
+		                        	<p th:if = ${isSale.equals(1)} class="text-success mb-0"><span id="remaining_time"> </span></p>
+		                        	<p th:if = ${isSale.equals(-1)}> 세일 중이 아닙니다.</p>
 		            	        	<a class= "text-secondary link-unstyled" href="#" th:href="@{/item/viewOnlineItem.do(itemId=${item.itemId})}">
 			                       	 	<button type="button" class="btn btn-success ">바로가기!</button>
 		                      		</a>

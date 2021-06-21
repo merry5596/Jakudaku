@@ -69,7 +69,7 @@ public interface jkdkFacade {
 
 	List<Funding> getNewFundingItemList(); 
 	
-	TimeSale getTimeSale(String openTime);
+	TimeSale getTimeSale();
 	
 	void insertTimeSale();
 	
@@ -121,7 +121,7 @@ public interface jkdkFacade {
 
 	List<Online> getNewOnlineItemListforHome();
 
-	List<Funding> getNewFundingItemListforHome(String today);
+	List<Funding> getNewFundingItemListforHome();
 	
 	String getCategoryNameByCategoryId(int categoryId);
 	

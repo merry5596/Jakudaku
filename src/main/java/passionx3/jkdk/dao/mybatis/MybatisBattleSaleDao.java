@@ -26,8 +26,8 @@ public class MybatisBattleSaleDao implements BattleSaleDao {
 	}
 	
 	@Override
-	public void insertBattleSale(int itemId1, int itemId2, String openTime, String closeTime) throws DataAccessException {
-		battleSaleMapper.insertBattleSale(itemId1, itemId2, openTime, closeTime);
+	public int insertBattleSale(int itemId1, int itemId2, String openTime, String closeTime) throws DataAccessException {
+		return battleSaleMapper.insertBattleSale(itemId1, itemId2, openTime, closeTime);
 	}
 
 	@Override
