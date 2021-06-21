@@ -23,6 +23,7 @@ import passionx3.jkdk.util.FileUtils;
 import passionx3.jkdk.domain.Account;
 import passionx3.jkdk.domain.Category;
 import passionx3.jkdk.domain.Funding;
+import passionx3.jkdk.domain.Online;
 import passionx3.jkdk.domain.Theme;
 
 @Controller
@@ -72,7 +73,7 @@ public class SellFundingItemController {
 			HttpServletRequest request, HttpSession session,
 			@Valid @ModelAttribute("sellFundingForm") SellFundingForm sellFundingForm,
 			BindingResult result,
-			@RequestParam("thumbnail1") MultipartFile[] thumbnail) throws Exception {
+			@RequestParam(value="thumbnail1", required=false) MultipartFile[] thumbnail) throws Exception {
 //		validator.validate(sellFundingForm, result);
 		
 		if (result.hasErrors()) return formViewName;

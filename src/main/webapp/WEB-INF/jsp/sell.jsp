@@ -231,6 +231,11 @@
 <a name = "funding" />
 <h3>Funding 상품 판매 목록</h3>
 <a href="#online">Online 상품 판매 목록 보기</a>
+
+<br><br>
+
+<p style="font-size: 0.8rem; color:gray;">*펀딩 상품은 수정이 불가능합니다.</p>
+
 <br><br>
 <table style="width: 100%;" class="ui very basic collapsing celled table center aligned middle aligned">
    <thead>
@@ -240,7 +245,6 @@
       <th>상품명</th>
       <th>등록날짜</th>
       <th>승인여부</th>
-      <th>수정</th>
    </tr>
    </thead>
    <c:if test="${fn:length(fundingList) == 0}">
@@ -259,7 +263,7 @@
          <c:otherwise>승인대기</c:otherwise>
          </c:choose>
       </td>
-      <td><button type="button" class="ui button" onClick="location.href='<c:url value="/item/sellFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'">수정</button></td>
+<%--       <td><button type="button" class="ui button" onClick="location.href='<c:url value="/item/sellFundingItem.do"><c:param name="itemId" value="${f.itemId}"/></c:url>'">수정</button></td> --%>
 
       </tr>
    </c:forEach>

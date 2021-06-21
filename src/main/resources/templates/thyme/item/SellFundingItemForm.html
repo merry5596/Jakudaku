@@ -77,6 +77,24 @@
 					class="ui form error" enctype="multipart/form-data">
 				
 					<div class="ui vertical aligned two column grid">
+						<div th:if="${sellFundingForm.newFunding}" class="row">
+							<div class="five wide column">
+								<span>미리보기 이미지 </span><span class="required"> *</span>
+								<br>
+								<span id="thumb_caution">※최대 3개의 이미지를 한번에 선택하세요.</span>
+							</div>
+							<br>
+							<div class="eleven wide column middle aligned">
+								<label class="input-file-button" for="thumbnail"><div class="ui red inverted button">업로드</div></label>
+								<input type="file" id="thumbnail" 
+								name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*" /><!-- 기존의 input file 태그 숨김 -->
+							
+								<div th:if="${#fields.hasErrors('thumbnail1')}" class="ui error message">
+									<p th:each="err : ${#fields.errors('thumbnail1')}" th:text="${err}"></p>
+								</div>
+							</div>
+						</div>
+					
 						<div th:replace="~{thyme/item/SellOnlineItemForm :: default_form}"></div>
 	
 	
@@ -126,6 +144,14 @@
 					
 					<input th:if="${sellFundingForm.newFunding}"
 						class="ui red huge button right floated" type="submit" value="등록하기"> 
+				
+					<input
+						th:unless="${sellFundingForm.newFunding}" type="hidden"
+						name="itemId" th:value="*{itemId}" /> 
+						
+					<input 
+						th:unless="${sellFundingForm.newFunding}" class="ui red huge button right floated"
+						type="submit" value="수정하기">
 				</form>
 				
 			</div>

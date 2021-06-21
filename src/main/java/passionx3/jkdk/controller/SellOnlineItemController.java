@@ -78,10 +78,10 @@ public class SellOnlineItemController {
 			HttpServletRequest request, HttpSession session,
 			@Valid @ModelAttribute("sellOnlineForm") SellOnlineForm sellOnlineForm,
 			BindingResult result, Model model, 
-			@RequestParam("thumbnail1") MultipartFile[] thumbnail, 
-			@RequestParam("pcFile") MultipartFile pcFile, 
-			@RequestParam("phoneFile") MultipartFile phoneFile, 
-			@RequestParam("tabletFile") MultipartFile tabletFile) throws Exception {
+			@RequestParam(value="thumbnail1", required=false) MultipartFile[] thumbnail, 
+			@RequestParam(value="pcFile", required=false) MultipartFile pcFile, 
+			@RequestParam(value="phoneFile", required=false) MultipartFile phoneFile, 
+			@RequestParam(value="tabletFile", required=false) MultipartFile tabletFile) throws Exception {
 		
 //		validator.validate(sellOnlineForm, result);
 		if (result.hasErrors()) return formViewName;
@@ -104,20 +104,14 @@ public class SellOnlineItemController {
 			}
 			else {
 				Online online = sellOnlineForm.getOnline();
-				online = (Online) fileUtils.uploadFiles(thumbnail, online);
-				online = fileUtils.uploadFiles(pcFile, online);
-				online = fileUtils.uploadFiles(phoneFile, online);
-				online = fileUtils.uploadFiles(tabletFile, online);
-				
-				jkdk.setWaterMark(online);
 				
 				if (jkdk.updateOnlineItem(online) != 1)
 					throw new Exception(); 
 			}
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
-					"처리하지 못했습니다. 다시 시도해주세요.");
+//			result.rejectValue("account.username", "ONLINEITEM_SELL_FAIL",
+//					"처리하지 못했습니다. 다시 시도해주세요.");
 			return formViewName; 
 		}
 				

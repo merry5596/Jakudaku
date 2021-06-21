@@ -272,8 +272,8 @@ div {
 					enctype="multipart/form-data">
 					
 					<div class="ui vertical aligned two column grid">
-						<th:block th:fragment="default_form">
-						<div class="row">
+						
+						<div th:if="${sellOnlineForm.newOnline}" class="row">
 							<div class="five wide column">
 								<span>미리보기 이미지 </span><span class="required"> *</span>
 								<br>
@@ -290,7 +290,7 @@ div {
 								</div>
 							</div>
 						</div>
-						
+						<th:block th:fragment="default_form">
 						<div class="ui section divider"></div>
 
 						<!-- 			<input type="file" name="thumbnail1" th:value="*{thumbnail1}" multiple="multiple" accept="image/*"/>  -->
@@ -409,7 +409,7 @@ div {
 						<div class="ui section divider"></div>
 
 
-						<div class="row">
+						<div class="row" th:if="${sellOnlineForm.newOnline}">
 							<div class="five wide column">
 								<span>기기 별 파일</span><span class="required"> *</span>
 							</div>
