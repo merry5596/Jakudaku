@@ -6,18 +6,6 @@
 - 디지털 창작물 판매 및 구매
 - 굿즈 펀딩 (공동구매)
 
-## 구조
-**src/main/java/passionx3/jkdk**
-- Controller
-- Model
-- Service
-
-**src/main/resources/templates/thyme**
-- View (HTML, Thymeleaf)
-
-**src/main/webapp/WEB_INF/jsp**
-- View (JSP)
-
 ## 사용 기술
 - Spring framework
 - MyBatis
