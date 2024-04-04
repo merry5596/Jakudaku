@@ -7,10 +7,19 @@
 - 굿즈 펀딩 (공동구매)
 
 ## 구조
-- 
+**src/main/java/passionx3/jkdk**
+- Controller
+- Model
+- Service
+
+**src/main/resources/templates/thyme**
+- View (HTML, Thymeleaf)
+
+**src/main/webapp/WEB_INF/jsp**
+- View (JSP)
 
 ## 사용 기술
-- **Spring framework**
-- **MyBatis**
-- **thymeleaf**, **JSP**
-- **Oracle DB**
+- Spring framework
+- MyBatis
+- Thymeleaf, JSP
+- Oracle DB
